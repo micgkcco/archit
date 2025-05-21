@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chartered Accountant Ahmedabad | Archit B. Sheth & Co - absheth.com</title>
 
-    <meta name="description" content="Need a Chartered Accountant in Ahmedabad? Archit B. Sheth & Co offers expert tax, audit, GST & advisory services. Grow your business with us.">
-    <meta name="keywords" content="Chartered Accountant Ahmedabad, Taxation Services Ahmedabad, GST Compliance Ahmedabad, Auditing Services Ahmedabad, Business Advisory Ahmedabad, CA in Ahmedabad, Tax Consultant Ahmedabad">
+    <meta name="description" content="Need a Chartered Accountant in Ahmedabad? Archit B. Sheth & Co offers expert tax, audit, GST & advisory services for businesses and individuals in Gujarat. Grow your business with us.">
+    <meta name="keywords" content="Chartered Accountant Ahmedabad, CA Ahmedabad, Taxation Services Ahmedabad, GST Compliance Ahmedabad, Auditing Services Ahmedabad, Business Advisory Ahmedabad, CA in Ahmedabad, Tax Consultant Ahmedabad, Accounting Ahmedabad, Gujarat CA Firm">
     <meta name="author" content="Archit Sheth">
+    <meta name="robots" content="index, follow">
 
-    <meta property="og:title" content="Archit B. Sheth & Co - Chartered Accountants, Ahmedabad">
-    <meta property="og:description" content="Trusted financial and taxation services in Ahmedabad. Explore our comprehensive solutions for individuals and businesses.">
+    <meta property="og:title" content="Archit B. Sheth & Co - Top Chartered Accountants in Ahmedabad">
+    <meta property="og:description" content="Trusted financial, taxation, and advisory services in Ahmedabad, Gujarat. Explore our comprehensive solutions for individuals and businesses.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://absheth.com">
     <script type="application/ld+json">
@@ -18,23 +19,23 @@
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "Archit B. Sheth & Co",
-      "description": "Chartered Accountant services in Ahmedabad, specializing in taxation, auditing, GST compliance, and business advisory.",
+      "description": "Chartered Accountant services in Ahmedabad, specializing in taxation, auditing, GST compliance, and business advisory for clients across Gujarat.",
       "url": "https://absheth.com",
       "telephone": "+919898467888",
       "email": "archit@absheth.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Office Address, Ambawadi",
-        "addressLocality": "Ahmedabad",
+        "streetAddress": "Office Address, Ambawadi", /* Replace "Office Address" with your actual building/office number and street if more specific */
+        "addressLocality": "Ambawadi, Ahmedabad",
         "addressRegion": "Gujarat",
-        "postalCode": "YOUR_PINCODE",
+        "postalCode": "380006", /* PLEASE VERIFY AND USE YOUR EXACT OFFICE PINCODE */
         "addressCountry": "IN"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "YOUR_LATITUDE",
-        "longitude": "YOUR_LONGITUDE"
-      },
+      // "geo": {  // Removed GeoCoordinates as requested
+      //   "@type": "GeoCoordinates",
+      //   "latitude": "YOUR_LATITUDE",
+      //   "longitude": "YOUR_LONGITUDE"
+      // },
       "founder": {
         "@type": "Person",
         "name": "Archit Sheth",
@@ -44,7 +45,10 @@
         { "@type": "City", "name": "Ahmedabad" },
         { "@type": "AdministrativeArea", "name": "Gujarat" }
       ],
-      "openingHours": [ /* "Mo-Fr 09:00-18:00", "Sa 10:00-14:00" */ ],
+      "openingHours": [
+        "Mo-Fr 09:30-18:30", /* PLEASE ADJUST TO YOUR ACTUAL HOURS */
+        "Sa 10:00-15:00"    /* PLEASE ADJUST TO YOUR ACTUAL HOURS */
+      ],
       "priceRange": "$$"
     }
     </script>
@@ -142,8 +146,8 @@
             text-align: center;
             z-index: 9999; 
             opacity: 1; 
-            /* Opacity transition starts after 7s and takes 1s */
-            transition: opacity 1s ease-out 7s; 
+            /* Opacity transition starts after 2s and takes 1s */
+            transition: opacity 1s ease-out 2s; 
             overflow: hidden; /* Hide overflowing bg lines */
         }
         #welcome-screen.fade-out { opacity: 0; }
@@ -157,43 +161,43 @@
         }
         .bg-line-1 {
             width: 0; top: 15%; left: 5%; transform: rotate(40deg); transform-origin: left center;
-            animation: subtleLineDrawBg 2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s forwards;
+            animation: subtleLineDrawBg 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s forwards;
         }
         .bg-line-2 {
             width: 0; bottom: 10%; right: 8%; transform: rotate(-35deg); transform-origin: right center;
-            animation: subtleLineDrawBg 2.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s forwards;
+            animation: subtleLineDrawBg 1.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0.3s forwards;
         }
         .bg-line-3 { /* Shorter, different angle/position */
             width: 0; top: 50%; left: 2%; transform: rotate(70deg) translateY(-50%); transform-origin: left center;
-            animation: subtleLineDrawBg 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.8s forwards;
+            animation: subtleLineDrawBg 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s forwards;
         }
         @keyframes subtleLineDrawBg {
             0% { width: 0; opacity: 0.5; }
-            100% { width: 200px; opacity: 1; } /* Adjust width for subtlety */
+            100% { width: 150px; opacity: 1; } /* Adjust width for subtlety */
         }
 
 
-        #welcome-screen h1 { 
+        #welcome-screen h2 { /* Changed from h1 */
             font-family: var(--font-family-serif);
             font-weight: 700;
-            font-size: 3.2rem; 
+            font-size: 2.8rem; /* Slightly adjusted */
             margin-bottom: 0.5rem; 
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
             opacity: 0; 
-            animation: magicalSlideInH1 1.5s cubic-bezier(0.23, 1, 0.32, 1) 1.5s forwards;
+            animation: magicalSlideInH1 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards; /* Faster animation */
             will-change: transform, opacity;
         }
         @keyframes magicalSlideInH1 {
             0% {
                 opacity: 0;
-                transform: translateY(60px) perspective(500px) rotateX(-20deg) skewY(6deg);
+                transform: translateY(50px) perspective(400px) rotateX(-15deg) skewY(4deg);
             }
-            60% {
-                 transform: translateY(-10px) perspective(500px) rotateX(5deg) skewY(-2deg);
+            70% {
+                 transform: translateY(-8px) perspective(400px) rotateX(3deg) skewY(-1deg);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0) perspective(500px) rotateX(0deg) skewY(0);
+                transform: translateY(0) perspective(400px) rotateX(0deg) skewY(0);
             }
         }
 
@@ -201,12 +205,12 @@
             height: 2px;
             background-color: rgba(255, 255, 255, 0.1); /* Initial faint bg */
             margin: 0.75rem auto 1.5rem auto; 
-            width: 70px; 
+            width: 60px; 
             transform: scaleX(0); 
             transform-origin: center;
             opacity: 0;
-            animation: drawLineCenterOut 1s cubic-bezier(0.19, 1, 0.22, 1) 3.0s forwards, 
-                       pulseGlow 2.5s ease-in-out 4.0s infinite alternate;
+            animation: drawLineCenterOut 0.8s cubic-bezier(0.19, 1, 0.22, 1) 1.5s forwards, 
+                         pulseGlow 2s ease-in-out 2.3s infinite alternate; /* Faster animation */
             will-change: transform, opacity, box-shadow;
         }
         @keyframes drawLineCenterOut {
@@ -214,32 +218,31 @@
             100% { transform: scaleX(1); opacity: 0.7; background-color: rgba(255, 255, 255, 0.6); }
         }
         @keyframes pulseGlow {
-            from { opacity: 0.5; box-shadow: 0 0 4px rgba(255,255,255,0.15); }
-            to { opacity: 0.8; box-shadow: 0 0 12px rgba(255,255,255,0.3); }
+            from { opacity: 0.5; box-shadow: 0 0 3px rgba(255,255,255,0.15); }
+            to { opacity: 0.8; box-shadow: 0 0 10px rgba(255,255,255,0.3); }
         }
 
         #welcome-screen p { 
             font-family: var(--font-family-sans-serif); 
-            font-size: 1.5rem; 
+            font-size: 1.3rem; /* Slightly adjusted */
             font-weight: 400; 
             letter-spacing: 0.025em;
-            /* Individual word spans will handle their animation */
         }
         #welcome-screen p .word {
-            display: inline-block; /* Needed for individual transform/opacity */
+            display: inline-block; 
             opacity: 0;
             will-change: transform, opacity;
         }
         #welcome-screen p .word1 {
-            animation: wordDriftUp 1s cubic-bezier(0.215, 0.610, 0.355, 1) 4.0s forwards;
+            animation: wordDriftUp 0.8s cubic-bezier(0.215, 0.610, 0.355, 1) 2.0s forwards; /* Faster */
         }
         #welcome-screen p .word2 {
-            animation: wordDriftUp 1s cubic-bezier(0.215, 0.610, 0.355, 1) 4.3s forwards; /* Staggered delay */
+            animation: wordDriftUp 0.8s cubic-bezier(0.215, 0.610, 0.355, 1) 2.2s forwards; /* Staggered delay, Faster */
         }
         @keyframes wordDriftUp {
             0% {
                 opacity: 0;
-                transform: translateY(25px);
+                transform: translateY(20px);
             }
             100% {
                 opacity: 1;
@@ -442,18 +445,19 @@
         }
         footer p { line-height: 1.7; color: var(--footer-text-primary); }
         footer p.footer-secondary-text { color: var(--footer-text-secondary); } 
+        footer a { color: var(--accent-blue-green); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
 
         body.welcome-active {
             overflow-y: hidden;
         }
 
     </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+      gtag('config', 'G-XXXXXXXXXX'); // Replace G-XXXXXXXXXX with your actual GA ID
     </script>
 </head>
 <body class="welcome-active"> 
@@ -462,22 +466,20 @@
         <div class="bg-line bg-line-2"></div>
         <div class="bg-line bg-line-3"></div>
 
-        <h1>Archit B. Sheth & Co</h1>
-        <div class="welcome-line"></div>
+        <h2>Archit B. Sheth & Co</h2> <div class="welcome-line"></div>
         <p>
             <span class="word word1">Chartered</span> <span class="word word2">Accountants</span>
         </p>
     </div>
 
-    <div id="main-content-wrapper" class="hidden">
-        <header class="sticky-nav" role="banner">
+    <div id="main-content-wrapper" class="hidden" style="opacity:0;"> <header class="sticky-nav" role="banner">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
                     <div class="flex items-center">
                         <a href="#" class="text-2xl font-bold header-logo-text hover:opacity-80 transition-opacity duration-300">absheth.com</a>
                         <div class="ml-4 text-sm header-subtitle-text">
                             <p class="font-semibold">Archit Sheth, Chartered Accountant</p>
-                            <p>Ahmedabad, India</p>
+                            <p>Ahmedabad, Gujarat, India</p>
                         </div>
                     </div>
                     <nav role="navigation" aria-label="Main navigation" class="hidden md:flex space-x-6">
@@ -506,8 +508,8 @@
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <div class="flex flex-col items-center justify-center gap-8 py-12 md:py-16">
                         <div class="w-full">
-                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Welcome to Archit B. Sheth & Co</h1>
-                            <p class="text-lg md:text-xl hero-paragraph mb-10 max-w-3xl mx-auto">Your trusted partner in comprehensive financial, taxation, and business advisory services in Ahmedabad. We are dedicated to providing expert solutions for individuals and businesses across Gujarat, helping you navigate complex financial landscapes.</p>
+                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Expert Chartered Accountant in Ahmedabad</h1>
+                            <p class="text-lg md:text-xl hero-paragraph mb-10 max-w-3xl mx-auto">Welcome to Archit B. Sheth & Co, your trusted partner for comprehensive financial, taxation, and business advisory services in Ahmedabad. We are dedicated to providing expert solutions for individuals and businesses across Gujarat, helping you navigate complex financial landscapes and achieve your goals.</p>
                             <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
                                 <a href="#services" class="cta-button text-lg">Explore Our Services</a>
                                 <a href="#contact" class="cta-button-alt text-lg shadow-md hover:shadow-lg">Schedule a Consultation</a>
@@ -519,11 +521,11 @@
 
             <section id="services" style="background-color: var(--section-bg-white);">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">Our Comprehensive Chartered Accountant Services</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">Our Comprehensive CA Services in Ahmedabad</h2>
                      <p class="text-center text-body-medium mb-10 max-w-3xl mx-auto">
-                        As a leading CA firm in Ahmedabad, we offer a wide array of services designed to meet the diverse financial and regulatory needs of individuals and businesses. Our expertise spans <a href="#taxation-services-section" class="contact-link hover:underline">taxation services</a>, <a href="#auditing-services-section" class="contact-link hover:underline">auditing</a>, <a href="#accounting-services-section" class="contact-link hover:underline">accounting</a>, and strategic <a href="#advisory-services-section" class="contact-link hover:underline">business advisory</a>, ensuring you receive holistic support for your financial success.
+                        As a leading CA firm in Ahmedabad, we offer a wide array of professional services designed to meet the diverse financial and regulatory needs of individuals and businesses throughout Gujarat. Our expertise spans <a href="#taxation-services-section" class="contact-link hover:underline">taxation services</a>, <a href="#auditing-services-section" class="contact-link hover:underline">auditing & assurance</a>, <a href="#accounting-services-section" class="contact-link hover:underline">accounting</a>, and strategic <a href="#advisory-services-section" class="contact-link hover:underline">business advisory</a>, ensuring you receive holistic support for your financial success.
                     </p>
-                    <input type="text" id="service-filter" placeholder="Search services (e.g., GST, Audit)..." class="w-full p-3.5 border border-gray-300 rounded-md mb-10 focus:outline-none focus:ring-2 focus:ring-var(--primary-blue-grotto) focus:border-var(--primary-blue-grotto) text-base" aria-label="Filter services">
+                    <input type="text" id="service-filter" placeholder="Search services (e.g., GST, Audit, ITR)..." class="w-full p-3.5 border border-gray-300 rounded-md mb-10 focus:outline-none focus:ring-2 focus:ring-var(--primary-blue-grotto) focus:border-var(--primary-blue-grotto) text-base" aria-label="Filter services">
                     <div class="flex flex-col md:flex-row gap-8 lg:gap-12">
                         <aside id="services-sidebar" class="md:w-1/3 lg:w-1/4 md:sticky md:top-24 self-start p-6 rounded-lg shadow-md" role="complementary" aria-label="Services navigation">
                             <h3 class="text-xl font-semibold mb-5 border-b pb-3" style="color: var(--text-heading-color); border-color: var(--primary-blue-grotto);">Services Index</h3>
@@ -539,74 +541,74 @@
 
                         <div class="md:w-2/3 lg:w-3/4 space-y-16">
                             <section id="taxation-services-section" class="service-category-section pt-0 md:pt-0">
-                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Taxation Services in Ahmedabad</h3>
+                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Taxation Services in Ahmedabad & Gujarat</h3>
                                 <p class="text-body-medium mb-8 leading-relaxed">
-                                    Navigating the complex Indian tax landscape requires expertise and diligence. Our taxation services in Ahmedabad are designed to help individuals and businesses optimize tax liabilities, ensure full compliance with evolving laws (including Income Tax, GST, and TDS), and manage all tax-related documentation and representations effectively.
+                                    Navigating the complex Indian tax landscape requires expertise and diligence. Our taxation services in Ahmedabad are designed to help individuals and businesses across Gujarat optimize tax liabilities, ensure full compliance with evolving laws (including Income Tax, GST, and TDS), and manage all tax-related documentation and representations effectively.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Income Tax Advisory & Compliance</h4>
-                                        <p class="text-body-medium">Expert assistance with income tax planning, ITR filing for individuals and businesses in Ahmedabad, TDS compliance, and handling scrutiny cases to optimize tax liabilities.</p>
+                                        <p class="text-body-medium">Expert assistance with income tax planning, ITR filing for individuals and businesses in Ahmedabad & Gujarat, TDS compliance, and handling scrutiny cases to optimize tax liabilities.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Goods and Services Tax (GST) Compliance & Advisory</h4>
-                                        <p class="text-body-medium">Comprehensive GST services including GST registration in Ahmedabad, return filing, reconciliation, and advisory to ensure seamless indirect tax compliance for your business.</p>
+                                        <p class="text-body-medium">Comprehensive GST services for Ahmedabad clients, including GST registration, return filing, reconciliation, and advisory to ensure seamless indirect tax compliance for your business in Gujarat.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">International & NRI Taxation</h4>
-                                        <p class="text-body-medium">Specialized taxation services for NRIs/OCIs based in or with interests in Ahmedabad, covering DTAA interpretation, capital gains tax, fund repatriation, and FEMA/RBI compliance.</p>
+                                        <h4 class="text-xl font-semibold">International & NRI Taxation Services in Ahmedabad</h4>
+                                        <p class="text-body-medium">Specialized taxation services for NRIs/OCIs with interests in Ahmedabad or Gujarat, covering DTAA interpretation, capital gains tax, fund repatriation, and FEMA/RBI compliance.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Taxation Services</a>
                             </section>
 
                             <section id="auditing-services-section" class="service-category-section pt-0 md:pt-0">
-                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Auditing & Assurance Services</h3>
+                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Auditing & Assurance Services in Ahmedabad</h3>
                                 <p class="text-body-medium mb-8 leading-relaxed">
-                                    Our auditing and assurance services provide independent verification of financial records, ensuring transparency, regulatory compliance, and the identification of potential risks or inefficiencies. We conduct thorough statutory audits, tax audits, and internal audits for businesses in Ahmedabad and Gujarat.
+                                    Our auditing and assurance services in Ahmedabad provide independent verification of financial records, ensuring transparency, regulatory compliance for Gujarat-based businesses, and the identification of potential risks or inefficiencies. We conduct thorough statutory audits, tax audits, and internal audits.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Statutory Audit</h4>
-                                        <p class="text-body-medium">Mandatory statutory audits for companies in Ahmedabad, ensuring financial statements comply with Indian Accounting Standards and regulatory filings.</p>
+                                        <h4 class="text-xl font-semibold">Statutory Audit for Ahmedabad Companies</h4>
+                                        <p class="text-body-medium">Mandatory statutory audits for companies registered in Ahmedabad or operating in Gujarat, ensuring financial statements comply with Indian Accounting Standards and regulatory filings.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Tax Audit</h4>
-                                        <p class="text-body-medium">Comprehensive tax audit services under the Income Tax Act for eligible businesses and professionals in Ahmedabad.</p>
+                                        <h4 class="text-xl font-semibold">Tax Audit under Income Tax Act</h4>
+                                        <p class="text-body-medium">Comprehensive tax audit services as per the Income Tax Act for eligible businesses and professionals based in Ahmedabad.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Internal Audit</h4>
-                                        <p class="text-body-medium">Assessment of internal controls, risk management, and operational efficiency to identify and correct inefficiencies within your Ahmedabad-based organization.</p>
+                                        <h4 class="text-xl font-semibold">Internal Audit & Risk Assessment</h4>
+                                        <p class="text-body-medium">Assessment of internal controls, risk management frameworks, and operational efficiency to identify and correct inefficiencies within your Ahmedabad-based organization.</p>
+                                    </div>
+                                     <div class="service-card">
+                                        <h4 class="text-xl font-semibold">Forensic Audit and Investigation</h4>
+                                        <p class="text-body-medium">Expert forensic audit services in Ahmedabad to investigate fraudulent transactions, trace financial anomalies, and assist in legal proceedings.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Forensic Audit</h4>
-                                        <p class="text-body-medium">Expert forensic audit services to investigate fraudulent transactions, trace financial anomalies, and assist in legal proceedings.</p>
-                                    </div>
-                                    <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Bank Audit</h4>
-                                        <p class="text-body-medium">Specialized bank audit services for financial institutions, focusing on loan books, NPAs, and RBI regulatory compliance.</p>
+                                        <h4 class="text-xl font-semibold">Bank Audit Services</h4>
+                                        <p class="text-body-medium">Specialized bank audit services for financial institutions in the Ahmedabad region, focusing on loan books, NPAs, and RBI regulatory compliance.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Auditing Services</a>
                             </section>
 
                             <section id="accounting-services-section" class="service-category-section pt-0 md:pt-0">
-                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Accounting & Financial Reporting</h3>
+                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Accounting & Financial Reporting - Ahmedabad</h3>
                                 <p class="text-body-medium mb-8 leading-relaxed">
-                                    Accurate accounting and financial reporting are the bedrock of sound financial management. We provide comprehensive bookkeeping and accounting solutions in Ahmedabad, from daily transaction management to the preparation of financial statements, ensuring your financial records are precise and compliant.
+                                    Accurate accounting and financial reporting are the bedrock of sound financial management. We provide comprehensive bookkeeping and accounting solutions in Ahmedabad, from daily transaction management to the preparation of financial statements, ensuring your financial records are precise and compliant for your Gujarat business.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Bookkeeping & Accounting Solutions</h4>
-                                        <p class="text-body-medium">Comprehensive management of financial transactions, including daily bookkeeping, accounts payable/receivable, and financial statement preparation for Ahmedabad businesses.</p>
+                                        <h4 class="text-xl font-semibold">Bookkeeping & Accounting Solutions for Ahmedabad Businesses</h4>
+                                        <p class="text-body-medium">Comprehensive management of financial transactions, including daily bookkeeping, accounts payable/receivable, and financial statement preparation for businesses in Ahmedabad and across Gujarat.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Industry-Specific Accounting</h4>
-                                        <p class="text-body-medium">Tailored accounting solutions designed to meet the unique needs of various sectors in Ahmedabad (e.g., Retail, Manufacturing, IT services).</p>
+                                        <h4 class="text-xl font-semibold">Industry-Specific Accounting in Gujarat</h4>
+                                        <p class="text-body-medium">Tailored accounting solutions designed to meet the unique needs of various sectors in Ahmedabad and Gujarat (e.g., Retail, Manufacturing, IT services, Real Estate).</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Accounts Cleanup & Restructuring</h4>
-                                        <p class="text-body-medium">Rectifying accounting discrepancies, streamlining processes, and restructuring financial records for accuracy and compliance.</p>
+                                        <p class="text-body-medium">Professional services for rectifying accounting discrepancies, streamlining processes, and restructuring financial records for accuracy and compliance for Ahmedabad companies.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Accounting Services</a>
@@ -615,68 +617,68 @@
                             <section id="advisory-services-section" class="service-category-section pt-0 md:pt-0">
                                 <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Business Advisory & Consulting in Ahmedabad</h3>
                                 <p class="text-body-medium mb-8 leading-relaxed">
-                                    Beyond compliance, we act as strategic business advisors for Ahmedabad enterprises, offering insights to enhance financial performance, facilitate growth, and support informed decision-making. Our advisory services cover startup incubation, financial planning, M&A support, and business valuation.
+                                    Beyond compliance, we act as strategic business advisors for Ahmedabad enterprises, offering insights to enhance financial performance, facilitate growth in the Gujarat market, and support informed decision-making. Our advisory services cover startup incubation, financial planning, M&A support, and business valuation.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Startup Advisory</h4>
-                                        <p class="text-body-medium">Guidance for new businesses and startups in Ahmedabad, from <a href="#corporate-services-section" class="contact-link hover:underline">company incorporation</a> to initial financial structuring, funding assistance, and compliance management.</p>
+                                        <h4 class="text-xl font-semibold">Startup Advisory for Ahmedabad Ventures</h4>
+                                        <p class="text-body-medium">Guidance for new businesses and startups in Ahmedabad, from <a href="#corporate-services-section" class="contact-link hover:underline">company incorporation in Gujarat</a> to initial financial structuring, funding assistance, and compliance management.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Financial Planning & Wealth Management</h4>
-                                        <p class="text-body-medium">Personalized financial planning and wealth management strategies for individuals and businesses in Ahmedabad to manage finances, optimize investments, and secure long-term goals.</p>
+                                        <h4 class="text-xl font-semibold">Financial Planning & Wealth Management - Ahmedabad</h4>
+                                        <p class="text-body-medium">Personalized financial planning and wealth management strategies for individuals and businesses in Ahmedabad to manage finances, optimize investments, and secure long-term goals in Gujarat.</p>
                                     </div>
-                                    <div class="service-card">
+                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Mergers, Acquisitions & Capital Structuring Advisory</h4>
-                                        <p class="text-body-medium">Expert advice on complex corporate transactions like M&A, and optimizing capital structure for strategic objectives for businesses in Ahmedabad.</p>
+                                        <p class="text-body-medium">Expert advice on complex corporate transactions like M&A, and optimizing capital structure for strategic objectives for businesses in Ahmedabad and Gujarat.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Business Valuation Services</h4>
-                                        <p class="text-body-medium">Professional assessment of a business's economic value for transactions, financing, dispute resolution, or strategic planning in Ahmedabad.</p>
+                                        <h4 class="text-xl font-semibold">Business Valuation Services in Ahmedabad</h4>
+                                        <p class="text-body-medium">Professional assessment of a business's economic value for transactions, financing, dispute resolution, or strategic planning, primarily serving clients in Ahmedabad.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Advisory Services</a>
                             </section>
 
                             <section id="corporate-services-section" class="service-category-section pt-0 md:pt-0">
-                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Corporate Law & Compliance Services</h3>
+                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Corporate Law & Compliance Services in Gujarat</h3>
                                 <p class="text-body-medium mb-8 leading-relaxed">
-                                    We assist Ahmedabad-based businesses in adhering to corporate laws (Companies Act, LLP Act) and regulatory standards, mitigating risks and ensuring smooth operations. Our services include company incorporation, secretarial compliance, due diligence, and IPR advisory.
+                                    We assist Ahmedabad-based and Gujarat businesses in adhering to corporate laws (Companies Act, LLP Act) and regulatory standards, mitigating risks and ensuring smooth operations. Our services include company incorporation, secretarial compliance, due diligence, and IPR advisory in India.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Company/LLP Incorporation & Annual Filings</h4>
-                                        <p class="text-body-medium">Assistance with registration of new companies and LLPs in Ahmedabad, and managing mandatory annual filings with MCA and other regulatory authorities.</p>
+                                        <h4 class="text-xl font-semibold">Company/LLP Incorporation & Annual Filings in Ahmedabad</h4>
+                                        <p class="text-body-medium">Assistance with registration of new companies and LLPs in Ahmedabad, and managing mandatory annual filings with MCA and other regulatory authorities for Gujarat entities.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Secretarial Compliance Services</h4>
-                                        <p class="text-body-medium">Ongoing support for corporate governance, ROC compliances, record maintenance, and assistance with board/shareholder meetings for Ahmedabad companies.</p>
+                                        <h4 class="text-xl font-semibold">Secretarial Compliance Services for Gujarat Companies</h4>
+                                        <p class="text-body-medium">Ongoing support for corporate governance, ROC compliances, record maintenance, and assistance with board/shareholder meetings for Ahmedabad & Gujarat companies.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Legal Due Diligence & Commercial Agreement Drafting</h4>
-                                        <p class="text-body-medium">Thorough investigation of legal aspects for M&A, investments, and drafting/reviewing various commercial and legal documents.</p>
+                                        <p class="text-body-medium">Thorough investigation of legal aspects for M&A, investments, and drafting/reviewing various commercial and legal documents for businesses operating in Ahmedabad.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Intellectual Property Rights (IPR) Advisory</h4>
-                                        <p class="text-body-medium">Guidance on protecting intellectual property through registration, renewal, and enforcement of trademarks, patents, and copyrights in India.</p>
+                                        <h4 class="text-xl font-semibold">Intellectual Property Rights (IPR) Advisory in India</h4>
+                                        <p class="text-body-medium">Guidance on protecting intellectual property through registration, renewal, and enforcement of trademarks, patents, and copyrights for Indian businesses, with support from Ahmedabad.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Corporate Law Services</a>
                             </section>
 
                             <section id="other-services-section" class="service-category-section pt-0 md:pt-0">
-                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Other Specialized Services</h3>
+                                <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Other Specialized CA Services in Ahmedabad</h3>
                                 <p class="text-body-medium mb-8 leading-relaxed">
-                                    To provide comprehensive support, we offer specialized ancillary services that complement our core offerings, adding convenience and ensuring compliance with specific industry regulations for our clients in Ahmedabad.
+                                    To provide comprehensive support, we offer specialized ancillary services that complement our core CA offerings, adding convenience and ensuring compliance with specific industry regulations for our clients in Ahmedabad and Gujarat.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">Digital Signature Certificate (DSC)</h4>
-                                        <p class="text-body-medium">Assistance in obtaining and managing Digital Signature Certificates (DSCs) required for various e-filings and secure online transactions.</p>
+                                        <h4 class="text-xl font-semibold">Digital Signature Certificate (DSC) Services</h4>
+                                        <p class="text-body-medium">Assistance in obtaining and managing Digital Signature Certificates (DSCs) required for various e-filings and secure online transactions for clients in Ahmedabad.</p>
                                     </div>
                                     <div class="service-card">
-                                        <h4 class="text-xl font-semibold">FSSAI Compliance (Renewal, Return Filing)</h4>
-                                        <p class="text-body-medium">Support for businesses in the food sector in Ahmedabad with FSSAI license application, renewal, and annual return filing.</p>
+                                        <h4 class="text-xl font-semibold">FSSAI Compliance (Renewal, Return Filing) for Ahmedabad Food Businesses</h4>
+                                        <p class="text-body-medium">Support for businesses in the food sector in Ahmedabad with FSSAI license application, renewal, and annual return filing, ensuring food safety compliance in Gujarat.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Specialized Services</a>
@@ -688,15 +690,15 @@
 
             <section id="testimonials" class="hero-bg"> 
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">What Our Clients Say</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">What Our Ahmedabad Clients Say</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                         <div class="testimonial-card">
-                            <p><span>"Archit Sheth’s expertise in GST compliance saved our Ahmedabad business significant time and ensured seamless filings."</span></p>
-                            <p class="author-text">– Manufacturing Business, Ahmedabad</p>
+                            <p><span>"Archit Sheth’s expertise in GST compliance saved our Ahmedabad manufacturing business significant time and ensured seamless filings. Truly a reliable CA in Ahmedabad."</span></p>
+                            <p class="author-text">– A. Patel, Manufacturing Business, Ahmedabad</p>
                         </div>
                         <div class="testimonial-card">
-                            <p><span>"Their startup advisory services helped us navigate complex regulations with ease. Highly recommended CA in Gujarat for new ventures."</span></p>
-                            <p class="author-text">– Tech Startup Entrepreneur, Surat</p>
+                            <p><span>"Their startup advisory services in Ahmedabad helped us navigate complex regulations with ease. Highly recommended CA in Gujarat for new ventures and company registration."</span></p>
+                            <p class="author-text">– S. Mehta, Tech Startup Entrepreneur, Ahmedabad</p>
                         </div>
                     </div>
                 </div>
@@ -704,12 +706,12 @@
 
             <section id="about" style="background-color: var(--section-bg-white);">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">About CA Archit Sheth</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">About CA Archit Sheth - Leading CA in Ahmedabad</h2>
                     <div class="flex flex-col items-center gap-8 max-w-4xl mx-auto">
                         <div class="w-full about-text space-y-6 text-lg">
-                            <p>Archit Sheth is a qualified Chartered Accountant based in Ahmedabad, India, with a strong commitment to providing exceptional client service and tailored financial solutions. With extensive experience as a CA in Ahmedabad, Archit Sheth offers expert, customized support in taxation, auditing, accounting, and business advisory to meet the diverse needs of individuals and businesses across Gujarat.</p>
-                            <p>The practice, Archit B. Sheth & Co, is built on principles of integrity, professionalism, and a proactive approach to financial management. We strive to empower our clients by ensuring compliance with Indian financial regulations, optimizing financial performance, and offering strategic insights that drive growth and stability. Our deep understanding of the Indian financial and regulatory landscape, particularly within Gujarat, allows us to deliver timely and effective chartered accountancy services.</p>
-                            <p>We believe in building long-term relationships with our clients, acting not just as service providers but as trusted financial advisors. Whether you are a startup in Ahmedabad navigating initial complexities, an established business seeking efficiency, or an individual planning your financial future, Archit Sheth is dedicated to helping you achieve your goals with expert CA services.</p>
+                            <p>Archit Sheth is a qualified Chartered Accountant based in Ahmedabad, Gujarat, with a strong commitment to providing exceptional client service and tailored financial solutions. With extensive experience as a leading CA in Ahmedabad, Archit Sheth offers expert, customized support in taxation, auditing, accounting, and business advisory to meet the diverse needs of individuals and businesses across Gujarat.</p>
+                            <p>The practice, Archit B. Sheth & Co, is built on principles of integrity, professionalism, and a proactive approach to financial management. We strive to empower our clients by ensuring compliance with Indian financial regulations, optimizing financial performance, and offering strategic insights that drive growth and stability. Our deep understanding of the Indian financial and regulatory landscape, particularly within Ahmedabad and Gujarat, allows us to deliver timely and effective chartered accountancy services.</p>
+                            <p>We believe in building long-term relationships with our clients, acting not just as service providers but as trusted financial advisors. Whether you are a startup in Ahmedabad navigating initial complexities, an established business in Gujarat seeking efficiency, or an individual planning your financial future, Archit Sheth is dedicated to helping you achieve your goals with expert CA services.</p>
                         </div>
                     </div>
                 </div>
@@ -717,16 +719,15 @@
 
             <section id="contact" class="hero-bg"> 
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">Get In Touch with Your CA</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">Get In Touch with Your Ahmedabad CA</h2>
                     <div class="max-w-xl mx-auto contact-card flex flex-col items-center gap-8">
                         <div class="w-full text-body-medium space-y-4 text-lg">
-                            <p class="text-center mb-6">We are here to assist you with all your accounting, tax, and financial advisory needs in Ahmedabad. Please feel free to reach out with your queries or to schedule a consultation.</p>
+                            <p class="text-center mb-6">We are here to assist you with all your accounting, tax, and financial advisory needs in Ahmedabad. Please feel free to reach out with your queries or to schedule a consultation with a leading Chartered Accountant.</p>
                             <p><strong>Name:</strong> Archit Sheth</p>
                             <p><strong>Designation:</strong> Chartered Accountant</p>
-                            <p><strong>Location:</strong> Ambawadi, Ahmedabad, Gujarat, India</p>
+                            <p><strong>Office Location:</strong> Ambawadi, Ahmedabad, Gujarat, 380006, India</p>
                             <p><strong>Email:</strong> <a href="mailto:archit@absheth.com" class="contact-link hover:underline">archit@absheth.com</a></p>
                             <p><strong>Phone:</strong> <a href="tel:+919898467888" class="contact-link hover:underline" id="contact-number">+91 98984 67888</a></p>
-                            <p><strong>Office Address:</strong> Ambawadi, Ahmedabad, 380006</p>
                             <div class="mt-10 text-center">
                                 <a href="mailto:archit@absheth.com?subject=Inquiry from absheth.com - Chartered Accountant Services Ahmedabad" class="cta-button">Send an Email</a>
                             </div>
@@ -739,6 +740,10 @@
         <footer role="contentinfo">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <p>© <span id="currentYear"></span> absheth.com - Archit B. Sheth & Co, Chartered Accountant Ahmedabad. All rights reserved.</p>
+                <p class="footer-secondary-text text-sm mt-2">
+                    <a href="/privacy-policy.html" class="mx-2">Privacy Policy</a> | 
+                    <a href="/terms-of-service.html" class="mx-2">Terms of Service</a>
+                </p>
                 <p class="footer-secondary-text text-sm mt-2">Website by Archit Sheth, Chartered Accountant, Ahmedabad.</p>
             </div>
         </footer>
@@ -750,69 +755,41 @@
         const mainContentWrapper = document.getElementById('main-content-wrapper');
         const body = document.body;
 
-        function enterSite() {
-            if (welcomeScreen) {
-                welcomeScreen.classList.add('fade-out');
-                welcomeScreen.addEventListener('transitionend', () => {
-                    welcomeScreen.style.display = 'none';
-                    if (mainContentWrapper) {
-                        mainContentWrapper.classList.remove('hidden');
-                        setTimeout(() => {
-                            mainContentWrapper.style.transition = 'opacity 0.5s ease-in';
-                            mainContentWrapper.style.opacity = '1';
-                        }, 50);
-                    }
-                    body.classList.remove('welcome-active');
-                    body.style.overflowY = 'auto';
-                }, { once: true });
-            }
-        }
-
         if (welcomeScreen && getComputedStyle(welcomeScreen).display !== 'none') {
             body.style.overflowY = 'hidden';
         } else if (welcomeScreen) { 
-             body.classList.remove('welcome-active');
-             body.style.overflowY = 'auto';
+            body.classList.remove('welcome-active');
+            body.style.overflowY = 'auto';
+            if (mainContentWrapper) { // If welcome screen was never displayed or already faded
+                mainContentWrapper.classList.remove('hidden');
+                mainContentWrapper.style.opacity = '1';
+            }
         }
-
-        // Total time before fade-out starts is 7s (animation sequence) + 1s (fade-out duration)
-        // The transition CSS on #welcome-screen handles the fade-out start with its delay.
-        // So the JS timeout should match the start of the fade-out if we want to trigger 'fade-out' class.
-        // Or, if CSS handles the delay, this JS timeout is for any post-animation cleanup if needed.
-        // Let's adjust JS setTimeout to align with the new total desired screen time.
-        // CSS for #welcome-screen: transition: opacity 1s ease-out 7s;
-        // This means the fade-out starts at 7s. We want to add the class slightly before or ensure elements are set up.
-        // The current JS effectively calls enterSite after 5s (original). We need to call it after ~7s for the fade-out.
-        // However, the CSS transition on #welcome-screen itself has the delay of `7s`. 
-        // The `enterSite` function primarily handles making main content visible *after* welcome screen fades.
-        // The actual opacity change leading to transitionend is handled by CSS.
-        // So, the class `fade-out` should be added at the point the CSS delay ends for opacity transition.
         
-        // Let's simplify. The CSS has `transition: opacity 1s ease-out 7s;` on #welcome-screen.
-        // We don't need to add `fade-out` class anymore if the opacity is just part of its base style and the transition is built-in.
-        // Ah, no, the initial opacity is 1. The `fade-out` class sets opacity to 0, triggering the transition.
-        // So, the JS timeout for adding `fade-out` should be 7 seconds (matching the CSS transition-delay).
-        
+        // Add fade-out class to start CSS transition after 2s
         setTimeout(() => {
             if (welcomeScreen) {
                 welcomeScreen.classList.add('fade-out');
             }
-        }, 7000); // Add fade-out class to start CSS transition at 7s
+        }, 2000); // Reduced from 7000ms
 
-        // This listener now correctly waits for the CSS-defined transition to end.
+        // Listener for when the welcome screen fade-out transition ends
         if (welcomeScreen) {
-            welcomeScreen.addEventListener('transitionend', () => {
-                if (welcomeScreen.style.opacity === "0" || welcomeScreen.classList.contains('fade-out')) { // Ensure it's the fade-out
-                    welcomeScreen.style.display = 'none';
-                    if (mainContentWrapper) {
-                        mainContentWrapper.classList.remove('hidden');
-                        setTimeout(() => {
-                            mainContentWrapper.style.transition = 'opacity 0.5s ease-in';
-                            mainContentWrapper.style.opacity = '1';
-                        }, 50);
+            welcomeScreen.addEventListener('transitionend', (event) => {
+                // Ensure the event is for the opacity transition on the welcome screen itself
+                if (event.target === welcomeScreen && event.propertyName === 'opacity') {
+                    if (welcomeScreen.style.opacity === "0" || welcomeScreen.classList.contains('fade-out')) {
+                        welcomeScreen.style.display = 'none';
+                        if (mainContentWrapper) {
+                            mainContentWrapper.classList.remove('hidden');
+                            setTimeout(() => { // Short delay for smooth opacity transition of main content
+                                mainContentWrapper.style.transition = 'opacity 0.5s ease-in';
+                                mainContentWrapper.style.opacity = '1';
+                            }, 50);
+                        }
+                        body.classList.remove('welcome-active');
+                        body.style.overflowY = 'auto';
                     }
-                    body.classList.remove('welcome-active');
-                    body.style.overflowY = 'auto';
                 }
             }, { once: true });
         }
@@ -842,6 +819,9 @@
                 allServiceCategorySections.forEach(section => {
                     let sectionHasVisibleCardThisIteration = false;
                     const cardsInSection = Array.from(section.querySelectorAll('.service-card'));
+                    const sectionTitleText = section.querySelector('h3')?.textContent.toLowerCase() || '';
+                    const sectionIntroText = section.querySelector('p:first-of-type')?.textContent.toLowerCase() || '';
+
 
                     cardsInSection.forEach(card => {
                         const title = card.querySelector('h4')?.textContent.toLowerCase() || '';
@@ -853,8 +833,18 @@
                             sectionHasVisibleCardThisIteration = true;
                         }
                     });
+                    
+                    // Also check if filter text matches section title or intro paragraph
+                    if (filterText !== '' && (sectionTitleText.includes(filterText) || sectionIntroText.includes(filterText))) {
+                        sectionHasVisibleCardThisIteration = true;
+                        // If section matches, ensure all its cards are visible if no specific card was matched by filter
+                        if (!cardsInSection.some(card => (card.querySelector('h4')?.textContent.toLowerCase() || '').includes(filterText) || (card.querySelector('p')?.textContent.toLowerCase() || '').includes(filterText))) {
+                           cardsInSection.forEach(card => card.style.display = 'block');
+                        }
+                    }
                     section.style.display = sectionHasVisibleCardThisIteration || filterText === '' ? 'block' : 'none';
                 });
+                updateActiveServiceLink(); // Update active link after filtering might change section visibility/position
             });
         }
         
@@ -864,11 +854,12 @@
 
         function updateActiveServiceLink() {
             let currentSectionId = '';
-            const navHeight = stickyNav?.offsetHeight || 80;
+            const navHeight = stickyNav?.offsetHeight || 70; // Adjusted default
+            const offsetMargin = Math.max(20, window.innerHeight * 0.15); // Increased margin for better trigger
 
             serviceContentSections.forEach(section => {
                 if (getComputedStyle(section).display !== 'none') { 
-                    const sectionTop = section.offsetTop - navHeight - Math.max(20, window.innerHeight * 0.1);
+                    const sectionTop = section.offsetTop - navHeight - offsetMargin;
                     if (window.scrollY >= sectionTop) {
                         currentSectionId = section.getAttribute('id');
                     }
@@ -885,13 +876,15 @@
         }
         
         window.addEventListener('scroll', updateActiveServiceLink);
+        
         // Delay initial call until after welcome screen animations might have completed
         // and main content is definitely rendered for offsetTop calculations.
+        // Total welcome screen: 2s animation + 1s fade = 3s
         setTimeout(() => {
-            if (mainContentWrapper && !mainContentWrapper.classList.contains('hidden')) {
-                updateActiveServiceLink();
+            if (mainContentWrapper && mainContentWrapper.style.opacity === '1') { // Check if main content is visible
+                 updateActiveServiceLink();
             }
-        }, 8100); // After the total welcome screen time (7s animation + 1s fade)
+        }, 3100); // After the total welcome screen time + small buffer
 
     });
     </script>
