@@ -17,27 +17,120 @@
         from the source report, focusing on user experience and quick access to relevant information.
     -->
     <!-- Visualization & Content Choices: 
-        - Hero Section: Goal: Inform/Engage. Method: Text block. Interaction: Read, CTA click. Justification: Standard engaging intro.
+        - Hero Section: Goal: Inform/Engage. Method: Text block with conceptual placeholder image. Interaction: Read, CTA click. Justification: Standard engaging intro with visual appeal.
         - Main Navigation (Header & Services Index): Goal: Organize/Navigate. Method: HTML links styled with Tailwind. Interaction: Click to scroll smoothly. Justification: Intuitive and efficient site navigation. Library: Vanilla JS for smooth scroll.
         - Service Categories (e.g., Taxation, Auditing): Goal: Inform. Method: Dedicated HTML sections with headings, introductory paragraphs, and lists of sub-services with descriptions. Interaction: Read, scroll. Justification: Clear, structured presentation of detailed service offerings as outlined in the source report.
-        - About Us Section: Goal: Inform/Build Trust. Method: Text block. Interaction: Read. Justification: Provides personal and professional context.
-        - Contact Section: Goal: Enable Action. Method: Text block with contact details (phone placeholder as requested). Interaction: Read, use information to contact. Justification: Essential for lead generation.
-        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. No charts are necessary as the source report focuses on descriptive service information rather than quantitative data suitable for charting.
+        - About Us Section: Goal: Inform/Build Trust. Method: Text block with conceptual placeholder image. Interaction: Read. Justification: Provides personal and professional context with visual reinforcement.
+        - Contact Section: Goal: Enable Action. Method: Text block with contact details and conceptual placeholder image. Interaction: Read, use information to contact. Justification: Essential for lead generation with visual cue.
+        - Gemini API Integration:
+            - Service Explanation Expander: Goal: Inform/Detail. Method: LLM-generated text in a modal. Interaction: Button click to expand. Justification: Provides quick, concise details without cluttering the main page.
+            - Quick Tax Tip Generator: Goal: Engage/Inform. Method: LLM-generated text. Interaction: Button click to generate. Justification: Adds value by offering quick, general tax insights.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. No charts are necessary as the source report focuses on descriptive service information rather than quantitative data suitable for charting. Placeholder images are used via placehold.co for pictorial elements.
     -->
     <style>
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; }
-        .hero-bg { background-color: #F8FAFC; } /* Very Light Gray */
+        .hero-bg { background-color: #F0F4F8; } /* Lighter Blue-Gray */
         .nav-link { transition: color 0.3s ease; }
-        .nav-link:hover { color: #3B82F6; } /* Lighter Blue Accent */
-        .service-card { background-color: #ffffff; border: 1px solid #E2E8F0; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .nav-link:hover { color: #2563EB; } /* Brighter Blue Accent */
+        .service-card { background-color: #ffffff; border: 1px solid #E2E8F0; border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s ease-in-out; }
+        .service-card:hover { transform: translateY(-5px); }
         .service-card h4 { color: #1E3A8A; } /* Deep Blue for sub-headings */
-        .cta-button { background-color: #1E3A8A; color: white; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: background-color 0.3s ease; text-align: center; font-weight: 600;}
-        .cta-button:hover { background-color: #1D4ED8; } /* Slightly lighter blue on hover */
-        .section-title { color: #1E3A8A; border-bottom: 2px solid #3B82F6; padding-bottom: 0.5rem; } /* Deep Blue with Lighter Blue underline */
+        .cta-button { background-color: #F59E0B; color: white; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: background-color 0.3s ease, transform 0.2s ease; text-align: center; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .cta-button:hover { background-color: #D97706; transform: translateY(-2px); } /* Darker goldenrod on hover */
+        .section-title { color: #1E3A8A; border-bottom: 3px solid #2563EB; padding-bottom: 0.75rem; } /* Deep Blue with Brighter Blue underline */
         .sticky-nav { position: -webkit-sticky; position: sticky; top: 0; z-index: 50; background-color: rgba(255, 255, 255, 0.98); backdrop-filter: blur(8px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .service-index-item a { display: block; padding: 0.5rem 1rem; margin-bottom: 0.25rem; border-radius: 0.375rem; transition: background-color 0.3s ease, color 0.3s ease; }
-        .service-index-item a:hover, .service-index-item a.active { background-color: #EBF8FF; color: #1E3A8A; font-weight: 600; } /* Very Light Blue bg, Deep Blue text for hover/active */
+        .service-index-item a:hover, .service-index-item a.active { background-color: #DBEAFE; color: #1E3A8A; font-weight: 600; } /* Very Light Blue bg, Deep Blue text for hover/active */
+        .image-placeholder {
+            background-color: #EBF8FF; /* Light blue background for placeholders */
+            border-radius: 0.75rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #60A5FA; /* Blue text for placeholder */
+            text-align: center;
+            height: 200px; /* Default height, responsive classes will override */
+            width: 100%;
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.75rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #333;
+            text-decoration: none;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none; /* Hidden by default */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-spinner.show {
+            display: block;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -77,9 +170,18 @@
     <main>
         <section id="hero" class="hero-bg py-20 md:py-32">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-6">Welcome to Archit B. Sheth & Co</h1>
-                <p class="text-lg md:text-xl text-slate-700 mb-8 max-w-3xl mx-auto">Your trusted partner in comprehensive financial, taxation, and business advisory services in Ahmedabad. We are dedicated to providing expert solutions tailored to your unique needs.</p>
-                <a href="#services" class="cta-button inline-block text-lg">Explore Our Services</a>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="md:w-1/2">
+                        <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-6">Welcome to Archit B. Sheth & Co</h1>
+                        <p class="text-lg md:text-xl text-slate-700 mb-8 max-w-3xl mx-auto">Your trusted partner in comprehensive financial, taxation, and business advisory services in Ahmedabad. We are dedicated to providing expert solutions tailored to your unique needs.</p>
+                        <a href="#services" class="cta-button inline-block text-lg">Explore Our Services</a>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="image-placeholder w-full max-w-xs md:max-w-sm lg:max-w-md h-48 md:h-64">
+                            <img src="https://placehold.co/400x250/DBEAFE/1E3A8A?text=Financial+Growth" alt="Financial Growth Concept" onerror="this.onerror=null;this.src='https://placehold.co/400x250/DBEAFE/1E3A8A?text=Image+Not+Available';">
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -113,14 +215,17 @@
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Income Tax Advisory & Compliance</h4>
                                     <p class="text-slate-600">Assistance with tax planning, ITR filing, TDS compliance, and handling scrutiny cases to optimize liabilities.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Income Tax Advisory & Compliance" data-service-desc="Assistance with tax planning, ITR filing, TDS compliance, and handling scrutiny cases to optimize liabilities.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Goods and Services Tax (GST) Compliance & Advisory</h4>
                                     <p class="text-slate-600">Expert guidance on GST regulations, return filing, and advisory to ensure seamless indirect tax compliance.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Goods and Services Tax (GST) Compliance & Advisory" data-service-desc="Expert guidance on GST regulations, return filing, and advisory to ensure seamless indirect tax compliance.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">International & NRI Taxation</h4>
                                     <p class="text-slate-600">Specialized services for NRIs/OCIs, covering DTAA, capital gains, fund repatriation, and FEMA/RBI compliance.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="International & NRI Taxation" data-service-desc="Specialized services for NRIs/OCIs, covering DTAA, capital gains, fund repatriation, and FEMA/RBI compliance.">Learn More ✨</button>
                                 </div>
                             </div>
                              <a href="#contact" class="cta-button inline-block mt-8">Enquire About Taxation Services</a>
@@ -135,22 +240,27 @@
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Statutory Audit</h4>
                                     <p class="text-slate-600">Mandatory audit ensuring financial statements comply with Indian Accounting Standards and regulatory filings.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Statutory Audit" data-service-desc="Mandatory audit ensuring financial statements comply with Indian Accounting Standards and regulatory filings.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Tax Audit</h4>
                                     <p class="text-slate-600">Examination of books to ensure income tax compliance, verify deductions, and file prescribed forms.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Tax Audit" data-service-desc="Examination of books to ensure income tax compliance, verify deductions, and file prescribed forms.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Internal Audit</h4>
                                     <p class="text-slate-600">Assessment of internal controls, risks, and operational efficiency to identify and correct inefficiencies.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Internal Audit" data-service-desc="Assessment of internal controls, risks, and operational efficiency to identify and correct inefficiencies.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Forensic Audit</h4>
                                     <p class="text-slate-600">Investigation of fraudulent transactions, tracing financial anomalies, and assisting in legal proceedings.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Forensic Audit" data-service-desc="Investigation of fraudulent transactions, tracing financial anomalies, and assisting in legal proceedings.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Bank Audit</h4>
                                     <p class="text-slate-600">Mandatory audit for financial institutions, focusing on loan books, NPAs, and RBI regulatory compliance.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Bank Audit" data-service-desc="Mandatory audit for financial institutions, focusing on loan books, NPAs, and RBI regulatory compliance.">Learn More ✨</button>
                                 </div>
                             </div>
                             <a href="#contact" class="cta-button inline-block mt-8">Enquire About Auditing Services</a>
@@ -165,14 +275,17 @@
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Bookkeeping & Accounting Solutions</h4>
                                     <p class="text-slate-600">Comprehensive management of financial transactions, including daily bookkeeping and financial statement preparation.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Bookkeeping & Accounting Solutions" data-service-desc="Comprehensive management of financial transactions, including daily bookkeeping and financial statement preparation.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Industry-Specific Accounting</h4>
                                     <p class="text-slate-600">Tailored accounting solutions designed to meet the unique needs of various sectors (e.g., Retail, Manufacturing).</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Industry-Specific Accounting" data-service-desc="Tailored accounting solutions designed to meet the unique needs of various sectors (e.g., Retail, Manufacturing).">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Accounts Cleanup & Restructuring</h4>
                                     <p class="text-slate-600">Rectifying discrepancies, streamlining processes, and restructuring financial records for accuracy and compliance.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Accounts Cleanup & Restructuring" data-service-desc="Rectifying discrepancies, streamlining processes, and restructuring financial records for accuracy and compliance.">Learn More ✨</button>
                                 </div>
                             </div>
                              <a href="#contact" class="cta-button inline-block mt-8">Enquire About Accounting Services</a>
@@ -187,18 +300,22 @@
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Startup Advisory</h4>
                                     <p class="text-slate-600">Guidance for new businesses from incorporation to initial financial structuring and compliance.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Startup Advisory" data-service-desc="Guidance for new businesses from incorporation to initial financial structuring and compliance.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Financial Planning & Wealth Management</h4>
                                     <p class="text-slate-600">Strategies for individuals and businesses to manage finances, optimize investments, and secure long-term goals.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Financial Planning & Wealth Management" data-service-desc="Strategies for individuals and businesses to manage finances, optimize investments, and secure long-term goals.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Mergers, Acquisitions & Capital Structuring Advisory</h4>
                                     <p class="text-slate-600">Expert advice on complex corporate transactions and optimizing capital structure for strategic objectives.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Mergers, Acquisitions & Capital Structuring Advisory" data-service-desc="Expert advice on complex corporate transactions and optimizing capital structure for strategic objectives.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Business Valuation Services</h4>
                                     <p class="text-slate-600">Professional assessment of a business's economic value for transactions, financing, or strategic planning.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Business Valuation Services" data-service-desc="Professional assessment of a business's economic value for transactions, financing, or strategic planning.">Learn More ✨</button>
                                 </div>
                             </div>
                             <a href="#contact" class="cta-button inline-block mt-8">Enquire About Advisory Services</a>
@@ -213,18 +330,22 @@
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Company/LLP Incorporation & Annual Filings</h4>
                                     <p class="text-slate-600">Assistance with registration of new entities and managing mandatory annual filings with regulatory authorities.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Company/LLP Incorporation & Annual Filings" data-service-desc="Assistance with registration of new entities and managing mandatory annual filings with regulatory authorities.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Secretarial Compliance Services</h4>
                                     <p class="text-slate-600">Ongoing support for corporate governance, record maintenance, and assistance with board/shareholder meetings.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Secretarial Compliance Services" data-service-desc="Ongoing support for corporate governance, record maintenance, and assistance with board/shareholder meetings.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Legal Due Diligence & Commercial Agreement Drafting</h4>
                                     <p class="text-slate-600">Thorough investigation of legal aspects and drafting/reviewing various commercial and legal documents.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Legal Due Diligence & Commercial Agreement Drafting" data-service-desc="Thorough investigation of legal aspects and drafting/reviewing various commercial and legal documents.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Intellectual Property Rights (IPR) Advisory</h4>
                                     <p class="text-slate-600">Guidance on protecting intellectual property through registration, renewal, and enforcement of trademarks, patents, and copyrights.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Intellectual Property Rights (IPR) Advisory" data-service-desc="Guidance on protecting intellectual property through registration, renewal, and enforcement of trademarks, patents, and copyrights.">Learn More ✨</button>
                                 </div>
                             </div>
                             <a href="#contact" class="cta-button inline-block mt-8">Enquire About Corporate Law Services</a>
@@ -239,13 +360,28 @@
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">Digital Signature Certificate (DSC)</h4>
                                     <p class="text-slate-600">Assistance in obtaining and managing Digital Signature Certificates (DSCs) for secure online transactions.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="Digital Signature Certificate (DSC)" data-service-desc="Assistance in obtaining and managing Digital Signature Certificates (DSCs) for secure online transactions.">Learn More ✨</button>
                                 </div>
                                 <div class="service-card">
                                     <h4 class="text-xl font-semibold mb-2">FSSAI Compliance (Renewal, Return Filing)</h4>
                                     <p class="text-slate-600">Support for businesses in the food sector with FSSAI license renewal and return filing.</p>
+                                    <button class="learn-more-button text-blue-600 hover:underline mt-4 text-sm" data-service-title="FSSAI Compliance (Renewal, Return Filing)" data-service-desc="Support for businesses in the food sector with FSSAI license renewal and return filing.">Learn More ✨</button>
                                 </div>
                             </div>
                             <a href="#contact" class="cta-button inline-block mt-8">Enquire About Specialized Services</a>
+                        </section>
+
+                        <section id="tax-tips-section" class="service-category-section">
+                            <h3 class="text-2xl font-semibold section-title mb-6">Quick Tax Tips ✨</h3>
+                            <p class="text-slate-600 mb-8">
+                                Get a general tax tip to help you with your financial planning. Remember, this is for informational purposes only and not professional financial advice.
+                            </p>
+                            <div class="bg-white p-6 rounded-lg shadow-lg">
+                                <button id="generate-tax-tip-button" class="cta-button inline-block mb-4">Generate Tax Tip ✨</button>
+                                <div id="tax-tip-output" class="text-slate-700 text-lg"></div>
+                                <div class="loading-spinner" id="tax-tip-spinner"></div>
+                                <p class="text-sm text-slate-500 mt-4">Disclaimer: This tip is generated by an AI and is for general informational purposes only. It does not constitute professional financial or tax advice. Please consult with a qualified Chartered Accountant for personalized guidance.</p>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -255,10 +391,17 @@
         <section id="about" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">About Archit Sheth</h2>
-                <div class="max-w-3xl mx-auto text-slate-700 space-y-6 text-lg">
-                    <p>Archit Sheth is a qualified Chartered Accountant based in Ahmedabad, India, with a strong commitment to providing exceptional client service. With extensive experience in the fields of taxation, auditing, accounting, and business advisory, Archit Sheth offers expert, customized solutions to meet the diverse needs of individuals and businesses.</p>
-                    <p>The practice is built on principles of integrity, professionalism, and a proactive approach to financial management. We strive to empower our clients by ensuring compliance, optimizing financial performance, and offering strategic insights that drive growth and stability. Our deep understanding of the Indian financial and regulatory landscape allows us to deliver timely and effective solutions.</p>
-                    <p>We believe in building long-term relationships with our clients, acting not just as service providers but as trusted advisors. Whether you are a startup navigating initial complexities, an established business seeking efficiency, or an individual planning your financial future, Archit Sheth is dedicated to helping you achieve your goals.</p>
+                <div class="flex flex-col md:flex-row items-center gap-8 max-w-4xl mx-auto">
+                    <div class="md:w-1/2">
+                        <div class="image-placeholder w-full h-48 md:h-64">
+                            <img src="https://placehold.co/400x250/DBEAFE/1E3A8A?text=Professional+Expertise" alt="Professional Expertise Concept" onerror="this.onerror=null;this.src='https://placehold.co/400x250/DBEAFE/1E3A8A?text=Image+Not+Available';">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 text-slate-700 space-y-6 text-lg">
+                        <p>Archit Sheth is a qualified Chartered Accountant based in Ahmedabad, India, with a strong commitment to providing exceptional client service. With extensive experience in the fields of taxation, auditing, accounting, and business advisory, Archit Sheth offers expert, customized solutions to meet the diverse needs of individuals and businesses.</p>
+                        <p>The practice is built on principles of integrity, professionalism, and a proactive approach to financial management. We strive to empower our clients by ensuring compliance, optimizing financial performance, and offering strategic insights that drive growth and stability. Our deep understanding of the Indian financial and regulatory landscape allows us to deliver timely and effective solutions.</p>
+                        <p>We believe in building long-term relationships with our clients, acting not just as service providers but as trusted advisors. Whether you are a startup navigating initial complexities, an established business seeking efficiency, or an individual planning your financial future, Archit Sheth is dedicated to helping you achieve your goals.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -266,18 +409,23 @@
         <section id="contact" class="py-16 md:py-24 hero-bg">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">Get In Touch</h2>
-                <div class="max-w-xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-xl">
-                    <p class="text-center text-slate-700 mb-8 text-lg">We are here to assist you. Please feel free to reach out with your queries or to schedule a consultation.</p>
-                    <div class="space-y-6 text-slate-700">
+                <div class="max-w-xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-xl flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/2 text-slate-700 space-y-6 text-lg">
+                        <p class="text-center md:text-left text-slate-700 mb-4 text-lg">We are here to assist you. Please feel free to reach out with your queries or to schedule a consultation.</p>
                         <p><strong>Name:</strong> Archit Sheth</p>
                         <p><strong>Designation:</strong> Chartered Accountant</p>
                         <p><strong>Location:</strong> Ahmedabad, Gujarat, India</p>
                         <p><strong>Email:</strong> <a href="mailto:archit@absheth.com" class="text-blue-600 hover:underline">archit@absheth.com</a></p>
                         <p><strong>Phone:</strong> <span id="contact-number">9898467888</span></p>
                         <p><strong>Office Address:</strong> Ambawadi, Ahmedabad</p>
+                        <div class="mt-8 text-center md:text-left">
+                            <a href="mailto:archit@absheth.com?subject=Inquiry from absheth.com" class="cta-button inline-block">Send an Email</a>
+                        </div>
                     </div>
-                    <div class="mt-10 text-center">
-                         <a href="mailto:archit@absheth.com?subject=Inquiry from absheth.com" class="cta-button inline-block">Send an Email</a>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="image-placeholder w-full h-48 md:h-64">
+                            <img src="https://placehold.co/400x250/DBEAFE/1E3A8A?text=Connect+with+Us" alt="Connect with Us Concept" onerror="this.onerror=null;this.src='https://placehold.co/400x250/DBEAFE/1E3A8A?text=Image+Not+Available';">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -290,6 +438,16 @@
             <p class="text-sm mt-2">Website by Archit Sheth, Chartered Accountant, Ahmedabad.</p>
         </div>
     </footer>
+
+    <div id="service-detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modal-service-title" class="text-2xl font-bold text-blue-800 mb-4"></h3>
+            <div class="loading-spinner" id="modal-spinner"></div>
+            <p id="modal-service-description" class="text-slate-700 text-lg"></p>
+            <p class="text-sm text-slate-500 mt-4">Disclaimer: This explanation is generated by an AI and is for general informational purposes only. It does not constitute professional financial or tax advice. Please consult with a qualified Chartered Accountant for personalized guidance.</p>
+        </div>
+    </div>
 
     <script>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -358,6 +516,108 @@
         window.addEventListener('scroll', highlightNavLink);
         window.addEventListener('load', highlightNavLink); // Initial check
 
+        // Gemini API Integration
+        const serviceDetailModal = document.getElementById('service-detail-modal');
+        const closeModalButton = serviceDetailModal.querySelector('.close-button');
+        const modalServiceTitle = document.getElementById('modal-service-title');
+        const modalServiceDescription = document.getElementById('modal-service-description');
+        const modalSpinner = document.getElementById('modal-spinner');
+
+        document.querySelectorAll('.learn-more-button').forEach(button => {
+            button.addEventListener('click', async () => {
+                const serviceTitle = button.dataset.serviceTitle;
+                const serviceDesc = button.dataset.serviceDesc;
+                
+                modalServiceTitle.textContent = serviceTitle;
+                modalServiceDescription.textContent = ''; // Clear previous content
+                modalSpinner.classList.add('show'); // Show spinner
+                serviceDetailModal.classList.add('show'); // Show modal
+
+                const prompt = `Provide a concise, professional explanation of "${serviceTitle}" for a potential client, elaborating slightly on its benefits and key aspects. Keep it under 100 words.`;
+
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        modalServiceDescription.textContent = text;
+                    } else {
+                        modalServiceDescription.textContent = 'Could not generate explanation. Please try again.';
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API:', error);
+                    modalServiceDescription.textContent = 'Failed to load explanation due to an error. Please try again later.';
+                } finally {
+                    modalSpinner.classList.remove('show'); // Hide spinner
+                }
+            });
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            serviceDetailModal.classList.remove('show');
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == serviceDetailModal) {
+                serviceDetailModal.classList.remove('show');
+            }
+        });
+
+        // Quick Tax Tip Generator
+        const generateTaxTipButton = document.getElementById('generate-tax-tip-button');
+        const taxTipOutput = document.getElementById('tax-tip-output');
+        const taxTipSpinner = document.getElementById('tax-tip-spinner');
+
+        if (generateTaxTipButton) {
+            generateTaxTipButton.addEventListener('click', async () => {
+                taxTipOutput.textContent = ''; // Clear previous tip
+                taxTipSpinner.classList.add('show'); // Show spinner
+
+                const prompt = "Provide a single, general, actionable tax tip for individuals in India. Keep it concise and easy to understand. Include a disclaimer that it's not professional financial advice.";
+
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        taxTipOutput.textContent = text;
+                    } else {
+                        taxTipOutput.textContent = 'Could not generate a tax tip. Please try again.';
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API for tax tip:', error);
+                    taxTipOutput.textContent = 'Failed to load a tax tip due to an error. Please try again later.';
+                } finally {
+                    taxTipSpinner.classList.remove('show'); // Hide spinner
+                }
+            });
+        }
     </script>
 </body>
 </html>
