@@ -586,7 +586,7 @@
                     chatHistory.push({ role: "user", parts: [{ text: prompt }] });
                     const payload = { contents: chatHistory };
                     const apiKey = ""; 
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AIzaSyDXttYzmrQybOB-yz1rYWJC4pSh6ctlmGw}`;
                     
                     const response = await fetch(apiUrl, {
                         method: 'POST',
@@ -604,7 +604,7 @@
                         modalServiceDescription.textContent = 'Could not generate explanation. Please try again.';
                     }
                 } catch (error) {
-                    console.error('Error calling Gemini API:', error);
+                    console.error('Error calling Gemini :', error);
                     modalServiceDescription.textContent = 'Failed to load explanation due to an error. Please try again later.';
                 } finally {
                     modalSpinner.classList.remove('show'); // Hide spinner
@@ -638,8 +638,8 @@
                     let chatHistory = [];
                     chatHistory.push({ role: "user", parts: [{ text: prompt }] });
                     const payload = { contents: chatHistory };
-                    const apiKey = ""; 
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    const Key = ""; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AIzaSyDXttYzmrQybOB-yz1rYWJC4pSh6ctlmGw}`;
                     
                     const response = await fetch(apiUrl, {
                         method: 'POST',
@@ -688,8 +688,8 @@
                     let chatHistory = [];
                     chatHistory.push({ role: "user", parts: [{ text: prompt }] });
                     const payload = { contents: chatHistory };
-                    const apiKey = ""; 
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    const apiKey = "AIzaSyDXttYzmrQybOB-yz1rYWJC4pSh6ctlmGw"; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AIzaSyDXttYzmrQybOB-yz1rYWJC4pSh6ctlmGw}`;
                     
                     const response = await fetch(apiUrl, {
                         method: 'POST',
