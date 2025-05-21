@@ -60,7 +60,7 @@
             --font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             --font-family-serif: 'Merriweather', Georgia, Cambria, "Times New Roman", Times, serif;
 
-            /* Previous Color Palette Variables (Navy Blue Theme) */
+            /* Color Palette Variables (Navy Blue Theme) */
             --primary-navy-blue: #05445E;
             --primary-blue-grotto: #189AB4;
             --accent-blue-green: #75E6DA;
@@ -103,38 +103,151 @@
             -moz-osx-font-smoothing: grayscale;
         }
         body {
-            font-family: var(--font-family-sans-serif); /* Default body font to Inter */
+            font-family: var(--font-family-sans-serif); 
             overflow-x: hidden;
             background-color: #F8FAFC; 
             color: var(--text-body-dark);
         }
 
-        /* Apply Merriweather to Headings */
         h1, h2, h3, h4,
-        .section-title, 
-        #welcome-screen h1 { /* Also ensure welcome screen H1 uses it */
+        .section-title { 
             font-family: var(--font-family-serif);
-            font-weight: 700; /* Default bold for headings */
+            font-weight: 700; 
         }
-        /* Specific heading font weight adjustments if needed */
         .service-card h4 { 
             font-family: var(--font-family-serif);
-            font-weight: 700; /* Ensure service card titles are bold */
+            font-weight: 700; 
         }
-         aside#services-sidebar h3 { /* Services Index Title */
+         aside#services-sidebar h3 { 
             font-family: var(--font-family-serif);
             font-weight: 700;
         }
 
-
-        /* Ensure other elements like nav links, CTAs, paragraphs use Inter */
         p, a, .nav-link, .cta-button, .cta-button-alt, 
-        .service-index-item a, #welcome-screen p,
+        .service-index-item a, 
         .header-logo-text, .header-subtitle-text,
-        input, button, textarea, select { /* Apply to form elements as well for consistency */
+        input, button, textarea, select { 
             font-family: var(--font-family-sans-serif);
         }
         
+        /* Welcome Screen Styles & Animations */
+        #welcome-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(135deg, var(--primary-navy-blue) 0%, var(--primary-blue-grotto) 100%);
+            color: var(--white-color); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            text-align: center;
+            z-index: 9999; 
+            opacity: 1; 
+            /* Opacity transition starts after 7s and takes 1s */
+            transition: opacity 1s ease-out 7s; 
+            overflow: hidden; /* Hide overflowing bg lines */
+        }
+        #welcome-screen.fade-out { opacity: 0; }
+
+        .bg-line {
+            position: absolute;
+            height: 1px; /* Very thin line */
+            background-color: rgba(212, 241, 244, 0.08); /* Very Faint Baby Blue based on theme */
+            opacity: 0;
+            will-change: width, opacity; /* Optimize for animation */
+        }
+        .bg-line-1 {
+            width: 0; top: 15%; left: 5%; transform: rotate(40deg); transform-origin: left center;
+            animation: subtleLineDrawBg 2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s forwards;
+        }
+        .bg-line-2 {
+            width: 0; bottom: 10%; right: 8%; transform: rotate(-35deg); transform-origin: right center;
+            animation: subtleLineDrawBg 2.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s forwards;
+        }
+        .bg-line-3 { /* Shorter, different angle/position */
+            width: 0; top: 50%; left: 2%; transform: rotate(70deg) translateY(-50%); transform-origin: left center;
+            animation: subtleLineDrawBg 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.8s forwards;
+        }
+        @keyframes subtleLineDrawBg {
+            0% { width: 0; opacity: 0.5; }
+            100% { width: 200px; opacity: 1; } /* Adjust width for subtlety */
+        }
+
+
+        #welcome-screen h1 { 
+            font-family: var(--font-family-serif);
+            font-weight: 700;
+            font-size: 3.2rem; 
+            margin-bottom: 0.5rem; 
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            opacity: 0; 
+            animation: magicalSlideInH1 1.5s cubic-bezier(0.23, 1, 0.32, 1) 1.5s forwards;
+            will-change: transform, opacity;
+        }
+        @keyframes magicalSlideInH1 {
+            0% {
+                opacity: 0;
+                transform: translateY(60px) perspective(500px) rotateX(-20deg) skewY(6deg);
+            }
+            60% {
+                 transform: translateY(-10px) perspective(500px) rotateX(5deg) skewY(-2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) perspective(500px) rotateX(0deg) skewY(0);
+            }
+        }
+
+        .welcome-line {
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.1); /* Initial faint bg */
+            margin: 0.75rem auto 1.5rem auto; 
+            width: 70px; 
+            transform: scaleX(0); 
+            transform-origin: center;
+            opacity: 0;
+            animation: drawLineCenterOut 1s cubic-bezier(0.19, 1, 0.22, 1) 3.0s forwards, 
+                       pulseGlow 2.5s ease-in-out 4.0s infinite alternate;
+            will-change: transform, opacity, box-shadow;
+        }
+        @keyframes drawLineCenterOut {
+            0% { transform: scaleX(0); opacity: 0.5; background-color: rgba(255, 255, 255, 0.3); }
+            100% { transform: scaleX(1); opacity: 0.7; background-color: rgba(255, 255, 255, 0.6); }
+        }
+        @keyframes pulseGlow {
+            from { opacity: 0.5; box-shadow: 0 0 4px rgba(255,255,255,0.15); }
+            to { opacity: 0.8; box-shadow: 0 0 12px rgba(255,255,255,0.3); }
+        }
+
+        #welcome-screen p { 
+            font-family: var(--font-family-sans-serif); 
+            font-size: 1.5rem; 
+            font-weight: 400; 
+            letter-spacing: 0.025em;
+            /* Individual word spans will handle their animation */
+        }
+        #welcome-screen p .word {
+            display: inline-block; /* Needed for individual transform/opacity */
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        #welcome-screen p .word1 {
+            animation: wordDriftUp 1s cubic-bezier(0.215, 0.610, 0.355, 1) 4.0s forwards;
+        }
+        #welcome-screen p .word2 {
+            animation: wordDriftUp 1s cubic-bezier(0.215, 0.610, 0.355, 1) 4.3s forwards; /* Staggered delay */
+        }
+        @keyframes wordDriftUp {
+            0% {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Other styles remain the same */
         .hero-bg { background-color: var(--hero-bg-color); }
         .nav-link { color: var(--text-body-dark); transition: color 0.3s ease; font-weight: 500; }
         .nav-link:hover, .nav-link:focus { color: var(--link-color); }
@@ -154,21 +267,22 @@
             box-shadow: 0 12px 24px rgba(0,0,0,0.1);
             border-left-color: var(--accent-blue-green);
         }
-        .service-card h4 { /* color already set by h4 rule */
+        .service-card h4 { 
+            color: var(--text-heading-color);
             margin-bottom: 0.75rem;
         }
 
-        .cta-button, .cta-button-alt { /* Common CTA styles */
+        .cta-button, .cta-button-alt { 
             padding: 0.875rem 1.75rem;
             border-radius: 0.5rem;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             text-align: center;
-            font-weight: 600; /* Inter bold */
+            font-weight: 600; 
             text-transform: uppercase;
             letter-spacing: 0.05em;
             display: inline-block;
         }
-        .cta-button { /* Primary CTA specific */
+        .cta-button { 
             background-color: var(--cta-bg);
             color: var(--cta-text);
             box-shadow: 0 4px 10px var(--cta-shadow-color);
@@ -183,7 +297,7 @@
             outline-offset: 2px;
         }
         
-        .cta-button-alt { /* Secondary CTA specific */
+        .cta-button-alt { 
             background-color: var(--secondary-cta-bg);
             color: var(--secondary-cta-text); 
             box-shadow: 0 4px 10px var(--secondary-cta-shadow-color);
@@ -198,7 +312,8 @@
             outline-offset: 2px;
         }
 
-        .section-title { /* color, font-family already set by h2 rule */
+        .section-title { 
+            color: var(--text-heading-color);
             border-bottom: 4px solid var(--primary-blue-grotto);
             padding-bottom: 1rem;
             margin-bottom: 4rem;
@@ -218,7 +333,7 @@
             margin-bottom: 0.25rem;
             border-radius: 0.375rem;
             transition: background-color 0.2s ease, color 0.2s ease, font-weight 0.2s ease;
-            font-weight: 500; /* Inter medium */
+            font-weight: 500; 
             color: var(--text-body-dark);
         }
         .service-index-item a:hover,
@@ -226,34 +341,11 @@
         .service-index-item a:focus {
             background-color: var(--white-color); 
             color: var(--primary-navy-blue);
-            font-weight: 700; /* Inter bold */
+            font-weight: 700; 
             outline: 2px solid var(--primary-blue-grotto);
             outline-offset: 2px;
         }
-
-        #welcome-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(135deg, var(--primary-navy-blue) 0%, var(--primary-blue-grotto) 100%);
-            color: var(--white-color); display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 9999; opacity: 1; transition: opacity 1s ease-out 4s;
-        }
-        #welcome-screen.fade-out { opacity: 0; }
-        #welcome-screen h1 { /* font-family, font-weight already set by h1 rule */
-            font-size: 3.5rem;  margin-bottom: 1rem;
-            animation: fadeInScale 1.5s ease-out forwards;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-            opacity: 0;
-        }
-        #welcome-screen p { /* font-family already set by p rule */
-            font-size: 1.5rem; font-weight: 400; /* Inter regular */
-            animation: fadeInScale 1.5s ease-out 0.5s forwards;
-            opacity: 0;
-        }
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
+        
         section { padding-top: 4rem; padding-bottom: 4rem; }
         @media (min-width: 768px) { section { padding-top: 6rem; padding-bottom: 6rem; } }
         
@@ -263,17 +355,17 @@
             background-color: var(--sidebar-bg); 
         }
         
-        #hero h1 { /* font-family, color, font-weight already set by h1 rule */
+        #hero h1 { 
+            color: var(--text-heading-color);
             text-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         #hero .hero-paragraph { 
             color: var(--text-body-medium);
         }
         
-        .header-logo-text { color: var(--primary-navy-blue); font-weight: 700; /* Inter Bold for logo text */ }
-        .header-subtitle-text { color: var(--text-body-medium); font-weight: 400; /* Inter Regular */ }
-        .header-subtitle-text .font-semibold { font-weight: 600; color: var(--primary-navy-blue); /* Inter Semibold for CA name */ }
-
+        .header-logo-text { color: var(--primary-navy-blue); font-weight: 700; }
+        .header-subtitle-text { color: var(--text-body-medium); font-weight: 400; }
+        .header-subtitle-text .font-semibold { font-weight: 600; color: var(--primary-navy-blue); }
 
         #testimonials { background-color: var(--section-bg-tint); } 
         #testimonials .testimonial-card { 
@@ -286,7 +378,7 @@
         }
         #testimonials .testimonial-card p:first-child {
             font-style: italic;
-            font-size: 1.125rem; /* Inter */
+            font-size: 1.125rem; 
             color: var(--text-body-dark);
             margin-bottom: 1.5rem;
             position: relative;
@@ -294,7 +386,7 @@
         }
         #testimonials .testimonial-card p:first-child::before {
             content: '“';
-            font-family: var(--font-family-serif); /* Merriweather for quote mark */
+            font-family: var(--font-family-serif); 
             font-size: 4.5rem;
             color: var(--accent-baby-blue); 
             position: absolute;
@@ -310,7 +402,7 @@
         }
         #testimonials .testimonial-card p.author-text { 
             text-align: right;
-            font-weight: 600; /* Inter Semibold */
+            font-weight: 600; 
             color: var(--primary-navy-blue);
             margin-top: 1rem;
         }
@@ -332,7 +424,7 @@
         @media (min-width: 768px) {
             #contact .contact-card { padding: 3rem; }
         }
-        #contact strong { color: var(--text-heading-color); font-family: var(--font-family-sans-serif); font-weight: 600; } /* Make strong tags use Inter Semibold */
+        #contact strong { color: var(--text-heading-color); font-family: var(--font-family-sans-serif); font-weight: 600; } 
         #contact p { margin-bottom: 1rem; }
         #contact .contact-link {
             color: var(--link-color);
@@ -366,8 +458,15 @@
 </head>
 <body class="welcome-active"> 
     <div id="welcome-screen" role="region" aria-label="Welcome screen">
+        <div class="bg-line bg-line-1"></div>
+        <div class="bg-line bg-line-2"></div>
+        <div class="bg-line bg-line-3"></div>
+
         <h1>Archit B. Sheth & Co</h1>
-        <p>Chartered Accountants</p>
+        <div class="welcome-line"></div>
+        <p>
+            <span class="word word1">Chartered</span> <span class="word word2">Accountants</span>
+        </p>
     </div>
 
     <div id="main-content-wrapper" class="hidden">
@@ -676,7 +775,48 @@
              body.style.overflowY = 'auto';
         }
 
-        setTimeout(enterSite, 5000);
+        // Total time before fade-out starts is 7s (animation sequence) + 1s (fade-out duration)
+        // The transition CSS on #welcome-screen handles the fade-out start with its delay.
+        // So the JS timeout should match the start of the fade-out if we want to trigger 'fade-out' class.
+        // Or, if CSS handles the delay, this JS timeout is for any post-animation cleanup if needed.
+        // Let's adjust JS setTimeout to align with the new total desired screen time.
+        // CSS for #welcome-screen: transition: opacity 1s ease-out 7s;
+        // This means the fade-out starts at 7s. We want to add the class slightly before or ensure elements are set up.
+        // The current JS effectively calls enterSite after 5s (original). We need to call it after ~7s for the fade-out.
+        // However, the CSS transition on #welcome-screen itself has the delay of `7s`. 
+        // The `enterSite` function primarily handles making main content visible *after* welcome screen fades.
+        // The actual opacity change leading to transitionend is handled by CSS.
+        // So, the class `fade-out` should be added at the point the CSS delay ends for opacity transition.
+        
+        // Let's simplify. The CSS has `transition: opacity 1s ease-out 7s;` on #welcome-screen.
+        // We don't need to add `fade-out` class anymore if the opacity is just part of its base style and the transition is built-in.
+        // Ah, no, the initial opacity is 1. The `fade-out` class sets opacity to 0, triggering the transition.
+        // So, the JS timeout for adding `fade-out` should be 7 seconds (matching the CSS transition-delay).
+        
+        setTimeout(() => {
+            if (welcomeScreen) {
+                welcomeScreen.classList.add('fade-out');
+            }
+        }, 7000); // Add fade-out class to start CSS transition at 7s
+
+        // This listener now correctly waits for the CSS-defined transition to end.
+        if (welcomeScreen) {
+            welcomeScreen.addEventListener('transitionend', () => {
+                if (welcomeScreen.style.opacity === "0" || welcomeScreen.classList.contains('fade-out')) { // Ensure it's the fade-out
+                    welcomeScreen.style.display = 'none';
+                    if (mainContentWrapper) {
+                        mainContentWrapper.classList.remove('hidden');
+                        setTimeout(() => {
+                            mainContentWrapper.style.transition = 'opacity 0.5s ease-in';
+                            mainContentWrapper.style.opacity = '1';
+                        }, 50);
+                    }
+                    body.classList.remove('welcome-active');
+                    body.style.overflowY = 'auto';
+                }
+            }, { once: true });
+        }
+
 
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -745,11 +885,14 @@
         }
         
         window.addEventListener('scroll', updateActiveServiceLink);
-        if (mainContentWrapper && !mainContentWrapper.classList.contains('hidden')) {
-            updateActiveServiceLink();
-        } else {
-            setTimeout(updateActiveServiceLink, 5100); 
-        }
+        // Delay initial call until after welcome screen animations might have completed
+        // and main content is definitely rendered for offsetTop calculations.
+        setTimeout(() => {
+            if (mainContentWrapper && !mainContentWrapper.classList.contains('hidden')) {
+                updateActiveServiceLink();
+            }
+        }, 8100); // After the total welcome screen time (7s animation + 1s fade)
+
     });
     </script>
 </body>
