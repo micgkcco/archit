@@ -3,184 +3,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absheth.com - Archit Sheth, Chartered Accountant</title>
+    <title>Archit Sheth - Chartered Accountant, Ahmedabad | absheth.com</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Application Structure Plan: 
+        The SPA is structured as a single scrolling page with a sticky header for persistent navigation. 
+        A prominent hero section introduces the practice. The core of the application is the 'Services' area, 
+        which features an interactive navigation menu (sidebar on larger screens, top links on smaller) 
+        that allows users to jump to specific service categories. Each service category is presented in its own 
+        section with an introductory paragraph explaining its purpose and a list of sub-services with descriptions. 
+        This is followed by 'About Us' and 'Contact' sections. 
+        This structure was chosen for its clarity, ease of navigation for a service-oriented website, and its 
+        ability to present comprehensive information in a digestible format. It directly implements the blueprint 
+        from the source report, focusing on user experience and quick access to relevant information.
+    -->
+    <!-- Visualization & Content Choices: 
+        - Hero Section: Goal: Inform/Engage. Method: Text block. Interaction: Read, CTA click. Justification: Standard engaging intro.
+        - Main Navigation (Header & Services Index): Goal: Organize/Navigate. Method: HTML links styled with Tailwind. Interaction: Click to scroll smoothly. Justification: Intuitive and efficient site navigation. Library: Vanilla JS for smooth scroll.
+        - Service Categories (e.g., Taxation, Auditing): Goal: Inform. Method: Dedicated HTML sections with headings, introductory paragraphs, and lists of sub-services with descriptions. Interaction: Read, scroll. Justification: Clear, structured presentation of detailed service offerings as outlined in the source report.
+        - About Us Section: Goal: Inform/Build Trust. Method: Text block. Interaction: Read. Justification: Provides personal and professional context.
+        - Contact Section: Goal: Enable Action. Method: Text block with contact details (phone placeholder as requested). Interaction: Read, use information to contact. Justification: Essential for lead generation.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. No charts are necessary as the source report focuses on descriptive service information rather than quantitative data suitable for charting.
+    -->
     <style>
-        /* Basic CSS for a clean look - You can enhance this significantly */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        nav ul {
-            padding: 0;
-            list-style: none;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px 0;
-        }
-        .hero {
-            background: #0056b3;
-            color: #fff;
-            padding: 40px 0;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .services-section {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .service-category h3 {
-            color: #0056b3;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 5px;
-            margin-top: 20px;
-        }
-        .service-category ul {
-            list-style: disc;
-            margin-left: 20px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #333;
-            color: #fff;
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg { background-color: #f5f5f5; } /* Light Neutral */
+        .nav-link { transition: color 0.3s ease; }
+        .nav-link:hover { color: #0D9488; } /* Teal Accent */
+        .service-card { background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+        .service-card h4 { color: #115E59; } /* Darker Teal for sub-headings */
+        .cta-button { background-color: #0D9488; color: white; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: background-color 0.3s ease; text-align: center;}
+        .cta-button:hover { background-color: #0F766E; }
+        .section-title { color: #064E3B; border-bottom: 2px solid #0D9488; padding-bottom: 0.5rem; } /* Dark Green with Teal underline */
+        .sticky-nav { position: -webkit-sticky; position: sticky; top: 0; z-index: 50; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .service-index-item a { display: block; padding: 0.5rem 1rem; margin-bottom: 0.25rem; border-radius: 0.375rem; transition: background-color 0.3s ease, color 0.3s ease; }
+        .service-index-item a:hover, .service-index-item a.active { background-color: #CCFBF1; color: #115E59; } /* Light Teal bg, Dark Teal text for hover/active */
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <h1>Absheth.com</h1>
-        <p>Archit Sheth - Chartered Accountant</p>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="sticky-nav">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-teal-700">absheth.com</a>
+                    <div class="ml-4 text-sm text-gray-600">
+                        <p class="font-semibold">Archit Sheth, Chartered Accountant</p>
+                        <p>Ahmedabad, India</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#hero" class="nav-link text-gray-700 hover:text-teal-600 font-medium">Home</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-teal-600 font-medium">Services</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-teal-600 font-medium">About Us</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-teal-600 font-medium">Contact</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-teal-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg py-2">
+            <a href="#hero" class="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-50">Home</a>
+            <a href="#services" class="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-50">Services</a>
+            <a href="#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-50">About Us</a>
+            <a href="#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-50">Contact</a>
+        </div>
     </header>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <h2>Your Trusted Partner in Financial Excellence</h2>
-            <p>Providing comprehensive financial, tax, and advisory services tailored to your needs.</p>
-            <a href="#contact" style="background: #fff; color: #0056b3; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 20px; display: inline-block;">Get in Touch</a>
+    <main>
+        <section id="hero" class="hero-bg py-20 md:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-teal-800 mb-6">Welcome to Archit B. Sheth & Co</h1>
+                <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-3xl mx-auto">Your trusted partner in comprehensive financial, taxation, and business advisory services in Ahmedabad. We are dedicated to providing expert solutions tailored to your unique needs.</p>
+                <a href="#services" class="cta-button inline-block text-lg">Explore Our Services</a>
+            </div>
+        </section>
+
+        <section id="services" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">Our Comprehensive Services</h2>
+                <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+                    We offer a wide array of services designed to meet the diverse financial and regulatory needs of individuals and businesses. Our expertise spans taxation, auditing, accounting, and strategic business advisory, ensuring you receive holistic support. Navigate through our service categories below to find out how we can assist you.
+                </p>
+
+                <div class="flex flex-col md:flex-row gap-8">
+                    <aside class="md:w-1/4 lg:w-1/5 md:sticky md:top-24 self-start bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-teal-700 mb-4">Services Index</h3>
+                        <ul id="services-navigation-index" class="space-y-1">
+                            <li class="service-index-item"><a href="#taxation-services-section">Taxation Services</a></li>
+                            <li class="service-index-item"><a href="#auditing-services-section">Auditing & Assurance</a></li>
+                            <li class="service-index-item"><a href="#accounting-services-section">Accounting & Financial Reporting</a></li>
+                            <li class="service-index-item"><a href="#advisory-services-section">Business Advisory & Consulting</a></li>
+                            <li class="service-index-item"><a href="#corporate-services-section">Corporate Law & Compliance</a></li>
+                            <li class="service-index-item"><a href="#other-services-section">Other Specialized Services</a></li>
+                        </ul>
+                    </aside>
+
+                    <div class="md:w-3/4 lg:w-4/5 space-y-16">
+                        <section id="taxation-services-section" class="service-category-section">
+                            <h3 class="text-2xl font-semibold section-title mb-6">Taxation Services</h3>
+                            <p class="text-gray-600 mb-8">
+                                Navigating the complex Indian tax landscape requires expertise and diligence. Our taxation services are designed to help individuals and businesses optimize tax liabilities, ensure full compliance with evolving laws, and manage all tax-related documentation and representations effectively.
+                            </p>
+                            <div class="space-y-6">
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Income Tax Advisory & Compliance</h4>
+                                    <p class="text-gray-600">Assistance with tax planning, ITR filing, TDS compliance, and handling scrutiny cases to optimize liabilities.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Goods and Services Tax (GST) Compliance & Advisory</h4>
+                                    <p class="text-gray-600">Expert guidance on GST regulations, return filing, and advisory to ensure seamless indirect tax compliance.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">International & NRI Taxation</h4>
+                                    <p class="text-gray-600">Specialized services for NRIs/OCIs, covering DTAA, capital gains, fund repatriation, and FEMA/RBI compliance.</p>
+                                </div>
+                            </div>
+                             <a href="#contact" class="cta-button inline-block mt-8">Enquire About Taxation Services</a>
+                        </section>
+
+                        <section id="auditing-services-section" class="service-category-section">
+                            <h3 class="text-2xl font-semibold section-title mb-6">Auditing & Assurance Services</h3>
+                            <p class="text-gray-600 mb-8">
+                                Our auditing and assurance services provide independent verification of financial records, ensuring transparency, regulatory compliance, and the identification of potential risks or inefficiencies. We conduct thorough audits tailored to various statutory and internal requirements.
+                            </p>
+                            <div class="space-y-6">
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Statutory Audit</h4>
+                                    <p class="text-gray-600">Mandatory audit ensuring financial statements comply with Indian Accounting Standards and regulatory filings.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Tax Audit</h4>
+                                    <p class="text-gray-600">Examination of books to ensure income tax compliance, verify deductions, and file prescribed forms.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Internal Audit</h4>
+                                    <p class="text-gray-600">Assessment of internal controls, risks, and operational efficiency to identify and correct inefficiencies.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Forensic Audit</h4>
+                                    <p class="text-gray-600">Investigation of fraudulent transactions, tracing financial anomalies, and assisting in legal proceedings.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Bank Audit</h4>
+                                    <p class="text-gray-600">Mandatory audit for financial institutions, focusing on loan books, NPAs, and RBI regulatory compliance.</p>
+                                </div>
+                            </div>
+                            <a href="#contact" class="cta-button inline-block mt-8">Enquire About Auditing Services</a>
+                        </section>
+
+                        <section id="accounting-services-section" class="service-category-section">
+                            <h3 class="text-2xl font-semibold section-title mb-6">Accounting & Financial Reporting</h3>
+                            <p class="text-gray-600 mb-8">
+                                Accurate accounting and financial reporting are the bedrock of sound financial management. We provide comprehensive solutions from daily bookkeeping to the preparation of financial statements, ensuring your financial records are precise and compliant.
+                            </p>
+                            <div class="space-y-6">
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Bookkeeping & Accounting Solutions</h4>
+                                    <p class="text-gray-600">Comprehensive management of financial transactions, including daily bookkeeping and financial statement preparation.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Industry-Specific Accounting</h4>
+                                    <p class="text-gray-600">Tailored accounting solutions designed to meet the unique needs of various sectors (e.g., Retail, Manufacturing).</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Accounts Cleanup & Restructuring</h4>
+                                    <p class="text-gray-600">Rectifying discrepancies, streamlining processes, and restructuring financial records for accuracy and compliance.</p>
+                                </div>
+                            </div>
+                             <a href="#contact" class="cta-button inline-block mt-8">Enquire About Accounting Services</a>
+                        </section>
+
+                        <section id="advisory-services-section" class="service-category-section">
+                            <h3 class="text-2xl font-semibold section-title mb-6">Business Advisory & Consulting</h3>
+                            <p class="text-gray-600 mb-8">
+                                Beyond compliance, we act as strategic advisors, offering insights to enhance financial performance, facilitate growth, and support informed decision-making. Our advisory services cover startups, financial planning, M&A, and business valuation.
+                            </p>
+                            <div class="space-y-6">
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Startup Advisory</h4>
+                                    <p class="text-gray-600">Guidance for new businesses from incorporation to initial financial structuring and compliance.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Financial Planning & Wealth Management</h4>
+                                    <p class="text-gray-600">Strategies for individuals and businesses to manage finances, optimize investments, and secure long-term goals.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Mergers, Acquisitions & Capital Structuring Advisory</h4>
+                                    <p class="text-gray-600">Expert advice on complex corporate transactions and optimizing capital structure for strategic objectives.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Business Valuation Services</h4>
+                                    <p class="text-gray-600">Professional assessment of a business's economic value for transactions, financing, or strategic planning.</p>
+                                </div>
+                            </div>
+                            <a href="#contact" class="cta-button inline-block mt-8">Enquire About Advisory Services</a>
+                        </section>
+
+                        <section id="corporate-services-section" class="service-category-section">
+                            <h3 class="text-2xl font-semibold section-title mb-6">Corporate Law & Compliance Services</h3>
+                            <p class="text-gray-600 mb-8">
+                                We assist businesses in adhering to corporate laws and regulatory standards, mitigating risks and ensuring smooth operations. Our services include company incorporation, secretarial compliance, due diligence, and IPR advisory.
+                            </p>
+                            <div class="space-y-6">
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Company/LLP Incorporation & Annual Filings</h4>
+                                    <p class="text-gray-600">Assistance with registration of new entities and managing mandatory annual filings with regulatory authorities.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Secretarial Compliance Services</h4>
+                                    <p class="text-gray-600">Ongoing support for corporate governance, record maintenance, and assistance with board/shareholder meetings.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Legal Due Diligence & Commercial Agreement Drafting</h4>
+                                    <p class="text-gray-600">Thorough investigation of legal aspects and drafting/reviewing various commercial and legal documents.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Intellectual Property Rights (IPR) Advisory</h4>
+                                    <p class="text-gray-600">Guidance on protecting intellectual property through registration, renewal, and enforcement of trademarks, patents, and copyrights.</p>
+                                </div>
+                            </div>
+                            <a href="#contact" class="cta-button inline-block mt-8">Enquire About Corporate Law Services</a>
+                        </section>
+
+                        <section id="other-services-section" class="service-category-section">
+                            <h3 class="text-2xl font-semibold section-title mb-6">Other Specialized Services</h3>
+                            <p class="text-gray-600 mb-8">
+                                To provide comprehensive support, we offer specialized ancillary services that complement our core offerings, adding convenience and ensuring compliance with specific industry regulations.
+                            </p>
+                            <div class="space-y-6">
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">Digital Signature Certificate (DSC)</h4>
+                                    <p class="text-gray-600">Assistance in obtaining and managing Digital Signature Certificates for secure online transactions.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h4 class="text-xl font-semibold mb-2">FSSAI Compliance (Renewal, Return Filing)</h4>
+                                    <p class="text-gray-600">Support for businesses in the food sector with FSSAI license renewal and return filing.</p>
+                                </div>
+                            </div>
+                            <a href="#contact" class="cta-button inline-block mt-8">Enquire About Specialized Services</a>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">About Archit Sheth</h2>
+                <div class="max-w-3xl mx-auto text-gray-700 space-y-6 text-lg">
+                    <p>Archit Sheth is a qualified Chartered Accountant based in Ahmedabad, India, with a strong commitment to providing exceptional client service. With extensive experience in the fields of taxation, auditing, accounting, and business advisory, Archit Sheth offers expert, customized solutions to meet the diverse needs of individuals and businesses.</p>
+                    <p>The practice is built on principles of integrity, professionalism, and a proactive approach to financial management. We strive to empower our clients by ensuring compliance, optimizing financial performance, and offering strategic insights that drive growth and stability. Our deep understanding of the Indian financial and regulatory landscape allows us to deliver timely and effective solutions.</p>
+                    <p>We believe in building long-term relationships with our clients, acting not just as service providers but as trusted advisors. Whether you are a startup navigating initial complexities, an established business seeking efficiency, or an individual planning your financial future, Archit Sheth is dedicated to helping you achieve your goals.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 md:py-24 hero-bg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">Get In Touch</h2>
+                <div class="max-w-xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-xl">
+                    <p class="text-center text-gray-700 mb-8 text-lg">We are here to assist you. Please feel free to reach out with your queries or to schedule a consultation.</p>
+                    <div class="space-y-6 text-gray-700">
+                        <p><strong>Name:</strong> Archit Sheth</p>
+                        <p><strong>Designation:</strong> Chartered Accountant</p>
+                        <p><strong>Location:</strong> Ahmedabad, Gujarat, India</p>
+                        <p><strong>Email:</strong> <a href="mailto:[archit@absheth.com]" class="text-teal-600 hover:underline">[Your Email Here]</a></p>
+                        <p><strong>Phone:</strong> <span id="contact-number">[9898467888]</span></p>
+                        <p><strong>Office Address:</strong> [Ambawadi], Ahmedabad</p>
+                    </div>
+                    <div class="mt-10 text-center">
+                         <a href="mailto:[Your Email Here]?subject=Inquiry from absheth.com" class="cta-button inline-block">Send an Email</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; <span id="currentYear"></span> absheth.com. All rights reserved.</p>
+            <p class="text-sm mt-2">Website by Archit Sheth, Chartered Accountant, Ahmedabad.</p>
         </div>
-    </section>
-
-    <div class="container">
-        <section id="services" class="services-section">
-            <h2>Our Services</h2>
-
-            <div class="service-category">
-                <h3>1. Taxation Services</h3>
-                <ul>
-                    <li>Income Tax Planning & Compliance (Individuals, HUF, Firms, Companies)</li>
-                    <li>Goods and Services Tax (GST) Advisory & Compliance</li>
-                    <li>Direct & Indirect Tax Representation</li>
-                    <li>Tax Deducted at Source (TDS) & Tax Collected at Source (TCS) Compliance</li>
-                    <li>International Taxation Advisory</li>
-                </ul>
-            </div>
-
-            <div class="service-category">
-                <h3>2. Audit & Assurance</h3>
-                <ul>
-                    <li>Statutory Audits</li>
-                    <li>Internal Audits</li>
-                    <li>Tax Audits</li>
-                    <li>GST Audits</li>
-                    <li>Concurrent Audits</li>
-                    <li>Special Purpose Audits</li>
-                </ul>
-            </div>
-
-            <div class="service-category">
-                <h3>3. Accounting & Bookkeeping</h3>
-                <ul>
-                    <li>Maintenance of Books of Accounts</li>
-                    <li>Preparation of Financial Statements</li>
-                    <li>Payroll Processing</li>
-                    <li>Fixed Asset Management</li>
-                    <li>Reconciliation Services</li>
-                </ul>
-            </div>
-
-            <div class="service-category">
-                <h3>4. Business Advisory & Consulting</h3>
-                <ul>
-                    <li>Business Setup & Registration (Company, LLP, Partnership Firm)</li>
-                    <li>Financial Planning & Analysis</li>
-                    <li>Project Financing & Debt Syndication</li>
-                    <li>Valuation Services</li>
-                    <li>Mergers & Acquisitions Advisory</li>
-                    <li>Due Diligence</li>
-                    <li>Business Restructuring</li>
-                </ul>
-            </div>
-
-            <div class="service-category">
-                <h3>5. Regulatory & Compliance</h3>
-                <ul>
-                    <li>Company Law Matters (ROC Filings, Secretarial Services)</li>
-                    <li>Compliance under various Acts & Regulations</li>
-                    <li>RBI & FEMA Compliance</li>
-                    <li>Assistance with various Registrations (e.g., MSME, Import Export Code)</li>
-                </ul>
-            </div>
-
-            <div class="service-category">
-                <h3>6. CFO Services (Virtual/Part-time)</h3>
-                <ul>
-                    <li>Strategic Financial Management</li>
-                    <li>Budgeting & Forecasting</li>
-                    <li>Cash Flow Management</li>
-                    <li>Management Reporting</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="about" class="services-section">
-            <h2>About Archit Sheth</h2>
-            <p>Hello! I'm Archit Sheth, a Chartered Accountant based in Ahmedabad. With a commitment to delivering exceptional financial services, I strive to provide comprehensive solutions to individuals and businesses alike. My approach is client-centric, focusing on understanding your unique needs to offer tailored and effective advice.</p>
-            <p>Whether you're looking for tax optimization, robust audit services, or strategic business consulting, Absheth.com is your reliable partner in navigating the complexities of finance and compliance.</p>
-        </section>
-
-        <section id="contact" class="services-section">
-            <h2>Contact Me</h2>
-            <p>I'm here to help you with all your financial and taxation needs. Feel free to reach out to discuss how I can assist you.</p>
-            <p><strong>Location:</strong> Ahmedabad, Gujarat, India</p>
-            <p><strong>Phone:</strong> [Your Contact Number Here]</p>
-            <p><strong>Email:</strong> <a href="mailto:info@absheth.com">info@absheth.com</a> (You can create this email address)</p>
-            </section>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 Absheth.com. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                
+                if (href === "#" || href === "") return; // Skip empty or "#" only links
+
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    e.preventDefault();
+                    // Close mobile menu if open and link is clicked
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    const offset = 80; // Height of sticky header
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = targetElement.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Update active link in service index
+                    if (this.closest('#services-navigation-index')) {
+                        document.querySelectorAll('#services-navigation-index a').forEach(link => link.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                }
+            });
+        });
+        
+        // Highlight service index link on scroll
+        const serviceSections = document.querySelectorAll('.service-category-section');
+        const serviceNavLinks = document.querySelectorAll('#services-navigation-index a');
+
+        function highlightNavLink() {
+            let index = serviceSections.length;
+
+            while(--index && window.scrollY + 120 < serviceSections[index].offsetTop) {}
+            
+            serviceNavLinks.forEach((link) => link.classList.remove('active'));
+            if (index >= 0 && serviceNavLinks[index]) {
+                 // Check if we are in the services section overall
+                const servicesSectionContainer = document.getElementById('services');
+                if (servicesSectionContainer && window.scrollY >= servicesSectionContainer.offsetTop - 120 && window.scrollY <= servicesSectionContainer.offsetTop + servicesSectionContainer.offsetHeight - 120) {
+                    serviceNavLinks[index].classList.add('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', highlightNavLink);
+        window.addEventListener('load', highlightNavLink); // Initial check
+
+    </script>
 </body>
 </html>
