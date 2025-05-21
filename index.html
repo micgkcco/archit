@@ -41,41 +41,60 @@
         "jobTitle": "Chartered Accountant, Founder"
       },
       "areaServed": [
-        {
-          "@type": "City",
-          "name": "Ahmedabad"
-        },
-        {
-          "@type": "AdministrativeArea",
-          "name": "Gujarat"
-        }
+        { "@type": "City", "name": "Ahmedabad" },
+        { "@type": "AdministrativeArea", "name": "Gujarat" }
       ],
-      "openingHours": [
-        // "Mo,Tu,We,Th,Fr 09:00-18:00",
-        // "Sa 10:00-14:00"
-      ],
+      "openingHours": [ /* "Mo-Fr 09:00-18:00", "Sa 10:00-14:00" */ ],
       "priceRange": "$$"
     }
     </script>
 
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.rel='stylesheet'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* New Color Palette Variables (CSS Custom Properties) */
         :root {
-            --primary-dark-blue: #34495E; /* Charcoal Blue for headings, dark accents */
-            --primary-medium-blue: #5D9CEC; /* Clear, accessible blue for links, accents */
-            --cta-green: #27AE60; /* Emerald Green for main CTAs */
-            --cta-green-hover: #229954; /* Darker green for CTA hover */
-            --hero-bg-color: #EBF4FA; /* Very light, soft blue-gray */
-            --footer-bg-color: #2C3E50; /* Dark charcoal/blue for footer */
-            --footer-text-primary: #ECF0F1; /* Light gray for primary footer text */
-            --footer-text-secondary: #BDC3C7; /* Slightly darker gray for secondary footer text */
-            --text-slate-600: #4B5563; /* Existing slate for body text */
-            --text-slate-700: #334155; /* Existing darker slate */
+            /* Font Variables */
+            --font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --font-family-serif: 'Merriweather', Georgia, Cambria, "Times New Roman", Times, serif;
+
+            /* Previous Color Palette Variables (Navy Blue Theme) */
+            --primary-navy-blue: #05445E;
+            --primary-blue-grotto: #189AB4;
+            --accent-blue-green: #75E6DA;
+            --accent-baby-blue: #D4F1F4;
+
+            --cta-bg: var(--primary-blue-grotto);
+            --cta-hover-bg: #137A8F; 
+            --cta-text: #FFFFFF;
+            --cta-shadow-color: rgba(24, 154, 180, 0.3);
+            --cta-hover-shadow-color: rgba(19, 122, 143, 0.4);
+
+            --secondary-cta-bg: var(--accent-blue-green);
+            --secondary-cta-hover-bg: #63C8B9; 
+            --secondary-cta-text: var(--primary-navy-blue);
+            --secondary-cta-shadow-color: rgba(117, 230, 218, 0.3);
+            --secondary-cta-hover-shadow-color: rgba(99, 200, 185, 0.4);
+
+            --hero-bg-color: var(--accent-baby-blue);
+            --footer-bg-color: var(--primary-navy-blue);
+            --footer-text-primary: #ECF0F1;
+            --footer-text-secondary: #BDC3C7;
+
+            --text-heading-color: var(--primary-navy-blue);
+            --text-body-dark: #334155; 
+            --text-body-medium: #4B5563; 
+            
+            --link-color: var(--primary-blue-grotto);
+            --link-hover-color: #137A8F; 
+
             --white-color: #ffffff;
             --border-light-gray: #E2E8F0;
+            --section-bg-white: var(--white-color);
+            --section-bg-tint: var(--accent-baby-blue); 
+            --sidebar-bg: var(--accent-baby-blue);
         }
 
         html {
@@ -84,19 +103,46 @@
             -moz-osx-font-smoothing: grayscale;
         }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-family-sans-serif); /* Default body font to Inter */
             overflow-x: hidden;
-            background-color: #F1F5F9; /* Tailwind slate-100 */
-            color: var(--text-slate-700);
+            background-color: #F8FAFC; 
+            color: var(--text-body-dark);
         }
+
+        /* Apply Merriweather to Headings */
+        h1, h2, h3, h4,
+        .section-title, 
+        #welcome-screen h1 { /* Also ensure welcome screen H1 uses it */
+            font-family: var(--font-family-serif);
+            font-weight: 700; /* Default bold for headings */
+        }
+        /* Specific heading font weight adjustments if needed */
+        .service-card h4 { 
+            font-family: var(--font-family-serif);
+            font-weight: 700; /* Ensure service card titles are bold */
+        }
+         aside#services-sidebar h3 { /* Services Index Title */
+            font-family: var(--font-family-serif);
+            font-weight: 700;
+        }
+
+
+        /* Ensure other elements like nav links, CTAs, paragraphs use Inter */
+        p, a, .nav-link, .cta-button, .cta-button-alt, 
+        .service-index-item a, #welcome-screen p,
+        .header-logo-text, .header-subtitle-text,
+        input, button, textarea, select { /* Apply to form elements as well for consistency */
+            font-family: var(--font-family-sans-serif);
+        }
+        
         .hero-bg { background-color: var(--hero-bg-color); }
-        .nav-link { color: var(--text-slate-700); transition: color 0.3s ease; }
-        .nav-link:hover, .nav-link:focus { color: var(--primary-medium-blue); }
+        .nav-link { color: var(--text-body-dark); transition: color 0.3s ease; font-weight: 500; }
+        .nav-link:hover, .nav-link:focus { color: var(--link-color); }
 
         .service-card {
             background-color: var(--white-color);
             border: 1px solid var(--border-light-gray);
-            border-left: 5px solid var(--primary-medium-blue);
+            border-left: 5px solid var(--primary-blue-grotto);
             border-radius: 0.5rem;
             padding: 2rem;
             margin-bottom: 1.5rem;
@@ -106,50 +152,54 @@
         .service-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-            border-left-color: var(--cta-green); /* Use CTA green for hover accent */
+            border-left-color: var(--accent-blue-green);
         }
-        .service-card h4 {
-            color: var(--primary-dark-blue);
+        .service-card h4 { /* color already set by h4 rule */
             margin-bottom: 0.75rem;
         }
 
-        .cta-button {
-            background-color: var(--cta-green);
-            color: var(--white-color);
+        .cta-button, .cta-button-alt { /* Common CTA styles */
             padding: 0.875rem 1.75rem;
             border-radius: 0.5rem;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             text-align: center;
-            font-weight: 600;
-            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); /* Green shadow */
+            font-weight: 600; /* Inter bold */
             text-transform: uppercase;
             letter-spacing: 0.05em;
             display: inline-block;
         }
+        .cta-button { /* Primary CTA specific */
+            background-color: var(--cta-bg);
+            color: var(--cta-text);
+            box-shadow: 0 4px 10px var(--cta-shadow-color);
+        }
         .cta-button:hover {
-            background-color: var(--cta-green-hover);
+            background-color: var(--cta-hover-bg);
             transform: translateY(-4px);
-            box-shadow: 0 7px 14px rgba(34, 153, 84, 0.4); /* Darker green shadow */
+            box-shadow: 0 7px 14px var(--cta-hover-shadow-color);
         }
         .cta-button:focus {
-            outline: 2px solid var(--primary-medium-blue);
+            outline: 2px solid var(--primary-blue-grotto);
             outline-offset: 2px;
         }
-        /* Secondary CTA button style (e.g., "Schedule a Consultation") */
-        .cta-button-secondary {
-            background-color: var(--primary-medium-blue);
-            color: var(--white-color);
-            /* box-shadow: 0 4px 10px rgba(93, 156, 236, 0.3); */ /* Blue shadow */
+        
+        .cta-button-alt { /* Secondary CTA specific */
+            background-color: var(--secondary-cta-bg);
+            color: var(--secondary-cta-text); 
+            box-shadow: 0 4px 10px var(--secondary-cta-shadow-color);
         }
-        .cta-button-secondary:hover {
-            background-color: #4A7FC9; /* Darker shade of primary medium blue */
-            /* box-shadow: 0 7px 14px rgba(93, 156, 236, 0.4); */
+        .cta-button-alt:hover {
+            background-color: var(--secondary-cta-hover-bg);
+            transform: translateY(-4px);
+            box-shadow: 0 7px 14px var(--secondary-cta-hover-shadow-color);
+        }
+        .cta-button-alt:focus {
+            outline: 2px solid var(--accent-blue-green);
+            outline-offset: 2px;
         }
 
-
-        .section-title {
-            color: var(--primary-dark-blue);
-            border-bottom: 4px solid var(--primary-medium-blue);
+        .section-title { /* color, font-family already set by h2 rule */
+            border-bottom: 4px solid var(--primary-blue-grotto);
             padding-bottom: 1rem;
             margin-bottom: 4rem;
         }
@@ -158,9 +208,9 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            background-color: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Softer shadow */
+            background-color: rgba(255, 255, 255, 0.97); 
+            backdrop-filter: blur(10px); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
         }
         .service-index-item a {
             display: block;
@@ -168,34 +218,34 @@
             margin-bottom: 0.25rem;
             border-radius: 0.375rem;
             transition: background-color 0.2s ease, color 0.2s ease, font-weight 0.2s ease;
-            font-weight: 500;
-            color: var(--text-slate-700);
+            font-weight: 500; /* Inter medium */
+            color: var(--text-body-dark);
         }
         .service-index-item a:hover,
         .service-index-item a.active,
         .service-index-item a:focus {
-            background-color: #E0EAFC; /* Lighter shade of new medium blue */
-            color: var(--primary-dark-blue);
-            font-weight: 700;
-            outline: 2px solid var(--primary-medium-blue);
+            background-color: var(--white-color); 
+            color: var(--primary-navy-blue);
+            font-weight: 700; /* Inter bold */
+            outline: 2px solid var(--primary-blue-grotto);
             outline-offset: 2px;
         }
 
         #welcome-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--primary-medium-blue) 100%);
+            background-image: linear-gradient(135deg, var(--primary-navy-blue) 0%, var(--primary-blue-grotto) 100%);
             color: var(--white-color); display: flex; flex-direction: column; align-items: center; justify-content: center;
             z-index: 9999; opacity: 1; transition: opacity 1s ease-out 4s;
         }
         #welcome-screen.fade-out { opacity: 0; }
-        #welcome-screen h1 {
-            font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem;
+        #welcome-screen h1 { /* font-family, font-weight already set by h1 rule */
+            font-size: 3.5rem;  margin-bottom: 1rem;
             animation: fadeInScale 1.5s ease-out forwards;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.25);
             opacity: 0;
         }
-        #welcome-screen p {
-            font-size: 1.5rem; font-weight: 400;
+        #welcome-screen p { /* font-family already set by p rule */
+            font-size: 1.5rem; font-weight: 400; /* Inter regular */
             animation: fadeInScale 1.5s ease-out 0.5s forwards;
             opacity: 0;
         }
@@ -207,42 +257,46 @@
         section { padding-top: 4rem; padding-bottom: 4rem; }
         @media (min-width: 768px) { section { padding-top: 6rem; padding-bottom: 6rem; } }
         
-        aside { max-height: calc(100vh - 8rem); overflow-y: auto; background-color: #F8FAFC; /* Tailwind slate-50 */ }
-        /* .text-slate-600 class is defined by Tailwind, using var(--text-slate-600) for overrides if needed */
-
-        #hero h1 { /* Targeting specifically for hero h1 */
-            color: var(--primary-dark-blue);
+        aside#services-sidebar { 
+            max-height: calc(100vh - 8rem); 
+            overflow-y: auto; 
+            background-color: var(--sidebar-bg); 
+        }
+        
+        #hero h1 { /* font-family, color, font-weight already set by h1 rule */
             text-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        #hero .text-slate-600 { /* For hero paragraph */
-            color: var(--text-slate-600);
+        #hero .hero-paragraph { 
+            color: var(--text-body-medium);
         }
-        /* Header specific styles */
-        .header-logo-text { color: var(--primary-dark-blue); }
-        .header-subtitle-text { color: var(--text-slate-600); }
+        
+        .header-logo-text { color: var(--primary-navy-blue); font-weight: 700; /* Inter Bold for logo text */ }
+        .header-subtitle-text { color: var(--text-body-medium); font-weight: 400; /* Inter Regular */ }
+        .header-subtitle-text .font-semibold { font-weight: 600; color: var(--primary-navy-blue); /* Inter Semibold for CA name */ }
 
 
-        #testimonials .bg-slate-50 {
-            background-color: #F8FAFC; /* Kept as is - good neutral */
+        #testimonials { background-color: var(--section-bg-tint); } 
+        #testimonials .testimonial-card { 
+            background-color: var(--white-color); 
             padding: 2.5rem;
             border-radius: 0.5rem;
             box-shadow: 0 8px 16px rgba(0,0,0,0.05);
             position: relative;
-            border-left: 5px solid var(--primary-medium-blue);
+            border-left: 5px solid var(--primary-blue-grotto);
         }
-        #testimonials .bg-slate-50 p:first-child {
+        #testimonials .testimonial-card p:first-child {
             font-style: italic;
-            font-size: 1.125rem;
-            color: var(--text-slate-700);
+            font-size: 1.125rem; /* Inter */
+            color: var(--text-body-dark);
             margin-bottom: 1.5rem;
             position: relative;
             padding-left: 1.5rem;
         }
-        #testimonials .bg-slate-50 p:first-child::before {
+        #testimonials .testimonial-card p:first-child::before {
             content: '“';
-            font-family: Georgia, serif;
+            font-family: var(--font-family-serif); /* Merriweather for quote mark */
             font-size: 4.5rem;
-            color: #D1E3F8; /* Lighter tint of new medium blue */
+            color: var(--accent-baby-blue); 
             position: absolute;
             left: -0.5rem;
             top: -1.5rem;
@@ -250,63 +304,56 @@
             line-height: 1;
             z-index: 0;
         }
-         #testimonials .bg-slate-50 p:first-child span {
+         #testimonials .testimonial-card p:first-child span {
             position: relative;
             z-index: 1;
         }
-        #testimonials .bg-slate-50 p.text-sm { /* Author */
+        #testimonials .testimonial-card p.author-text { 
             text-align: right;
-            font-weight: 600;
-            color: var(--primary-dark-blue);
+            font-weight: 600; /* Inter Semibold */
+            color: var(--primary-navy-blue);
             margin-top: 1rem;
         }
 
-        #about .text-slate-600 p {
+        #about .about-text p { 
             line-height: 1.8;
             margin-bottom: 1.75rem;
         }
-        #about .text-slate-600 {
-             color: var(--text-slate-700);
+        #about .about-text {
+             color: var(--text-body-dark);
         }
 
-        #contact .bg-white {
+        #contact .contact-card { 
             box-shadow: 0 12px 30px rgba(0,0,0,0.08);
             border-radius: 0.75rem;
             padding: 2.5rem;
+            background-color: var(--white-color);
         }
         @media (min-width: 768px) {
-            #contact .bg-white { padding: 3rem; }
+            #contact .contact-card { padding: 3rem; }
         }
-        #contact strong { color: var(--primary-dark-blue); }
+        #contact strong { color: var(--text-heading-color); font-family: var(--font-family-sans-serif); font-weight: 600; } /* Make strong tags use Inter Semibold */
         #contact p { margin-bottom: 1rem; }
         #contact .contact-link {
-            color: var(--primary-medium-blue);
+            color: var(--link-color);
+            text-decoration: none; 
             transition: color 0.3s ease;
         }
         #contact .contact-link:hover {
-            color: var(--primary-dark-blue); /* Darker on hover */
+            color: var(--link-hover-color);
+            text-decoration: underline;
         }
 
-
-        footer { /* Targeting footer tag directly */
+        footer { 
             padding-top: 4rem; padding-bottom: 4rem;
             background-color: var(--footer-bg-color);
         }
         footer p { line-height: 1.7; color: var(--footer-text-primary); }
-        footer p.text-sm { color: var(--footer-text-secondary); }
+        footer p.footer-secondary-text { color: var(--footer-text-secondary); } 
 
         body.welcome-active {
             overflow-y: hidden;
         }
-
-        /* Overriding Tailwind blue colors directly if they were used for text links etc. */
-        .text-blue-600 { color: var(--primary-medium-blue) !important; }
-        .text-blue-800 { color: var(--primary-dark-blue) !important; }
-        .hover\:text-blue-600:hover { color: var(--primary-medium-blue) !important; }
-        .hover\:text-blue-800:hover { color: var(--primary-dark-blue) !important; }
-        .bg-blue-700 { background-color: var(--primary-medium-blue) !important; }
-        .hover\:bg-blue-800:hover { background-color: #4A7FC9 !important; } /* Darker shade for hover */
-
 
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -317,7 +364,8 @@
       gtag('config', 'G-XXXXXXXXXX');
     </script>
 </head>
-<body class="bg-slate-100 welcome-active"> <div id="welcome-screen" role="region" aria-label="Welcome screen">
+<body class="welcome-active"> 
+    <div id="welcome-screen" role="region" aria-label="Welcome screen">
         <h1>Archit B. Sheth & Co</h1>
         <p>Chartered Accountants</p>
     </div>
@@ -328,9 +376,9 @@
                 <div class="flex items-center justify-between h-20">
                     <div class="flex items-center">
                         <a href="#" class="text-2xl font-bold header-logo-text hover:opacity-80 transition-opacity duration-300">absheth.com</a>
-                        <div class="ml-4 text-sm">
-                            <p class="font-semibold header-logo-text">Archit Sheth, Chartered Accountant</p>
-                            <p class="header-subtitle-text">Ahmedabad, India</p>
+                        <div class="ml-4 text-sm header-subtitle-text">
+                            <p class="font-semibold">Archit Sheth, Chartered Accountant</p>
+                            <p>Ahmedabad, India</p>
                         </div>
                     </div>
                     <nav role="navigation" aria-label="Main navigation" class="hidden md:flex space-x-6">
@@ -347,10 +395,10 @@
                 </div>
             </div>
             <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg py-2" role="navigation" aria-label="Mobile navigation">
-                <a href="#hero" class="block px-4 py-3 text-base nav-link hover:bg-blue-50">Home</a>
-                <a href="#services" class="block px-4 py-3 text-base nav-link hover:bg-blue-50">Services</a>
-                <a href="#about" class="block px-4 py-3 text-base nav-link hover:bg-blue-50">About Us</a>
-                <a href="#contact" class="block px-4 py-3 text-base nav-link hover:bg-blue-50">Contact</a>
+                <a href="#hero" class="block px-4 py-3 text-base nav-link hover:bg-opacity-10">Home</a>
+                <a href="#services" class="block px-4 py-3 text-base nav-link hover:bg-opacity-10">Services</a>
+                <a href="#about" class="block px-4 py-3 text-base nav-link hover:bg-opacity-10">About Us</a>
+                <a href="#contact" class="block px-4 py-3 text-base nav-link hover:bg-opacity-10">Contact</a>
             </div>
         </header>
 
@@ -360,26 +408,26 @@
                     <div class="flex flex-col items-center justify-center gap-8 py-12 md:py-16">
                         <div class="w-full">
                             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Welcome to Archit B. Sheth & Co</h1>
-                            <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-3xl mx-auto">Your trusted partner in comprehensive financial, taxation, and business advisory services in Ahmedabad. We are dedicated to providing expert solutions for individuals and businesses across Gujarat, helping you navigate complex financial landscapes.</p>
+                            <p class="text-lg md:text-xl hero-paragraph mb-10 max-w-3xl mx-auto">Your trusted partner in comprehensive financial, taxation, and business advisory services in Ahmedabad. We are dedicated to providing expert solutions for individuals and businesses across Gujarat, helping you navigate complex financial landscapes.</p>
                             <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
                                 <a href="#services" class="cta-button text-lg">Explore Our Services</a>
-                                <a href="#contact" class="cta-button cta-button-secondary text-lg shadow-md hover:shadow-lg">Schedule a Consultation</a>
+                                <a href="#contact" class="cta-button-alt text-lg shadow-md hover:shadow-lg">Schedule a Consultation</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="services" class="bg-white">
+            <section id="services" style="background-color: var(--section-bg-white);">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">Our Comprehensive Chartered Accountant Services</h2>
-                     <p class="text-center text-slate-600 mb-10 max-w-3xl mx-auto">
+                     <p class="text-center text-body-medium mb-10 max-w-3xl mx-auto">
                         As a leading CA firm in Ahmedabad, we offer a wide array of services designed to meet the diverse financial and regulatory needs of individuals and businesses. Our expertise spans <a href="#taxation-services-section" class="contact-link hover:underline">taxation services</a>, <a href="#auditing-services-section" class="contact-link hover:underline">auditing</a>, <a href="#accounting-services-section" class="contact-link hover:underline">accounting</a>, and strategic <a href="#advisory-services-section" class="contact-link hover:underline">business advisory</a>, ensuring you receive holistic support for your financial success.
                     </p>
-                    <input type="text" id="service-filter" placeholder="Search services (e.g., GST, Audit)..." class="w-full p-3.5 border border-gray-300 rounded-md mb-10 focus:outline-none focus:ring-2 focus:ring-var(--primary-medium-blue) focus:border-var(--primary-medium-blue) text-base" aria-label="Filter services">
+                    <input type="text" id="service-filter" placeholder="Search services (e.g., GST, Audit)..." class="w-full p-3.5 border border-gray-300 rounded-md mb-10 focus:outline-none focus:ring-2 focus:ring-var(--primary-blue-grotto) focus:border-var(--primary-blue-grotto) text-base" aria-label="Filter services">
                     <div class="flex flex-col md:flex-row gap-8 lg:gap-12">
-                        <aside class="md:w-1/3 lg:w-1/4 md:sticky md:top-24 self-start p-6 rounded-lg shadow-md" role="complementary" aria-label="Services navigation">
-                            <h3 class="text-xl font-semibold text-blue-800 mb-5 border-b pb-3">Services Index</h3>
+                        <aside id="services-sidebar" class="md:w-1/3 lg:w-1/4 md:sticky md:top-24 self-start p-6 rounded-lg shadow-md" role="complementary" aria-label="Services navigation">
+                            <h3 class="text-xl font-semibold mb-5 border-b pb-3" style="color: var(--text-heading-color); border-color: var(--primary-blue-grotto);">Services Index</h3>
                             <ul id="services-navigation-index" class="space-y-1">
                                 <li class="service-index-item"><a href="#taxation-services-section">Taxation Services</a></li>
                                 <li class="service-index-item"><a href="#auditing-services-section">Auditing & Assurance</a></li>
@@ -393,21 +441,21 @@
                         <div class="md:w-2/3 lg:w-3/4 space-y-16">
                             <section id="taxation-services-section" class="service-category-section pt-0 md:pt-0">
                                 <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Taxation Services in Ahmedabad</h3>
-                                <p class="text-slate-600 mb-8 leading-relaxed">
+                                <p class="text-body-medium mb-8 leading-relaxed">
                                     Navigating the complex Indian tax landscape requires expertise and diligence. Our taxation services in Ahmedabad are designed to help individuals and businesses optimize tax liabilities, ensure full compliance with evolving laws (including Income Tax, GST, and TDS), and manage all tax-related documentation and representations effectively.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Income Tax Advisory & Compliance</h4>
-                                        <p class="text-slate-600">Expert assistance with income tax planning, ITR filing for individuals and businesses in Ahmedabad, TDS compliance, and handling scrutiny cases to optimize tax liabilities.</p>
+                                        <p class="text-body-medium">Expert assistance with income tax planning, ITR filing for individuals and businesses in Ahmedabad, TDS compliance, and handling scrutiny cases to optimize tax liabilities.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Goods and Services Tax (GST) Compliance & Advisory</h4>
-                                        <p class="text-slate-600">Comprehensive GST services including GST registration in Ahmedabad, return filing, reconciliation, and advisory to ensure seamless indirect tax compliance for your business.</p>
+                                        <p class="text-body-medium">Comprehensive GST services including GST registration in Ahmedabad, return filing, reconciliation, and advisory to ensure seamless indirect tax compliance for your business.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">International & NRI Taxation</h4>
-                                        <p class="text-slate-600">Specialized taxation services for NRIs/OCIs based in or with interests in Ahmedabad, covering DTAA interpretation, capital gains tax, fund repatriation, and FEMA/RBI compliance.</p>
+                                        <p class="text-body-medium">Specialized taxation services for NRIs/OCIs based in or with interests in Ahmedabad, covering DTAA interpretation, capital gains tax, fund repatriation, and FEMA/RBI compliance.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Taxation Services</a>
@@ -415,29 +463,29 @@
 
                             <section id="auditing-services-section" class="service-category-section pt-0 md:pt-0">
                                 <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Auditing & Assurance Services</h3>
-                                <p class="text-slate-600 mb-8 leading-relaxed">
+                                <p class="text-body-medium mb-8 leading-relaxed">
                                     Our auditing and assurance services provide independent verification of financial records, ensuring transparency, regulatory compliance, and the identification of potential risks or inefficiencies. We conduct thorough statutory audits, tax audits, and internal audits for businesses in Ahmedabad and Gujarat.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Statutory Audit</h4>
-                                        <p class="text-slate-600">Mandatory statutory audits for companies in Ahmedabad, ensuring financial statements comply with Indian Accounting Standards and regulatory filings.</p>
+                                        <p class="text-body-medium">Mandatory statutory audits for companies in Ahmedabad, ensuring financial statements comply with Indian Accounting Standards and regulatory filings.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Tax Audit</h4>
-                                        <p class="text-slate-600">Comprehensive tax audit services under the Income Tax Act for eligible businesses and professionals in Ahmedabad.</p>
+                                        <p class="text-body-medium">Comprehensive tax audit services under the Income Tax Act for eligible businesses and professionals in Ahmedabad.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Internal Audit</h4>
-                                        <p class="text-slate-600">Assessment of internal controls, risk management, and operational efficiency to identify and correct inefficiencies within your Ahmedabad-based organization.</p>
+                                        <p class="text-body-medium">Assessment of internal controls, risk management, and operational efficiency to identify and correct inefficiencies within your Ahmedabad-based organization.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Forensic Audit</h4>
-                                        <p class="text-slate-600">Expert forensic audit services to investigate fraudulent transactions, trace financial anomalies, and assist in legal proceedings.</p>
+                                        <p class="text-body-medium">Expert forensic audit services to investigate fraudulent transactions, trace financial anomalies, and assist in legal proceedings.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Bank Audit</h4>
-                                        <p class="text-slate-600">Specialized bank audit services for financial institutions, focusing on loan books, NPAs, and RBI regulatory compliance.</p>
+                                        <p class="text-body-medium">Specialized bank audit services for financial institutions, focusing on loan books, NPAs, and RBI regulatory compliance.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Auditing Services</a>
@@ -445,21 +493,21 @@
 
                             <section id="accounting-services-section" class="service-category-section pt-0 md:pt-0">
                                 <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Accounting & Financial Reporting</h3>
-                                <p class="text-slate-600 mb-8 leading-relaxed">
+                                <p class="text-body-medium mb-8 leading-relaxed">
                                     Accurate accounting and financial reporting are the bedrock of sound financial management. We provide comprehensive bookkeeping and accounting solutions in Ahmedabad, from daily transaction management to the preparation of financial statements, ensuring your financial records are precise and compliant.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Bookkeeping & Accounting Solutions</h4>
-                                        <p class="text-slate-600">Comprehensive management of financial transactions, including daily bookkeeping, accounts payable/receivable, and financial statement preparation for Ahmedabad businesses.</p>
+                                        <p class="text-body-medium">Comprehensive management of financial transactions, including daily bookkeeping, accounts payable/receivable, and financial statement preparation for Ahmedabad businesses.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Industry-Specific Accounting</h4>
-                                        <p class="text-slate-600">Tailored accounting solutions designed to meet the unique needs of various sectors in Ahmedabad (e.g., Retail, Manufacturing, IT services).</p>
+                                        <p class="text-body-medium">Tailored accounting solutions designed to meet the unique needs of various sectors in Ahmedabad (e.g., Retail, Manufacturing, IT services).</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Accounts Cleanup & Restructuring</h4>
-                                        <p class="text-slate-600">Rectifying accounting discrepancies, streamlining processes, and restructuring financial records for accuracy and compliance.</p>
+                                        <p class="text-body-medium">Rectifying accounting discrepancies, streamlining processes, and restructuring financial records for accuracy and compliance.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Accounting Services</a>
@@ -467,25 +515,25 @@
 
                             <section id="advisory-services-section" class="service-category-section pt-0 md:pt-0">
                                 <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Business Advisory & Consulting in Ahmedabad</h3>
-                                <p class="text-slate-600 mb-8 leading-relaxed">
+                                <p class="text-body-medium mb-8 leading-relaxed">
                                     Beyond compliance, we act as strategic business advisors for Ahmedabad enterprises, offering insights to enhance financial performance, facilitate growth, and support informed decision-making. Our advisory services cover startup incubation, financial planning, M&A support, and business valuation.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Startup Advisory</h4>
-                                        <p class="text-slate-600">Guidance for new businesses and startups in Ahmedabad, from <a href="#corporate-services-section" class="contact-link hover:underline">company incorporation</a> to initial financial structuring, funding assistance, and compliance management.</p>
+                                        <p class="text-body-medium">Guidance for new businesses and startups in Ahmedabad, from <a href="#corporate-services-section" class="contact-link hover:underline">company incorporation</a> to initial financial structuring, funding assistance, and compliance management.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Financial Planning & Wealth Management</h4>
-                                        <p class="text-slate-600">Personalized financial planning and wealth management strategies for individuals and businesses in Ahmedabad to manage finances, optimize investments, and secure long-term goals.</p>
+                                        <p class="text-body-medium">Personalized financial planning and wealth management strategies for individuals and businesses in Ahmedabad to manage finances, optimize investments, and secure long-term goals.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Mergers, Acquisitions & Capital Structuring Advisory</h4>
-                                        <p class="text-slate-600">Expert advice on complex corporate transactions like M&A, and optimizing capital structure for strategic objectives for businesses in Ahmedabad.</p>
+                                        <p class="text-body-medium">Expert advice on complex corporate transactions like M&A, and optimizing capital structure for strategic objectives for businesses in Ahmedabad.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Business Valuation Services</h4>
-                                        <p class="text-slate-600">Professional assessment of a business's economic value for transactions, financing, dispute resolution, or strategic planning in Ahmedabad.</p>
+                                        <p class="text-body-medium">Professional assessment of a business's economic value for transactions, financing, dispute resolution, or strategic planning in Ahmedabad.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Advisory Services</a>
@@ -493,25 +541,25 @@
 
                             <section id="corporate-services-section" class="service-category-section pt-0 md:pt-0">
                                 <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Corporate Law & Compliance Services</h3>
-                                <p class="text-slate-600 mb-8 leading-relaxed">
+                                <p class="text-body-medium mb-8 leading-relaxed">
                                     We assist Ahmedabad-based businesses in adhering to corporate laws (Companies Act, LLP Act) and regulatory standards, mitigating risks and ensuring smooth operations. Our services include company incorporation, secretarial compliance, due diligence, and IPR advisory.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Company/LLP Incorporation & Annual Filings</h4>
-                                        <p class="text-slate-600">Assistance with registration of new companies and LLPs in Ahmedabad, and managing mandatory annual filings with MCA and other regulatory authorities.</p>
+                                        <p class="text-body-medium">Assistance with registration of new companies and LLPs in Ahmedabad, and managing mandatory annual filings with MCA and other regulatory authorities.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Secretarial Compliance Services</h4>
-                                        <p class="text-slate-600">Ongoing support for corporate governance, ROC compliances, record maintenance, and assistance with board/shareholder meetings for Ahmedabad companies.</p>
+                                        <p class="text-body-medium">Ongoing support for corporate governance, ROC compliances, record maintenance, and assistance with board/shareholder meetings for Ahmedabad companies.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Legal Due Diligence & Commercial Agreement Drafting</h4>
-                                        <p class="text-slate-600">Thorough investigation of legal aspects for M&A, investments, and drafting/reviewing various commercial and legal documents.</p>
+                                        <p class="text-body-medium">Thorough investigation of legal aspects for M&A, investments, and drafting/reviewing various commercial and legal documents.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Intellectual Property Rights (IPR) Advisory</h4>
-                                        <p class="text-slate-600">Guidance on protecting intellectual property through registration, renewal, and enforcement of trademarks, patents, and copyrights in India.</p>
+                                        <p class="text-body-medium">Guidance on protecting intellectual property through registration, renewal, and enforcement of trademarks, patents, and copyrights in India.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Corporate Law Services</a>
@@ -519,17 +567,17 @@
 
                             <section id="other-services-section" class="service-category-section pt-0 md:pt-0">
                                 <h3 class="text-2xl md:text-3xl font-semibold section-title mb-8">Other Specialized Services</h3>
-                                <p class="text-slate-600 mb-8 leading-relaxed">
+                                <p class="text-body-medium mb-8 leading-relaxed">
                                     To provide comprehensive support, we offer specialized ancillary services that complement our core offerings, adding convenience and ensuring compliance with specific industry regulations for our clients in Ahmedabad.
                                 </p>
                                 <div class="space-y-8">
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">Digital Signature Certificate (DSC)</h4>
-                                        <p class="text-slate-600">Assistance in obtaining and managing Digital Signature Certificates (DSCs) required for various e-filings and secure online transactions.</p>
+                                        <p class="text-body-medium">Assistance in obtaining and managing Digital Signature Certificates (DSCs) required for various e-filings and secure online transactions.</p>
                                     </div>
                                     <div class="service-card">
                                         <h4 class="text-xl font-semibold">FSSAI Compliance (Renewal, Return Filing)</h4>
-                                        <p class="text-slate-600">Support for businesses in the food sector in Ahmedabad with FSSAI license application, renewal, and annual return filing.</p>
+                                        <p class="text-body-medium">Support for businesses in the food sector in Ahmedabad with FSSAI license application, renewal, and annual return filing.</p>
                                     </div>
                                 </div>
                                 <a href="#contact" class="cta-button inline-block mt-10">Enquire About Specialized Services</a>
@@ -539,27 +587,27 @@
                 </div>
             </section>
 
-            <section id="testimonials" class="hero-bg">
+            <section id="testimonials" class="hero-bg"> 
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">What Our Clients Say</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                        <div class="bg-slate-50 p-6 rounded-lg shadow-lg">
-                            <p class="text-slate-600"><span>"Archit Sheth’s expertise in GST compliance saved our Ahmedabad business significant time and ensured seamless filings."</span></p>
-                            <p class="text-sm mt-4">– Manufacturing Business, Ahmedabad</p>
+                        <div class="testimonial-card">
+                            <p><span>"Archit Sheth’s expertise in GST compliance saved our Ahmedabad business significant time and ensured seamless filings."</span></p>
+                            <p class="author-text">– Manufacturing Business, Ahmedabad</p>
                         </div>
-                        <div class="bg-slate-50 p-6 rounded-lg shadow-lg">
-                            <p class="text-slate-600"><span>"Their startup advisory services helped us navigate complex regulations with ease. Highly recommended CA in Ahmedabad for new ventures."</span></p>
-                            <p class="text-sm mt-4">– Tech Startup Entrepreneur, Surat</p>
+                        <div class="testimonial-card">
+                            <p><span>"Their startup advisory services helped us navigate complex regulations with ease. Highly recommended CA in Gujarat for new ventures."</span></p>
+                            <p class="author-text">– Tech Startup Entrepreneur, Surat</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="about" class="bg-white">
+            <section id="about" style="background-color: var(--section-bg-white);">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">About CA Archit Sheth</h2>
                     <div class="flex flex-col items-center gap-8 max-w-4xl mx-auto">
-                        <div class="w-full text-slate-600 space-y-6 text-lg">
+                        <div class="w-full about-text space-y-6 text-lg">
                             <p>Archit Sheth is a qualified Chartered Accountant based in Ahmedabad, India, with a strong commitment to providing exceptional client service and tailored financial solutions. With extensive experience as a CA in Ahmedabad, Archit Sheth offers expert, customized support in taxation, auditing, accounting, and business advisory to meet the diverse needs of individuals and businesses across Gujarat.</p>
                             <p>The practice, Archit B. Sheth & Co, is built on principles of integrity, professionalism, and a proactive approach to financial management. We strive to empower our clients by ensuring compliance with Indian financial regulations, optimizing financial performance, and offering strategic insights that drive growth and stability. Our deep understanding of the Indian financial and regulatory landscape, particularly within Gujarat, allows us to deliver timely and effective chartered accountancy services.</p>
                             <p>We believe in building long-term relationships with our clients, acting not just as service providers but as trusted financial advisors. Whether you are a startup in Ahmedabad navigating initial complexities, an established business seeking efficiency, or an individual planning your financial future, Archit Sheth is dedicated to helping you achieve your goals with expert CA services.</p>
@@ -568,11 +616,11 @@
                 </div>
             </section>
 
-            <section id="contact" class="hero-bg">
+            <section id="contact" class="hero-bg"> 
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl md:text-4xl font-bold section-title mb-12 text-center">Get In Touch with Your CA</h2>
-                    <div class="max-w-xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-xl flex flex-col items-center gap-8">
-                        <div class="w-full text-slate-600 space-y-4 text-lg">
+                    <div class="max-w-xl mx-auto contact-card flex flex-col items-center gap-8">
+                        <div class="w-full text-body-medium space-y-4 text-lg">
                             <p class="text-center mb-6">We are here to assist you with all your accounting, tax, and financial advisory needs in Ahmedabad. Please feel free to reach out with your queries or to schedule a consultation.</p>
                             <p><strong>Name:</strong> Archit Sheth</p>
                             <p><strong>Designation:</strong> Chartered Accountant</p>
@@ -592,7 +640,7 @@
         <footer role="contentinfo">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <p>© <span id="currentYear"></span> absheth.com - Archit B. Sheth & Co, Chartered Accountant Ahmedabad. All rights reserved.</p>
-                <p class="text-sm mt-2">Website by Archit Sheth, Chartered Accountant, Ahmedabad.</p>
+                <p class="footer-secondary-text text-sm mt-2">Website by Archit Sheth, Chartered Accountant, Ahmedabad.</p>
             </div>
         </footer>
     </div>
@@ -623,11 +671,10 @@
 
         if (welcomeScreen && getComputedStyle(welcomeScreen).display !== 'none') {
             body.style.overflowY = 'hidden';
-        } else if (welcomeScreen) { // if welcome screen is already hidden by other means
+        } else if (welcomeScreen) { 
              body.classList.remove('welcome-active');
              body.style.overflowY = 'auto';
         }
-
 
         setTimeout(enterSite, 5000);
 
@@ -646,7 +693,6 @@
         }
 
         const serviceFilterInput = document.getElementById('service-filter');
-        // const allServiceCards = Array.from(document.querySelectorAll('.service-card'));
         const allServiceCategorySections = Array.from(document.querySelectorAll('.service-category-section'));
 
         if (serviceFilterInput) {
@@ -682,7 +728,7 @@
 
             serviceContentSections.forEach(section => {
                 if (getComputedStyle(section).display !== 'none') { 
-                    const sectionTop = section.offsetTop - navHeight - 20; // Add some offset
+                    const sectionTop = section.offsetTop - navHeight - Math.max(20, window.innerHeight * 0.1);
                     if (window.scrollY >= sectionTop) {
                         currentSectionId = section.getAttribute('id');
                     }
@@ -691,18 +737,18 @@
 
             serviceNavLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                const linkHref = link.getAttribute('href');
+                if (linkHref && linkHref.substring(1) === currentSectionId) {
                     link.classList.add('active');
                 }
             });
         }
         
         window.addEventListener('scroll', updateActiveServiceLink);
-        // Initial call to set active link on page load/refresh, after main content is expected to be visible
         if (mainContentWrapper && !mainContentWrapper.classList.contains('hidden')) {
             updateActiveServiceLink();
         } else {
-            setTimeout(updateActiveServiceLink, 5100); // Call after welcome screen transition
+            setTimeout(updateActiveServiceLink, 5100); 
         }
     });
     </script>
