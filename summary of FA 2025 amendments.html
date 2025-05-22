@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Act 2025: Interactive Summary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --font-family-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --background-body: #f5f5f7;
+            --background-light: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-primary-rgb: 29, 29, 31;
+            --text-secondary: #515154;
+            --text-tertiary: #86868b;
+            --link-blue: #007aff;
+            --link-blue-rgb: 0, 122, 255;
+            --link-blue-hover: #0071e3;
+            --border-color-light: #d2d2d7;
+            --border-color-light-rgb: 210, 210, 215;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body { 
+            font-family: var(--font-family-apple); 
+            background-color: var(--background-body);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-apple);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .content-section { 
+            display: none; 
+            background-color: var(--background-light);
+            padding: 24px; /* Consistent with card padding */
+            border-radius: 14px; /* Apple-like radius */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04), 0 5px 15px rgba(0,0,0,0.06); /* Softer shadow */
+            margin-bottom: 1.5rem;
+        }
+        .content-section.active { 
+            display: block; 
+        }
+
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 700px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: 400px; 
+            max-height: 450px; 
+            padding: 1rem; 
+            background-color: var(--background-light); 
+            border-radius: 12px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 8px rgba(0,0,0,0.05);
+        }
+        @media (min-width: 768px) { 
+            .chart-container { height: 450px; } 
+        }
+
+        .table-container { 
+            max-height: 400px; 
+            overflow-y: auto; 
+            border: 1px solid var(--border-color-light);
+            border-radius: 8px; 
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate; /* Allows border-radius on table */
+            border-spacing: 0;
+        }
+        table thead { 
+            background-color: rgba(var(--text-primary-rgb), 0.03); /* Very subtle grey */
+        }
+        table th {
+            color: var(--text-primary); 
+            font-weight: 500;
+            font-size: 0.8rem; /* 12.8px */
+            text-transform: none; 
+            letter-spacing: normal;
+            padding: 0.75rem 1rem; /* 12px 16px */
+            text-align: left;
+            border-bottom: 1px solid var(--border-color-light);
+        }
+        table td {
+            color: var(--text-secondary);
+            font-size: 0.875rem; /* 14px */
+            padding: 0.75rem 1rem;
+            vertical-align: top; 
+            border-bottom: 1px solid var(--border-color-light);
+        }
+        table tr:last-child td {
+            border-bottom: none;
+        }
+        table th:first-child, table td:first-child { border-radius: 8px 0 0 8px; } /* If table has rounded corners */
+        table th:last-child, table td:last-child { border-radius: 0 8px 8px 0; }
+
+
+        .sidebar-nav {
+            background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+            backdrop-filter: saturate(180%) blur(15px);
+            -webkit-backdrop-filter: saturate(180%) blur(15px);
+            border-right: 0.5px solid var(--border-color-light);
+        }
+        .sidebar-title {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem; /* More space */
+            padding: 1rem 0;
+        }
+        .sidebar-title a {
+            text-decoration: none;
+            color: inherit; /* Inherit color from h2 */
+            transition: color 0.2s ease-in-out;
+        }
+        .sidebar-title a:hover {
+            color: var(--link-blue);
+        }
+
+
+        .nav-link { 
+            transition: color 0.2s ease, background-color 0.2s ease; 
+            display: block;
+            padding: 0.65rem 1rem; /* Adjusted padding */
+            border-radius: 8px; /* Rounded corners for links */
+            font-size: 0.9rem; /* 14.4px */
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 0.25rem; /* Space between links */
+        }
+        .nav-link:hover {
+            color: var(--link-blue);
+            background-color: rgba(var(--link-blue-rgb), 0.08);
+        }
+        .nav-link.active { 
+            color: var(--link-blue);
+            background-color: rgba(var(--link-blue-rgb), 0.12);
+            font-weight: 500; 
+        }
+        .nav-category-title {
+            font-size: 1rem; /* 16px */
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 1.25rem; /* 20px */
+            margin-bottom: 0.5rem; /* 8px */
+            padding-left: 1rem; /* Align with links if they have padding */
+        }
+
+
+        .accordion-item {
+            background-color: transparent; /* Let card background show */
+            border: 1px solid var(--border-color-light);
+            border-radius: 10px; /* Apple-like radius */
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .accordion-header { 
+            cursor: pointer; 
+            background-color: rgba(var(--text-primary-rgb), 0.04); /* Very subtle background */
+            padding: 0.85rem 1.25rem; /* Adjusted padding */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-bottom: 1px solid transparent; /* Border shown when open */
+            transition: background-color 0.2s ease;
+        }
+         .accordion-item.open .accordion-header {
+            border-bottom-color: var(--border-color-light);
+        }
+        .accordion-header:hover {
+            background-color: rgba(var(--text-primary-rgb), 0.07);
+        }
+        .accordion-header h3 { /* Target h3 inside accordion header */
+            font-size: 1.05rem; /* 16.8px */
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0; /* Remove default margin */
+        }
+        .accordion-header .arrow-icon {
+            color: var(--text-tertiary);
+            font-size: 1.25rem; /* Slightly larger */
+            transform: rotate(0deg);
+            transition: transform 0.3s ease-out;
+        }
+        .accordion-item.open .accordion-header .arrow-icon {
+             transform: rotate(180deg);
+        }
+        .accordion-content { 
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out, padding 0.35s ease-out;
+            padding: 0 1.25rem; 
+            background-color: var(--background-light); /* Ensure content area is white */
+        }
+        .accordion-item.open .accordion-content { 
+            padding: 1.25rem; 
+        }
+        .accordion-content p, .accordion-content ul li {
+            font-size: 0.9rem; /* 14.4px */
+            line-height: 1.6;
+        }
+        .accordion-content ul {
+            padding-left: 1.25rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .accordion-content strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+
+        .sticky-sidebar { 
+            position: sticky; 
+            top: 1rem; 
+            height: calc(100vh - 2rem); 
+            overflow-y: auto; 
+        }
+
+        .main-heading {
+            font-size: 1.75rem; /* text-3xl -> 28px */
+            font-weight: 700; 
+            color: var(--text-primary);
+            margin-bottom: 1.25rem; /* mb-5 */
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color-light);
+        }
+        .sub-heading {
+            font-size: 1.25rem; /* text-xl -> 20px */
+            font-weight: 600; 
+            color: var(--text-primary);
+            margin-top: 1.25rem; 
+            margin-bottom: 0.75rem;
+        }
+        .paragraph-text {
+            margin-bottom: 1rem; 
+            font-size: 0.95rem; /* 15.2px */
+            line-height: 1.65;
+            color: var(--text-secondary);
+        }
+        .list-item-custom { /* For main bullet points */
+            margin-bottom: 0.5rem; 
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .list-item-custom strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <nav class="w-full md:w-72 p-4 md:p-6 space-y-1 md:sticky-sidebar sidebar-nav">
+            <h2 class="sidebar-title text-center">
+                <a href="index.html">Finance Act 2025</a>
+            </h2>
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#highlights" class="nav-link">Key Highlights</a>
+            <div>
+                <h3 class="nav-category-title">Direct Taxes</h3>
+                <a href="#direct-tax-rates" class="nav-link ml-3">Income Tax Rates</a>
+                <a href="#direct-investment-employment" class="nav-link ml-3">Investment & Employment</a>
+                <a href="#direct-simplification" class="nav-link ml-3">Simplification & Rationalisation</a>
+                <a href="#direct-welfare" class="nav-link ml-3">Socio-Economic Welfare</a>
+                <a href="#direct-administration" class="nav-link ml-3">Tax Administration</a>
+            </div>
+            <div>
+                <h3 class="nav-category-title">Indirect Taxes</h3>
+                <a href="#indirect-customs" class="nav-link ml-3">Customs</a>
+                <a href="#indirect-excise" class="nav-link ml-3">Central Excise</a>
+                <a href="#indirect-service-tax" class="nav-link ml-3">Service Tax</a>
+                <a href="#indirect-gst" class="nav-link ml-3">GST</a>
+            </div>
+        </nav>
+
+        <main class="flex-1 p-6 md:p-8">
+            <section id="overview" class="content-section active">
+                <h1 class="main-heading">Overview of Finance Act 2025</h1>
+                <p class="paragraph-text">The Finance Act, 2025, continues India's tax reform journey. It aims to provide tax reliefs, simplify provisions for taxpayers, and rationalize existing tax laws. The Act proposes amendments to the Income-tax Act, 1961, Customs Act, 1962, CGST Act, 2017, and other related legislation.</p>
+                <p class="paragraph-text">Key objectives include simplifying the individual tax structure, promoting strategic sectors like International Financial Services Centres (IFSCs) and domestic manufacturing, and enhancing compliance through technology. It seeks to balance taxpayer relief with economic growth and improved tax governance, aligning with international best practices.</p>
+                <p class="paragraph-text">Amendments will come into effect on various dates, typically April 1st for direct taxes (corresponding to the assessment year) and from enactment or notified dates for indirect taxes. Careful attention to specific effective dates is crucial for compliance.</p>
+            </section>
+
+            <section id="highlights" class="content-section">
+                <h1 class="main-heading">Key Highlights of Finance Act 2025</h1>
+                <p class="paragraph-text">This section provides a snapshot of the most significant proposed changes in the Finance Act 2025, offering a quick understanding of its potential impact across various taxpayer segments and economic sectors. These highlights cover major shifts in tax rates, new incentives, simplification measures, and administrative reforms.</p>
+                <ul class="list-disc list-inside space-y-1">
+                    <li class="list-item-custom"><strong>New Default Income Tax Regime (AY 2026-27):</strong> Revised slabs with basic exemption up to ₹4,00,000 and rebate up to ₹12,00,000 income (potentially nil tax).</li>
+                    <li class="list-item-custom"><strong>IFSC Incentives Boosted:</strong> Sunset dates for various concessions extended to March 31, 2030; new exemptions for life insurance, ship leasing, and treasury centres.</li>
+                    <li class="list-item-custom"><strong>TDS/TCS Rationalisation:</strong> Many thresholds increased (e.g., interest, dividend, rent, professional fees); TDS rate on securitisation trust income reduced; TCS on sale of goods (Sec 206C(1H)) omitted.</li>
+                    <li class="list-item-custom"><strong>Removal of Higher TDS/TCS for Non-Filers:</strong> Sections 206AB and 206CCA proposed to be omitted from April 1, 2025.</li>
+                    <li class="list-item-custom"><strong>Multi-Year Transfer Pricing:</strong> Option for Arm's Length Price determined for one year to apply for two subsequent years.</li>
+                    <li class="list-item-custom"><strong>Crypto-Asset Reporting:</strong> New section 285BAA mandates reporting of crypto transactions from April 1, 2026.</li>
+                    <li class="list-item-custom"><strong>Customs Duty Changes:</strong> Tariff rationalization, new tariff lines, BCD changes (increases and decreases) on various goods, AIDC revisions. Provisional assessment finalization within 2 years.</li>
+                    <li class="list-item-custom"><strong>GST Amendments:</strong> ISD provisions clarified for reverse charge ITC; Schedule III amended retrospectively for warehoused goods in SEZ/FTWZ; Track and Trace mechanism enabled.</li>
+                    <li class="list-item-custom"><strong>Start-up Benefits Extended:</strong> Incorporation period for Sec 80-IAC deduction extended to March 31, 2030.</li>
+                    <li class="list-item-custom"><strong>Updated Return Filing Window Extended:</strong> Time limit extended from 24 to 48 months from end of relevant AY.</li>
+                </ul>
+            </section>
+
+            <section id="direct-tax-rates" class="content-section">
+                <h1 class="main-heading">Direct Taxes: Income Tax Rates</h1>
+                <p class="paragraph-text">The Finance Act 2025 proposes significant changes to the personal income tax structure, particularly for the default tax regime, effective from Assessment Year (AY) 2026-27. For AY 2025-26, existing rates remain unchanged. Corporate tax rates also see no changes for AY 2025-26.</p>
+                
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Assessment Year 2025-26</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-2">
+                        <p>No changes proposed to existing income tax rates. The default regime rates under Sec 115BAC(1A) for Individuals/HUFs are:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Up to ₹3,00,000: Nil</li>
+                            <li>₹3,00,001 to ₹7,00,000: 5%</li>
+                            <li>₹7,00,001 to ₹10,00,000: 10%</li>
+                            <li>₹10,00,001 to ₹12,00,000: 15%</li>
+                            <li>₹12,00,001 to ₹15,00,000: 20%</li>
+                            <li>Above ₹15,00,000: 30%</li>
+                        </ul>
+                        <p>Surcharge rates remain unchanged. Health & Education Cess at 4% continues.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Proposed for Assessment Year 2026-27 (New Default Regime)</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-2">
+                        <p>Significant changes to the default tax regime (Sec 115BAC(1A)) for Individuals/HUFs:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Up to ₹4,00,000: Nil</li>
+                            <li>₹4,00,001 to ₹8,00,000: 5%</li>
+                            <li>₹8,00,001 to ₹12,00,000: 10%</li>
+                            <li>₹12,00,001 to ₹16,00,000: 15%</li>
+                            <li>₹16,00,001 to ₹20,00,000: 20%</li>
+                            <li>₹20,00,001 to ₹24,00,000: 25%</li>
+                            <li>Above ₹24,00,000: 30%</li>
+                        </ul>
+                        <p><strong>Rebate under Section 87A (AY 2026-27 onwards for new default regime):</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Income limit for rebate increased from ₹7,00,000 to ₹12,00,000.</li>
+                            <li>Rebate amount increased from ₹25,000 to ₹60,000.</li>
+                            <li>This implies potentially nil tax liability for incomes up to ₹12,00,000 under the new default regime.</li>
+                        </ul>
+                        <p>Taxpayers can opt out of this new default regime. Surcharge rates principles remain consistent. Health & Education Cess at 4% continues.</p>
+                    </div>
+                </div>
+                
+                <h3 class="sub-heading">Income Tax Slab Comparison (Default Regimes)</h3>
+                <p class="paragraph-text">The chart below visualizes the tax payable at different income levels under the current default regime (AY 2025-26) and the proposed new default regime (AY 2026-27), considering the basic slab benefits and rebates. Note: This is illustrative and does not include surcharge or cess for simplicity in comparison of slab benefits.</p>
+                <div class="chart-container">
+                    <canvas id="incomeTaxComparisonChart"></canvas>
+                </div>
+            </section>
+
+            <section id="direct-investment-employment" class="content-section">
+                <h1 class="main-heading">Direct Taxes: Measures to Promote Investment & Employment</h1>
+                <p class="paragraph-text">The Act introduces several measures to encourage investment and job creation, with a strong focus on International Financial Services Centres (IFSC) and key domestic manufacturing sectors. These proposals aim to enhance India's attractiveness as an investment destination and support strategic industries.</p>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Incentives for International Financial Services Centre (IFSC)</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p><strong>Extension of Sunset Dates:</strong> Deadlines for commencing operations/relocating funds to IFSC for various tax concessions (Sec 80LA, Sec 10(4D), (4F), (4H), Sec 47(viiad)) extended to March 31, 2030.</p>
+                        <p><strong>Life Insurance Policy Exemption:</strong> Proceeds from policies issued by IFSC insurance intermediaries exempted under Sec 10(10D) without premium conditions for non-residents.</p>
+                        <p><strong>Ship Leasing Benefits:</strong> Capital gains exemption (Sec 10(4H)) and dividend exemption (Sec 10(34B)) extended to ship leasing units in IFSC, similar to aircraft leasing.</p>
+                        <p><strong>Rationalisation for Treasury Centres:</strong> Advances/loans between group entities involving an IFSC finance unit (treasury centre) not treated as deemed dividend under specific conditions.</p>
+                        <p><strong>Simplified Regime for IFSC Fund Managers (Sec 9A):</strong> Condition for Indian resident participation in eligible investment funds rationalized; sunset date for relaxing other conditions extended to March 31, 2030.</p>
+                        <p><strong>Exemption for Non-Resident Income from IFSC Transactions (Sec 10(4E)):</strong> Extended to NDFs, offshore derivatives with FPIs that are IFSC units (from AY 2026-27).</p>
+                        <p><strong>Tax-Neutral Relocation for Retail Schemes/ETFs (Sec 47(viiad)):</strong> Definition of "resultant fund" expanded to include IFSC-based retail schemes/ETFs (from AY 2026-27).</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Sovereign Wealth Funds (SWFs) & Pension Funds (PFs)</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p>Investment period for SWFs/PFs to avail tax exemptions (Sec 10(23FE)) on dividend, interest, LTCG from infrastructure investments extended to March 31, 2030.</p>
+                        <p>Clarification: LTCG exempt even if deemed STCG under Sec 50AA (unlisted debt).</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Presumptive Taxation for Non-Residents in Electronics Manufacturing</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>New Sec 44BBD: Presumptive tax at 25% of gross receipts for non-residents providing services/technology for notified electronics manufacturing facilities (effective tax rate <10%). Effective AY 2026-27.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Extension of Tonnage Tax Scheme to Inland Vessels</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Benefits of Tonnage Tax Scheme (Chapter XII-G) extended to Inland Vessels registered under Inland Vessels Act, 2021. Effective AY 2026-27.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="direct-simplification" class="content-section">
+                <h1 class="main-heading">Direct Taxes: Simplification & Rationalisation</h1>
+                <p class="paragraph-text">This section details proposals aimed at simplifying tax provisions, rationalizing rules, and reducing compliance burdens. Key areas include charitable trusts, taxation of ULIPs and investment funds, start-up benefits, and a significant overhaul of TDS/TCS provisions.</p>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Charitable Trusts/Institutions</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p><strong>'Specified Violation' Rationalised:</strong> Incomplete registration application no longer a "specified violation" leading to cancellation.</p>
+                        <p><strong>Extended Registration for Smaller Trusts:</strong> Validity increased from 5 to 10 years for trusts with total income ≤ ₹5 crore in preceding two years.</p>
+                        <p><strong>Rationalisation of Specified Persons (Sec 13(3)):</strong> Threshold for "substantial contribution" revised; scope of relatives narrowed.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>ULIPs, Investment Funds, Start-ups</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p><strong>Business Trusts (REITs/InVITs):</strong> Sec 115UA amended to align LTCG taxation with Sec 112A (AY 2026-27).</p>
+                        <p><strong>Significant Economic Presence (SEP):</strong> Purchase of goods in India for export will not constitute SEP (AY 2026-27).</p>
+                        <p><strong>Taxation of ULIP Redemption (Non-exempt):</strong> Defined as "capital asset"; gains taxed as capital gains; included in "equity oriented fund" definition for Sec 112A (AY 2026-27).</p>
+                        <p><strong>'Capital Asset' for Investment Funds:</strong> Securities held by investment funds (Sec 115UB) treated as capital assets only (AY 2026-27).</p>
+                        <p><strong>Start-up Benefits (Sec 80-IAC):</strong> Incorporation period for deduction extended to March 31, 2030.</p>
+                        <p><strong>Capital Gains for Non-Residents (Sec 115AD):</strong> LTCG rate on certain securities aligned to 12.5% (AY 2026-27).</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Rationalisation of TDS/TCS (Effective April 1, 2025 unless stated)</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p><strong>TDS Rate Reduction (Sec 194LBC):</strong> Income from Securitisation Trust to resident investor - uniform 10% rate.</p>
+                        <p><strong>TDS Threshold Increases:</strong> See table below for key changes.</p>
+                        <div class="table-container my-4">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Nature of Payment</th>
+                                        <th>Current Threshold (₹)</th>
+                                        <th>Proposed Threshold (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>193</td><td>Interest on securities</td><td>Nil (General); 5,000 (Specific)</td><td>10,000 (General)</td></tr>
+                                    <tr><td>194</td><td>Dividend (to individual)</td><td>5,000</td><td>10,000</td></tr>
+                                    <tr><td>194A</td><td>Interest (Bank/Co-op/PO)</td><td>50K (Sr. Cit.); 40K (Others)</td><td>100K (Sr. Cit.); 50K (Others)</td></tr>
+                                    <tr><td>194A</td><td>Interest (Other cases)</td><td>5,000</td><td>10,000</td></tr>
+                                    <tr><td>194B/BB</td><td>Winnings (Lottery/Horse Race)</td><td>10,000 (Aggregate FY)</td><td>10,000 (Per transaction)</td></tr>
+                                    <tr><td>194D</td><td>Insurance commission</td><td>15,000</td><td>20,000</td></tr>
+                                    <tr><td>194H</td><td>Commission/Brokerage</td><td>15,000</td><td>20,000</td></tr>
+                                    <tr><td>194-I</td><td>Rent</td><td>2,40,000 (p.a.)</td><td>50,000 (p.m.)</td></tr>
+                                    <tr><td>194J</td><td>Professional/Technical Fees etc.</td><td>30,000 (each category)</td><td>50,000 (each category)</td></tr>
+                                    <tr><td>194K</td><td>Income from MF units</td><td>5,000</td><td>10,000</td></tr>
+                                    <tr><td>194LA</td><td>Compensation (Immovable Property)</td><td>2,50,000</td><td>5,00,000</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p><strong>TCS Rationalisation:</strong> "Forest Produce" definition clarified; TCS on sale of goods (Sec 206C(1H)) omitted from Apr 1, 2025.</p>
+                        <p><strong>Removal of Higher TDS/TCS for Non-Filers:</strong> Sections 206AB and 206CCA proposed to be omitted from April 1, 2025.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Transfer Pricing for Multi-Year ALP</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>New mechanism: Assessee can opt for ALP determined for one year to apply to similar transactions for two subsequent years. TPO to validate. Effective AY 2026-27.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="direct-welfare" class="content-section">
+                <h1 class="main-heading">Direct Taxes: Socio-Economic Welfare Measures</h1>
+                <p class="paragraph-text">The Act includes proposals aimed at providing relief and promoting welfare, such as increasing income limits for perquisite calculations, extending tax benefits for NPS Vatsalya, exempting NSS withdrawals, and simplifying annual value for self-occupied property.</p>
+                
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Perquisites, NPS Vatsalya, NSS, Self-Occupied Property</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p><strong>Perquisite Income Limits (Sec 17(2)):</strong> Govt empowered to prescribe rules to increase old income limits for perquisite calculation (e.g., monetary salary limit of ₹50,000; GTI limit of ₹2 lakh for medical travel exemption). Effective AY 2026-27.</p>
+                        <p><strong>NPS Vatsalya Contributions (Sec 80CCD):</strong> Tax benefits extended to contributions to NPS Vatsalya Scheme for minors, up to ₹50,000 limit under Sec 80CCD(1B). Partial withdrawals for specified needs also exempt up to 25% of contributions. Effective AY 2026-27.</p>
+                        <p><strong>NSS Withdrawals (Sec 80CCA):</strong> Exemption for withdrawals from NSS deposits (on which deduction allowed pre-Apr 1, 1992) made on or after Aug 29, 2024 (retrospective).</p>
+                        <p><strong>Self-Occupied Property Annual Value (Sec 23):</strong> Annual value taken as nil if owner occupies OR cannot occupy *for any reason* (previously specific work reasons). Limit of two such properties remains. Effective AY 2025-26.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="direct-administration" class="content-section">
+                <h1 class="main-heading">Direct Taxes: Tax Administration</h1>
+                <p class="paragraph-text">This section covers amendments aimed at strengthening tax administration, leveraging technology, streamlining procedures, and enhancing compliance. Key changes include crypto-asset reporting, revisions to block assessment, search and seizure rules, penalty rationalization, and extended timelines for updated returns.</p>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Key Administrative Changes</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p><strong>Crypto-Asset Information (New Sec 285BAA):</strong> Mandates reporting entities to furnish information on crypto-asset transactions. VDA definition expanded. Effective Apr 1, 2026.</p>
+                        <p><strong>Block Assessment (Chapter XIV-B):</strong> VDA added to "undisclosed income"; time limit for completion changed to 12 months from end of *quarter* of last authorization. Effective Feb 1, 2025 for searches from Sep 1, 2024.</p>
+                        <p><strong>Search & Seizure (Sec 132, 132B):</strong> Time for approval for retention of seized documents changed to 1 month from end of *quarter* of assessment order. Effective Apr 1, 2025.</p>
+                        <p><strong>Penalty Imposition Time Limit (Sec 275):</strong> Uniform time limit: 6 months from end of *quarter* of connected proceedings completion/appeal order receipt etc. Effective Apr 1, 2025.</p>
+                        <p><strong>Court Stay Period Clarification:</strong> Excluded period for time limits to commence from stay grant date and end on date certified copy of vacation order received by PCIT/CIT. Effective Apr 1, 2025.</p>
+                        <p><strong>Carry Forward of Losses (Amalgamation - Sec 72A, 72AA):</strong> Loss carry forward for successor limited to 8 AYs from original computation for predecessor. For amalgamations from Apr 1, 2025 (AY 2026-27).</p>
+                        <p><strong>Certain Penalties by AO:</strong> Penalties under Sec 271C, 271CA, 271D, 271DA, 271DB, 271E to be levied by AO (subject to JCIT approval for higher amounts). Effective Apr 1, 2025.</p>
+                        <p><strong>Faceless Schemes Date Restriction Removed:</strong> End date of Mar 31, 2025 for notifying faceless schemes (TP, DRP, ITAT) omitted. Effective Apr 1, 2025.</p>
+                        <p><strong>Updated Return Filing (Sec 139(8A)):</strong> Time limit extended from 24 to 48 months from end of relevant AY. Additional tax rates: 60% (24-36 months), 70% (36-48 months). Effective Apr 1, 2025.</p>
+                        <p><strong>SUUTI Exemption Extended:</strong> Income tax exemption for Specified Undertaking of UTI extended to Mar 31, 2027. Effective Apr 1, 2025.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="indirect-customs" class="content-section">
+                <h1 class="main-heading">Indirect Taxes: Customs</h1>
+                <p class="paragraph-text">The Finance Act 2025 proposes significant amendments to Customs law, impacting procedures, tariff structures, duty rates, and exemptions. These aim to facilitate trade, promote domestic manufacturing, and align with international practices. Key changes include time limits for provisional assessments, voluntary revision of entries, and various adjustments to Basic Customs Duty (BCD) and Agriculture Infrastructure and Development Cess (AIDC).</p>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Customs Act & Tariff Act Amendments</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p><strong>Provisional Assessment (Sec 18):</strong> Finalization within 2 years (extendable by 1 year). Effective from enactment.</p>
+                        <p><strong>Voluntary Revision of Entry (New Sec 18A):</strong> Importers/exporters can revise entries post-clearance within prescribed time. Effective from enactment.</p>
+                        <p><strong>Customs Tariff Act, 1975 (Effective May 1, 2025 unless specified):</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Tariff rate rationalization (e.g., slabs consolidated).</li>
+                            <li>Creation of new tariff items for better classification (e.g., specific rice, Makhana, waste oils, high-purity precious metals).</li>
+                            <li>Alignment with WCO HS 2022.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Changes in Basic Customs Duty (BCD) Rates</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="mb-2"><strong>Increases (effective Feb 2, 2025):</strong></p>
+                        <ul class="list-disc list-inside ml-4 mb-2">
+                            <li>Knitted Fabrics (Ch. 60): to 20% or ₹115/kg.</li>
+                            <li>Interactive Flat Panel Displays (CBU): 10% to 20%.</li>
+                        </ul>
+                        <p class="mb-2"><strong>Decreases (effective May 1, 2025, or Feb 2, 2025 by notification for some):</strong></p>
+                        <div class="table-container my-4">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Commodity</th>
+                                        <th>Old BCD</th>
+                                        <th>New BCD</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Marble, Granite (crude)</td><td>40%</td><td>20%</td></tr>
+                                    <tr><td>Footwear (various)</td><td>35%</td><td>20%</td></tr>
+                                    <tr><td>Waste/Scrap (Copper, Tin, etc.)</td><td>2.5%-10%</td><td>Nil</td></tr>
+                                    <tr><td>Solar Cells / Modules</td><td>25% / 40%</td><td>20% / 20%</td></tr>
+                                    <tr><td>Motor Cars (general)</td><td>125%</td><td>70%</td></tr>
+                                    <tr><td>Wet blue leather (by notification)</td><td>10%</td><td>Nil</td></tr>
+                                    <tr><td>Ethernet switches (Carrier grade, by notification)</td><td>20%</td><td>10%</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="mb-2">Many other changes via notification for specific sectors like aquafarming, gems & jewellery, IT & electronics, auto components.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Changes in Export Duty, AIDC, SWS, Exemptions, IGCR</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p><strong>Export Duty (eff. Feb 2, 2025):</strong> Crust leather export duty reduced from 20% to Nil.</p>
+                        <p><strong>Agriculture Infrastructure and Development Cess (AIDC) (eff. Feb 2, 2025):</strong> Rates revised on several goods. Examples:</p>
+                        <div class="table-container my-4">
+                             <table class="min-w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Commodity</th>
+                                        <th>Old AIDC</th>
+                                        <th>New AIDC</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Marble, Granite (crude)</td><td>Nil</td><td>20%</td></tr>
+                                    <tr><td>Footwear (various)</td><td>Nil</td><td>18.5%</td></tr>
+                                    <tr><td>Solar Cells / Modules</td><td>Nil</td><td>7.5% / 20%</td></tr>
+                                    <tr><td>Motor Cars (CIF > $40k)</td><td>Nil</td><td>40%</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p><strong>Social Welfare Surcharge (SWS) (eff. Feb 2, 2025):</strong> Several goods exempted (e.g., candles, PVC Flex Films, solar cells, yachts, specified motor vehicles).</p>
+                        <p><strong>Review of Customs Duty Exemptions:</strong> 24 out of 25 expiring conditional exemptions continued with modifications; 1 lapsing. New items added for handicraft export, satellite/launch vehicle goods.</p>
+                        <p><strong>IGCR Rules Amended:</strong> Time limit for end-use conditions increased to 1 year; quarterly statement instead of monthly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="indirect-excise" class="content-section">
+                <h1 class="main-heading">Indirect Taxes: Central Excise</h1>
+                <p class="paragraph-text">Amendments in Central Excise mainly concern the transition from the existing Settlement Commission (CCESC) to "Interim Boards for Settlement" to handle pending applications, effective April 1, 2025. This indicates a move to wind down the legacy Central Excise settlement mechanism.</p>
+                 <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Settlement Commission Transition</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p>Section 31 of Central Excise Act, 1944, amended to define "Interim Board for Settlement" and "pending application."</p>
+                        <p>New Section 31A inserted for establishing Interim Boards to take up pending applications.</p>
+                        <p>CCESC to cease operations from April 1, 2025. No new applications from this date.</p>
+                        <p>Powers and functions of Settlement Commission for pending cases transferred to Interim Boards.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="indirect-service-tax" class="content-section">
+                <h1 class="main-heading">Indirect Taxes: Service Tax</h1>
+                <p class="paragraph-text">The Act proposes a specific retrospective exemption for Service Tax on reinsurance services under certain agricultural insurance schemes.</p>
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Retrospective Exemption</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Services by insurance companies via reinsurance under Weather Based Crop Insurance Scheme (WBCIS) and Modified National Agricultural Insurance Scheme (MNAIS) exempted retrospectively from Service Tax for the period April 1, 2011, to June 30, 2017.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="indirect-gst" class="content-section">
+                <h1 class="main-heading">Indirect Taxes: Goods and Services Tax (GST)</h1>
+                <p class="paragraph-text">Several amendments are proposed to the CGST Act, 2017, to refine definitions, clarify ITC and supply provisions, and introduce new compliance mechanisms like Track and Trace. These changes aim to improve GST framework efficiency and plug leakages.</p>
+
+                <div class="accordion-item mb-4">
+                    <div class="accordion-header">
+                        <h3>Key GST Amendments</h3>
+                        <span class="arrow-icon">▼</span>
+                    </div>
+                    <div class="accordion-content space-y-3">
+                        <p><strong>Input Service Distributor (ISD) Definition (Sec 2(61)):</strong> Amended for ITC distribution for inter-state supplies under reverse charge (eff. Apr 1, 2025).</p>
+                        <p><strong>Time of Supply (Vouchers - Sec 12(4), 13(4)):</strong> Provisions deleted.</p>
+                        <p><strong>Input Tax Credit (ITC):</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>"Plant or machinery" substituted with "plant and machinery" in Sec 17(5)(d) (retrospective from Jul 1, 2017).</li>
+                            <li>ISD ITC distribution (Sec 20) aligned with definition change (eff. Apr 1, 2025).</li>
+                            <li>Statement of ITC (Sec 38): "auto generated" omitted; enabling clause for prescribing other details.</li>
+                        </ul>
+                        <p><strong>Credit Notes (Sec 34(2) Proviso):</strong> Explicitly requires recipient's ITC reversal for supplier to reduce tax liability.</p>
+                        <p><strong>Appeals (Penalty-only Cases - Sec 107(6), 112(8)):</strong> Mandatory 10% pre-deposit of penalty amount.</p>
+                        <p><strong>Track and Trace Mechanism:</strong> New Sec 122B for penalties; New Sec 148A enabling mechanism for specified commodities.</p>
+                        <p><strong>Schedule III Amendments (Retrospective from Jul 1, 2017):</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>New clause (aa) in para 8: Supply of goods warehoused in SEZ/FTWZ to any person before clearance for export/DTA treated as neither supply of goods nor services.</li>
+                            <li>No refund of tax already paid for such transactions.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const accordionItems = document.querySelectorAll('.accordion-item');
+
+            function setActiveSection(hash) {
+                contentSections.forEach(section => {
+                    section.classList.toggle('active', section.id === hash.substring(1));
+                });
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === hash);
+                });
+                const mainContentArea = document.querySelector('main');
+                if (mainContentArea) {
+                    mainContentArea.scrollTop = 0; // Scroll main content to top
+                }
+            }
+            
+            const initialHash = window.location.hash || '#overview';
+            setActiveSection(initialHash);
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    setActiveSection(targetId);
+                    window.location.hash = targetId;
+                });
+            });
+            
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = header.nextElementSibling; // The accordion-content div
+                const arrowIcon = header.querySelector('.arrow-icon');
+                header.addEventListener('click', () => {
+                    const isOpen = item.classList.toggle('open');
+                    arrowIcon.textContent = isOpen ? '▲' : '▼'; // Change arrow
+                     if (isOpen) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = "0px";
+                    }
+                });
+            });
+
+            const ctx = document.getElementById('incomeTaxComparisonChart');
+            if (ctx) {
+                function calculateTaxWithRebate(income, slabs, rebateLimit, rebateAmount) {
+                    let tax = 0;
+                    let prevSlabLimit = 0;
+                    for (const slab of slabs) {
+                        if (income <= prevSlabLimit) break;
+                        const currentSlabUpperLimit = slab.limit === Infinity ? income : Math.min(income, slab.limit);
+                        const taxableInSlab = currentSlabUpperLimit - prevSlabLimit;
+                        tax += taxableInSlab * slab.rate;
+                        if (income <= slab.limit) break; 
+                        prevSlabLimit = slab.limit;
+                    }
+                    if (income <= rebateLimit) {
+                        tax = Math.max(0, tax - rebateAmount);
+                    }
+                    return tax;
+                }
+
+                const slabsAY2526 = [ { limit: 300000, rate: 0 }, { limit: 700000, rate: 0.05 }, { limit: 1000000, rate: 0.10 }, { limit: 1200000, rate: 0.15 }, { limit: 1500000, rate: 0.20 }, { limit: Infinity, rate: 0.30 } ];
+                const slabsAY2627 = [ { limit: 400000, rate: 0 }, { limit: 800000, rate: 0.05 }, { limit: 1200000, rate: 0.10 }, { limit: 1600000, rate: 0.15 }, { limit: 2000000, rate: 0.20 }, { limit: 2400000, rate: 0.25 }, { limit: Infinity, rate: 0.30 } ];
+                const incomeLevels = [300000, 500000, 700000, 800000, 1000000, 1200000, 1500000, 1600000, 2000000, 2400000, 2500000, 3000000];
+                const taxAY2526 = incomeLevels.map(inc => calculateTaxWithRebate(inc, slabsAY2526, 700000, 25000));
+                const taxAY2627 = incomeLevels.map(inc => calculateTaxWithRebate(inc, slabsAY2627, 1200000, 60000));
+
+                Chart.defaults.font.family = 'var(--font-family-apple)';
+                Chart.defaults.color = 'var(--text-secondary)';
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: incomeLevels.map(l => `₹${(l/100000).toFixed(0)}L`),
+                        datasets: [
+                            {
+                                label: 'Tax AY 2025-26 (Default Regime with Rebate)',
+                                data: taxAY2526,
+                                backgroundColor: 'rgba(var(--link-blue-rgb), 0.6)', 
+                                borderColor: 'var(--link-blue)',
+                                borderWidth: 1,
+                                borderRadius: 6,
+                            },
+                            {
+                                label: 'Tax AY 2026-27 (Proposed New Default Regime with Rebate)',
+                                data: taxAY2627,
+                                backgroundColor: 'rgba(81, 81, 84, 0.5)', // --text-secondary with alpha
+                                borderColor: 'var(--text-secondary)',
+                                borderWidth: 1,
+                                borderRadius: 6,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Illustrative Income Tax Comparison (Net Tax after Rebate)',
+                                font: { size: 16, weight: '500' }, // Adjusted size
+                                color: 'var(--text-primary)', 
+                                padding: { top: 5, bottom: 15 }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(var(--text-primary-rgb), 0.85)', 
+                                titleFont: { size: 13, weight: '600' },
+                                bodyFont: { size: 12 },
+                                padding: 10,
+                                cornerRadius: 6,
+                                displayColors: true,
+                                boxPadding: 3,
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) { label += ': '; }
+                                        if (context.parsed.y !== null) {
+                                            label += `₹${context.parsed.y.toLocaleString('en-IN')}`;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            },
+                            legend: {
+                                position: 'bottom',
+                                labels: { font: { size: 12 }, color: 'var(--text-primary)', boxWidth: 12, padding: 15 }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Tax Amount (₹)', font: { size: 13, weight: '500' }, color: 'var(--text-secondary)' },
+                                ticks: { callback: function(value) { return '₹' + value.toLocaleString('en-IN'); }, font: { size: 11 }, color: 'var(--text-tertiary)' },
+                                grid: { color: 'var(--border-color-light)' }
+                            },
+                            x: {
+                                title: { display: true, text: 'Taxable Income Level', font: { size: 13, weight: '500' }, color: 'var(--text-secondary)' },
+                                ticks: { font: { size: 11 }, color: 'var(--text-tertiary)' },
+                                grid: { display: false }
+                            }
+                        },
+                        interaction: { mode: 'index', intersect: false, },
+                        hover: { mode: 'nearest', intersect: true }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
