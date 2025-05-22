@@ -5,31 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archit B. Sheth | Tax Services Ahmedabad</title>
 
-    <meta name="description" content="Contact Archit B. Sheth in Ahmedabad for expert tax-related matters and chartered accountant services. Email archit@absheth.com or call +919898467888.">
-    <meta name="keywords" content="Chartered Accountant Ahmedabad, Tax Services Ahmedabad, CA Ahmedabad, Tax Consultant Ahmedabad, GST Ahmedabad, Income Tax Ahmedabad">
+    <meta name="description" content="Archit B. Sheth in Ahmedabad. Expert tax advisory and chartered accountant services. Contact: archit@absheth.com or +919898467888.">
+    <meta name="keywords" content="Chartered Accountant Ahmedabad, Tax Services Ahmedabad, CA Ahmedabad, Tax Consultant Ahmedabad, GST Ahmedabad, Income Tax Ahmedabad, Apple Style Design">
     <meta name="author" content="Archit Sheth">
     <meta name="robots" content="index, follow">
 
     <meta property="og:title" content="Archit B. Sheth - Tax Experts in Ahmedabad">
     <meta property="og:description" content="Professional tax advisory and chartered accountant services in Ahmedabad, Gujarat.">
     <meta property="og:type" content="website">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script> <style>
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <style>
         :root {
-            /* Updated Font Variable to Caveat */
-            --font-family-main: 'Caveat', cursive;
-
-            /* Color Palette Variables (Navy Blue Theme) - Unchanged */
-            --primary-navy-blue: #05445E;
-            --primary-blue-grotto: #189AB4;
-            --accent-blue-green: #75E6DA;
-            --accent-baby-blue: #D4F1F4;
-
-            --white-color: #ffffff;
-            --text-body-dark: #334155;
+            /* Apple-inspired Palette */
+            --font-family-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            
+            --background-light: #f5f5f7; 
+            --text-primary: #1d1d1f;    
+            --text-secondary: #515154; 
+            --link-blue: #007aff;       
+            --link-blue-hover: #0071e3; 
+            --border-color-light: #d2d2d7; 
         }
 
         html {
@@ -38,191 +33,199 @@
             -moz-osx-font-smoothing: grayscale;
         }
         body {
-            font-family: var(--font-family-main); /* All text will use Caveat */
+            font-family: var(--font-family-apple);
             overflow: hidden; 
-            background-color: #F8FAFC; 
-            color: var(--text-body-dark); 
-            line-height: 1.6; /* General line-height for better readability with handwriting font */
+            background-color: var(--background-light); 
+            color: var(--text-primary); 
+            line-height: 1.5; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
         }
 
         #welcome-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(135deg, var(--primary-navy-blue) 0%, var(--primary-blue-grotto) 100%);
-            color: var(--white-color);
+            color: var(--text-primary);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            z-index: 9999;
             opacity: 1; 
-            overflow: hidden; 
+            padding: 40px 20px; 
+            max-width: 800px; /* Increased max-width for bolder feel */
         }
-
-        .bg-line {
-            position: absolute;
-            height: 1px;
-            background-color: rgba(212, 241, 244, 0.08);
-            opacity: 0;
-            will-change: width, opacity;
-        }
-        .bg-line-1 {
-            width: 0; top: 15%; left: 5%; transform: rotate(40deg); transform-origin: left center;
-            animation: subtleLineDrawBg 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s forwards;
-        }
-        .bg-line-2 {
-            width: 0; bottom: 10%; right: 8%; transform: rotate(-35deg); transform-origin: right center;
-            animation: subtleLineDrawBg 1.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0.3s forwards;
-        }
-        .bg-line-3 {
-            width: 0; top: 50%; left: 2%; transform: rotate(70deg) translateY(-50%); transform-origin: left center;
-            animation: subtleLineDrawBg 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s forwards;
-        }
-        @keyframes subtleLineDrawBg {
-            0% { width: 0; opacity: 0.5; }
-            100% { width: 150px; opacity: 1; }
-        }
-
+        
+        /* Main Heading Styling & Animation - Bolder and Mightier */
         #welcome-screen h2 {
-            font-family: var(--font-family-main); 
-            font-weight: 700; /* Bold Caveat */
-            font-size: 4.2rem; /* Adjusted for Caveat's appearance */
-            margin-bottom: 0.5rem;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            font-family: var(--font-family-apple); 
+            font-size: 72px; /* Significantly larger */
+            font-weight: 600; /* Semibold is very impactful at this size */
+            color: var(--text-primary);
+            margin-bottom: 20px; /* Adjusted spacing */
+            line-height: 1.1; /* Ensure lines are not too far apart */
+            letter-spacing: -0.025em; /* Fine-tune for large size */
             opacity: 0;
-            line-height: 1.2; /* Adjusted for large heading */
-            animation: magicalSlideInH1 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
-            will-change: transform, opacity;
+            /* transform: translateY(40px) scale(0.98); /* Initial state for animation */
+            animation: appleHeroTextReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
         }
-        @keyframes magicalSlideInH1 {
-            0% { opacity: 0; transform: translateY(50px) perspective(400px) rotateX(-15deg) skewY(4deg); }
-            70% { transform: translateY(-8px) perspective(400px) rotateX(3deg) skewY(-1deg); }
-            100% { opacity: 1; transform: translateY(0) perspective(400px) rotateX(0deg) skewY(0); }
-        }
-
-        .welcome-line {
-            height: 2px;
-            background-color: rgba(255, 255, 255, 0.1);
-            margin: 0.75rem auto 1.5rem auto;
-            width: 60px;
-            transform: scaleX(0);
-            transform-origin: center;
-            opacity: 0;
-            animation: drawLineCenterOut 0.8s cubic-bezier(0.19, 1, 0.22, 1) 1.5s forwards,
-                         pulseGlow 2s ease-in-out 2.3s infinite alternate;
-            will-change: transform, opacity, box-shadow;
-        }
-        @keyframes drawLineCenterOut {
-            0% { transform: scaleX(0); opacity: 0.5; background-color: rgba(255, 255, 255, 0.3); }
-            100% { transform: scaleX(1); opacity: 0.7; background-color: rgba(255, 255, 255, 0.6); }
-        }
-        @keyframes pulseGlow {
-            from { opacity: 0.5; box-shadow: 0 0 3px rgba(255,255,255,0.15); }
-            to { opacity: 0.8; box-shadow: 0 0 10px rgba(255,255,255,0.3); }
-        }
-
+        
+        /* Subtitle Styling & Animation - Bolder and Mightier */
         #welcome-screen .welcome-subtitle {
-            font-family: var(--font-family-main); 
-            font-size: 2.2rem; /* Adjusted for Caveat */
-            font-weight: 400; /* Regular Caveat */
-            letter-spacing: normal; /* Reset letter-spacing */
-            margin-bottom: 2.5rem; 
-            line-height: 1.4;
-        }
-        #welcome-screen .welcome-subtitle .word {
-            display: inline-block;
+            font-family: var(--font-family-apple); 
+            font-size: 30px; /* Larger subtitle */
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 40px; /* Adjusted spacing */
+            line-height: 1.35;
+            letter-spacing: -0.015em; /* Fine-tune */
             opacity: 0;
-            will-change: transform, opacity;
+            /* transform: translateY(40px) scale(0.98); /* Initial state for animation */
+            animation: appleHeroTextReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards; /* Staggered */
         }
-        #welcome-screen .welcome-subtitle .word1 {
-            animation: wordDriftUp 0.8s cubic-bezier(0.215, 0.610, 0.355, 1) 2.0s forwards;
+        #welcome-screen .welcome-subtitle .emoji {
+            font-size: 28px; /* Scaled with subtitle */
+            vertical-align: baseline; 
+            margin-left: 6px;
         }
-        #welcome-screen .welcome-subtitle .word2 {
-            animation: wordDriftUp 0.8s cubic-bezier(0.215, 0.610, 0.355, 1) 2.2s forwards;
+        
+        /* Refined Apple-like Hero Text Reveal Animation */
+        @keyframes appleHeroTextReveal { 
+            0% { 
+                opacity: 0; 
+                transform: translateY(40px) scale(0.97); /* Start further down and slightly smaller */
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
         }
-        #welcome-screen .welcome-subtitle .word3 { 
-            animation: wordDriftUp 0.8s cubic-bezier(0.215, 0.610, 0.355, 1) 2.4s forwards;
+        
+        /* Contact Info Styling & Animation - standard animation */
+        .contact-info {
+            opacity: 0;
+            margin-top: 24px; 
+            font-family: var(--font-family-apple); 
+            transform: translateY(20px); /* Standard initial state */
+            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards; 
         }
-        @keyframes wordDriftUp {
+        @keyframes appleStandardFadeInUp { /* Keep a standard one for less prominent elements */
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        .contact-info {
-            opacity: 0;
-            margin-top: 1.5rem; 
-            font-family: var(--font-family-main); 
-            animation: contentFadeInUp 1s cubic-bezier(0.215, 0.610, 0.355, 1) 2.8s forwards; 
-            will-change: transform, opacity;
-        }
+
         .contact-info p {
-            font-size: 1.8rem; /* Adjusted for Caveat */
-            font-weight: 400; /* Regular Caveat */
+            font-size: 19px; 
+            font-weight: 400;
             line-height: 1.5; 
-            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
         }
-        .contact-info a {
-            color: var(--accent-blue-green); 
+        .contact-info .emoji-contact { 
+            font-size: 17px; 
+            margin-right: 8px; 
+            vertical-align: middle; 
+            color: var(--text-secondary); 
+        }
+         .contact-info a {
+            color: var(--link-blue); 
             text-decoration: none;
-            font-weight: 700; /* Bold Caveat for links */
+            font-weight: 400; 
+            transition: color 0.2s ease-in-out;
         }
-        .contact-info a:hover {
-            text-decoration: underline;
-            color: var(--accent-baby-blue);
+        .contact-info a:hover { 
+            color: var(--link-blue-hover);
+            text-decoration: underline; 
         }
 
+        /* CTA Link Container - standard animation */
+        .cta-link-container { 
+            margin-top: 36px; /* More space before CTA */
+            opacity: 0;
+            transform: translateY(20px); /* Standard initial state */
+            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.9s forwards; 
+        }
+
+        /* Subtle Apple-like Text CTA - slightly more presence */
+        .apple-text-cta {
+            display: inline-block;
+            color: var(--link-blue);
+            font-size: 21px; /* Slightly larger CTA text */
+            font-weight: 500; /* Medium weight for more presence */
+            text-decoration: none;
+            transition: color 0.2s ease-in-out, text-decoration-color 0.2s ease-in-out;
+            cursor: pointer;
+            padding: 4px 0; /* Add a little vertical space if needed */
+        }
+        .apple-text-cta:hover {
+            color: var(--link-blue-hover);
+            text-decoration: underline;
+            text-decoration-color: var(--link-blue-hover); 
+        }
+        .apple-text-cta .cta-arrow {
+            margin-left: 5px; /* Slightly more space */
+            font-weight: 500; /* Match link weight */
+            display: inline-block; 
+        }
+
+        /* Footer Styling & Animation - standard animation */
         .footer-text {
-            position: absolute;
-            bottom: 20px;
+            position: absolute; 
+            bottom: 30px; 
             left: 0;
             right: 0;
             text-align: center;
-            font-family: var(--font-family-main);
-            font-size: 1.3rem; /* Adjusted for Caveat */
-            font-weight: 400; /* Regular Caveat */
+            font-family: var(--font-family-apple);
+            font-size: 12px; 
+            font-weight: 400;
             opacity: 0;
-            color: var(--accent-baby-blue); 
-            animation: contentFadeInUp 1s cubic-bezier(0.215, 0.610, 0.355, 1) 3.2s forwards; 
-            will-change: transform, opacity;
+            color: var(--text-secondary); 
+            letter-spacing: -0.003em;
+            transform: translateY(20px); /* Standard initial state */
+            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.1s forwards; 
         }
-        @keyframes contentFadeInUp { 
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .footer-text .india-flag {
+            display: inline-block;
+            margin-left: 4px;
+            font-size: 12px; 
+            vertical-align: baseline;
         }
-
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+      // gtag('config', 'G-XXXXXXXXXX'); 
     </script>
 </head>
 <body>
-    <div id="welcome-screen" role="region" aria-label="Welcome to Archit B. Sheth">
-        <div class="bg-line bg-line-1"></div>
-        <div class="bg-line bg-line-2"></div>
-        <div class="bg-line bg-line-3"></div>
-
-        <h2>Archit B. Sheth</h2>
-        <div class="welcome-line"></div>
+    <div id="welcome-screen" role="main"> 
+        <h2 id="main-heading">Archit B. Sheth</h2> 
         <p class="welcome-subtitle">
-            <span class="word word1">Your</span> <span class="word word2">Taxation</span> <span class="word word3">Expert</span>
+            Your Taxation Expert
+            <span class="emoji">📊</span> 
         </p>
 
         <div class="contact-info">
-            <p>For assistance with tax-related matters in Ahmedabad:</p>
             <p>
-                Email: <a href="mailto:archit@absheth.com">archit@absheth.com</a>
+                <span class="emoji-contact">📧</span> Email: <a href="mailto:archit@absheth.com">archit@absheth.com</a>
             </p>
             <p>
-                Phone: <a href="tel:+919898467888">+91 98984 67888</a>
+                <span class="emoji-contact">📞</span> Phone: <a href="tel:+919898467888">+91 98984 67888</a>
             </p>
         </div>
 
+        <div class="cta-link-container"> 
+            <a href="profile.html" class="apple-text-cta">
+                Know More about Expert <span class="cta-arrow">&rsaquo;</span>
+            </a>
+        </div>
+
         <p class="footer-text">
-            © <span id="currentYear"></span> Archit B. Sheth. All rights reserved. Ahmedabad, Gujarat.
+            © <span id="currentYear"></span> Archit B. Sheth. All rights reserved. Ahmedabad, Gujarat <span class="india-flag">🇮🇳</span>
         </p>
     </div>
 
