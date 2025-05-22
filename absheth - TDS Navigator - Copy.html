@@ -40,9 +40,20 @@
         border-bottom: 0.5px solid var(--border-color-light);
         box-shadow: none; /* Remove Tailwind shadow if any, rely on border */
     }
+    /* Styling for the logo link */
+    .header-logo-link {
+        text-decoration: none;
+        color: inherit; /* Inherits color from h1, which is var(--text-primary) */
+        display: inline-block; /* or block if you want it to take full width of its container div */
+    }
+    .header-logo-link:hover h1 { /* Optional: if you want a hover effect on the H1 via the link */
+        color: var(--link-blue); /* Example hover effect */
+    }
+
     header h1.text-2xl {
         color: var(--text-primary);
         font-weight: 600; /* Apple-like headers are often semibold/bold */
+        transition: color 0.2s ease-in-out; /* Smooth transition for hover */
     }
     header p.text-xs {
         color: var(--text-secondary);
@@ -391,7 +402,9 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <h1 class="text-2xl font-bold">TDS Navigator</h1>
+                    <a href="index.html" class="header-logo-link">
+                        <h1 class="text-2xl font-bold">TDS Navigator</h1>
+                    </a>
                     <p class="text-xs">FY 2025-26 (AY 2026-27) Post-Finance Act 2025</p>
                 </div>
                 <nav class="hidden md:flex space-x-4">
@@ -945,7 +958,7 @@
                 const card = document.createElement('div');
                 // Tailwind classes for layout, custom CSS for styling
                 card.className = 'tds-section-card bg-white rounded-lg shadow-md hover:shadow-xl cursor-pointer flex flex-col justify-between items-center text-center';
-                card.innerHTML = `<h4 class="text-md font-semibold mb-1">${key}</h4><p class="text-xs">${data.title.split('–')[1].trim()}</p>`;
+                card.innerHTML = `<h4 class="text-md font-semibold mb-1"><span class="math-inline">\{key\}</h4\><p class\="text\-xs"\></span>{data.title.split('–')[1].trim()}</p>`;
                 card.addEventListener('click', () => displaySectionDetail(key));
                 tdsSectionGrid.appendChild(card);
             });
@@ -967,16 +980,16 @@
                 let exemptionsHtml = data.exemptions.map(ex => `<li class="detail-list-item">${ex}</li>`).join('');
 
                 tdsSectionDetail.innerHTML = `
-                    <h3 class="text-2xl font-semibold mb-1">${data.title}</h3>
-                    <p class="detail-overview text-sm mb-4">${data.overview}</p>
+                    <h3 class="text-2xl font-semibold mb-1"><span class="math-inline">\{data\.title\}</h3\>
+<p class\="detail\-overview text\-sm mb\-4"\></span>{data.overview}</p>
                     
                     <div class="mb-4">
                         <strong class="detail-strong-block">Applicability:</strong>
-                        <p class="detail-text-content text-sm">${data.applicability}</p>
-                    </div>
-                    <div class="mb-4">
-                        <strong class="detail-strong-block">TDS Rate & Threshold (FY 2025-26):</strong>
-                        <p class="detail-text-content text-sm">${data.rateThreshold}</p>
+                        <p class="detail-text-content text-sm"><span class="math-inline">\{data\.applicability\}</p\>
+</div\>
+<div class\="mb\-4"\>
+<strong class\="detail\-strong\-block"\>TDS Rate & Threshold \(FY 2025\-26\)\:</strong\>
+<p class\="detail\-text\-content text\-sm"\></span>{data.rateThreshold}</p>
                     </div>
                     
                     ${data.nuances.length > 0 ? `
@@ -1168,4 +1181,4 @@
         });
     </script>
 </body>
-</html>
+</html> in TDS Navigator page the section name is Key Changes. change the name to "Key Amendments".
