@@ -44,10 +44,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            /* justify-content: center; */ /* Adjusted for longer content */
             min-height: 100vh;
             margin: 0;
-            padding: 20px 0;
+            padding: 40px 20px; /* Added more top/bottom padding */
+            box-sizing: border-box;
         }
 
         #welcome-screen {
@@ -62,6 +63,7 @@
             max-width: 800px;
             width: 100%;
             box-sizing: border-box;
+            margin-bottom: 40px; /* Space before the grid */
         }
 
         #welcome-screen h2 {
@@ -167,29 +169,40 @@
             display: inline-block;
         }
 
-        /* --- Update Section (common style for TDS and SFT updates) --- */
+        /* --- Updates Grid Layout --- */
+        .updates-grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px; /* Space between cards */
+            justify-content: center;
+            width: 100%;
+            max-width: 1100px; /* Adjust as needed for 3 cards in a row */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 15px; /* Padding for the container itself */
+            box-sizing: border-box;
+        }
+
         .update-section-common {
-            margin-top: 35px; /* Adjusted default margin */
-            padding: 18px 20px; /* Reduced padding */
+            flex: 1 1 300px; /* Grow, shrink, with a base width for responsiveness */
+            min-width: 280px; /* Minimum width before wrapping or shrinking too much */
+            padding: 20px 22px;
             background-color: rgba(var(--text-primary-rgb), 0.025);
-            border-radius: 12px; /* Slightly smaller radius */
+            border-radius: 14px; /* Slightly larger radius for cards */
             text-align: center;
             opacity: 0;
             transform: translateY(30px) scale(0.98);
-            max-width: 500px; /* Reduced max-width */
-            width: 90%;
-            border: 0.5px solid rgba(var(--border-color-light-rgb), 0.35); /* Slightly lighter border */
+            border: 0.5px solid rgba(var(--border-color-light-rgb), 0.35);
             box-sizing: border-box;
+            display: flex; /* For aligning content within the card */
+            flex-direction: column; /* Stack content vertically */
+            justify-content: space-between; /* Distribute space if needed */
+            /* margin-top is removed, gap in parent handles spacing */
         }
-        .update-section-common.tds-update {
-             animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards;
-        }
-        .update-section-common.sft-update {
-             animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.25s forwards;
-        }
-        .update-section-common.fa-summary-update { /* New class for FA Summary */
-             animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.4s forwards; /* Adjusted animation delay */
-        }
+
+        .tds-update { animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards;}
+        .sft-update { animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.25s forwards;}
+        .fa-summary-update { animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.4s forwards;}
 
 
         @keyframes latestUpdateReveal {
@@ -207,34 +220,36 @@
             display: inline-block;
             background-color: var(--link-blue);
             color: white;
-            font-size: 9px; /* Reduced font size */
+            font-size: 9px;
             font-weight: 600;
-            padding: 3px 8px; /* Reduced padding */
-            border-radius: 10px; /* Slightly smaller radius */
-            margin-bottom: 12px; /* Reduced margin */
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            align-self: center; /* Center badge if card is flex container */
         }
 
         .update-section-common .update-link-text {
-            font-size: 18px; /* Reduced font size */
+            font-size: 18px;
             display: block;
-            margin-bottom: 8px; /* Reduced margin */
+            margin-bottom: 10px; /* Increased margin */
         }
 
         .update-description {
-            font-size: 14px; /* Reduced font size */
+            font-size: 14px;
             color: var(--text-secondary);
-            line-height: 1.4; /* Adjusted line height */
-            max-width: 420px; /* Reduced max width */
+            line-height: 1.45; /* Adjusted line height */
+            max-width: 100%; /* Let it fill the card */
             margin-left: auto;
             margin-right: auto;
+            flex-grow: 1; /* Allows description to take up available space */
         }
         /* End Update Section */
 
         .main-footer {
             width: 100%;
-            padding: 30px 20px 20px;
+            padding: 40px 20px 20px; /* Increased top padding */
             text-align: center;
             font-family: var(--font-family-apple);
             font-size: 12px;
@@ -243,8 +258,8 @@
             color: var(--text-secondary);
             letter-spacing: -0.003em;
             transform: translateY(20px);
-            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.55s forwards; /* Adjusted animation delay */
-            margin-top: 40px;
+            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.6s forwards; /* Adjusted animation delay */
+            margin-top: 50px; /* Increased margin from content above */
             border-top: 0.5px solid var(--border-color-light);
         }
         .main-footer .india-flag {
@@ -348,23 +363,33 @@
         /* End Disclaimer Modal Styles */
 
         /* --- Mobile Friendliness --- */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) { /* Tablet breakpoint */
+             .updates-grid-container {
+                max-width: 700px; /* Allow 2 cards side-by-side or wrap to single column if narrow */
+            }
+            .update-section-common {
+                flex-basis: calc(50% - 12.5px); /* For two cards in a row, accounting for gap */
+                min-width: 280px; /* Ensure they don't get too small */
+            }
+        }
+
+
+        @media (max-width: 768px) { /* Mobile breakpoint */
             body {
-                /* overflow: auto; */
+                 padding: 25px 15px;
             }
             #welcome-screen {
-                padding: 25px 15px; /* Adjusted */
-                justify-content: flex-start;
-                min-height: auto;
+                padding: 15px 0px;
+                margin-bottom: 30px;
             }
             #welcome-screen h2 {
-                font-size: 40px; /* Reduced */
+                font-size: 40px;
                 margin-bottom: 15px;
                 letter-spacing: -0.02em;
             }
 
             #welcome-screen .welcome-subtitle {
-                font-size: 20px; /* Reduced */
+                font-size: 20px;
                 margin-bottom: 25px;
                 letter-spacing: -0.01em;
             }
@@ -384,15 +409,22 @@
             }
             .cta-link-container { margin-top: 30px;}
 
+            .updates-grid-container {
+                flex-direction: column; /* Stack them vertically on mobile */
+                align-items: center; /* Center cards in the column */
+                gap: 20px; /* Vertical gap when stacked */
+                padding: 0;
+            }
             .update-section-common {
-                margin-top: 30px;
-                padding: 15px;
-                width: 100%;
-                max-width: none;
+                flex-basis: auto; /* Reset flex-basis */
+                width: 100%; /* Full width when stacked */
+                max-width: 450px; /* Max width for readability */
+                min-width: unset;
+                /* margin-top is handled by gap in parent now */
             }
 
             .update-section-common .update-link-text {
-                font-size: 17px; /* Reduced */
+                font-size: 17px;
             }
              .update-badge {
                 font-size: 9px;
@@ -400,7 +432,7 @@
                 margin-bottom: 10px;
             }
             .update-description {
-                font-size: 13px; /* Reduced */
+                font-size: 13px;
             }
 
             .disclaimer-modal .modal-content {
@@ -418,53 +450,57 @@
             }
              .main-footer {
                 position: static;
-                padding: 20px 15px;
-                margin-top: 30px;
+                padding: 25px 15px 15px;
+                margin-top: 40px;
             }
         }
 
         @media (max-width: 480px) {
+             body {
+                 padding: 20px 10px;
+             }
             #welcome-screen {
-                padding: 20px 10px;
+                padding: 10px 0px;
             }
             #welcome-screen h2 {
-                font-size: 30px; /* Further reduce */
+                font-size: 30px;
             }
 
             #welcome-screen .welcome-subtitle {
-                font-size: 17px; /* Further reduce */
+                font-size: 17px;
             }
             #welcome-screen .welcome-subtitle .emoji {
                 font-size: 16px;
             }
 
             .contact-info p {
-                font-size: 14px; /* Reduced */
+                font-size: 14px;
                 margin-bottom: 8px;
             }
             .apple-text-cta {
-                font-size: 16px; /* Reduced */
+                font-size: 16px;
             }
+
              .update-section-common {
-                margin-top: 25px; /* Reduced */
-                padding: 12px; /* Reduced */
+                padding: 15px;
              }
              .update-section-common .update-link-text {
-                font-size: 16px; /* Reduced */
+                font-size: 16px;
                 margin-bottom: 6px;
             }
             .update-badge {
-                font-size: 8px; /* Reduced */
+                font-size: 8px;
                 padding: 2px 6px;
                 margin-bottom: 8px;
             }
             .update-description {
-                font-size: 12px; /* Reduced */
+                font-size: 12px;
             }
 
             .main-footer {
                 font-size: 10px;
                 padding-top: 20px;
+                margin-top: 30px;
             }
             .disclaimer-modal .modal-content {
                 padding: 20px 15px;
@@ -510,7 +546,9 @@
                 Know More about Expert <span class="cta-arrow">&rsaquo;</span>
             </a>
         </div>
+    </div>
 
+    <div class="updates-grid-container">
         <div class="update-section-common tds-update">
             <span class="update-badge">Latest</span>
             <a href="absheth - TDS Navigator - Copy.html" class="apple-text-cta update-link-text tds-navigator-link">
@@ -527,13 +565,13 @@
             <p class="update-description">Understand Specified Financial Transaction reporting requirements and procedures.</p>
         </div>
 
-        <div class="update-section-common fa-summary-update"> <span class="update-badge">New</span>
+        <div class="update-section-common fa-summary-update">
+            <span class="update-badge">New</span>
             <a href="summary of FA 2025 amendments.html" class="apple-text-cta update-link-text fa-summary-link">
                 Finance Act 2025 Amendments Summary <span class="cta-arrow">&rsaquo;</span>
             </a>
             <p class="update-description">An interactive summary of key amendments in the Finance Act 2025.</p>
         </div>
-
     </div>
 
     <footer class="main-footer">
@@ -543,8 +581,7 @@
     <div id="disclaimerModal" class="disclaimer-modal">
         <div class="modal-content">
             <h3 id="disclaimerTitle">Disclaimer</h3>
-            <p id="disclaimerText">
-                </p>
+            <p id="disclaimerText"></p>
             <div class="modal-buttons">
                 <button id="agreeButton">Agree & Proceed</button>
                 <button id="cancelButton">Cancel</button>
@@ -562,7 +599,7 @@
         // --- Disclaimer Modal Logic ---
         const tdsUpdateLink = document.querySelector('a.tds-navigator-link');
         const sftGuideLink = document.querySelector('a.sft-guide-link');
-        const faSummaryLink = document.querySelector('a.fa-summary-link'); // New link selector
+        const faSummaryLink = document.querySelector('a.fa-summary-link');
 
         const disclaimerModal = document.getElementById('disclaimerModal');
         const disclaimerTitle = document.getElementById('disclaimerTitle');
@@ -570,7 +607,7 @@
         const agreeButton = document.getElementById('agreeButton');
         const cancelButton = document.getElementById('cancelButton');
 
-        let targetUrl = ''; // To store the URL to navigate to after agreement
+        let targetUrl = '';
 
         function showDisclaimer(event, toolName, url) {
             event.preventDefault();
@@ -593,7 +630,7 @@
             });
         }
 
-        if (faSummaryLink) { // Event listener for the new link
+        if (faSummaryLink) {
             faSummaryLink.addEventListener('click', function(event) {
                  showDisclaimer(event, 'Finance Act 2025 Summary', this.href);
             });
@@ -619,7 +656,6 @@
                 }
             });
         }
-        // --- End Disclaimer Modal Logic ---
     });
     </script>
 </body>
