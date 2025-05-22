@@ -4,94 +4,297 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive SFT Reporting Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Visualization & Content Choices:
-        - SFT Overview: Goal: Inform. Viz: Text blocks, icon-supported key objectives. Interaction: Static. Justification: Clear, concise introduction. Library: HTML/Tailwind.
-        - Key Principles (Aggregation, Joint Accounts): Goal: Explain. Viz: Expandable text sections/cards. Interaction: Click to expand/collapse. Justification: Focused learning. Library: HTML/Tailwind, JS.
-        - Reportable Transactions Table: Goal: Explore/Compare. Viz: Interactive filterable cards + Chart.js bar chart (count of transactions by threshold type). Interaction: Filters update cards & chart. Justification: Dynamic exploration superior to static table. Library: JS, Chart.js.
-        - Bonus Shares Analysis: Goal: Clarify. Viz: Q&A text, icons. Interaction: Static. Justification: Direct answer to a key query. Library: HTML/Tailwind.
-        - Filing Procedures: Goal: Guide. Viz: HTML/CSS step-diagram using Tailwind. Interaction: Static. Justification: Visualizes sequence. Library: HTML/Tailwind.
-        - Penalties: Goal: Warn. Viz: Info cards with warning icons. Interaction: Static. Justification: Clear impact. Library: HTML/Tailwind.
-        - Conclusion & Recommendations: Goal: Summarize/Advise. Viz: Bulleted lists/cards. Interaction: Static. Justification: Actionable takeaways. Library: HTML/Tailwind.
-        - NEW: SFT Explainer (LLM): Goal: Clarify/Explain. Viz: Text output. Interaction: User input text, button click. Justification: On-demand explanation of complex SFT terms/transactions. Library: JS (fetch), Gemini API.
-        - NEW: Compliance Assistant (LLM): Goal: Advise/Guide. Viz: Text output. Interaction: User selects options, button click. Justification: Tailored compliance tips based on user's context. Library: JS (fetch), Gemini API.
-    -->
     <style>
-        body { font-family: 'Open Sans', sans-serif; background-color: #F9FAFB; color: #374151; }
-        h1, h2, h3, h4 { font-family: 'Lora', serif; color: #1F2937; }
-        .nav-link { transition: all 0.3s ease; }
-        .nav-link.active { color: #D97706; border-bottom-color: #D97706; font-weight: 600;}
+        :root {
+            --font-family-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --background-body: #f5f5f7;
+            --background-light: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #515154;
+            --text-tertiary: #86868b;
+            --link-blue: #007aff;
+            --link-blue-rgb: 0, 122, 255; /* For rgba usage */
+            --link-blue-hover: #0071e3;
+            --border-color-light: #d2d2d7;
+            --warning-red: #ff3b30; /* Apple red for warnings */
+            --warning-red-rgb: 255, 59, 48;
+        }
+
+        body {
+            font-family: var(--font-family-apple);
+            background-color: var(--background-body);
+            color: var(--text-secondary);
+        }
+        h1, h2, h3, h4, h5, h6 { /* Apply to all heading levels */
+            font-family: var(--font-family-apple);
+            color: var(--text-primary);
+            font-weight: 600; /* Consistent heading weight */
+        }
+
+        /* Page Title Header */
+        .page-title-header {
+            background-color: var(--background-body); 
+            padding: 1.5rem 0; 
+            text-align: center;
+            border-bottom: 0.5px solid var(--border-color-light);
+        }
+        .page-title-header .page-main-title-link { 
+            text-decoration: none;
+            color: inherit; 
+        }
+        .page-title-header .page-main-title-link:hover h1 { 
+             color: var(--link-blue);
+        }
+        .page-title-header h1 {
+            font-size: 2rem; 
+            font-weight: 700;
+            transition: color 0.2s ease-in-out; 
+        }
+        .page-title-header p {
+            font-size: 1rem; 
+            color: var(--text-secondary);
+        }
+
+
+        /* Sticky Navigation Bar */
+        #mainNav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: saturate(180%) blur(15px);
+            -webkit-backdrop-filter: saturate(180%) blur(15px);
+            z-index: 50;
+            box-shadow: none;
+            border-bottom: 0.5px solid var(--border-color-light);
+        }
+        .nav-link {
+            color: var(--text-secondary);
+            border-bottom-width: 2px;
+            border-bottom-color: transparent;
+            transition: color 0.3s ease, border-bottom-color 0.3s ease, font-weight 0.3s ease;
+            font-size: 0.9rem; 
+            padding: 0.75rem 1rem; 
+            font-weight: 400;
+        }
+        .nav-link:hover {
+            color: var(--link-blue);
+            border-bottom-color: var(--link-blue);
+        }
+        .nav-link.active {
+            color: var(--link-blue);
+            border-bottom-color: var(--link-blue);
+            font-weight: 600;
+        }
+        
         .content-section { display: none; }
         .content-section.active { display: block; }
-        .card { background-color: #FFFFFF; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); padding: 1.5rem; margin-bottom: 1.5rem; }
-        .tab-button { background-color: #EBF0F5; color: #374151; }
-        .tab-button.active { background-color: #1F2937; color: white; }
-        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+
+        .card {
+            background-color: var(--background-light);
+            border-radius: 14px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04), 0 5px 15px rgba(0,0,0,0.06); 
+            padding: 24px; 
+            margin-bottom: 1.5rem;
+        }
+        .card h2, .card h3, .card h4 { 
+             margin-bottom: 0.75rem;
+        }
+        .card p, .card ul li {
+            font-size: 1rem; 
+            line-height: 1.65;
+            color: var(--text-secondary);
+        }
+        .card ul {
+            padding-left: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Accordion Styles */
+        .accordion-item { 
+        }
+        .accordion-header {
+            background-color: rgba(var(--text-primary-rgb, 29, 29, 31), 0.04); 
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            border-radius: 8px; 
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border: 1px solid var(--border-color-light);
+        }
+        .accordion-header:hover {
+            background-color: rgba(var(--text-primary-rgb, 29, 29, 31), 0.07);
+        }
+        .accordion-header .arrow-icon {
+            transform: rotate(0deg);
+            transition: transform 0.3s ease-out;
+        }
+        .accordion-header.open .arrow-icon { 
+             transform: rotate(180deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out;
+            padding: 0 1rem; 
+            border: 1px solid var(--border-color-light);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+        .accordion-header.open + .accordion-content {
+            padding: 1rem; 
+        }
+
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            background-color: var(--background-light);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 8px rgba(0,0,0,0.05);
+        }
         @media (min-width: 768px) { .chart-container { height: 350px; } }
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-        .filter-input, .filter-select { border-color: #CFD8DC; }
-        .step-item { display: flex; align-items: center; margin-bottom: 0.5rem; }
-        .step-number { background-color: #1F2937; color: white; border-radius: 50%; width: 2rem; height: 2rem; display: flex; justify-content: center; align-items: center; font-weight: bold; margin-right: 0.75rem; flex-shrink: 0; }
-        .step-line { flex-grow: 1; height: 2px; background-color: #CFD8DC; margin: 0 0.5rem; }
-        .icon-placeholder { display: inline-block; width: 1.25em; height: 1.25em; background-color: #EBF0F5; border-radius: 0.25rem; text-align: center; line-height: 1.25em; font-weight: bold; color: #1F2937; margin-right: 0.25rem;}
-        .llm-button { background-color: #D97706; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease; }
-        .llm-button:hover { background-color: #B45309; }
-        .llm-output { background-color: #F0F9FF; border: 1px solid #BFDBFE; border-radius: 0.5rem; padding: 1rem; margin-top: 1rem; white-space: pre-wrap; font-size: 0.9rem; color: #1E40AF; }
-        .loading-indicator { display: none; margin-top: 1rem; color: #1F2937; font-style: italic; }
-        .bg-teal-50 { background-color: #D1FAE5; }
-        .border-teal-500 { border-color: #059669; }
-        .text-teal-700 { color: #059669; }
+        
+        .filter-input, .filter-select {
+            border: 1px solid var(--border-color-light);
+            background-color: var(--background-light);
+            color: var(--text-primary);
+            border-radius: 6px;
+            padding: 0.65rem 0.75rem; 
+            font-size: 0.9rem;
+            width: 100%;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .filter-input:focus, .filter-select:focus {
+            border-color: var(--link-blue);
+            box-shadow: 0 0 0 2px rgba(var(--link-blue-rgb), 0.2);
+            outline: none;
+        }
+        label {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
 
-        .bg-sky-50 { background-color: #E0F2FE; }
-        .border-sky-500 { border-color: #3B82F6; }
-        .text-sky-700 { color: #1D4ED8; }
+        /* Step Diagram */
+        .step-item { display: flex; align-items: center; margin-bottom: 0.75rem; }
+        .step-number {
+            background-color: var(--link-blue);
+            color: white;
+            border-radius: 50%;
+            width: 2.25rem; height: 2.25rem;
+            display: flex; justify-content: center; align-items: center;
+            font-weight: 600; font-size: 0.9rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .step-text { 
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
 
-        .bg-red-50 { background-color: #FEE2E2; }
-        .border-red-500 { border-color: #DC2626; }
-        .text-red-700 { color: #B91C1C; }
+        /* Icon Placeholders */
+        .icon-placeholder { 
+            display: inline-flex; 
+            align-items: center;
+            justify-content: center;
+            width: 1.1em; height: 1.1em;
+            background-color: rgba(var(--link-blue-rgb), 0.12); 
+            border-radius: 0.25rem;
+            color: var(--link-blue); 
+            font-weight: 500; 
+            margin-right: 0.35rem;
+            font-size: 0.9em; 
+            line-height: 1.1em;
+        }
 
-        .text-[#14B8A6] { color: #1F2937; }
-        .text-[#F97316] { color: #D97706; }
-        .bg-[#14B8A6] { background-color: #1F2937; }
-        .border-[#14B8A6] { border-color: #1F2937; }
-        .hover:border-[#F97316]:hover { border-color: #D97706; }
-        .hover:text-[#F97316]:hover { color: #D97706; }
+        /* Info/Warning/Note Boxes */
+        .info-box {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-width: 1px;
+            border-style: solid;
+            font-size: 0.9rem;
+        }
+        .info-box-note { 
+            background-color: rgba(var(--text-secondary-rgb, 81, 81, 84), 0.05);
+            border-color: rgba(var(--text-secondary-rgb, 81, 81, 84), 0.2);
+            color: var(--text-secondary);
+        }
+        .info-box-info { 
+            background-color: rgba(var(--link-blue-rgb), 0.07);
+            border-color: rgba(var(--link-blue-rgb), 0.3);
+            color: var(--link-blue); 
+        }
+        .info-box-info strong { color: var(--link-blue); }
 
-        .bg-amber-100 { background-color: #FFFBEB; }
-        .text-amber-800 { color: #D97706; }
+        .info-box-warning { 
+            background-color: rgba(var(--warning-red-rgb), 0.07);
+            border-color: rgba(var(--warning-red-rgb), 0.4);
+            color: var(--warning-red);
+        }
+        .info-box-warning h4, .info-box-warning strong { color: var(--warning-red); }
+
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+            border-top: 0.5px solid var(--border-color-light);
+            background-color: var(--background-body);
+        }
+        footer p {
+            font-size: 0.8rem; 
+            color: var(--text-tertiary);
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <header class="bg-[#EBF0F5] py-6 shadow-md">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-3xl font-bold text-[#1F2937]">Interactive Guide to SFT Reporting</h1>
-            <p class="text-md text-[#4B5563] mt-1">Understanding Section 285BA of the Income Tax Act, 1961</p>
+    <header class="page-title-header">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <a href="index.html" class="page-main-title-link">
+                <h1 class="text-3xl font-bold">Interactive Guide to SFT Reporting</h1>
+            </a>
+            <p class="text-md mt-1">Understanding Section 285BA of the Income Tax Act, 1961</p>
         </div>
     </header>
 
-    <nav id="mainNav" class="sticky top-0 bg-white shadow-lg z-50">
+    <nav id="mainNav" class="sticky top-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-wrap justify-center items-center py-2 md:py-0">
-                <a href="#overview" class="nav-link text-sm sm:text-base p-3 md:p-4 border-b-2 border-transparent hover:text-[#D97706] hover:border-[#D97706]">Overview</a>
-                <a href="#principles" class="nav-link text-sm sm:text-base p-3 md:p-4 border-b-2 border-transparent hover:text-[#D97706] hover:border-[#D97706]">Key Principles</a>
-                <a href="#transactions" class="nav-link text-sm sm:text-base p-3 md:p-4 border-b-2 border-transparent hover:text-[#D97706] hover:border-[#D97706]">Reportable Transactions</a>
-                <a href="#bonus-shares" class="nav-link text-sm sm:text-base p-3 md:p-4 border-b-2 border-transparent hover:text-[#D97706] hover:border-[#D97706]">Bonus Shares</a>
-                <a href="#filing" class="nav-link text-sm sm:text-base p-3 md:p-4 border-b-2 border-transparent hover:text-[#D97706] hover:border-[#D97706]">Filing & Compliance</a>
-                <a href="#penalties" class="nav-link text-sm sm:text-base p-3 md:p-4 border-b-2 border-transparent hover:text-[#D97706] hover:border-[#D97706]">Penalties</a>
-                <a href="#takeaways" class="nav-link text-sm sm:text-base p-3 md:p-4 border-b-2 border-transparent hover:text-[#D97706] hover:border-[#D97706]">Takeaways</a>
+            <div class="flex flex-wrap justify-center items-center py-1">
+                <a href="#overview" class="nav-link text-sm sm:text-base p-3 md:p-4">Overview</a>
+                <a href="#principles" class="nav-link text-sm sm:text-base p-3 md:p-4">Key Principles</a>
+                <a href="#transactions" class="nav-link text-sm sm:text-base p-3 md:p-4">Reportable Transactions</a>
+                <a href="#bonus-shares" class="nav-link text-sm sm:text-base p-3 md:p-4">Bonus Shares</a>
+                <a href="#filing" class="nav-link text-sm sm:text-base p-3 md:p-4">Filing & Compliance</a>
+                <a href="#penalties" class="nav-link text-sm sm:text-base p-3 md:p-4">Penalties</a>
+                <a href="#takeaways" class="nav-link text-sm sm:text-base p-3 md:p-4">Takeaways</a>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto p-4 sm:p-6 lg:p-8">
         <section id="overview" class="content-section">
-            <h2 class="text-2xl font-semibold mb-4 text-[#1F2937]">1. Overview of SFT</h2>
+            <h2 class="text-2xl font-semibold mb-4">1. Overview of SFT</h2>
             <div class="card">
                 <p class="mb-3">The Statement of Specified Financial Transactions (SFTs) is a critical mechanism in India's tax system, established under Section 285BA of the Income Tax Act, 1961. It mandates specified entities to report high-value financial transactions to the Income Tax Department (ITD).</p>
-                <p class="font-semibold mb-2">Key Objectives:</p>
+                <h4 class="font-semibold mb-2 text-lg">Key Objectives:</h4>
                 <ul class="list-disc list-inside space-y-1">
                     <li><span class="icon-placeholder">🎯</span>Monitor high-value transactions by taxpayers.</li>
                     <li><span class="icon-placeholder">💰</span>Curb the issue of black money.</li>
@@ -103,22 +306,22 @@
         </section>
 
         <section id="principles" class="content-section">
-            <h2 class="text-2xl font-semibold mb-4 text-[#1F2937]">2. Core Principles of SFT Reporting</h2>
-            <div class="card accordion-item">
-                <button class="accordion-header w-full text-left font-semibold p-3 bg-[#EBF0F5] hover:bg-[#CFD8DC] rounded-t-md flex justify-between items-center">
+            <h2 class="text-2xl font-semibold mb-4">2. Core Principles of SFT Reporting</h2>
+            <div class="accordion-item mb-4">
+                <button class="accordion-header w-full text-left font-semibold flex justify-between items-center">
                     <span>Broad Definition of "Specified Financial Transaction"</span>
                     <span class="arrow-icon transform transition-transform duration-300">▼</span>
                 </button>
-                <div class="accordion-content p-3 border border-t-0 border-[#CFD8DC] rounded-b-md">
+                <div class="accordion-content">
                     <p>Section 285BA broadly covers transactions like purchase/sale of goods, property, rights; rendering services; works contracts; investments; expenditures; and loans/deposits. This wide scope allows ITD to capture diverse financial movements.</p>
                 </div>
             </div>
-            <div class="card accordion-item mt-4">
-                <button class="accordion-header w-full text-left font-semibold p-3 bg-[#EBF0F5] hover:bg-[#CFD8DC] rounded-t-md flex justify-between items-center">
+            <div class="accordion-item mb-4">
+                <button class="accordion-header w-full text-left font-semibold flex justify-between items-center">
                     <span>Aggregation Rules for Monetary Thresholds</span>
                     <span class="arrow-icon transform transition-transform duration-300">▼</span>
                 </button>
-                <div class="accordion-content p-3 border border-t-0 border-[#CFD8DC] rounded-b-md">
+                <div class="accordion-content">
                     <p class="mb-2">For most SFTs (exceptions: immovable property, cash receipts for sales), amounts must be aggregated to check if thresholds are met. This prevents splitting transactions to avoid reporting.</p>
                     <ul class="list-disc list-inside space-y-1">
                         <li>All accounts of the same nature for a person in a FY are aggregated (e.g., multiple savings accounts in one bank).</li>
@@ -126,32 +329,32 @@
                     </ul>
                 </div>
             </div>
-            <div class="card accordion-item mt-4">
-                <button class="accordion-header w-full text-left font-semibold p-3 bg-[#EBF0F5] hover:bg-[#CFD8DC] rounded-t-md flex justify-between items-center">
+            <div class="accordion-item mb-4">
+                <button class="accordion-header w-full text-left font-semibold flex justify-between items-center">
                     <span>Joint Accounts/Transactions</span>
                     <span class="arrow-icon transform transition-transform duration-300">▼</span>
                 </button>
-                <div class="accordion-content p-3 border border-t-0 border-[#CFD8DC] rounded-b-md">
-                    <p>If an account or transaction is in multiple names (e.g., joint account), the <strong class="text-[#D97706]">entire value</strong> is attributed to <strong class="text-[#D97706]">each person</strong> for threshold checking. This increases scrutiny on jointly held assets and means individuals can be flagged even if their personal share is below the threshold, if the total joint transaction crosses it.</p>
+                <div class="accordion-content">
+                    <p>If an account or transaction is in multiple names (e.g., joint account), the <strong style="color: var(--link-blue);">entire value</strong> is attributed to <strong style="color: var(--link-blue);">each person</strong> for threshold checking. This increases scrutiny on jointly held assets and means individuals can be flagged even if their personal share is below the threshold, if the total joint transaction crosses it.</p>
                 </div>
             </div>
-             <p class="mt-4 p-4 bg-amber-100 text-amber-800 rounded-md text-sm">
-                <span class="font-bold">Note:</span> These principles are designed to capture the true economic substance of financial activity and prevent tax evasion through complex structuring.
+             <p class="mt-4 info-box info-box-note">
+                <span style="font-weight: 600; color: var(--text-primary);">Note:</span> These principles are designed to capture the true economic substance of financial activity and prevent tax evasion through complex structuring.
             </p>
         </section>
 
         <section id="transactions" class="content-section">
-            <h2 class="text-2xl font-semibold mb-4 text-[#1F2937]">3. Reportable Transactions Explorer</h2>
+            <h2 class="text-2xl font-semibold mb-4">3. Reportable Transactions Explorer</h2>
             <div class="card">
                 <p class="mb-4">Rule 114E of the Income Tax Rules, 1962, details specific reportable transactions. Explore them below. This interactive tool helps you filter and understand the various SFTs, their thresholds, and who is responsible for reporting.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <div>
-                        <label for="filterKeyword" class="block text-sm font-medium text-gray-700 mb-1">Filter by Keyword:</label>
-                        <input type="text" id="filterKeyword" class="filter-input w-full p-2 border rounded-md focus:ring-[#1F2937] focus:border-[#1F2937]" placeholder="e.g., Shares, Cash, Property">
+                        <label for="filterKeyword">Filter by Keyword:</label>
+                        <input type="text" id="filterKeyword" class="filter-input" placeholder="e.g., Shares, Cash, Property">
                     </div>
                     <div>
-                        <label for="filterThreshold" class="block text-sm font-medium text-gray-700 mb-1">Filter by Threshold (Min Lakhs):</label>
-                        <select id="filterThreshold" class="filter-select w-full p-2 border rounded-md focus:ring-[#1F2937] focus:border-[#1F2937]">
+                        <label for="filterThreshold">Filter by Threshold (Min Lakhs):</label>
+                        <select id="filterThreshold" class="filter-select">
                             <option value="">All Thresholds</option>
                             <option value="1">₹1 Lakh+</option>
                             <option value="2">₹2 Lakh+</option>
@@ -161,165 +364,134 @@
                         </select>
                     </div>
                     <div>
-                        <label for="filterEntity" class="block text-sm font-medium text-gray-700 mb-1">Filter by Reporting Entity:</label>
-                        <select id="filterEntity" class="filter-select w-full p-2 border rounded-md focus:ring-[#1F2937] focus:border-[#1F2937]">
+                        <label for="filterEntity">Filter by Reporting Entity:</label>
+                        <select id="filterEntity" class="filter-select">
                             <option value="">All Entities</option>
                         </select>
                     </div>
                 </div>
                 <div id="transactionList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                </div>
-                <p id="noResults" class="text-center text-gray-500 py-4" style="display: none;">No transactions match your filters.</p>
+                    </div>
+                <p id="noResults" class="text-center py-4" style="display: none; color: var(--text-secondary);">No transactions match your filters.</p>
 
                 <div class="mt-8">
                     <h3 class="text-xl font-semibold mb-3 text-center">Transaction Threshold Distribution</h3>
-                    <div class="chart-container bg-white p-2 rounded-lg shadow">
+                    <div class="chart-container">
                         <canvas id="thresholdChart"></canvas>
                     </div>
-                    <p class="text-xs text-gray-500 mt-2 text-center">This chart shows the number of SFT categories associated with different monetary threshold levels.</p>
-                </div>
-
-                <div class="mt-8 pt-6 border-t border-gray-200">
-                    <h3 class="text-xl font-semibold mb-3 text-[#D97706]">✨ SFT Explainer</h3>
-                    <p class="mb-3 text-gray-700">Have a question about a specific SFT transaction or concept? Type it below and get a simplified explanation.</p>
-                    <textarea id="sftExplainerInput" class="w-full p-3 border rounded-md focus:ring-[#D97706] focus:border-[#D97706] mb-3" rows="3" placeholder="e.g., Explain 'Receipt for acquiring shares' or 'What are aggregation rules?'"></textarea>
-                    <button id="getSftExplanationBtn" class="llm-button">Get Explanation</button>
-                    <div id="sftExplainerOutput" class="llm-output" style="display: none;"></div>
-                    <div id="sftExplainerLoading" class="loading-indicator">Generating explanation...</div>
+                    <p class="text-xs mt-2 text-center" style="color: var(--text-tertiary);">This chart shows the number of SFT categories associated with different monetary threshold levels.</p>
                 </div>
             </div>
         </section>
 
         <section id="bonus-shares" class="content-section">
-            <h2 class="text-2xl font-semibold mb-4 text-[#1F2937]">4. Bonus Shares & SFT Reporting</h2>
+            <h2 class="text-2xl font-semibold mb-4">4. Bonus Shares & SFT Reporting</h2>
             <div class="card">
                 <h3 class="text-xl font-semibold mb-3">Is the issuance of Bonus Shares by a company reportable under SFT by the issuing company?</h3>
-                <div class="p-4 bg-teal-50 border-l-4 border-teal-500 text-teal-700 rounded-md">
-                    <p class="font-bold text-lg">Generally, NO.</p>
+                <div class="info-box info-box-info">
+                    <p style="font-weight: 600; font-size: 1.1rem;">Generally, NO.</p>
                 </div>
                 <div class="mt-4 space-y-3">
                     <p><span class="icon-placeholder">ℹ️</span> Bonus shares are issued without monetary consideration from shareholders. They represent capitalization of company reserves (a capital restructuring).</p>
-                    <p><span class="icon-placeholder">🚫</span> SFT Category "Receipt for acquiring shares" (Sl. No. 8 in Rule 114E) implies the company <strong class="text-[#D97706]">receives money</strong> for issuing shares. This doesn't happen with bonus shares.</p>
-                    <p><span class="icon-placeholder">💸</span> No immediate tax liability for shareholders on receiving bonus shares. Cost of acquisition is usually nil. Tax (capital gains) arises only upon <strong class="text-[#D97706]">sale</strong> of bonus shares.</p>
-                    <p><span class="icon-placeholder">🔍</span> While the <strong class="text-[#D97706]">issuance itself</strong> is not directly reported by the company under SFT, the ITD gains visibility through:
+                    <p><span class="icon-placeholder">🚫</span> SFT Category "Receipt for acquiring shares" (Sl. No. 8 in Rule 114E) implies the company <strong style="color: var(--link-blue);">receives money</strong> for issuing shares. This doesn't happen with bonus shares.</p>
+                    <p><span class="icon-placeholder">💸</span> No immediate tax liability for shareholders on receiving bonus shares. Cost of acquisition is usually nil. Tax (capital gains) arises only upon <strong style="color: var(--link-blue);">sale</strong> of bonus shares.</p>
+                    <p><span class="icon-placeholder">🔍</span> While the <strong style="color: var(--link-blue);">issuance itself</strong> is not directly reported by the company under SFT, the ITD gains visibility through:
                         <ul class="list-disc list-inside ml-6 mt-1">
                             <li>Capital gains reported by shareholders on sale (pre-filled in ITR).</li>
                             <li>Reporting by intermediaries like depositories for "Depository Transactions" (movement/trading of shares).</li>
                         </ul>
                     </p>
-                    <p><span class="icon-placeholder">✅</span> Transactions like IPOs, Rights Issues (where company receives money) or Share Buybacks (company pays money) <strong class="text-[#1F2937]">are reportable</strong> if thresholds are met.</p>
+                    <p><span class="icon-placeholder">✅</span> Transactions like IPOs, Rights Issues (where company receives money) or Share Buybacks (company pays money) <strong style="color: var(--text-primary);">are reportable</strong> if thresholds are met.</p>
                 </div>
             </div>
         </section>
 
         <section id="filing" class="content-section">
-            <h2 class="text-2xl font-semibold mb-4 text-[#1F2937]">5. SFT Filing Procedures & Compliance</h2>
+            <h2 class="text-2xl font-semibold mb-4">5. SFT Filing Procedures & Compliance</h2>
             <div class="card">
                 <p class="mb-4">SFT must be filed in Form 61A. The process involves several key steps. Adherence to procedures and timelines is crucial.</p>
                 <h3 class="text-lg font-semibold mb-3">Key Steps in SFT Filing:</h3>
-                <div class="space-y-2">
-                    <div class="step-item"><div class="step-number">1</div><div>Register on Income Tax e-filing portal as "Reporting Entity".</div></div>
-                    <div class="step-item"><div class="step-number">2</div><div>Principal Officer creates login and provides organizational details.</div></div>
-                    <div class="step-item"><div class="step-number">3</div><div>Obtain unique ITDREIN (Income Tax Department Reporting Entity Identification Number). Mandatory if reportable transactions exist.</div></div>
-                    <div class="step-item"><div class="step-number">4</div><div>Prepare SFT report in prescribed XML format (as per ITD schema).</div></div>
-                    <div class="step-item"><div class="step-number">5</div><div>Validate data using ITD utility to correct errors.</div></div>
-                    <div class="step-item"><div class="step-number">6</div><div>Digitally sign Form 61A with Class 2 or 3 DSC.</div></div>
-                    <div class="step-item"><div class="step-number">7</div><div>Upload to e-filing portal. Receive acknowledgment.</div></div>
+                <div class="space-y-3">
+                    <div class="step-item"><div class="step-number">1</div><div class="step-text">Register on Income Tax e-filing portal as "Reporting Entity".</div></div>
+                    <div class="step-item"><div class="step-number">2</div><div class="step-text">Principal Officer creates login and provides organizational details.</div></div>
+                    <div class="step-item"><div class="step-number">3</div><div class="step-text">Obtain unique ITDREIN (Income Tax Department Reporting Entity Identification Number). Mandatory if reportable transactions exist.</div></div>
+                    <div class="step-item"><div class="step-number">4</div><div class="step-text">Prepare SFT report in prescribed XML format (as per ITD schema).</div></div>
+                    <div class="step-item"><div class="step-number">5</div><div class="step-text">Validate data using ITD utility to correct errors.</div></div>
+                    <div class="step-item"><div class="step-number">6</div><div class="step-text">Digitally sign Form 61A with Class 2 or 3 DSC.</div></div>
+                    <div class="step-item"><div class="step-number">7</div><div class="step-text">Upload to e-filing portal. Receive acknowledgment.</div></div>
                 </div>
 
-                <div class="mt-6 p-4 bg-sky-50 border-l-4 border-sky-500 text-sky-700 rounded-md">
-                    <p><strong class="font-semibold">Due Date:</strong> May 31st of the assessment year following the financial year of the transaction. (e.g., FY 2023-24 transactions reported by May 31, 2025).</p>
+                <div class="mt-6 info-box info-box-info">
+                    <p><strong style="color: var(--link-blue); font-weight:600;">Due Date:</strong> May 31st of the assessment year following the financial year of the transaction. (e.g., FY 2023-24 transactions reported by May 31, 2025).</p>
                 </div>
 
-                <div class="mt-6 accordion-item card p-0">
-                     <button class="accordion-header w-full text-left font-semibold p-3 bg-[#EBF0F5] hover:bg-[#CFD8DC] rounded-t-md flex justify-between items-center">
+                <div class="mt-4 accordion-item">
+                     <button class="accordion-header w-full text-left font-semibold flex justify-between items-center">
                         <span>Defects & Revisions</span>
                         <span class="arrow-icon transform transition-transform duration-300">▼</span>
                     </button>
-                    <div class="accordion-content p-3 border border-t-0 border-[#CFD8DC] rounded-b-md">
+                    <div class="accordion-content">
                         <p>If errors are found, a revised statement can be submitted. If ITD notifies a defect, it must be rectified within 30 days. Failure to rectify (post Sep 1, 2019) is treated as inaccurate information.</p>
                     </div>
                 </div>
 
-                <div class="mt-4 accordion-item card p-0">
-                     <button class="accordion-header w-full text-left font-semibold p-3 bg-[#EBF0F5] hover:bg-[#CFD8DC] rounded-t-md flex justify-between items-center">
+                <div class="mt-4 accordion-item">
+                     <button class="accordion-header w-full text-left font-semibold flex justify-between items-center">
                         <span>Nil SFT & Preliminary Response</span>
                         <span class="arrow-icon transform transition-transform duration-300">▼</span>
                     </button>
-                    <div class="accordion-content p-3 border border-t-0 border-[#CFD8DC] rounded-b-md">
+                    <div class="accordion-content">
                         <p>If no reportable transactions, experts often recommend filing a Nil SFT. Alternatively, use the "SFT Preliminary Response" on the e-Filing portal to indicate non-reportability for the year.</p>
                     </div>
-                </div>
-
-                <div class="mt-8 pt-6 border-t border-gray-200">
-                    <h3 class="text-xl font-semibold mb-3 text-[#D97706]">✨ Compliance Assistant</h3>
-                    <p class="mb-3 text-gray-700">Get tailored compliance tips based on your entity type and a specific transaction.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-                        <div>
-                            <label for="complianceEntitySelect" class="block text-sm font-medium text-gray-700 mb-1">Your Entity Type:</label>
-                            <select id="complianceEntitySelect" class="filter-select w-full p-2 border rounded-md focus:ring-[#D97706] focus:border-[#D97706]">
-                                <option value="">Select an Entity</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="complianceTransactionSelect" class="block text-sm font-medium text-gray-700 mb-1">Transaction Type:</label>
-                            <select id="complianceTransactionSelect" class="filter-select w-full p-2 border rounded-md focus:ring-[#D97706] focus:border-[#D97706]">
-                                <option value="">Select a Transaction</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button id="getComplianceTipsBtn" class="llm-button">Get Compliance Tips</button>
-                    <div id="complianceTipsOutput" class="llm-output" style="display: none;"></div>
-                    <div id="complianceTipsLoading" class="loading-indicator">Generating tips...</div>
                 </div>
             </div>
         </section>
 
         <section id="penalties" class="content-section">
-            <h2 class="text-2xl font-semibold mb-4 text-[#1F2937]">6. Consequences of Non-Compliance</h2>
+            <h2 class="text-2xl font-semibold mb-4">6. Consequences of Non-Compliance</h2>
             <div class="card">
                 <p class="mb-4">Failure to comply with SFT reporting obligations can lead to significant penalties. It's crucial to be timely and accurate.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md">
-                        <h4 class="font-semibold text-lg mb-1"><span class="icon-placeholder">⚠️</span> Failure to Furnish SFT by Due Date:</h4>
+                    <div class="info-box info-box-warning">
+                        <h4 class="font-semibold text-lg mb-1"><span class="icon-placeholder" style="background-color: rgba(var(--warning-red-rgb),0.15); color: var(--warning-red);">⚠️</span> Failure to Furnish SFT by Due Date:</h4>
                         <p>₹500 per day of default.</p>
                     </div>
-                    <div class="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md">
-                        <h4 class="font-semibold text-lg mb-1"><span class="icon-placeholder">⚠️</span> Failure After Notice:</h4>
+                    <div class="info-box info-box-warning">
+                        <h4 class="font-semibold text-lg mb-1"><span class="icon-placeholder" style="background-color: rgba(var(--warning-red-rgb),0.15); color: var(--warning-red);">⚠️</span> Failure After Notice:</h4>
                         <p>If default continues after ITD notice (30 days to comply), penalty increases to ₹1,000 per day from expiry of notice period.</p>
                     </div>
-                    <div class="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md">
-                        <h4 class="font-semibold text-lg mb-1"><span class="icon-placeholder">⚠️</span> Inaccurate Statement:</h4>
+                    <div class="info-box info-box-warning">
+                        <h4 class="font-semibold text-lg mb-1"><span class="icon-placeholder" style="background-color: rgba(var(--warning-red-rgb),0.15); color: var(--warning-red);">⚠️</span> Inaccurate Statement:</h4>
                         <p>₹50,000 penalty. (Includes unrectified defects post Sep 1, 2019).</p>
                     </div>
-                    <div class="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-md">
-                        <h4 class="font-semibold text-lg mb-1"><span class="icon-placeholder">⚠️</span> For Eligible Investment Funds:</h4>
+                    <div class="info-box info-box-warning">
+                        <h4 class="font-semibold text-lg mb-1"><span class="icon-placeholder" style="background-color: rgba(var(--warning-red-rgb),0.15); color: var(--warning-red);">⚠️</span> For Eligible Investment Funds:</h4>
                         <p>Failure to furnish required statements/info can attract ₹5,00,000 penalty.</p>
                     </div>
                 </div>
-                <p class="mt-4 text-sm text-gray-600">Beyond direct penalties, non-compliance can trigger deeper investigations, audits, and reputational damage.</p>
+                <p class="mt-4 text-sm" style="color: var(--text-secondary);">Beyond direct penalties, non-compliance can trigger deeper investigations, audits, and reputational damage.</p>
             </div>
         </section>
 
         <section id="takeaways" class="content-section">
-            <h2 class="text-2xl font-semibold mb-4 text-[#1F2937]">7. Key Takeaways & Recommendations</h2>
+            <h2 class="text-2xl font-semibold mb-4">7. Key Takeaways & Recommendations</h2>
             <div class="card">
                 <p class="mb-3">SFT reporting is a cornerstone of India's tax transparency efforts. Issuance of bonus shares by the company is generally NOT a direct SFT trigger for the issuer. The SFT regime is dynamic, requiring continuous adaptation.</p>
                 <h3 class="text-lg font-semibold mt-4 mb-2">Recommendations for Robust Compliance:</h3>
-                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <ul class="list-disc list-inside space-y-2">
                     <li><span class="icon-placeholder">⚙️</span><strong>Continuous Monitoring & System Integration:</strong> Integrate SFT tracking with ERP systems for proactive identification of reportable transactions.</li>
                     <li><span class="icon-placeholder">🗂️</span><strong>Accurate Data Management:</strong> Maintain meticulous records for all financial transactions, especially share-related activities.</li>
                     <li><span class="icon-placeholder">🗓️</span><strong>Timely Filing & Prompt Rectification:</strong> Adhere strictly to the May 31st due date and rectify any ITD-notified defects within 30 days.</li>
                     <li><span class="icon-placeholder">✅</span><strong>Leverage ITD Functionalities:</strong> Use "SFT Preliminary Response" if no transactions are reportable.</li>
                     <li><span class="icon-placeholder">🔄</span><strong>Stay Updated:</strong> Regularly consult CBDT notifications and the ITD Reporting Portal for changes.</li>
                 </ul>
-                <p class="mt-4 p-3 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-md text-sm">Proactive compliance mitigates risks, enhances reputation, and ensures smooth operations.</p>
+                <p class="mt-4 info-box info-box-info" style="background-color: rgba(var(--link-blue-rgb), 0.06); border-color: rgba(var(--link-blue-rgb),0.2); color: var(--text-primary);"> Proactive compliance mitigates risks, enhances reputation, and ensures smooth operations.</p>
             </div>
         </section>
     </main>
 
-    <footer class="text-center py-8 mt-10 border-t border-[#CFD8DC]">
-        <p class="text-sm text-gray-500">This interactive guide is for informational purposes only and not a substitute for professional tax advice. Based on content from the "Comprehensive Guide to SFT Reporting".</p>
+    <footer>
+        <p>This interactive guide is for informational purposes only and not a substitute for professional tax advice. Based on content from the "Comprehensive Guide to SFT Reporting".</p>
     </footer>
 
 <script>
@@ -348,47 +520,24 @@
     const noResultsP = document.getElementById('noResults');
     let thresholdChartInstance = null;
 
-    const sftExplainerInput = document.getElementById('sftExplainerInput');
-    const getSftExplanationBtn = document.getElementById('getSftExplanationBtn');
-    const sftExplainerOutput = document.getElementById('sftExplainerOutput');
-    const sftExplainerLoading = document.getElementById('sftExplainerLoading');
-
-    const complianceEntitySelect = document.getElementById('complianceEntitySelect');
-    const complianceTransactionSelect = document.getElementById('complianceTransactionSelect');
-    const getComplianceTipsBtn = document.getElementById('getComplianceTipsBtn');
-    const complianceTipsOutput = document.getElementById('complianceTipsOutput');
-    const complianceTipsLoading = document.getElementById('complianceTipsLoading');
-
     function populateEntityFilter() {
         const entities = new Set();
         sftData.forEach(item => {
             item.entity.split(',').forEach(e => entities.add(e.trim()));
         });
         const sortedEntities = Array.from(entities).sort();
+        filterEntitySelect.innerHTML = '<option value="">All Entities</option>'; 
         sortedEntities.forEach(entity => {
             const option = document.createElement('option');
             option.value = entity;
             option.textContent = entity;
             filterEntitySelect.appendChild(option);
-
-            const complianceOption = document.createElement('option');
-            complianceOption.value = entity;
-            complianceOption.textContent = entity;
-            complianceEntitySelect.appendChild(complianceOption);
         });
     }
 
-    function populateTransactionSelect() {
-        sftData.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.nature;
-            option.textContent = item.nature;
-            complianceTransactionSelect.appendChild(option);
-        });
-    }
-
+    // --- CORRECTED displayTransactions function ---
     function displayTransactions(filteredData) {
-        transactionListDiv.innerHTML = '';
+        transactionListDiv.innerHTML = ''; // Clear existing cards
         if (filteredData.length === 0) {
             noResultsP.style.display = 'block';
             return;
@@ -397,31 +546,77 @@
 
         filteredData.forEach(item => {
             const card = document.createElement('div');
-            card.className = 'p-4 border border-gray-200 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow';
-            card.innerHTML = `
-                <h4 class="font-semibold text-md text-[#1F2937] mb-1">Sl. No. ${item.sl}: ${item.nature.substring(0,50)}${item.nature.length > 50 ? '...' : ''}</h4>
-                <p class="text-sm text-gray-600 mb-1"><strong class="text-gray-700">Threshold:</strong> ${item.thresholdText}</p>
-                <p class="text-sm text-gray-600"><strong class="text-gray-700">Reporting Entity:</strong> ${item.entity}</p>
-                <button class="text-xs text-[#D97706] hover:underline mt-2" onclick="showTransactionDetails(${item.sl -1})">View Details</button>
-            `;
+            card.className = 'p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow';
+            card.style.backgroundColor = 'var(--background-light)';
+            card.style.borderColor = 'var(--border-color-light)';
+            card.style.borderRadius = '10px'; // Consistent with other card styles
+
+            // Title (h4)
+            const titleH4 = document.createElement('h4');
+            titleH4.className = 'font-semibold text-md mb-1'; // Tailwind classes for styling
+            titleH4.style.color = 'var(--text-primary)';
+            const natureText = item.nature.length > 50 ? item.nature.substring(0, 50) + '...' : item.nature;
+            titleH4.textContent = `${item.sl}. ${natureText}`;
+
+            // Threshold (p)
+            const thresholdP = document.createElement('p');
+            thresholdP.className = 'text-sm mb-1';
+            thresholdP.style.color = 'var(--text-secondary)';
+            
+            const thresholdStrong = document.createElement('strong');
+            thresholdStrong.style.color = 'var(--text-primary)';
+            thresholdStrong.textContent = 'Threshold: ';
+            thresholdP.appendChild(thresholdStrong);
+            thresholdP.appendChild(document.createTextNode(item.thresholdText));
+
+            // Reporting Entity (p)
+            const entityP = document.createElement('p');
+            entityP.className = 'text-sm';
+            entityP.style.color = 'var(--text-secondary)';
+
+            const entityStrong = document.createElement('strong');
+            entityStrong.style.color = 'var(--text-primary)';
+            entityStrong.textContent = 'Reporting Entity: ';
+            entityP.appendChild(entityStrong);
+            entityP.appendChild(document.createTextNode(item.entity));
+
+            // View Details Button
+            const detailsButton = document.createElement('button');
+            detailsButton.className = 'text-xs mt-2'; // Tailwind classes
+            detailsButton.style.color = 'var(--link-blue)';
+            detailsButton.style.textDecoration = 'underline';
+            detailsButton.textContent = 'View Details';
+            detailsButton.onclick = function() { showTransactionDetails(item.sl - 1); }; // Corrected to use item.sl
+
+            card.appendChild(titleH4);
+            card.appendChild(thresholdP);
+            card.appendChild(entityP);
+            card.appendChild(detailsButton);
+
             transactionListDiv.appendChild(card);
         });
     }
+    // --- END CORRECTED displayTransactions function ---
     
     window.showTransactionDetails = function(index) {
         const item = sftData[index];
-        const modalContent = `
-            <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
-                <div style="background-color: white; padding: 2rem; border-radius: 0.5rem; max-width: 500px; width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-                    <h3 style="font-size: 1.25rem; font-weight: 600; color: #1F2937; margin-bottom: 1rem;">Transaction Details (Sl. No. ${item.sl})</h3>
-                    <p style="margin-bottom: 0.5rem;"><strong>Nature:</strong> ${item.nature}</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>Threshold:</strong> ${item.thresholdText}</p>
-                    <p style="margin-bottom: 1rem;"><strong>Reporting Entity:</strong> ${item.entity}</p>
-                    <button onclick="this.parentElement.parentElement.remove()" style="background-color: #D97706; color: white; padding: 0.5rem 1rem; border-radius: 0.25rem; border: none; cursor: pointer;">Close</button>
+        const existingModal = document.getElementById('sftDetailModal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        const modalHTML = `
+            <div id="sftDetailModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.55); display: flex; justify-content: center; align-items: center; z-index: 1050; padding: 15px; box-sizing: border-box;">
+                <div style="background-color: var(--background-light); padding: 25px 30px; border-radius: 14px; max-width: 550px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: var(--font-family-apple); text-align: left;">
+                    <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; margin-top:0;">SFT Detail (Sl. No. ${item.sl})</h3>
+                    <p style="margin-bottom: 0.75rem; font-size: 0.95rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Nature:</strong> ${item.nature}</p>
+                    <p style="margin-bottom: 0.75rem; font-size: 0.95rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Threshold:</strong> ${item.thresholdText}</p>
+                    <p style="margin-bottom: 1.5rem; font-size: 0.95rem; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Reporting Entity:</strong> ${item.entity}</p>
+                    <button onclick="document.getElementById('sftDetailModal').remove()" style="background-color: var(--link-blue); color: white; padding: 0.6rem 1.2rem; border-radius: 8px; border: none; cursor: pointer; font-size: 0.9rem; font-weight:500;">Close</button>
                 </div>
             </div>
         `;
-        document.body.insertAdjacentHTML('beforeend', modalContent);
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
     }
 
 
@@ -432,7 +627,7 @@
 
         const filtered = sftData.filter(item => {
             const natureMatch = item.nature.toLowerCase().includes(keyword);
-            const entityMatch = entity === "" || item.entity.toLowerCase().includes(entity);
+            const entityMatch = entity === "" || item.entity.toLowerCase().split(',').map(e=>e.trim()).some(e => e.includes(entity));
             
             let thresholdMatch = true;
             if (threshold > 0) {
@@ -450,13 +645,13 @@
     function updateThresholdChart() {
         const thresholdCounts = {};
         sftData.forEach(item => {
-            const key = Array.isArray(item.thresholdVal) ? item.thresholdVal.join('/') + ' Lakhs (Multiple)' : item.thresholdVal + ' Lakhs';
+            const key = Array.isArray(item.thresholdVal) ? item.thresholdVal.map(tv => `₹${tv}L`).join('/') + ' (Multiple)' : `₹${item.thresholdVal} Lakhs`;
             thresholdCounts[key] = (thresholdCounts[key] || 0) + 1;
         });
 
         const labels = Object.keys(thresholdCounts).sort((a,b) => {
-            const valA = parseFloat(a.split(' ')[0]);
-            const valB = parseFloat(b.split(' ')[0]);
+            const valA = parseFloat(a.replace('₹','').split(' ')[0]);
+            const valB = parseFloat(b.replace('₹','').split(' ')[0]);
             return valA - valB;
         });
         const data = labels.map(label => thresholdCounts[label]);
@@ -470,11 +665,12 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Number of SFT Categories',
+                    label: 'No. of SFT Categories',
                     data: data,
-                    backgroundColor: '#1F2937',
-                    borderColor: '#111827',
-                    borderWidth: 1
+                    backgroundColor: 'rgba(var(--link-blue-rgb), 0.7)',
+                    borderColor: 'var(--link-blue)',
+                    borderWidth: 1,
+                    borderRadius: 4,
                 }]
             },
             options: {
@@ -483,28 +679,26 @@
                 scales: {
                     y: {
                         beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
-                        }
+                        ticks: { stepSize: 1, color: 'var(--text-secondary)' },
+                        grid: { color: 'var(--border-color-light)' }
                     },
                     x: {
-                        ticks: {
+                        ticks: { color: 'var(--text-secondary)',
                              callback: function(value, index, values) {
                                 const label = this.getLabelForValue(value);
-                                if (label.length > 15) {
-                                    return label.substring(0, 15) + '...';
-                                }
-                                return label;
+                                return label.length > 18 ? label.substring(0,18) + '...' : label;
                             }
-                        }
+                        },
+                        grid: { display: false }
                     }
                 },
                 plugins: {
+                    legend: { labels: { color: 'var(--text-primary)' } },
                     tooltip: {
+                        backgroundColor: 'rgba(29, 29, 31, 0.85)',
+                        titleColor: '#f5f5f7', bodyColor: '#f5f5f7',
                         callbacks: {
-                            title: function(tooltipItems) {
-                                return tooltipItems[0].label;
-                            }
+                            title: function(tooltipItems) { return tooltipItems[0].label; }
                         }
                     }
                 }
@@ -516,137 +710,48 @@
     function handleNavigation() {
         const hash = window.location.hash || '#overview';
         navLinks.forEach(link => {
-            if (link.getAttribute('href') === hash) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
+            link.classList.toggle('active', link.getAttribute('href') === hash);
         });
         contentSections.forEach(section => {
-            if ('#' + section.id === hash) {
-                section.classList.add('active');
-            } else {
-                section.classList.remove('active');
-            }
+            section.classList.toggle('active', ('#' + section.id) === hash);
         });
-        window.scrollTo(0, 0); 
+        if (event && event.type === 'hashchange') { 
+            const targetElement = document.querySelector(hash);
+            if(targetElement) {
+                 const headerTotalHeight = document.getElementById('mainNav').offsetHeight + 
+                                         (document.querySelector('.page-title-header') ? document.querySelector('.page-title-header').offsetHeight : 0);
+                 const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                 const offsetPosition = elementPosition - headerTotalHeight;
+                 window.scrollTo({top: offsetPosition, behavior: 'smooth'});
+            }
+        } else if (window.location.hash === '') { 
+             window.scrollTo(0,0);
+        }
     }
     
     document.querySelectorAll('.accordion-header').forEach(header => {
         header.addEventListener('click', () => {
             const content = header.nextElementSibling;
             const arrow = header.querySelector('.arrow-icon');
+            header.classList.toggle('open'); 
             if (content.style.maxHeight && content.style.maxHeight !== '0px') {
                 content.style.maxHeight = '0px';
-                arrow.style.transform = 'rotate(0deg)';
             } else {
                 content.style.maxHeight = content.scrollHeight + 'px';
-                arrow.style.transform = 'rotate(180deg)';
             }
         });
-    });
-
-    // LLM Integration for SFT Explainer
-    getSftExplanationBtn.addEventListener('click', async () => {
-        const prompt = sftExplainerInput.value.trim();
-        if (!prompt) {
-            sftExplainerOutput.style.display = 'block';
-            sftExplainerOutput.textContent = 'Please enter a query to get an explanation.';
-            return;
-        }
-
-        sftExplainerOutput.style.display = 'none';
-        sftExplainerLoading.style.display = 'block';
-
-        try {
-            let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: `Explain the following SFT concept or transaction in simple terms, focusing on its SFT reporting implications based on the provided data and general SFT knowledge. Keep the explanation concise and easy to understand for a non-expert. If the query is about bonus shares, specifically mention why they are generally not reportable by the issuing company. If the query is about a specific transaction type, refer to its threshold and reporting entity. Here is the available SFT data: ${JSON.stringify(sftData)}. Query: ${prompt}` }] });
-            const payload = { contents: chatHistory };
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-            const result = await response.json();
-
-            if (result.candidates && result.candidates.length > 0 &&
-                result.candidates[0].content && result.candidates[0].content.parts &&
-                result.candidates[0].content.parts.length > 0) {
-                const text = result.candidates[0].content.parts[0].text;
-                sftExplainerOutput.textContent = text;
-                sftExplainerOutput.style.display = 'block';
-            } else {
-                sftExplainerOutput.textContent = 'Could not get an explanation. Please try again.';
-                sftExplainerOutput.style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Error fetching SFT explanation:', error);
-            sftExplainerOutput.textContent = 'An error occurred while fetching the explanation. Please try again later.';
-            sftExplainerOutput.style.display = 'block';
-        } finally {
-            sftExplainerLoading.style.display = 'none';
-        }
-    });
-
-    // LLM Integration for Compliance Assistant
-    getComplianceTipsBtn.addEventListener('click', async () => {
-        const selectedEntity = complianceEntitySelect.value;
-        const selectedTransaction = complianceTransactionSelect.value;
-
-        if (!selectedEntity || !selectedTransaction) {
-            complianceTipsOutput.style.display = 'block';
-            complianceTipsOutput.textContent = 'Please select both an entity and a transaction.';
-            return;
-        }
-
-        complianceTipsOutput.style.display = 'none';
-        complianceTipsLoading.style.display = 'block';
-
-        try {
-            let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: `As a ${selectedEntity} dealing with "${selectedTransaction}", what are the key SFT compliance tips or a mini-checklist I should follow? Focus on actionable steps and refer to relevant thresholds and reporting procedures from SFT Rule 114E. Here is the available SFT data: ${JSON.stringify(sftData)}. Also include general advice on timely filing and accuracy.` }] });
-            const payload = { contents: chatHistory };
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-            const result = await response.json();
-
-            if (result.candidates && result.candidates.length > 0 &&
-                result.candidates[0].content && result.candidates[0].content.parts &&
-                result.candidates[0].content.parts.length > 0) {
-                const text = result.candidates[0].content.parts[0].text;
-                complianceTipsOutput.textContent = text;
-                complianceTipsOutput.style.display = 'block';
-            } else {
-                complianceTipsOutput.textContent = 'Could not get compliance tips. Please try again.';
-                complianceTipsOutput.style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Error fetching compliance tips:', error);
-            complianceTipsOutput.textContent = 'An error occurred while fetching compliance tips. Please try again later.';
-            complianceTipsOutput.style.display = 'block';
-        } finally {
-            complianceTipsLoading.style.display = 'none';
-        }
     });
 
 
     window.addEventListener('hashchange', handleNavigation);
     window.addEventListener('load', () => {
-        handleNavigation();
+        handleNavigation(); 
         populateEntityFilter();
-        populateTransactionSelect();
         displayTransactions(sftData);
         updateThresholdChart();
-        filterKeywordInput.addEventListener('input', filterTransactions);
-        filterThresholdSelect.addEventListener('change', filterTransactions);
-        filterEntitySelect.addEventListener('change', filterTransactions);
+        if(filterKeywordInput) filterKeywordInput.addEventListener('input', filterTransactions);
+        if(filterThresholdSelect) filterThresholdSelect.addEventListener('change', filterTransactions);
+        if(filterEntitySelect) filterEntitySelect.addEventListener('change', filterTransactions);
     });
 
 </script>
