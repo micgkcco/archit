@@ -44,16 +44,16 @@
     .header-logo-link {
         text-decoration: none;
         color: inherit; /* Inherits color from h1, which is var(--text-primary) */
-        display: inline-block; /* or block if you want it to take full width of its container div */
+        display: inline-block; 
     }
-    .header-logo-link:hover h1 { /* Optional: if you want a hover effect on the H1 via the link */
-        color: var(--link-blue); /* Example hover effect */
+    .header-logo-link:hover h1 { 
+        color: var(--link-blue); 
     }
 
     header h1.text-2xl {
         color: var(--text-primary);
-        font-weight: 600; /* Apple-like headers are often semibold/bold */
-        transition: color 0.2s ease-in-out; /* Smooth transition for hover */
+        font-weight: 600; 
+        transition: color 0.2s ease-in-out; 
     }
     header p.text-xs {
         color: var(--text-secondary);
@@ -63,7 +63,7 @@
         border-bottom-width: 2px;
         border-bottom-color: transparent;
         transition: color 0.3s ease, border-bottom-color 0.3s ease;
-        font-size: 15px; /* Slightly adjusted for Apple feel */
+        font-size: 15px; 
         font-weight: 400;
     }
     .nav-link:hover,
@@ -71,80 +71,79 @@
         color: var(--link-blue);
         border-bottom-color: var(--link-blue);
     }
-    #mobile-menu-button svg { /* Was text-slate-700 */
+    #mobile-menu-button svg { 
         color: var(--text-primary);
     }
-     #mobile-menu { /* Was bg-white shadow-lg */
+     #mobile-menu { 
         background-color: rgba(255, 255, 255, 0.95);
         backdrop-filter: saturate(180%) blur(10px);
         -webkit-backdrop-filter: saturate(180%) blur(10px);
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
      }
     #mobile-menu a.nav-link {
-        color: var(--text-secondary); /* Base color for mobile links */
+        color: var(--text-secondary); 
     }
     #mobile-menu a.nav-link:hover,
     #mobile-menu a.nav-link.active {
-        color: var(--link-blue); /* Hover/active color */
-        background-color: rgba(0, 122, 255, 0.05); /* Subtle hover for mobile menu */
+        color: var(--link-blue); 
+        background-color: rgba(0, 122, 255, 0.05); 
     }
 
 
     /* Main Content */
     main.container {
-        padding-top: 1rem; /* Add some space below sticky header */
+        padding-top: 1rem; 
     }
 
     /* Section Headings */
     .content-section > h2 {
-        font-size: 32px; /* Apple-like section titles */
+        font-size: 32px; 
         font-weight: 600;
         color: var(--text-primary);
         border-bottom: 1px solid var(--border-color-light);
-        margin-bottom: 2rem; /* More space after title */
+        margin-bottom: 2rem; 
         padding-bottom: 0.75rem;
     }
 
     /* Paragraphs and general text */
-    p.leading-relaxed { /* Targeting default paragraphs that had text-slate-700 or text-slate-600 */
+    p.leading-relaxed { 
         color: var(--text-secondary);
         line-height: 1.65;
         font-size: 17px;
     }
-    /* Targeting specific paragraphs that were .text-slate-600 or .text-slate-700 */
     .text-slate-600-override, .text-slate-700-override {
-        color: var(--text-secondary) !important; /* Use important if Tailwind specificity is an issue, otherwise remove class */
-        font-size: 17px; /* Ensure consistent font size */
+        color: var(--text-secondary) !important; 
+        font-size: 17px; 
         line-height: 1.65;
     }
 
-    ul li, .text-sm-override { /* Targeting list items and text that used text-slate-600 or similar */
+    ul li, .text-sm-override { 
          color: var(--text-secondary);
-         font-size: 16px; /* Standardize slightly */
+         font-size: 16px; 
     }
      ul.list-disc {
-        padding-left: 1.5rem; /* Ensure good spacing for lists */
+        padding-left: 1.5rem; 
     }
 
 
     /* Content Cards / Backgrounds */
-    .bg-white-card { /* This class will replace .bg-white for main content blocks */
+    .bg-white-card { 
         background-color: var(--background-light);
-        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05); /* Softer shadow */
-        padding: 24px; /* Consistent padding */
-        border-radius: 12px; /* Apple uses slightly larger radii */
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05); 
+        padding: 24px; 
+        border-radius: 12px; 
     }
 
 
     /* Sub-headings within cards */
-    h3.font-semibold { /* Was text-amber-700 or text-slate-700 */
+    h3.font-semibold { 
         color: var(--text-primary);
         font-weight: 600;
         margin-bottom: 1rem;
     }
-     h4.font-semibold { /* Was text-slate-700 */
+     h4.font-semibold { 
         color: var(--text-primary);
-        font-weight: 500; /* slightly less than h3 */
+        font-weight: 500; 
         margin-top: 1.5rem;
         margin-bottom: 0.75rem;
     }
@@ -153,31 +152,30 @@
     /* Tables */
     .table-responsive {
         border: 1px solid var(--border-color-light);
-        border-radius: 8px; /* Rounded corners for table container */
-        overflow: hidden; /* Ensures children (table) respect border-radius */
+        border-radius: 8px; 
+        overflow: hidden; 
     }
-    table thead { /* Was bg-slate-100 */
-        background-color: #f9f9f9; /* Very light grey, almost white */
+    table thead { 
+        background-color: #f9f9f9; 
     }
     table th {
-        color: var(--text-primary); /* Darker for table headers */
+        color: var(--text-primary); 
         font-weight: 500;
-        font-size: 13px; /* Apple table headers are often smaller */
-        text-transform: none; /* Remove uppercase if not desired */
+        font-size: 13px; 
+        text-transform: none; 
         letter-spacing: normal;
-        padding: 12px 16px; /* Adjust padding */
+        padding: 12px 16px; 
         text-align: left;
     }
     table td {
         color: var(--text-secondary);
         font-size: 15px;
         padding: 12px 16px;
-        vertical-align: top; /* Align content to top for consistency */
+        vertical-align: top; 
     }
-    table tbody { /* For .divide-y .divide-slate-200 */
+    table tbody { 
         border-color: var(--border-color-light);
     }
-    /* Specific overrides for table cell text if needed */
     .table-text-override {
         color: var(--text-secondary) !important;
         font-size: 15px !important;
@@ -194,9 +192,9 @@
         height: 350px;
         max-height: 400px;
         padding: 1rem;
-        border-radius: 12px; /* Match card rounding */
-        background-color: var(--background-light); /* Add background to chart container */
-        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05); /* Softer shadow */
+        border-radius: 12px; 
+        background-color: var(--background-light); 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05); 
 
     }
     @media (min-width: 768px) { .chart-container { height: 400px; } }
@@ -205,191 +203,198 @@
     /* Section Deep Dive Cards */
     .tds-section-card {
         background-color: var(--background-light);
-        border: 1px solid transparent; /* Base border */
+        border: 1px solid var(--border-color-light); /* Using light border always for definition */
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
         border-radius: 10px;
-        padding: 1rem; /* Tailwind's p-4 */
-        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.04); /* Subtle base shadow */
+        padding: 1rem; 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.04); 
+        /* Added flex properties for alignment if not using Tailwind flex classes on the element itself */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Center content vertically */
+        align-items: center;    /* Center content horizontally */
+        text-align: center;
+        cursor: pointer;
     }
     .tds-section-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-        border-color: var(--link-blue); /* Accent on hover */
+        border-color: var(--link-blue); 
     }
     .tds-section-card h4 {
-        color: var(--link-blue); /* Use link color for interactive titles */
+        color: var(--link-blue); 
         font-weight: 500;
-        font-size: 1rem; /* Tailwind's text-md */
-        margin-bottom: 0.25rem; /* Tailwind's mb-1 */
+        font-size: 1rem; 
+        margin-bottom: 0.25rem; 
     }
     .tds-section-card p {
         color: var(--text-secondary);
-        font-size: 0.75rem; /* Tailwind's text-xs */
+        font-size: 0.75rem; 
     }
 
     /* TDS Section Detail Display */
     #tdsSectionDetail {
         background-color: var(--background-light);
         border-radius: 12px;
-        min-height: 200px; /* Adjusted min-height */
-        padding: 24px; /* Added padding, was p-6 from .bg-white */
-        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05); /* Softer shadow */
+        min-height: 200px; 
+        padding: 24px; 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05); 
     }
-    #tdsSectionDetail p.text-center { /* Was .text-slate-500 */
+    #tdsSectionDetail p.text-center { 
         color: var(--text-tertiary);
     }
-    #tdsSectionDetail h3 { /* Was .text-amber-700 */
+    #tdsSectionDetail h3 { 
          color: var(--text-primary);
-         font-size: 1.5rem; /* text-2xl */
-         font-weight: 600; /* font-semibold */
-         margin-bottom: 0.25rem; /* mb-1 */
+         font-size: 1.5rem; 
+         font-weight: 600; 
+         margin-bottom: 0.25rem; 
     }
-    #tdsSectionDetail p.detail-overview { /* Was .text-sm .text-slate-500 */
+    #tdsSectionDetail p.detail-overview { 
         color: var(--text-secondary);
-        font-size: 0.875rem; /* text-sm */
-        margin-bottom: 1rem; /* mb-4 */
+        font-size: 0.875rem; 
+        margin-bottom: 1rem; 
     }
-     #tdsSectionDetail strong.detail-strong-block { /* Was .block .text-slate-700 .text-sm */
+     #tdsSectionDetail strong.detail-strong-block { 
         color: var(--text-primary);
         font-weight: 500;
-        font-size: 0.875rem; /* text-sm */
+        font-size: 0.875rem; 
         margin-bottom: 0.3rem;
         display: block;
     }
     #tdsSectionDetail p.detail-text-content,
-    #tdsSectionDetail ul li.detail-list-item { /* Was .text-slate-600 .text-sm */
+    #tdsSectionDetail ul li.detail-list-item { 
         color: var(--text-secondary);
-        font-size: 0.875rem; /* text-sm */
+        font-size: 0.875rem; 
     }
      #tdsSectionDetail ul.list-disc {
-        padding-left: 1.25rem; /* pl-4 */
-        margin-bottom: 1rem; /* Space after lists */
+        padding-left: 1.25rem; 
+        margin-bottom: 1rem; 
      }
 
 
     /* Accordion */
     .accordion-button {
-        background-color: #f0f0f0; /* Slightly darker than card bg for differentiation */
+        background-color: #f0f0f0; 
         color: var(--text-primary);
         font-weight: 500;
         border-radius: 8px;
-        padding: 12px 16px; /* was p-3 */
+        padding: 12px 16px; 
         width: 100%;
         text-align: left;
-        display: flex; /* from flex */
-        justify-content: space-between; /* from justify-between */
-        align-items: center; /* from items-center */
-        font-size: 0.875rem; /* text-sm */
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        font-size: 0.875rem; 
     }
     .accordion-button:hover {
-        background-color: #e8e8e8; /* was hover:bg-slate-200 */
+        background-color: #e8e8e8; 
     }
     .accordion-button svg {
         color: var(--text-secondary);
     }
     .accordion-content {
-        background-color: var(--background-light); /* was bg-white */
-        border: 1px solid var(--border-color-light); /* was border border-t-0 border-slate-200 */
+        background-color: var(--background-light); 
+        border: 1px solid var(--border-color-light); 
         border-top: none;
-        border-radius: 0 0 8px 8px; /* was rounded-b-md */
-        padding: 16px; /* was p-3 */
-        color: var(--text-secondary); /* was text-slate-600 */
-        font-size: 0.875rem; /* text-sm */
+        border-radius: 0 0 8px 8px; 
+        padding: 16px; 
+        color: var(--text-secondary); 
+        font-size: 0.875rem; 
         max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
     }
     .accordion-button.open + .accordion-content { max-height: 1000px; }
 
 
     /* Forms & Interactive Tool (Section 194N) */
-    #sec194NToolContainer { /* Was .bg-white */
+    #sec194NToolContainer { 
         background-color: var(--background-light);
         border-radius: 12px;
-        padding: 24px; /* p-6 */
+        padding: 24px; 
         box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05);
-        margin-top: 2rem; /* mt-8 */
+        margin-top: 2rem; 
     }
-     #sec194NToolContainer h3 { /* text-xl font-semibold text-amber-700 mb-4 */
+     #sec194NToolContainer h3 { 
         color: var(--text-primary);
-        font-size: 1.25rem; /* text-xl */
-        font-weight: 600; /* font-semibold */
-        margin-bottom: 1rem; /* mb-4 */
+        font-size: 1.25rem; 
+        font-weight: 600; 
+        margin-bottom: 1rem; 
      }
-    label, .form-radio-label { /* for .text-slate-700 */
+    label, .form-radio-label { 
         color: var(--text-primary);
-        font-size: 0.875rem; /* text-sm */
-        font-weight: 500; /* font-medium */
-        display: block; /* block */
-        margin-bottom: 0.25rem; /* mb-1 */
+        font-size: 0.875rem; 
+        font-weight: 500; 
+        display: block; 
+        margin-bottom: 0.25rem; 
     }
-    input[type="number"], input[type="text"] { /* input styling */
-        border: 1px solid var(--border-color-light); /* border border-slate-300 */
-        background-color: var(--background-light); /* bg-white */
+    input[type="number"], input[type="text"] { 
+        border: 1px solid var(--border-color-light); 
+        background-color: var(--background-light); 
         color: var(--text-primary);
-        border-radius: 6px; /* rounded-md */
-        padding: 10px 12px; /* px-3 py-2 */
-        font-size: 0.875rem; /* sm:text-sm */
+        border-radius: 6px; 
+        padding: 10px 12px; 
+        font-size: 0.875rem; 
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        margin-top: 0.25rem; /* mt-1 */
-        width: 100%; /* block w-full */
-        box-shadow: none; /* shadow-sm */
+        margin-top: 0.25rem; 
+        width: 100%; 
+        box-shadow: none; 
     }
     input[type="number"]:focus, input[type="text"]:focus {
-        border-color: var(--link-blue); /* focus:border-amber-500 */
-        box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2); /* focus:ring-amber-500 */
-        outline: none; /* focus:outline-none */
+        border-color: var(--link-blue); 
+        box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2); 
+        outline: none; 
     }
-    input[type="radio"].form-radio { /* class="form-radio text-amber-600 focus:ring-amber-500" */
+    input[type="radio"].form-radio { 
         color: var(--link-blue);
     }
     input[type="radio"].form-radio:focus {
-        box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3); /* Simulating focus:ring-amber-500 */
+        box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3); 
     }
 
-    button#calculate194NTds { /* class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition duration-150 ease-in-out" */
+    button#calculate194NTds { 
         background-color: var(--link-blue);
         color: white;
-        font-weight: 600; /* font-semibold */
-        font-size: 1rem; /* text-base implicit */
-        padding: 0.75rem 1rem; /* py-2 px-4 is more like py-3 for 0.75rem, adjusted for balance */
-        border-radius: 8px; /* rounded-md */
-        transition: background-color 0.2s ease; /* transition duration-150 ease-in-out */
-        width: 100%; /* w-full */
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+        font-weight: 600; 
+        font-size: 1rem; 
+        padding: 0.75rem 1rem; 
+        border-radius: 8px; 
+        transition: background-color 0.2s ease; 
+        width: 100%; 
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
     }
     button#calculate194NTds:hover {
         background-color: var(--link-blue-hover);
     }
-    #sec194NResult { /* class="mt-4 p-4 bg-amber-100 border border-amber-300 rounded-md text-slate-700" */
-        background-color: rgba(0, 122, 255, 0.08); /* Light blueish background */
+    #sec194NResult { 
+        background-color: rgba(0, 122, 255, 0.08); 
         border: 1px solid var(--link-blue);
         color: var(--text-primary);
-        border-radius: 8px; /* rounded-md */
-        padding: 1rem; /* p-4 */
-        font-size: 0.875rem; /* text-sm implied */
-        margin-top: 1rem; /* mt-4 */
+        border-radius: 8px; 
+        padding: 1rem; 
+        font-size: 0.875rem; 
+        margin-top: 1rem; 
     }
 
     /* Footer */
-    footer { /* class="bg-slate-800 text-amber-50 py-8 mt-12" */
+    footer { 
         background-color: var(--background-body);
         color: var(--text-tertiary);
-        padding: 30px 20px; /* py-8 is a bit large, adjusted */
+        padding: 30px 20px; 
         text-align: center;
         border-top: 0.5px solid var(--border-color-light);
-        margin-top: 3rem; /* mt-12 */
+        margin-top: 3rem; 
     }
     footer p {
         color: var(--text-tertiary);
-        font-size: 13px; /* text-sm or text-xs */
+        font-size: 13px; 
     }
     footer p.text-xs {
-        margin-top: 0.25rem; /* mt-1 */
+        margin-top: 0.25rem; 
     }
 
 
     /* Utility for consistent table cell structure */
     .table-responsive { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    table { width: 100%; border-collapse: collapse; } /* Added border-collapse */
+    table { width: 100%; border-collapse: collapse; } 
     th, td { white-space: normal; word-wrap: break-word; }
 
     .content-section { display: none; }
@@ -409,7 +414,7 @@
                 </div>
                 <nav class="hidden md:flex space-x-4">
                     <a href="#essentials" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">TDS Essentials</a>
-                    <a href="#key-changes" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Key Changes</a>
+                    <a href="#key-changes" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Key Amendments</a>
                     <a href="#compliance" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Compliance</a>
                     <a href="#deep-dive" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Section Deep Dive</a>
                 </nav>
@@ -424,7 +429,7 @@
         </div>
         <div id="mobile-menu" class="md:hidden hidden shadow-lg">
             <a href="#essentials" class="block nav-link px-3 py-2 rounded-md text-base font-medium">TDS Essentials</a>
-            <a href="#key-changes" class="block nav-link px-3 py-2 rounded-md text-base font-medium">Key Changes</a>
+            <a href="#key-changes" class="block nav-link px-3 py-2 rounded-md text-base font-medium">Key Amendments</a>
             <a href="#compliance" class="block nav-link px-3 py-2 rounded-md text-base font-medium">Compliance</a>
             <a href="#deep-dive" class="block nav-link px-3 py-2 rounded-md text-base font-medium">Section Deep Dive</a>
         </div>
@@ -455,7 +460,7 @@
         </section>
 
         <section id="key-changes" class="content-section pt-16 -mt-16">
-            <h2 class="text-3xl font-bold mb-6 border-b-2 pb-2">Key Changes & Highlights (Finance Act 2025)</h2>
+            <h2 class="text-3xl font-bold mb-6 border-b-2 pb-2">Key Amendments & Highlights (Finance Act 2025)</h2>
             <p class="mb-6 leading-relaxed">The Finance Act, 2025, effective April 1, 2025, introduces significant modifications to TDS provisions for FY 2025-26 (AY 2026-27). This section outlines these crucial updates, including revised thresholds, new sections, and procedural simplifications, helping you stay compliant with the latest regulations.</p>
             
             <div class="bg-white-card p-6 rounded-lg shadow-lg mb-8">
@@ -889,7 +894,7 @@
 
             function updateActiveLink(targetId) {
                 navLinks.forEach(link => {
-                    link.classList.remove('active'); // Relies on CSS for active state .nav-link.active
+                    link.classList.remove('active'); 
                     if (link.getAttribute('href') === `#${targetId}`) {
                         link.classList.add('active');
                     }
@@ -904,11 +909,10 @@
                     }
                 });
                 updateActiveLink(targetId);
-                if (mobileMenu.classList.contains('block')) { // Check if mobile menu is open
+                if (mobileMenu.classList.contains('block')) { 
                     mobileMenu.classList.remove('block');
                     mobileMenu.classList.add('hidden');
                 }
-                 // Adjust offset for sticky header height (approx 64px)
                  const headerOffset = 64;
                  const elementPosition = document.getElementById(targetId).offsetTop;
                  const offsetPosition = elementPosition - headerOffset;
@@ -920,7 +924,6 @@
                     e.preventDefault();
                     const targetId = this.getAttribute('href').substring(1);
                     showSection(targetId);
-                     // Update URL hash without jumping, for bookmarkability
                     if(history.pushState) {
                         history.pushState(null, null, `#${targetId}`);
                     } else {
@@ -935,10 +938,10 @@
                 if (targetSection && targetSection.classList.contains('content-section')) {
                      showSection(targetId);
                 } else {
-                    showSection('essentials'); // Default section
+                    showSection('essentials'); 
                 }
             } else {
-                 showSection('essentials'); // Default section
+                 showSection('essentials'); 
             }
 
 
@@ -953,15 +956,52 @@
 
             const sectionOrder = ["192", "193", "194", "194A", "194C", "194H", "194I", "194IA", "194IB", "194J", "194K", "194M", "194N", "194Q", "194R", "194T"];
 
+            // --- Corrected card generation logic ---
             sectionOrder.forEach(key => {
                 const data = tdsData[key];
+                if (!data || !data.title) {
+                    console.error("TDS Navigator: Missing data or title for key:", key);
+                    return; // Skip this card if data is problematic
+                }
+
                 const card = document.createElement('div');
-                // Tailwind classes for layout, custom CSS for styling
-                card.className = 'tds-section-card bg-white rounded-lg shadow-md hover:shadow-xl cursor-pointer flex flex-col justify-between items-center text-center';
-                card.innerHTML = `<h4 class="text-md font-semibold mb-1"><span class="math-inline">\{key\}</h4\><p class\="text\-xs"\></span>{data.title.split('–')[1].trim()}</p>`;
+                // Use the specific CSS class, Tailwind utility classes can be added for fine-tuning if needed
+                card.className = 'tds-section-card'; 
+                // card.classList.add('flex', 'flex-col', 'justify-between', 'items-center', 'text-center', 'cursor-pointer'); // Redundant if CSS handles it
+
+                const h4 = document.createElement('h4');
+                // Styling for h4 is handled by .tds-section-card h4 in CSS
+                // h4.className = 'text-md font-semibold mb-1'; // No need if CSS for .tds-section-card h4 covers it
+                h4.textContent = `Sec ${key}`; // Display "Sec XXX"
+
+                const p = document.createElement('p');
+                // Styling for p is handled by .tds-section-card p in CSS
+                // p.className = 'text-xs'; // No need if CSS for .tds-section-card p covers it
+                
+                let cardSubtitle = "Details"; // Default fallback
+                try {
+                    const subtitleParts = data.title.split('–'); // Using en-dash '–' as in data
+                    if (subtitleParts.length > 1) {
+                        cardSubtitle = subtitleParts[1].trim();
+                    } else {
+                        // If '–' is not found, use the whole title or just a part of it
+                        cardSubtitle = data.title.replace(`Section ${key} –`, "").trim(); 
+                        if (!cardSubtitle) cardSubtitle = "Overview"; // Fallback if stripping leaves empty
+                    }
+                } catch (e) {
+                    console.error("TDS Navigator: Error processing subtitle for key:", key, data.title, e);
+                    if(data.title) cardSubtitle = data.title.trim(); // Fallback to full title on error
+                }
+                p.textContent = cardSubtitle;
+
+                card.appendChild(h4);
+                card.appendChild(p);
+
                 card.addEventListener('click', () => displaySectionDetail(key));
                 tdsSectionGrid.appendChild(card);
             });
+            // --- End of corrected card generation logic ---
+
 
             function displaySectionDetail(key) {
                 const data = tdsData[key];
@@ -980,16 +1020,16 @@
                 let exemptionsHtml = data.exemptions.map(ex => `<li class="detail-list-item">${ex}</li>`).join('');
 
                 tdsSectionDetail.innerHTML = `
-                    <h3 class="text-2xl font-semibold mb-1"><span class="math-inline">\{data\.title\}</h3\>
-<p class\="detail\-overview text\-sm mb\-4"\></span>{data.overview}</p>
+                    <h3 class="text-2xl font-semibold mb-1">${data.title}</h3>
+                    <p class="detail-overview text-sm mb-4">${data.overview}</p>
                     
                     <div class="mb-4">
                         <strong class="detail-strong-block">Applicability:</strong>
-                        <p class="detail-text-content text-sm"><span class="math-inline">\{data\.applicability\}</p\>
-</div\>
-<div class\="mb\-4"\>
-<strong class\="detail\-strong\-block"\>TDS Rate & Threshold \(FY 2025\-26\)\:</strong\>
-<p class\="detail\-text\-content text\-sm"\></span>{data.rateThreshold}</p>
+                        <p class="detail-text-content text-sm">${data.applicability}</p>
+                    </div>
+                    <div class="mb-4">
+                        <strong class="detail-strong-block">TDS Rate & Threshold (FY 2025-26):</strong>
+                        <p class="detail-text-content text-sm">${data.rateThreshold}</p>
                     </div>
                     
                     ${data.nuances.length > 0 ? `
@@ -1011,11 +1051,10 @@
                     </div>` : ''}
                 `;
                 
-                 // Scroll to the detail section, considering the sticky header
-                const headerOffset = 70; // Approximate height of sticky header + a little buffer
-                const elementPosition = tdsSectionDetail.offsetTop;
-                const offsetPosition = elementPosition - headerOffset;
-                window.scrollTo({
+                 const headerOffset = 70; 
+                 const elementPosition = tdsSectionDetail.offsetTop;
+                 const offsetPosition = elementPosition - headerOffset;
+                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
@@ -1181,4 +1220,4 @@
         });
     </script>
 </body>
-</html> in TDS Navigator page the section name is Key Changes. change the name to "Key Amendments".
+</html>
