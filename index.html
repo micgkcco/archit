@@ -13,20 +13,20 @@
     <meta property="og:title" content="Archit B. Sheth - Tax Experts in Ahmedabad">
     <meta property="og:description" content="Professional tax advisory and chartered accountant services in Ahmedabad, Gujarat.">
     <meta property="og:type" content="website">
-    <script src="https://cdn.tailwindcss.com"></script> 
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             /* Apple-inspired Palette */
             --font-family-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            
-            --background-light: #f5f5f7; 
-            --text-primary: #1d1d1f;    
-            --text-primary-rgb: 29, 29, 31; 
-            --text-secondary: #515154; 
-            --link-blue: #007aff;       
-            --link-blue-hover: #0071e3; 
+
+            --background-light: #f5f5f7;
+            --text-primary: #1d1d1f;
+            --text-primary-rgb: 29, 29, 31;
+            --text-secondary: #515154;
+            --link-blue: #007aff;
+            --link-blue-hover: #0071e3;
             --border-color-light: #d2d2d7;
-            --border-color-light-rgb: 210, 210, 215; 
+            --border-color-light-rgb: 210, 210, 215;
         }
 
         html {
@@ -36,18 +36,18 @@
         }
         body {
             font-family: var(--font-family-apple);
-            overflow-x: hidden; 
+            overflow-x: hidden;
             overflow-y: auto;
-            background-color: var(--background-light); 
-            color: var(--text-primary); 
-            line-height: 1.5; 
-            display: flex; 
-            flex-direction: column; 
+            background-color: var(--background-light);
+            color: var(--text-primary);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center; 
+            justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px 0; 
+            padding: 20px 0;
         }
 
         #welcome-screen {
@@ -57,15 +57,15 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            opacity: 1; 
-            padding: 20px; 
+            opacity: 1;
+            padding: 20px;
             max-width: 800px;
-            width: 100%; 
-            box-sizing: border-box; 
+            width: 100%;
+            box-sizing: border-box;
         }
-        
+
         #welcome-screen h2 {
-            font-family: var(--font-family-apple); 
+            font-family: var(--font-family-apple);
             font-size: 72px;
             font-weight: 600;
             color: var(--text-primary);
@@ -75,9 +75,9 @@
             opacity: 0;
             animation: appleHeroTextReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
         }
-        
+
         #welcome-screen .welcome-subtitle {
-            font-family: var(--font-family-apple); 
+            font-family: var(--font-family-apple);
             font-size: 30px;
             font-weight: 400;
             color: var(--text-secondary);
@@ -89,27 +89,27 @@
         }
         #welcome-screen .welcome-subtitle .emoji {
             font-size: 28px;
-            vertical-align: baseline; 
+            vertical-align: baseline;
             margin-left: 6px;
         }
-        
-        @keyframes appleHeroTextReveal { 
-            0% { 
-                opacity: 0; 
+
+        @keyframes appleHeroTextReveal {
+            0% {
+                opacity: 0;
                 transform: translateY(40px) scale(0.97);
             }
-            100% { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
             }
         }
-        
+
         .contact-info {
             opacity: 0;
-            margin-top: 24px; 
-            font-family: var(--font-family-apple); 
+            margin-top: 24px;
+            font-family: var(--font-family-apple);
             transform: translateY(20px);
-            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards; 
+            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards;
         }
         @keyframes appleStandardFadeInUp {
             0% { opacity: 0; transform: translateY(20px); }
@@ -117,37 +117,37 @@
         }
 
         .contact-info p {
-            font-size: 19px; 
+            font-size: 19px;
             font-weight: 400;
-            line-height: 1.5; 
+            line-height: 1.5;
             color: var(--text-primary);
             margin-bottom: 12px;
         }
-        .contact-info .emoji-contact { 
-            font-size: 17px; 
-            margin-right: 8px; 
-            vertical-align: middle; 
-            color: var(--text-secondary); 
+        .contact-info .emoji-contact {
+            font-size: 17px;
+            margin-right: 8px;
+            vertical-align: middle;
+            color: var(--text-secondary);
         }
          .contact-info a {
-            color: var(--link-blue); 
+            color: var(--link-blue);
             text-decoration: none;
-            font-weight: 400; 
+            font-weight: 400;
             transition: color 0.2s ease-in-out;
         }
-        .contact-info a:hover { 
+        .contact-info a:hover {
             color: var(--link-blue-hover);
-            text-decoration: underline; 
+            text-decoration: underline;
         }
 
-        .cta-link-container { 
+        .cta-link-container {
             margin-top: 36px;
             opacity: 0;
             transform: translateY(20px);
-            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.9s forwards; 
+            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.9s forwards;
         }
 
-        .apple-text-cta { 
+        .apple-text-cta {
             display: inline-block;
             color: var(--link-blue);
             font-weight: 500;
@@ -159,33 +159,36 @@
         .apple-text-cta:hover {
             color: var(--link-blue-hover);
             text-decoration: underline;
-            text-decoration-color: var(--link-blue-hover); 
+            text-decoration-color: var(--link-blue-hover);
         }
         .apple-text-cta .cta-arrow {
             margin-left: 5px;
-            font-weight: 500; 
-            display: inline-block; 
+            font-weight: 500;
+            display: inline-block;
         }
-        
+
         /* --- Update Section (common style for TDS and SFT updates) --- */
-        .update-section-common { 
+        .update-section-common {
             margin-top: 35px; /* Adjusted default margin */
             padding: 18px 20px; /* Reduced padding */
-            background-color: rgba(var(--text-primary-rgb), 0.025); 
+            background-color: rgba(var(--text-primary-rgb), 0.025);
             border-radius: 12px; /* Slightly smaller radius */
             text-align: center;
             opacity: 0;
             transform: translateY(30px) scale(0.98);
             max-width: 500px; /* Reduced max-width */
-            width: 90%; 
+            width: 90%;
             border: 0.5px solid rgba(var(--border-color-light-rgb), 0.35); /* Slightly lighter border */
             box-sizing: border-box;
         }
-        .update-section-common.tds-update { 
+        .update-section-common.tds-update {
              animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards;
         }
-        .update-section-common.sft-update { 
-             animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.25s forwards; 
+        .update-section-common.sft-update {
+             animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.25s forwards;
+        }
+        .update-section-common.fa-summary-update { /* New class for FA Summary */
+             animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.4s forwards; /* Adjusted animation delay */
         }
 
 
@@ -213,9 +216,9 @@
             letter-spacing: 0.5px;
         }
 
-        .update-section-common .update-link-text { 
+        .update-section-common .update-link-text {
             font-size: 18px; /* Reduced font size */
-            display: block; 
+            display: block;
             margin-bottom: 8px; /* Reduced margin */
         }
 
@@ -229,61 +232,61 @@
         }
         /* End Update Section */
 
-        .main-footer { 
+        .main-footer {
             width: 100%;
-            padding: 30px 20px 20px; 
+            padding: 30px 20px 20px;
             text-align: center;
             font-family: var(--font-family-apple);
-            font-size: 12px; 
+            font-size: 12px;
             font-weight: 400;
             opacity: 0;
-            color: var(--text-secondary); 
+            color: var(--text-secondary);
             letter-spacing: -0.003em;
             transform: translateY(20px);
-            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.4s forwards;
-            margin-top: 40px; 
+            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.55s forwards; /* Adjusted animation delay */
+            margin-top: 40px;
             border-top: 0.5px solid var(--border-color-light);
         }
         .main-footer .india-flag {
             display: inline-block;
             margin-left: 4px;
-            font-size: 12px; 
+            font-size: 12px;
             vertical-align: baseline;
         }
 
         /* --- Disclaimer Modal Styles --- */
         .disclaimer-modal {
-            display: none; 
+            display: none;
             position: fixed;
-            inset: 0; 
-            background-color: rgba(0, 0, 0, 0.55); 
-            z-index: 2000; 
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.55);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transition: opacity 0.25s ease-in-out;
-            font-family: var(--font-family-apple); 
-            padding: 15px; 
+            font-family: var(--font-family-apple);
+            padding: 15px;
             box-sizing: border-box;
         }
 
-        .disclaimer-modal.visible { 
-            display: flex; 
+        .disclaimer-modal.visible {
+            display: flex;
             opacity: 1;
         }
 
         .disclaimer-modal .modal-content {
             background-color: var(--background-light);
-            padding: 30px 35px; 
-            border-radius: 14px; 
-            max-width: 460px; 
-            width: 100%; 
+            padding: 30px 35px;
+            border-radius: 14px;
+            max-width: 460px;
+            width: 100%;
             text-align: center;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.12); 
-            transform: scale(0.92); 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+            transform: scale(0.92);
             opacity: 0;
             transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-            transition-delay: 0.05s; 
+            transition-delay: 0.05s;
             box-sizing: border-box;
         }
 
@@ -296,35 +299,35 @@
             font-size: 20px;
             font-weight: 600;
             color: var(--text-primary);
-            margin-top: 0; 
+            margin-top: 0;
             margin-bottom: 12px;
         }
 
         .disclaimer-modal .modal-content p {
-            font-size: 14px; 
+            font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.55;
             margin-bottom: 25px;
         }
 
         .disclaimer-modal .modal-buttons {
-            display: flex; 
-            flex-direction: column; 
-            gap: 10px; 
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .disclaimer-modal .modal-buttons button {
-            padding: 10px 15px; 
+            padding: 10px 15px;
             border: none;
-            border-radius: 8px; 
+            border-radius: 8px;
             font-size: 16px;
-            font-weight: 500; 
+            font-weight: 500;
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.1s ease;
-            width: 100%; 
+            width: 100%;
         }
         .disclaimer-modal .modal-buttons button:active {
-            transform: scale(0.96); 
+            transform: scale(0.96);
         }
 
         .disclaimer-modal #agreeButton {
@@ -336,11 +339,11 @@
         }
 
         .disclaimer-modal #cancelButton {
-            background-color: #e8e8ed; 
-            color: var(--link-blue); 
+            background-color: #e8e8ed;
+            color: var(--link-blue);
         }
         .disclaimer-modal #cancelButton:hover {
-            background-color: #dddce1; 
+            background-color: #dddce1;
         }
         /* End Disclaimer Modal Styles */
 
@@ -351,8 +354,8 @@
             }
             #welcome-screen {
                 padding: 25px 15px; /* Adjusted */
-                justify-content: flex-start; 
-                min-height: auto; 
+                justify-content: flex-start;
+                min-height: auto;
             }
             #welcome-screen h2 {
                 font-size: 40px; /* Reduced */
@@ -366,29 +369,29 @@
                 letter-spacing: -0.01em;
             }
             #welcome-screen .welcome-subtitle .emoji {
-                font-size: 18px; 
+                font-size: 18px;
             }
             .contact-info { margin-top: 20px; }
             .contact-info p {
-                font-size: 16px; 
+                font-size: 16px;
             }
-            .contact-info .emoji-contact { 
-                font-size: 14px; 
+            .contact-info .emoji-contact {
+                font-size: 14px;
             }
 
-            .apple-text-cta { 
-                font-size: 18px; 
+            .apple-text-cta {
+                font-size: 18px;
             }
             .cta-link-container { margin-top: 30px;}
-            
-            .update-section-common { 
-                margin-top: 30px; 
-                padding: 15px; 
-                width: 100%; 
-                max-width: none; 
+
+            .update-section-common {
+                margin-top: 30px;
+                padding: 15px;
+                width: 100%;
+                max-width: none;
             }
 
-            .update-section-common .update-link-text { 
+            .update-section-common .update-link-text {
                 font-size: 17px; /* Reduced */
             }
              .update-badge {
@@ -401,7 +404,7 @@
             }
 
             .disclaimer-modal .modal-content {
-                padding: 25px 20px; 
+                padding: 25px 20px;
             }
             .disclaimer-modal .modal-content h3 {
                 font-size: 18px;
@@ -411,10 +414,10 @@
                 margin-bottom: 20px;
             }
             .disclaimer-modal .modal-buttons {
-                flex-direction: row; 
+                flex-direction: row;
             }
              .main-footer {
-                position: static; 
+                position: static;
                 padding: 20px 15px;
                 margin-top: 30px;
             }
@@ -442,11 +445,11 @@
             .apple-text-cta {
                 font-size: 16px; /* Reduced */
             }
-             .update-section-common { 
+             .update-section-common {
                 margin-top: 25px; /* Reduced */
                 padding: 12px; /* Reduced */
              }
-             .update-section-common .update-link-text { 
+             .update-section-common .update-link-text {
                 font-size: 16px; /* Reduced */
                 margin-bottom: 6px;
             }
@@ -459,7 +462,7 @@
                 font-size: 12px; /* Reduced */
             }
 
-            .main-footer { 
+            .main-footer {
                 font-size: 10px;
                 padding-top: 20px;
             }
@@ -467,7 +470,7 @@
                 padding: 20px 15px;
             }
              .disclaimer-modal .modal-buttons {
-                flex-direction: column; 
+                flex-direction: column;
             }
             .disclaimer-modal .modal-buttons button {
                 font-size: 15px;
@@ -482,15 +485,15 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      // gtag('config', 'G-XXXXXXXXXX'); 
+      // gtag('config', 'G-XXXXXXXXXX');
     </script>
 </head>
 <body>
-    <div id="welcome-screen" role="main"> 
-        <h2 id="main-heading">Archit B. Sheth</h2> 
+    <div id="welcome-screen" role="main">
+        <h2 id="main-heading">Archit B. Sheth</h2>
         <p class="welcome-subtitle">
             Your Taxation Expert
-            <span class="emoji">📊</span> 
+            <span class="emoji">💼</span>
         </p>
 
         <div class="contact-info">
@@ -502,7 +505,7 @@
             </p>
         </div>
 
-        <div class="cta-link-container"> 
+        <div class="cta-link-container">
             <a href="profile.html" class="apple-text-cta" style="font-size: 21px;">
                 Know More about Expert <span class="cta-arrow">&rsaquo;</span>
             </a>
@@ -523,6 +526,14 @@
             </a>
             <p class="update-description">Understand Specified Financial Transaction reporting requirements and procedures.</p>
         </div>
+
+        <div class="update-section-common fa-summary-update"> <span class="update-badge">New</span>
+            <a href="summary of FA 2025 amendments.html" class="apple-text-cta update-link-text fa-summary-link">
+                Finance Act 2025 Amendments Summary <span class="cta-arrow">&rsaquo;</span>
+            </a>
+            <p class="update-description">An interactive summary of key amendments in the Finance Act 2025.</p>
+        </div>
+
     </div>
 
     <footer class="main-footer">
@@ -551,7 +562,8 @@
         // --- Disclaimer Modal Logic ---
         const tdsUpdateLink = document.querySelector('a.tds-navigator-link');
         const sftGuideLink = document.querySelector('a.sft-guide-link');
-        
+        const faSummaryLink = document.querySelector('a.fa-summary-link'); // New link selector
+
         const disclaimerModal = document.getElementById('disclaimerModal');
         const disclaimerTitle = document.getElementById('disclaimerTitle');
         const disclaimerText = document.getElementById('disclaimerText');
@@ -561,12 +573,12 @@
         let targetUrl = ''; // To store the URL to navigate to after agreement
 
         function showDisclaimer(event, toolName, url) {
-            event.preventDefault(); 
+            event.preventDefault();
             targetUrl = url;
             disclaimerTitle.textContent = `${toolName} - Disclaimer`;
             disclaimerText.innerHTML = `© ${new Date().getFullYear()} ${toolName}. For informational purposes only.<br>
                 Consult a tax professional for specific advice. Content based on relevant provisions.`;
-            disclaimerModal.classList.add('visible'); 
+            disclaimerModal.classList.add('visible');
         }
 
         if (tdsUpdateLink) {
@@ -580,23 +592,29 @@
                  showDisclaimer(event, 'SFT Reporting Guide', this.href);
             });
         }
-        
+
+        if (faSummaryLink) { // Event listener for the new link
+            faSummaryLink.addEventListener('click', function(event) {
+                 showDisclaimer(event, 'Finance Act 2025 Summary', this.href);
+            });
+        }
+
         if (disclaimerModal && agreeButton && cancelButton) {
             agreeButton.addEventListener('click', function() {
                 disclaimerModal.classList.remove('visible');
                 if (targetUrl) {
                     setTimeout(() => {
-                        window.location.href = targetUrl; 
-                    }, 150); 
+                        window.location.href = targetUrl;
+                    }, 150);
                 }
             });
 
             cancelButton.addEventListener('click', function() {
-                disclaimerModal.classList.remove('visible'); 
+                disclaimerModal.classList.remove('visible');
             });
 
             disclaimerModal.addEventListener('click', function(event) {
-                if (event.target === disclaimerModal) { 
+                if (event.target === disclaimerModal) {
                     disclaimerModal.classList.remove('visible');
                 }
             });
