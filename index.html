@@ -21,10 +21,12 @@
             
             --background-light: #f5f5f7; 
             --text-primary: #1d1d1f;    
+            --text-primary-rgb: 29, 29, 31; /* Added for subtle background */
             --text-secondary: #515154; 
             --link-blue: #007aff;       
             --link-blue-hover: #0071e3; 
-            --border-color-light: #d2d2d7; 
+            --border-color-light: #d2d2d7;
+            --border-color-light-rgb: 210, 210, 215; /* For rgba borders */
         }
 
         html {
@@ -54,47 +56,42 @@
             text-align: center;
             opacity: 1; 
             padding: 40px 20px; 
-            max-width: 800px; /* Increased max-width for bolder feel */
+            max-width: 800px;
         }
         
-        /* Main Heading Styling & Animation - Bolder and Mightier */
         #welcome-screen h2 {
             font-family: var(--font-family-apple); 
-            font-size: 72px; /* Significantly larger */
-            font-weight: 600; /* Semibold is very impactful at this size */
+            font-size: 72px;
+            font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 20px; /* Adjusted spacing */
-            line-height: 1.1; /* Ensure lines are not too far apart */
-            letter-spacing: -0.025em; /* Fine-tune for large size */
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
             opacity: 0;
-            /* transform: translateY(40px) scale(0.98); /* Initial state for animation */
             animation: appleHeroTextReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
         }
         
-        /* Subtitle Styling & Animation - Bolder and Mightier */
         #welcome-screen .welcome-subtitle {
             font-family: var(--font-family-apple); 
-            font-size: 30px; /* Larger subtitle */
+            font-size: 30px;
             font-weight: 400;
             color: var(--text-secondary);
-            margin-bottom: 40px; /* Adjusted spacing */
+            margin-bottom: 40px;
             line-height: 1.35;
-            letter-spacing: -0.015em; /* Fine-tune */
+            letter-spacing: -0.015em;
             opacity: 0;
-            /* transform: translateY(40px) scale(0.98); /* Initial state for animation */
-            animation: appleHeroTextReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards; /* Staggered */
+            animation: appleHeroTextReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
         }
         #welcome-screen .welcome-subtitle .emoji {
-            font-size: 28px; /* Scaled with subtitle */
+            font-size: 28px;
             vertical-align: baseline; 
             margin-left: 6px;
         }
         
-        /* Refined Apple-like Hero Text Reveal Animation */
         @keyframes appleHeroTextReveal { 
             0% { 
                 opacity: 0; 
-                transform: translateY(40px) scale(0.97); /* Start further down and slightly smaller */
+                transform: translateY(40px) scale(0.97);
             }
             100% { 
                 opacity: 1; 
@@ -102,19 +99,17 @@
             }
         }
         
-        /* Contact Info Styling & Animation - standard animation */
         .contact-info {
             opacity: 0;
             margin-top: 24px; 
             font-family: var(--font-family-apple); 
-            transform: translateY(20px); /* Standard initial state */
+            transform: translateY(20px);
             animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards; 
         }
-        @keyframes appleStandardFadeInUp { /* Keep a standard one for less prominent elements */
+        @keyframes appleStandardFadeInUp {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
 
         .contact-info p {
             font-size: 19px; 
@@ -140,24 +135,21 @@
             text-decoration: underline; 
         }
 
-        /* CTA Link Container - standard animation */
         .cta-link-container { 
-            margin-top: 36px; /* More space before CTA */
+            margin-top: 36px;
             opacity: 0;
-            transform: translateY(20px); /* Standard initial state */
+            transform: translateY(20px);
             animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.9s forwards; 
         }
 
-        /* Subtle Apple-like Text CTA - slightly more presence */
-        .apple-text-cta {
+        .apple-text-cta { /* General style for text-based CTAs */
             display: inline-block;
             color: var(--link-blue);
-            font-size: 21px; /* Slightly larger CTA text */
-            font-weight: 500; /* Medium weight for more presence */
+            font-weight: 500;
             text-decoration: none;
             transition: color 0.2s ease-in-out, text-decoration-color 0.2s ease-in-out;
             cursor: pointer;
-            padding: 4px 0; /* Add a little vertical space if needed */
+            padding: 4px 0;
         }
         .apple-text-cta:hover {
             color: var(--link-blue-hover);
@@ -165,12 +157,65 @@
             text-decoration-color: var(--link-blue-hover); 
         }
         .apple-text-cta .cta-arrow {
-            margin-left: 5px; /* Slightly more space */
+            margin-left: 5px;
             font-weight: 500; /* Match link weight */
             display: inline-block; 
         }
+        
+        /* --- Latest Update Section --- */
+        .latest-update-section {
+            margin-top: 50px; /* Space below the main CTA */
+            padding: 20px 25px; /* Generous padding */
+            background-color: rgba(var(--text-primary-rgb), 0.025); /* Very subtle background */
+            border-radius: 14px; /* Apple-like rounded corners */
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards; /* After main CTA animation */
+            max-width: 580px; /* Constrain width for focus */
+            border: 0.5px solid rgba(var(--border-color-light-rgb), 0.4); /* Very subtle border */
+        }
 
-        /* Footer Styling & Animation - standard animation */
+        @keyframes latestUpdateReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .update-badge {
+            display: inline-block;
+            background-color: var(--link-blue);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px; /* Pill shape */
+            margin-bottom: 15px; /* Space below badge */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .latest-update-section .update-link-text { /* Specific styling for this link */
+            font-size: 20px; /* Prominent link text */
+            display: block; 
+            margin-bottom: 10px;
+        }
+
+        .update-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.45;
+            max-width: 480px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* End Latest Update Section */
+
         .footer-text {
             position: absolute; 
             bottom: 30px; 
@@ -183,8 +228,8 @@
             opacity: 0;
             color: var(--text-secondary); 
             letter-spacing: -0.003em;
-            transform: translateY(20px); /* Standard initial state */
-            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.1s forwards; 
+            transform: translateY(20px);
+            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.4s forwards; /* Adjusted delay */
         }
         .footer-text .india-flag {
             display: inline-block;
@@ -219,9 +264,16 @@
         </div>
 
         <div class="cta-link-container"> 
-            <a href="profile.html" class="apple-text-cta">
-                Know More about Expert <span class="cta-arrow">&rsaquo;</span>
+            <a href="profile.html" class="apple-text-cta" style="font-size: 21px;"> Know More about Expert <span class="cta-arrow">&rsaquo;</span>
             </a>
+        </div>
+
+        <div class="latest-update-section">
+            <span class="update-badge">Latest</span>
+            <a href="absheth - TDS Navigator - Copy.html" class="apple-text-cta update-link-text">
+                Updates on TDS Provision (FY 2025-26) <span class="cta-arrow">&rsaquo;</span>
+            </a>
+            <p class="update-description">Explore the key changes and simplify your TDS compliance with our interactive guide.</p>
         </div>
 
         <p class="footer-text">
