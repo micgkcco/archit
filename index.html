@@ -21,12 +21,12 @@
             
             --background-light: #f5f5f7; 
             --text-primary: #1d1d1f;    
-            --text-primary-rgb: 29, 29, 31; /* Added for subtle background */
+            --text-primary-rgb: 29, 29, 31; 
             --text-secondary: #515154; 
             --link-blue: #007aff;       
             --link-blue-hover: #0071e3; 
             --border-color-light: #d2d2d7;
-            --border-color-light-rgb: 210, 210, 215; /* For rgba borders */
+            --border-color-light-rgb: 210, 210, 215; 
         }
 
         html {
@@ -36,15 +36,18 @@
         }
         body {
             font-family: var(--font-family-apple);
-            overflow: hidden; 
+            overflow-x: hidden; 
+            overflow-y: auto;
             background-color: var(--background-light); 
             color: var(--text-primary); 
             line-height: 1.5; 
-            display: flex;
+            display: flex; 
+            flex-direction: column; 
             align-items: center;
-            justify-content: center;
+            justify-content: center; 
             min-height: 100vh;
             margin: 0;
+            padding: 20px 0; 
         }
 
         #welcome-screen {
@@ -55,10 +58,10 @@
             justify-content: center;
             text-align: center;
             opacity: 1; 
-            padding: 40px 20px; 
+            padding: 20px; 
             max-width: 800px;
-            width: 100%; /* Ensure it takes up available width for padding to work */
-            box-sizing: border-box; /* Include padding in width calculation */
+            width: 100%; 
+            box-sizing: border-box; 
         }
         
         #welcome-screen h2 {
@@ -144,7 +147,7 @@
             animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.9s forwards; 
         }
 
-        .apple-text-cta { /* General style for text-based CTAs */
+        .apple-text-cta { 
             display: inline-block;
             color: var(--link-blue);
             font-weight: 500;
@@ -160,25 +163,31 @@
         }
         .apple-text-cta .cta-arrow {
             margin-left: 5px;
-            font-weight: 500; /* Match link weight */
+            font-weight: 500; 
             display: inline-block; 
         }
         
-        /* --- Latest Update Section --- */
-        .latest-update-section {
-            margin-top: 50px; /* Space below the main CTA */
-            padding: 20px 25px; /* Generous padding */
-            background-color: rgba(var(--text-primary-rgb), 0.025); /* Very subtle background */
-            border-radius: 14px; /* Apple-like rounded corners */
+        /* --- Update Section (common style for TDS and SFT updates) --- */
+        .update-section-common { 
+            margin-top: 35px; /* Adjusted default margin */
+            padding: 18px 20px; /* Reduced padding */
+            background-color: rgba(var(--text-primary-rgb), 0.025); 
+            border-radius: 12px; /* Slightly smaller radius */
             text-align: center;
             opacity: 0;
             transform: translateY(30px) scale(0.98);
-            animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards; /* After main CTA animation */
-            max-width: 580px; /* Constrain width for focus */
-            width: 90%; /* Make it responsive within its container */
-            border: 0.5px solid rgba(var(--border-color-light-rgb), 0.4); /* Very subtle border */
+            max-width: 500px; /* Reduced max-width */
+            width: 90%; 
+            border: 0.5px solid rgba(var(--border-color-light-rgb), 0.35); /* Slightly lighter border */
             box-sizing: border-box;
         }
+        .update-section-common.tds-update { 
+             animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards;
+        }
+        .update-section-common.sft-update { 
+             animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.25s forwards; 
+        }
+
 
         @keyframes latestUpdateReveal {
             0% {
@@ -195,36 +204,34 @@
             display: inline-block;
             background-color: var(--link-blue);
             color: white;
-            font-size: 10px;
+            font-size: 9px; /* Reduced font size */
             font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 12px; /* Pill shape */
-            margin-bottom: 15px; /* Space below badge */
+            padding: 3px 8px; /* Reduced padding */
+            border-radius: 10px; /* Slightly smaller radius */
+            margin-bottom: 12px; /* Reduced margin */
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .latest-update-section .update-link-text { /* Specific styling for this link */
-            font-size: 20px; /* Prominent link text */
+        .update-section-common .update-link-text { 
+            font-size: 18px; /* Reduced font size */
             display: block; 
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* Reduced margin */
         }
 
         .update-description {
-            font-size: 15px;
+            font-size: 14px; /* Reduced font size */
             color: var(--text-secondary);
-            line-height: 1.45;
-            max-width: 480px; 
+            line-height: 1.4; /* Adjusted line height */
+            max-width: 420px; /* Reduced max width */
             margin-left: auto;
             margin-right: auto;
         }
-        /* End Latest Update Section */
+        /* End Update Section */
 
-        .footer-text {
-            position: absolute; 
-            bottom: 30px; 
-            left: 0;
-            right: 0;
+        .main-footer { 
+            width: 100%;
+            padding: 30px 20px 20px; 
             text-align: center;
             font-family: var(--font-family-apple);
             font-size: 12px; 
@@ -233,9 +240,11 @@
             color: var(--text-secondary); 
             letter-spacing: -0.003em;
             transform: translateY(20px);
-            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.4s forwards; /* Adjusted delay */
+            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.4s forwards;
+            margin-top: 40px; 
+            border-top: 0.5px solid var(--border-color-light);
         }
-        .footer-text .india-flag {
+        .main-footer .india-flag {
             display: inline-block;
             margin-left: 4px;
             font-size: 12px; 
@@ -244,22 +253,22 @@
 
         /* --- Disclaimer Modal Styles --- */
         .disclaimer-modal {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
-            inset: 0; /* Cover the whole screen (top, right, bottom, left = 0) */
-            background-color: rgba(0, 0, 0, 0.55); /* Semi-transparent overlay */
-            z-index: 2000; /* Ensure it's on top */
+            inset: 0; 
+            background-color: rgba(0, 0, 0, 0.55); 
+            z-index: 2000; 
             align-items: center;
             justify-content: center;
             opacity: 0;
             transition: opacity 0.25s ease-in-out;
-            font-family: var(--font-family-apple); /* Ensure font consistency */
-            padding: 15px; /* Add padding for modal on small screens */
+            font-family: var(--font-family-apple); 
+            padding: 15px; 
             box-sizing: border-box;
         }
 
-        .disclaimer-modal.visible { /* Class to control visibility and animation */
-            display: flex; /* Use flex for centering */
+        .disclaimer-modal.visible { 
+            display: flex; 
             opacity: 1;
         }
 
@@ -268,7 +277,7 @@
             padding: 30px 35px; 
             border-radius: 14px; 
             max-width: 460px; 
-            width: 100%; /* Was calc(100% - 40px), now simpler 100% due to parent padding */
+            width: 100%; 
             text-align: center;
             box-shadow: 0 12px 35px rgba(0,0,0,0.12); 
             transform: scale(0.92); 
@@ -299,20 +308,20 @@
         }
 
         .disclaimer-modal .modal-buttons {
-            display: flex; /* For button layout on small screens */
-            flex-direction: column; /* Stack buttons vertically by default */
-            gap: 10px; /* Space between buttons */
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
         }
 
         .disclaimer-modal .modal-buttons button {
-            padding: 10px 15px; /* Unified padding */
+            padding: 10px 15px; 
             border: none;
             border-radius: 8px; 
             font-size: 16px;
             font-weight: 500; 
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.1s ease;
-            width: 100%; /* Make buttons full width of their container */
+            width: 100%; 
         }
         .disclaimer-modal .modal-buttons button:active {
             transform: scale(0.96); 
@@ -321,7 +330,6 @@
         .disclaimer-modal #agreeButton {
             background-color: var(--link-blue);
             color: white;
-            /* margin-right: 10px; Removed for stacked layout */
         }
         .disclaimer-modal #agreeButton:hover {
             background-color: var(--link-blue-hover);
@@ -338,48 +346,58 @@
 
         /* --- Mobile Friendliness --- */
         @media (max-width: 768px) {
+            body {
+                /* overflow: auto; */
+            }
             #welcome-screen {
-                padding: 30px 15px; /* Adjust padding for smaller screens */
+                padding: 25px 15px; /* Adjusted */
+                justify-content: flex-start; 
+                min-height: auto; 
             }
             #welcome-screen h2 {
-                font-size: 44px; /* Reduced from 72px */
+                font-size: 40px; /* Reduced */
                 margin-bottom: 15px;
                 letter-spacing: -0.02em;
             }
 
             #welcome-screen .welcome-subtitle {
-                font-size: 22px; /* Reduced from 30px */
+                font-size: 20px; /* Reduced */
                 margin-bottom: 25px;
                 letter-spacing: -0.01em;
             }
             #welcome-screen .welcome-subtitle .emoji {
-                font-size: 20px; /* Scaled with subtitle */
+                font-size: 18px; 
             }
-
+            .contact-info { margin-top: 20px; }
             .contact-info p {
-                font-size: 17px; /* Reduced from 19px */
+                font-size: 16px; 
             }
             .contact-info .emoji-contact { 
-                font-size: 15px; 
-            }
-
-            .apple-text-cta { /* For both main CTA and update link text */
-                font-size: 19px; /* Reduced from 21px */
-            }
-            
-            .latest-update-section {
-                margin-top: 35px; 
-                padding: 15px; 
-                width: 100%; /* Take full available width within welcome-screen padding */
-                max-width: none; /* Override desktop max-width for this section */
-            }
-
-            .latest-update-section .update-link-text {
-                font-size: 18px; /* Reduced from 20px */
-            }
-
-            .update-description {
                 font-size: 14px; 
+            }
+
+            .apple-text-cta { 
+                font-size: 18px; 
+            }
+            .cta-link-container { margin-top: 30px;}
+            
+            .update-section-common { 
+                margin-top: 30px; 
+                padding: 15px; 
+                width: 100%; 
+                max-width: none; 
+            }
+
+            .update-section-common .update-link-text { 
+                font-size: 17px; /* Reduced */
+            }
+             .update-badge {
+                font-size: 9px;
+                padding: 3px 8px;
+                margin-bottom: 10px;
+            }
+            .update-description {
+                font-size: 13px; /* Reduced */
             }
 
             .disclaimer-modal .modal-content {
@@ -392,9 +410,13 @@
                 font-size: 13px;
                 margin-bottom: 20px;
             }
-             /* For modal buttons on wider small screens, allow side-by-side */
             .disclaimer-modal .modal-buttons {
-                flex-direction: row; /* Side-by-side for wider small screens */
+                flex-direction: row; 
+            }
+             .main-footer {
+                position: static; 
+                padding: 20px 15px;
+                margin-top: 30px;
             }
         }
 
@@ -403,48 +425,49 @@
                 padding: 20px 10px;
             }
             #welcome-screen h2 {
-                font-size: 32px; /* Further reduce */
+                font-size: 30px; /* Further reduce */
             }
 
             #welcome-screen .welcome-subtitle {
-                font-size: 18px; /* Further reduce */
+                font-size: 17px; /* Further reduce */
             }
             #welcome-screen .welcome-subtitle .emoji {
-                font-size: 17px;
+                font-size: 16px;
             }
 
             .contact-info p {
-                font-size: 15px;
+                font-size: 14px; /* Reduced */
                 margin-bottom: 8px;
             }
             .apple-text-cta {
-                font-size: 17px;
+                font-size: 16px; /* Reduced */
             }
-             .latest-update-section {
-                margin-top: 30px;
+             .update-section-common { 
+                margin-top: 25px; /* Reduced */
+                padding: 12px; /* Reduced */
              }
-             .latest-update-section .update-link-text {
-                font-size: 17px;
-                margin-bottom: 8px;
+             .update-section-common .update-link-text { 
+                font-size: 16px; /* Reduced */
+                margin-bottom: 6px;
             }
             .update-badge {
-                font-size: 9px;
-                padding: 3px 8px;
-                margin-bottom: 10px;
+                font-size: 8px; /* Reduced */
+                padding: 2px 6px;
+                margin-bottom: 8px;
             }
             .update-description {
-                font-size: 13px;
+                font-size: 12px; /* Reduced */
             }
 
-            .footer-text {
+            .main-footer { 
                 font-size: 10px;
-                bottom: 10px; 
+                padding-top: 20px;
             }
             .disclaimer-modal .modal-content {
                 padding: 20px 15px;
             }
              .disclaimer-modal .modal-buttons {
-                flex-direction: column; /* Stack buttons on very small screens */
+                flex-direction: column; 
             }
             .disclaimer-modal .modal-buttons button {
                 font-size: 15px;
@@ -485,26 +508,32 @@
             </a>
         </div>
 
-        <div class="latest-update-section">
+        <div class="update-section-common tds-update">
             <span class="update-badge">Latest</span>
-            <a href="absheth - TDS Navigator - Copy.html" class="apple-text-cta update-link-text">
+            <a href="absheth - TDS Navigator - Copy.html" class="apple-text-cta update-link-text tds-navigator-link">
                 Updates on TDS Provision (FY 2025-26) <span class="cta-arrow">&rsaquo;</span>
             </a>
             <p class="update-description">Explore the key changes and simplify your TDS compliance with our interactive guide.</p>
         </div>
 
-        <p class="footer-text">
-            © <span id="currentYear"></span> Archit B. Sheth. All rights reserved. Ahmedabad, Gujarat <span class="india-flag">🇮🇳</span>
-        </p>
+        <div class="update-section-common sft-update">
+            <span class="update-badge">Info</span>
+            <a href="stf.html" class="apple-text-cta update-link-text sft-guide-link">
+                SFT Reporting Guide (Sec 285BA) <span class="cta-arrow">&rsaquo;</span>
+            </a>
+            <p class="update-description">Understand Specified Financial Transaction reporting requirements and procedures.</p>
+        </div>
     </div>
+
+    <footer class="main-footer">
+        <p>© <span id="currentYear"></span> Archit B. Sheth. All rights reserved. Ahmedabad, Gujarat <span class="india-flag">🇮🇳</span></p>
+    </footer>
 
     <div id="disclaimerModal" class="disclaimer-modal">
         <div class="modal-content">
-            <h3>Disclaimer</h3>
-            <p>
-                © 2025 TDS Navigator. For informational purposes only.<br>
-                Consult a tax professional for specific advice. Content based on provisions as of Finance Act 2025.
-            </p>
+            <h3 id="disclaimerTitle">Disclaimer</h3>
+            <p id="disclaimerText">
+                </p>
             <div class="modal-buttons">
                 <button id="agreeButton">Agree & Proceed</button>
                 <button id="cancelButton">Cancel</button>
@@ -520,30 +549,52 @@
         }
 
         // --- Disclaimer Modal Logic ---
-        const tdsUpdateLink = document.querySelector('.latest-update-section a.update-link-text');
+        const tdsUpdateLink = document.querySelector('a.tds-navigator-link');
+        const sftGuideLink = document.querySelector('a.sft-guide-link');
+        
         const disclaimerModal = document.getElementById('disclaimerModal');
+        const disclaimerTitle = document.getElementById('disclaimerTitle');
+        const disclaimerText = document.getElementById('disclaimerText');
         const agreeButton = document.getElementById('agreeButton');
         const cancelButton = document.getElementById('cancelButton');
 
-        if (tdsUpdateLink && disclaimerModal && agreeButton && cancelButton) {
-            tdsUpdateLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Stop the link from navigating immediately
-                disclaimerModal.classList.add('visible'); // Show the modal
-            });
+        let targetUrl = ''; // To store the URL to navigate to after agreement
 
+        function showDisclaimer(event, toolName, url) {
+            event.preventDefault(); 
+            targetUrl = url;
+            disclaimerTitle.textContent = `${toolName} - Disclaimer`;
+            disclaimerText.innerHTML = `© ${new Date().getFullYear()} ${toolName}. For informational purposes only.<br>
+                Consult a tax professional for specific advice. Content based on relevant provisions.`;
+            disclaimerModal.classList.add('visible'); 
+        }
+
+        if (tdsUpdateLink) {
+            tdsUpdateLink.addEventListener('click', function(event) {
+                showDisclaimer(event, 'TDS Navigator', this.href);
+            });
+        }
+
+        if (sftGuideLink) {
+            sftGuideLink.addEventListener('click', function(event) {
+                 showDisclaimer(event, 'SFT Reporting Guide', this.href);
+            });
+        }
+        
+        if (disclaimerModal && agreeButton && cancelButton) {
             agreeButton.addEventListener('click', function() {
                 disclaimerModal.classList.remove('visible');
-                // Optional: Short delay for animation before redirecting
-                setTimeout(() => {
-                    window.location.href = tdsUpdateLink.href; // Proceed to the link's destination
-                }, 150); 
+                if (targetUrl) {
+                    setTimeout(() => {
+                        window.location.href = targetUrl; 
+                    }, 150); 
+                }
             });
 
             cancelButton.addEventListener('click', function() {
-                disclaimerModal.classList.remove('visible'); // Hide the modal
+                disclaimerModal.classList.remove('visible'); 
             });
 
-            // Optional: Close modal if user clicks on the overlay backdrop
             disclaimerModal.addEventListener('click', function(event) {
                 if (event.target === disclaimerModal) { 
                     disclaimerModal.classList.remove('visible');
