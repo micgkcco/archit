@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive TDS Guide - FY 2025-26</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    :root {
+        --font-family-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        --background-body: #f5f5f7; /* Light grey for overall page background */
+        --background-light: #ffffff; /* White for content cards, header */
+        --text-primary: #1d1d1f;
+        --text-secondary: #515154;
+        --text-tertiary: #86868b;
+        --link-blue: #007aff;
+        --link-blue-hover: #0071e3;
+        --border-color-light: #d2d2d7;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        font-family: var(--font-family-apple);
+        background-color: var(--background-body);
+        color: var(--text-secondary); /* Default text color */
+        line-height: 1.6;
+    }
+
+    /* Header */
+    header.sticky {
+        background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+        backdrop-filter: saturate(180%) blur(15px);
+        -webkit-backdrop-filter: saturate(180%) blur(15px);
+        border-bottom: 0.5px solid var(--border-color-light);
+        box-shadow: none; /* Remove Tailwind shadow if any, rely on border */
+    }
+    header h1.text-2xl {
+        color: var(--text-primary);
+        font-weight: 600; /* Apple-like headers are often semibold/bold */
+    }
+    header p.text-xs {
+        color: var(--text-secondary);
+    }
+    .nav-link {
+        color: var(--text-secondary);
+        border-bottom-width: 2px;
+        border-bottom-color: transparent;
+        transition: color 0.3s ease, border-bottom-color 0.3s ease;
+        font-size: 15px; /* Slightly adjusted for Apple feel */
+        font-weight: 400;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--link-blue);
+        border-bottom-color: var(--link-blue);
+    }
+    #mobile-menu-button svg { /* Was text-slate-700 */
+        color: var(--text-primary);
+    }
+     #mobile-menu { /* Was bg-white shadow-lg */
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: saturate(180%) blur(10px);
+        -webkit-backdrop-filter: saturate(180%) blur(10px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+     }
+    #mobile-menu a.nav-link {
+        color: var(--text-secondary); /* Base color for mobile links */
+    }
+    #mobile-menu a.nav-link:hover,
+    #mobile-menu a.nav-link.active {
+        color: var(--link-blue); /* Hover/active color */
+        background-color: rgba(0, 122, 255, 0.05); /* Subtle hover for mobile menu */
+    }
+
+
+    /* Main Content */
+    main.container {
+        padding-top: 1rem; /* Add some space below sticky header */
+    }
+
+    /* Section Headings */
+    .content-section > h2 {
+        font-size: 32px; /* Apple-like section titles */
+        font-weight: 600;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border-color-light);
+        margin-bottom: 2rem; /* More space after title */
+        padding-bottom: 0.75rem;
+    }
+
+    /* Paragraphs and general text */
+    p.leading-relaxed { /* Targeting default paragraphs that had text-slate-700 or text-slate-600 */
+        color: var(--text-secondary);
+        line-height: 1.65;
+        font-size: 17px;
+    }
+    /* Targeting specific paragraphs that were .text-slate-600 or .text-slate-700 */
+    .text-slate-600-override, .text-slate-700-override {
+        color: var(--text-secondary) !important; /* Use important if Tailwind specificity is an issue, otherwise remove class */
+        font-size: 17px; /* Ensure consistent font size */
+        line-height: 1.65;
+    }
+
+    ul li, .text-sm-override { /* Targeting list items and text that used text-slate-600 or similar */
+         color: var(--text-secondary);
+         font-size: 16px; /* Standardize slightly */
+    }
+     ul.list-disc {
+        padding-left: 1.5rem; /* Ensure good spacing for lists */
+    }
+
+
+    /* Content Cards / Backgrounds */
+    .bg-white-card { /* This class will replace .bg-white for main content blocks */
+        background-color: var(--background-light);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05); /* Softer shadow */
+        padding: 24px; /* Consistent padding */
+        border-radius: 12px; /* Apple uses slightly larger radii */
+    }
+
+
+    /* Sub-headings within cards */
+    h3.font-semibold { /* Was text-amber-700 or text-slate-700 */
+        color: var(--text-primary);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+     h4.font-semibold { /* Was text-slate-700 */
+        color: var(--text-primary);
+        font-weight: 500; /* slightly less than h3 */
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+
+    /* Tables */
+    .table-responsive {
+        border: 1px solid var(--border-color-light);
+        border-radius: 8px; /* Rounded corners for table container */
+        overflow: hidden; /* Ensures children (table) respect border-radius */
+    }
+    table thead { /* Was bg-slate-100 */
+        background-color: #f9f9f9; /* Very light grey, almost white */
+    }
+    table th {
+        color: var(--text-primary); /* Darker for table headers */
+        font-weight: 500;
+        font-size: 13px; /* Apple table headers are often smaller */
+        text-transform: none; /* Remove uppercase if not desired */
+        letter-spacing: normal;
+        padding: 12px 16px; /* Adjust padding */
+        text-align: left;
+    }
+    table td {
+        color: var(--text-secondary);
+        font-size: 15px;
+        padding: 12px 16px;
+        vertical-align: top; /* Align content to top for consistency */
+    }
+    table tbody { /* For .divide-y .divide-slate-200 */
+        border-color: var(--border-color-light);
+    }
+    /* Specific overrides for table cell text if needed */
+    .table-text-override {
+        color: var(--text-secondary) !important;
+        font-size: 15px !important;
+    }
+
+
+    /* Chart Container */
+    .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 350px;
+        max-height: 400px;
+        padding: 1rem;
+        border-radius: 12px; /* Match card rounding */
+        background-color: var(--background-light); /* Add background to chart container */
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05); /* Softer shadow */
+
+    }
+    @media (min-width: 768px) { .chart-container { height: 400px; } }
+
+
+    /* Section Deep Dive Cards */
+    .tds-section-card {
+        background-color: var(--background-light);
+        border: 1px solid transparent; /* Base border */
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        border-radius: 10px;
+        padding: 1rem; /* Tailwind's p-4 */
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.04); /* Subtle base shadow */
+    }
+    .tds-section-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        border-color: var(--link-blue); /* Accent on hover */
+    }
+    .tds-section-card h4 {
+        color: var(--link-blue); /* Use link color for interactive titles */
+        font-weight: 500;
+        font-size: 1rem; /* Tailwind's text-md */
+        margin-bottom: 0.25rem; /* Tailwind's mb-1 */
+    }
+    .tds-section-card p {
+        color: var(--text-secondary);
+        font-size: 0.75rem; /* Tailwind's text-xs */
+    }
+
+    /* TDS Section Detail Display */
+    #tdsSectionDetail {
+        background-color: var(--background-light);
+        border-radius: 12px;
+        min-height: 200px; /* Adjusted min-height */
+        padding: 24px; /* Added padding, was p-6 from .bg-white */
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05); /* Softer shadow */
+    }
+    #tdsSectionDetail p.text-center { /* Was .text-slate-500 */
+        color: var(--text-tertiary);
+    }
+    #tdsSectionDetail h3 { /* Was .text-amber-700 */
+         color: var(--text-primary);
+         font-size: 1.5rem; /* text-2xl */
+         font-weight: 600; /* font-semibold */
+         margin-bottom: 0.25rem; /* mb-1 */
+    }
+    #tdsSectionDetail p.detail-overview { /* Was .text-sm .text-slate-500 */
+        color: var(--text-secondary);
+        font-size: 0.875rem; /* text-sm */
+        margin-bottom: 1rem; /* mb-4 */
+    }
+     #tdsSectionDetail strong.detail-strong-block { /* Was .block .text-slate-700 .text-sm */
+        color: var(--text-primary);
+        font-weight: 500;
+        font-size: 0.875rem; /* text-sm */
+        margin-bottom: 0.3rem;
+        display: block;
+    }
+    #tdsSectionDetail p.detail-text-content,
+    #tdsSectionDetail ul li.detail-list-item { /* Was .text-slate-600 .text-sm */
+        color: var(--text-secondary);
+        font-size: 0.875rem; /* text-sm */
+    }
+     #tdsSectionDetail ul.list-disc {
+        padding-left: 1.25rem; /* pl-4 */
+        margin-bottom: 1rem; /* Space after lists */
+     }
+
+
+    /* Accordion */
+    .accordion-button {
+        background-color: #f0f0f0; /* Slightly darker than card bg for differentiation */
+        color: var(--text-primary);
+        font-weight: 500;
+        border-radius: 8px;
+        padding: 12px 16px; /* was p-3 */
+        width: 100%;
+        text-align: left;
+        display: flex; /* from flex */
+        justify-content: space-between; /* from justify-between */
+        align-items: center; /* from items-center */
+        font-size: 0.875rem; /* text-sm */
+    }
+    .accordion-button:hover {
+        background-color: #e8e8e8; /* was hover:bg-slate-200 */
+    }
+    .accordion-button svg {
+        color: var(--text-secondary);
+    }
+    .accordion-content {
+        background-color: var(--background-light); /* was bg-white */
+        border: 1px solid var(--border-color-light); /* was border border-t-0 border-slate-200 */
+        border-top: none;
+        border-radius: 0 0 8px 8px; /* was rounded-b-md */
+        padding: 16px; /* was p-3 */
+        color: var(--text-secondary); /* was text-slate-600 */
+        font-size: 0.875rem; /* text-sm */
+        max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+    }
+    .accordion-button.open + .accordion-content { max-height: 1000px; }
+
+
+    /* Forms & Interactive Tool (Section 194N) */
+    #sec194NToolContainer { /* Was .bg-white */
+        background-color: var(--background-light);
+        border-radius: 12px;
+        padding: 24px; /* p-6 */
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05);
+        margin-top: 2rem; /* mt-8 */
+    }
+     #sec194NToolContainer h3 { /* text-xl font-semibold text-amber-700 mb-4 */
+        color: var(--text-primary);
+        font-size: 1.25rem; /* text-xl */
+        font-weight: 600; /* font-semibold */
+        margin-bottom: 1rem; /* mb-4 */
+     }
+    label, .form-radio-label { /* for .text-slate-700 */
+        color: var(--text-primary);
+        font-size: 0.875rem; /* text-sm */
+        font-weight: 500; /* font-medium */
+        display: block; /* block */
+        margin-bottom: 0.25rem; /* mb-1 */
+    }
+    input[type="number"], input[type="text"] { /* input styling */
+        border: 1px solid var(--border-color-light); /* border border-slate-300 */
+        background-color: var(--background-light); /* bg-white */
+        color: var(--text-primary);
+        border-radius: 6px; /* rounded-md */
+        padding: 10px 12px; /* px-3 py-2 */
+        font-size: 0.875rem; /* sm:text-sm */
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        margin-top: 0.25rem; /* mt-1 */
+        width: 100%; /* block w-full */
+        box-shadow: none; /* shadow-sm */
+    }
+    input[type="number"]:focus, input[type="text"]:focus {
+        border-color: var(--link-blue); /* focus:border-amber-500 */
+        box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2); /* focus:ring-amber-500 */
+        outline: none; /* focus:outline-none */
+    }
+    input[type="radio"].form-radio { /* class="form-radio text-amber-600 focus:ring-amber-500" */
+        color: var(--link-blue);
+    }
+    input[type="radio"].form-radio:focus {
+        box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3); /* Simulating focus:ring-amber-500 */
+    }
+
+    button#calculate194NTds { /* class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition duration-150 ease-in-out" */
+        background-color: var(--link-blue);
+        color: white;
+        font-weight: 600; /* font-semibold */
+        font-size: 1rem; /* text-base implicit */
+        padding: 0.75rem 1rem; /* py-2 px-4 is more like py-3 for 0.75rem, adjusted for balance */
+        border-radius: 8px; /* rounded-md */
+        transition: background-color 0.2s ease; /* transition duration-150 ease-in-out */
+        width: 100%; /* w-full */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    }
+    button#calculate194NTds:hover {
+        background-color: var(--link-blue-hover);
+    }
+    #sec194NResult { /* class="mt-4 p-4 bg-amber-100 border border-amber-300 rounded-md text-slate-700" */
+        background-color: rgba(0, 122, 255, 0.08); /* Light blueish background */
+        border: 1px solid var(--link-blue);
+        color: var(--text-primary);
+        border-radius: 8px; /* rounded-md */
+        padding: 1rem; /* p-4 */
+        font-size: 0.875rem; /* text-sm implied */
+        margin-top: 1rem; /* mt-4 */
+    }
+
+    /* Footer */
+    footer { /* class="bg-slate-800 text-amber-50 py-8 mt-12" */
+        background-color: var(--background-body);
+        color: var(--text-tertiary);
+        padding: 30px 20px; /* py-8 is a bit large, adjusted */
+        text-align: center;
+        border-top: 0.5px solid var(--border-color-light);
+        margin-top: 3rem; /* mt-12 */
+    }
+    footer p {
+        color: var(--text-tertiary);
+        font-size: 13px; /* text-sm or text-xs */
+    }
+    footer p.text-xs {
+        margin-top: 0.25rem; /* mt-1 */
+    }
+
+
+    /* Utility for consistent table cell structure */
+    .table-responsive { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; border-collapse: collapse; } /* Added border-collapse */
+    th, td { white-space: normal; word-wrap: break-word; }
+
+    .content-section { display: none; }
+    .content-section.active { display: block; }
+</style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold">TDS Navigator</h1>
+                    <p class="text-xs">FY 2025-26 (AY 2026-27) Post-Finance Act 2025</p>
+                </div>
+                <nav class="hidden md:flex space-x-4">
+                    <a href="#essentials" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">TDS Essentials</a>
+                    <a href="#key-changes" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Key Changes</a>
+                    <a href="#compliance" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Compliance</a>
+                    <a href="#deep-dive" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">Section Deep Dive</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden shadow-lg">
+            <a href="#essentials" class="block nav-link px-3 py-2 rounded-md text-base font-medium">TDS Essentials</a>
+            <a href="#key-changes" class="block nav-link px-3 py-2 rounded-md text-base font-medium">Key Changes</a>
+            <a href="#compliance" class="block nav-link px-3 py-2 rounded-md text-base font-medium">Compliance</a>
+            <a href="#deep-dive" class="block nav-link px-3 py-2 rounded-md text-base font-medium">Section Deep Dive</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <section id="essentials" class="content-section active pt-16 -mt-16">
+            <h2 class="text-3xl font-bold mb-6 border-b-2 pb-2">Decoding TDS: Essentials for FY 2025-26</h2>
+            <p class="mb-6 leading-relaxed">This section provides a foundational understanding of Tax Deducted at Source (TDS). Explore the core concepts, objectives, and the roles of deductors and deductees in India's direct tax framework. Understanding these basics is crucial before diving into specific provisions and recent amendments.</p>
+
+            <div class="bg-white-card p-6 rounded-lg shadow-lg mb-8">
+                <h3 class="text-2xl font-semibold mb-4">Understanding TDS: Core Concepts</h3>
+                <p class="mb-3 text-slate-600-override">Tax Deducted at Source (TDS) is a mechanism to collect tax at the point of income generation. The deductor (payer) subtracts tax before paying the deductee (recipient), acting as an advance tax collection for the government.</p>
+                <p class="mb-3 text-slate-600-override"><strong>Objectives of TDS:</strong></p>
+                <ul class="list-disc list-inside text-sm-override mb-4 pl-4 space-y-1">
+                    <li>Ensure regular tax revenue flow.</li>
+                    <li>Broaden the tax base.</li>
+                    <li>Track incomes and reduce tax evasion.</li>
+                </ul>
+                <p class="mb-3 text-slate-600-override"><strong>Key Responsibilities:</strong></p>
+                <ul class="list-disc list-inside text-sm-override mb-4 pl-4 space-y-1">
+                    <li><strong>Deductor:</strong> Obtain TAN, deduct tax accurately, deposit with government, file TDS returns, issue TDS certificates.</li>
+                    <li><strong>Deductee:</strong> Provide PAN (to avoid higher TDS rates), claim TDS credit in ITR (visible in Form 26AS).</li>
+                </ul>
+                <p class="text-slate-600-override">The TDS system creates an information trail, enabling cross-verification by tax authorities and enhancing transparency.</p>
+            </div>
+        </section>
+
+        <section id="key-changes" class="content-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold mb-6 border-b-2 pb-2">Key Changes & Highlights (Finance Act 2025)</h2>
+            <p class="mb-6 leading-relaxed">The Finance Act, 2025, effective April 1, 2025, introduces significant modifications to TDS provisions for FY 2025-26 (AY 2026-27). This section outlines these crucial updates, including revised thresholds, new sections, and procedural simplifications, helping you stay compliant with the latest regulations.</p>
+            
+            <div class="bg-white-card p-6 rounded-lg shadow-lg mb-8">
+                <h3 class="text-2xl font-semibold mb-4">Overview of Amendments</h3>
+                <p class="mb-3 text-slate-600-override">Key changes include enhanced threshold limits for several sections (e.g., 193, 194A, 194H, 194-I, 194J, 194K), reducing compliance for smaller transactions. A significant introduction is <strong>Section 194T</strong> for TDS on payments by firms to partners. Sections 206AB and 206CCA (higher TDS for non-filers) are omitted, simplifying deductor responsibilities. Some rates were revised from Oct 2024 (e.g., 194H).</p>
+            
+                <h4 class="text-xl font-semibold mt-6 mb-3">Table 1: Key TDS Amendments by Finance Act, 2025 (Effective for FY 2025-26)</h4>
+                <div class="table-responsive shadow rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">TDS Section</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">Nature of Change</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">Provision Before 1 Apr 2025 (Illustrative)</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">Provision From 1 Apr 2025 (Illustrative)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr><td class="px-4 py-3 table-text-override">193</td><td class="px-4 py-3 table-text-override">Threshold Enhanced</td><td class="px-4 py-3 table-text-override">NIL / Lower specific limits</td><td class="px-4 py-3 table-text-override">Rs. 10,000 (Interest on securities)</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">194</td><td class="px-4 py-3 table-text-override">Threshold Enhanced</td><td class="px-4 py-3 table-text-override">Rs. 5,000 (Dividend)</td><td class="px-4 py-3 table-text-override">Rs. 10,000 (Dividend)</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">194A</td><td class="px-4 py-3 table-text-override">Thresholds Enhanced</td><td class="px-4 py-3 table-text-override">Bank Interest (Others): Rs. 40,000; Other Cases: Rs. 5,000</td><td class="px-4 py-3 table-text-override">Bank Interest (Others): Rs. 50,000; Senior Citizen: Rs. 1,00,000; Other Cases: Rs. 10,000</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">194H</td><td class="px-4 py-3 table-text-override">Threshold Enhanced & Rate Change</td><td class="px-4 py-3 table-text-override">Threshold: Rs. 15,000; Rate: 5%</td><td class="px-4 py-3 table-text-override">Threshold: Rs. 20,000; Rate: 2% (from Oct 2024)</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">194-I</td><td class="px-4 py-3 table-text-override">Threshold Basis Changed & Enhanced</td><td class="px-4 py-3 table-text-override">Rs. 2,40,000 p.a.</td><td class="px-4 py-3 table-text-override">Rs. 50,000 per month</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">194J</td><td class="px-4 py-3 table-text-override">Threshold Enhanced</td><td class="px-4 py-3 table-text-override">Rs. 30,000 per category</td><td class="px-4 py-3 table-text-override">Rs. 50,000 per category</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">194K</td><td class="px-4 py-3 table-text-override">Threshold Enhanced</td><td class="px-4 py-3 table-text-override">Rs. 5,000 (MF dividend)</td><td class="px-4 py-3 table-text-override">Rs. 10,000 (MF dividend)</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">194T</td><td class="px-4 py-3 table-text-override">New Section Introduced</td><td class="px-4 py-3 table-text-override">Not Applicable</td><td class="px-4 py-3 table-text-override">Rate: 10%; Threshold: Rs. 20,000 p.a. (Payments to partners)</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">206AB/CCA</td><td class="px-4 py-3 table-text-override">Sections Omitted</td><td class="px-4 py-3 table-text-override">Higher TDS/TCS for non-filers</td><td class="px-4 py-3 table-text-override">Provisions removed</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 class="text-xl font-semibold mt-8 mb-4">Visualizing Threshold Changes</h4>
+                <div class="chart-container p-4 rounded-lg shadow">
+                    <canvas id="thresholdChangesChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="compliance" class="content-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold mb-6 border-b-2 pb-2">General TDS Compliance</h2>
+            <p class="mb-6 leading-relaxed">Adhering to TDS provisions is critical. This section details the duties of a deductor, essential timelines for TDS deposit and return filing, and the potential consequences of non-compliance. Familiarize yourself with these general requirements to ensure smooth tax operations.</p>
+
+            <div class="bg-white-card p-6 rounded-lg shadow-lg mb-8">
+                <h3 class="text-2xl font-semibold mb-4">Deductor Duties and Timelines</h3>
+                <ul class="list-disc list-inside text-sm-override mb-4 pl-4 space-y-2">
+                    <li><strong>Obtain TAN:</strong> Mandatory for all TDS-related documents.</li>
+                    <li><strong>Deduct Tax:</strong> At applicable rates, at time of credit or payment (whichever is earlier).</li>
+                    <li><strong>Timely Deposit:</strong> Generally by 7th of next month (30th April for March deductions). Use Challan ITNS 281.</li>
+                    <li><strong>File TDS Returns:</strong> Quarterly (Form 24Q for salary, 26Q for non-salary resident, 27Q for non-salary non-resident). Due dates: Jul 31, Oct 31, Jan 31, May 31.</li>
+                    <li><strong>Issue TDS Certificates:</strong> Form 16 (salary), Form 16A (non-salary), etc.</li>
+                </ul>
+
+                <h4 class="text-xl font-semibold mt-6 mb-3">Table 2: TDS Compliance Calendar: Key Due Dates for FY 2025-26</h4>
+                <div class="table-responsive shadow rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">Quarter</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">Period</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">TDS Deposit Due (Non-Govt)</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">TDS Return Filing Due</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr><td class="px-4 py-3 table-text-override">1</td><td class="px-4 py-3 table-text-override">Apr-Jun 2025</td><td class="px-4 py-3 table-text-override">7th July 2025</td><td class="px-4 py-3 table-text-override">31st July 2025</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">2</td><td class="px-4 py-3 table-text-override">Jul-Sep 2025</td><td class="px-4 py-3 table-text-override">7th Oct 2025</td><td class="px-4 py-3 table-text-override">31st Oct 2025</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">3</td><td class="px-4 py-3 table-text-override">Oct-Dec 2025</td><td class="px-4 py-3 table-text-override">7th Jan 2026</td><td class="px-4 py-3 table-text-override">31st Jan 2026</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">4</td><td class="px-4 py-3 table-text-override">Jan-Mar 2026</td><td class="px-4 py-3 table-text-override">7th Apr 2026 (Jan-Feb), 30th Apr 2026 (Mar)</td><td class="px-4 py-3 table-text-override">31st May 2026</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-white-card p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold mb-4">Consequences of Non-Compliance</h3>
+                 <p class="mb-3 text-slate-600-override">Failure to comply can lead to interest, penalties, disallowance of expenditure, and even prosecution. Key provisions include:</p>
+                <h4 class="text-xl font-semibold mt-6 mb-3">Table 3: Summary of Key Penal Provisions</h4>
+                <div class="table-responsive shadow rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">Nature of Default</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">Section</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium tracking-wider">Interest/Penalty</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr><td class="px-4 py-3 table-text-override">Late deduction</td><td class="px-4 py-3 table-text-override">201(1A)</td><td class="px-4 py-3 table-text-override">1% per month</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">Late payment after deduction</td><td class="px-4 py-3 table-text-override">201(1A)</td><td class="px-4 py-3 table-text-override">1.5% per month</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">Failure to deduct/pay</td><td class="px-4 py-3 table-text-override">271C</td><td class="px-4 py-3 table-text-override">Penalty equal to tax</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">Late filing of TDS return</td><td class="px-4 py-3 table-text-override">234E</td><td class="px-4 py-3 table-text-override">Rs. 200 per day (max TDS amount)</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">Failure to file/Incorrect info</td><td class="px-4 py-3 table-text-override">271H</td><td class="px-4 py-3 table-text-override">Penalty Rs. 10,000 to Rs. 1,00,000</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">Expense disallowance</td><td class="px-4 py-3 table-text-override">40(a)(ia)</td><td class="px-4 py-3 table-text-override">30% of expenditure disallowed</td></tr>
+                            <tr><td class="px-4 py-3 table-text-override">Failure to pay TDS to govt.</td><td class="px-4 py-3 table-text-override">276B</td><td class="px-4 py-3 table-text-override">Imprisonment (3 months-7 years) + fine</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="deep-dive" class="content-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold mb-6 border-b-2 pb-2">Section-wise Deep Dive</h2>
+            <p class="mb-8 leading-relaxed">Explore individual TDS provisions in detail. Click on a section card below to view its overview, applicability, TDS rates, thresholds, specific conditions, common scenarios, and exemptions for FY 2025-26. This interactive guide helps you pinpoint the exact information you need for each TDS section.</p>
+            
+            <div id="tdsSectionGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            </div>
+
+            <div id="tdsSectionDetail" class="min-h-[300px]">
+                <p class="text-center py-10">Select a TDS section from the grid above to see details here.</p>
+            </div>
+            
+            <div id="sec194NToolContainer" class="hidden">
+                <h3 class="text-xl font-semibold mb-4">Section 194N: Cash Withdrawal TDS Calculator</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1 form-radio-label">ITR Filing Status (Last 3 Relevant AYs):</label>
+                        <div class="flex items-center space-x-4">
+                            <label class="flex items-center"><input type="radio" name="itrStatus" value="filed" class="form-radio mr-2" checked> All Filed</label>
+                            <label class="flex items-center"><input type="radio" name="itrStatus" value="not_filed" class="form-radio mr-2"> Not All Filed</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="cashWithdrawalAmount" class="block text-sm font-medium mb-1">Total Cash Withdrawal in FY (Rs.):</label>
+                        <input type="number" id="cashWithdrawalAmount" placeholder="e.g., 15000000" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm sm:text-sm">
+                    </div>
+                    <button id="calculate194NTds" class="w-full font-semibold py-2 px-4 rounded-md shadow-sm transition duration-150 ease-in-out">Calculate TDS</button>
+                    <div id="sec194NResult" class="mt-4 p-4 border rounded-md"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2025 TDS Navigator. For informational purposes only.</p>
+            <p class="text-xs mt-1">Consult a tax professional for specific advice. Content based on provisions as of Finance Act 2025.</p>
+        </div>
+    </footer>
+
+    <script>
+        const tdsData = {
+            "192": {
+                title: "Section 192 – TDS on Salary",
+                overview: "Mandates employers to deduct income tax from salaries paid to employees on a monthly basis, based on estimated annual income and applicable slab rates.",
+                applicability: "<strong>Payer:</strong> Any employer (Individual, HUF, Firm, Company, Trust, etc.).<br><strong>Payee:</strong> Any employee receiving salary income.",
+                rateThreshold: "<strong>Rate:</strong> Average rate of income tax based on employee's estimated total income and chosen tax regime (New/Old). Slab rates for FY 2025-26 (New Regime e.g., Up to Rs. 4L: Nil; Rs. 4L-8L: 5%).<br><strong>Threshold:</strong> No TDS if estimated salary (after deductions/exemptions) is below basic exemption limit (Rs. 4,00,000 for New Regime FY 2025-26).",
+                nuances: [
+                    "Employer estimates annual salary, considers deductions (Std. Deduction, Ch. VIA), exemptions (HRA, LTA), perquisites.",
+                    "TDS on advance/arrears of salary.",
+                    "Employee can declare salary from other employers (Sec 192(2)) or other income (Sec 192(2B)) for consolidated TDS.",
+                    "Relief u/s 89 (Form 10E) considered."
+                ],
+                examples: [
+                    {
+                        title: "TDS Calculation (New Regime Example)",
+                        content: "Annual Salary: Rs. 10,00,000. Standard Deduction (New Regime FY25-26): Rs. 75,000. Taxable Salary: Rs. 9,25,000. Tax (New Regime Slabs): Up to 4L: Nil; 4L-8L (4L @ 5%): Rs. 20,000; 8L-9.25L (1.25L @ 10%): Rs. 12,500. Total Tax: Rs. 32,500 (+cess). Monthly TDS = (Total Tax + Cess) / 12."
+                    }
+                ],
+                exemptions: [
+                    "Net taxable salary below basic exemption limit.",
+                    "Exempt allowances (HRA, LTA limits).",
+                    "Deductions under Chapter VIA (80C, 80D etc.) if declared with proof.",
+                    "Form 15G/H not typically applicable."
+                ]
+            },
+            "193": {
+                title: "Section 193 – TDS on Interest on Securities",
+                overview: "Mandates TDS on income from 'Interest on Securities' (Govt./State Govt. securities, debentures, etc.) paid to a resident.",
+                applicability: "<strong>Payer:</strong> Any person (Govt., companies, local authorities) paying interest on securities.<br><strong>Payee:</strong> Any resident receiving such interest.",
+                rateThreshold: "<strong>Rate:</strong> 10% (20% if no PAN).<br><strong>Threshold (from 1 Apr 2025):</strong> Rs. 10,000 aggregate interest per FY.",
+                nuances: ["Threshold applies to aggregate interest from the payer in a FY."],
+                examples: [
+                    {
+                        title: "Debenture Interest",
+                        content: "Company pays Rs. 15,000 annual interest on debentures to Mr. A (resident, PAN provided). TDS = 10% of Rs. 15,000 = Rs. 1,500 (as Rs. 15,000 > Rs. 10,000 threshold)."
+                    }
+                ],
+                exemptions: [
+                    "Aggregate interest up to Rs. 10,000/FY.",
+                    "Interest on certain notified securities/bonds (e.g., 7-Yr NSC IV Issue).",
+                    "Form 15G/15H applicable for eligible individuals.",
+                    "Lower/Nil TDS certificate (Sec 197)."
+                ]
+            },
+            "194": {
+                title: "Section 194 – TDS on Dividend",
+                overview: "Mandates TDS on dividend income distributed by a domestic company to resident shareholders. (DDT abolished by Finance Act, 2020).",
+                applicability: "<strong>Payer:</strong> Principal officer of any domestic company paying dividends.<br><strong>Payee:</strong> Resident shareholder.",
+                rateThreshold: "<strong>Rate:</strong> 10% (20% if no PAN).<br><strong>Threshold (from 1 Apr 2025 for individuals):</strong> Rs. 10,000 aggregate dividend per FY. (Previously Rs. 5,000).",
+                nuances: ["Threshold of Rs. 10,000 for individual shareholders. For others, TDS irrespective of amount unless exempt."],
+                examples: [
+                    {
+                        title: "Dividend Payment",
+                        content: "ABC Ltd. pays Rs. 12,000 dividend to Ms. Priya (individual, PAN provided). TDS = 10% of Rs. 12,000 = Rs. 1,200 (as Rs. 12,000 > Rs. 10,000 threshold)."
+                    }
+                ],
+                exemptions: [
+                    "Dividend to individual up to Rs. 10,000/FY.",
+                    "Dividend to LIC, GIC, other insurers for their shares.",
+                    "Form 15G/15H applicable for eligible individuals.",
+                    "Lower/Nil TDS certificate (Sec 197)."
+                ]
+            },
+            "194A": {
+                title: "Section 194A – TDS on Interest other than Interest on Securities",
+                overview: "Governs TDS on interest income (e.g., FD interest, loan interest) other than 'Interest on Securities', paid to residents.",
+                applicability: "<strong>Payer:</strong> Any person (other than Individual/HUF not liable for tax audit). Individual/HUF liable if turnover > Rs. 1 Cr (business) or Rs. 50L (profession) in preceding FY.<br><strong>Payee:</strong> Any resident.",
+                rateThreshold: "<strong>Rate:</strong> 10% (20% if no PAN).<br><strong>Thresholds (from 1 Apr 2025):</strong><br>- Payer is Bank/Co-op Bank/Post Office: <strong>Rs. 1,00,000</strong> (for senior citizens), <strong>Rs. 50,000</strong> (others).<br>- Other Cases: <strong>Rs. 10,000</strong>.",
+                nuances: ["Thresholds apply to aggregate interest from a specific payer (e.g., all bank branches).", "Interest on savings bank account generally not under 194A TDS (but taxable)."],
+                examples: [
+                    {
+                        title: "Bank FD Interest (Non-Senior Citizen)",
+                        content: "Bank pays Rs. 60,000 FD interest to Mr. B (45 yrs, PAN provided). TDS = 10% of Rs. 60,000 = Rs. 6,000 (as Rs. 60,000 > Rs. 50,000 threshold)."
+                    }
+                ],
+                exemptions: [
+                    "Aggregate interest below applicable thresholds.",
+                    "Interest paid by firm to partners.",
+                    "Form 15G/15H applicable.",
+                    "Lower/Nil TDS certificate (Sec 197)."
+                ]
+            },
+            "194C": {
+                title: "Section 194C – TDS on Payments to Contractors/Sub-contractors",
+                overview: "TDS on payments to resident contractors/sub-contractors for carrying out any 'work' (advertising, broadcasting, transport, catering, job work etc.).",
+                applicability: "<strong>Payer:</strong> Specified persons (Govt, Company, Firm, Co-op, Trust, Individual/HUF with turnover > Rs. 1Cr/50L).<br><strong>Payee:</strong> Resident contractor/sub-contractor.",
+                rateThreshold: "<strong>Rates:</strong> 1% (Individual/HUF payee), 2% (Other payees). (20% if no PAN).<br><strong>Thresholds:</strong> Single payment > Rs. 30,000 OR Aggregate payments in FY > Rs. 1,00,000.",
+                nuances: ["'Work' has a broad definition.", "TDS on invoice value excluding separately indicated GST.", "Special provision for transporters owning <=10 goods carriages (declaration needed)."],
+                examples: [
+                    {
+                        title: "Multiple Small Payments",
+                        content: "Company makes 4 payments of Rs. 28,000 each to an individual contractor (Total Rs. 1,12,000). TDS @1% on Rs. 1,12,000 once aggregate exceeds Rs. 1,00,000."
+                    }
+                ],
+                exemptions: [
+                    "Single payment <= Rs. 30,000 AND aggregate <= Rs. 1,00,000.",
+                    "Payments by Individual/HUF for personal purposes.",
+                    "Lower/Nil TDS certificate (Sec 197)."
+                ]
+            },
+             "194H": {
+                title: "Section 194H – TDS on Commission or Brokerage",
+                overview: "TDS on commission or brokerage (not insurance commission or securities brokerage) paid to a resident.",
+                applicability: "<strong>Payer:</strong> Any person (other than Individual/HUF not liable for tax audit). Individual/HUF liable if turnover > Rs. 1 Cr (business) or Rs. 50L (profession).<br><strong>Payee:</strong> Any resident.",
+                rateThreshold: "<strong>Rate (from 1 Oct 2024):</strong> 2% (20% if no PAN). (Previously 5%)<br><strong>Threshold (from 1 Apr 2025):</strong> Rs. 20,000 aggregate per FY. (Previously Rs. 15,000).",
+                nuances: ["Excludes insurance commission (Sec 194D) and brokerage on listed securities for residents."],
+                examples: [
+                    {
+                        title: "Sales Commission",
+                        content: "Company pays Rs. 25,000 sales commission to an agent (PAN provided). TDS = 2% of Rs. 25,000 = Rs. 500 (as Rs. 25,000 > Rs. 20,000 threshold)."
+                    }
+                ],
+                exemptions: [
+                    "Aggregate commission/brokerage up to Rs. 20,000/FY.",
+                    "Form 15G/15H applicable.",
+                    "Lower/Nil TDS certificate (Sec 197)."
+                ]
+            },
+            "194I": {
+                title: "Section 194I – TDS on Rent",
+                overview: "TDS on payments of 'rent' for land, building, machinery, plant, equipment, furniture, fittings to a resident.",
+                applicability: "<strong>Payer:</strong> Any person (other than Individual/HUF not liable for tax audit). Individual/HUF liable if turnover > Rs. 1 Cr (business) or Rs. 50L (profession).<br><strong>Payee:</strong> Any resident.",
+                rateThreshold: "<strong>Rates:</strong> 2% (Machinery/Plant/Equipment), 10% (Land/Building/Furniture/Fittings). (20% if no PAN).<br><strong>Threshold (from 1 Apr 2025):</strong> Rs. 50,000 per month. (Previously Rs. 2,40,000 p.a.).",
+                nuances: ["TDS not on GST component if shown separately.", "No TDS on refundable security deposits (until adjusted against rent).", "For co-owners, threshold applies per co-owner if shares definite."],
+                examples: [
+                    {
+                        title: "Office Rent",
+                        content: "Company pays Rs. 60,000/month office rent. TDS = 10% of Rs. 60,000 = Rs. 6,000/month (as Rs. 60,000 > Rs. 50,000 threshold)."
+                    }
+                ],
+                exemptions: [
+                    "Rent up to Rs. 50,000/month.",
+                    "Payments to Govt, certain local/statutory authorities.",
+                    "Form 15G/15H applicable.",
+                    "Lower/Nil TDS certificate (Sec 197)."
+                ]
+            },
+            "194IA": {
+                title: "Section 194IA – TDS on Transfer of Immovable Property",
+                overview: "TDS on consideration for transfer of immovable property (other than agricultural land) by a resident seller.",
+                applicability: "<strong>Payer (Buyer/Transferee):</strong> Any person.<br><strong>Payee (Seller/Transferor):</strong> A resident.",
+                rateThreshold: "<strong>Rate:</strong> 1% of sale consideration (20% if seller's PAN not provided).<br><strong>Threshold:</strong> Sale consideration >= Rs. 50 lakhs.",
+                nuances: ["Applies to land (non-agricultural), buildings.", "TDS on gross sale consideration including associated charges (club membership, parking etc.).", "Buyer not required to obtain TAN; uses PAN.", "TDS deposited via Form 26QB; Certificate Form 16B issued."],
+                examples: [
+                    {
+                        title: "Flat Purchase",
+                        content: "Mr. X buys flat from Mr. Y (resident) for Rs. 60 lakhs. TDS = 1% of Rs. 60L = Rs. 60,000. Mr. X pays Rs. 59.40L to Y, deposits Rs. 60,000 TDS."
+                    }
+                ],
+                exemptions: [
+                    "Sale consideration < Rs. 50 lakhs.",
+                    "Transfer of rural agricultural land."
+                ]
+            },
+            "194IB": {
+                title: "Section 194IB – TDS on Rent by Certain Individuals/HUFs",
+                overview: "TDS on rent paid by Individuals/HUFs not covered under Sec 194I (i.e., not liable for tax audit).",
+                applicability: "<strong>Payer:</strong> Individual/HUF not liable for tax audit.<br><strong>Payee:</strong> Resident landlord.",
+                rateThreshold: "<strong>Rate (from 1 Oct 2024):</strong> 2% (20% if no PAN, but TDS not to exceed last month's rent). (Previously 5%)<br><strong>Threshold:</strong> Rent > Rs. 50,000 per month.",
+                nuances: ["TDS typically deducted once a year (from last month's rent or at end of tenancy).", "Payer not required to obtain TAN.", "TDS deposited via Form 26QC; Certificate Form 16C issued."],
+                examples: [
+                    {
+                        title: "High Value Residential Rent",
+                        content: "Salaried Mr. A pays Rs. 60,000/month rent. Total annual rent Rs. 7,20,000. TDS = 2% of Rs. 7,20,000 = Rs. 14,400 (deducted from March rent)."
+                    }
+                ],
+                exemptions: ["Rent <= Rs. 50,000 per month."]
+            },
+            "194J": {
+                title: "Section 194J – TDS on Fees for Professional or Technical Services",
+                overview: "TDS on payments for professional services, technical services, royalty, non-compete fees, director's remuneration (non-salary) to a resident.",
+                applicability: "<strong>Payer:</strong> Any person (other than Individual/HUF not liable for tax audit). Individual/HUF liable if turnover > Rs. 1 Cr (business) or Rs. 50L (profession).<br><strong>Payee:</strong> Any resident.",
+                rateThreshold: "<strong>Rates:</strong><br>- <strong>2%</strong> for Technical services (non-professional), Royalty (cinematographic films), Call center operators.<br>- <strong>10%</strong> for Professional services, Other Royalty, Director's remuneration (non-salary), Non-compete fees.<br>(20% if no PAN).<br><strong>Threshold (from 1 Apr 2025):</strong> Rs. 50,000 per category (Prof. fees, Tech. fees, Royalty separately). No threshold for Director's remuneration.",
+                nuances: ["'Professional services' and 'Technical services' defined specifically.", "Threshold applies per category of service."],
+                examples: [
+                    {
+                        title: "Technical & Professional Fees",
+                        content: "Company pays Rs. 60,000 (Technical fees @2% TDS) and Rs. 40,000 (Professional fees, no TDS as < Rs. 50,000 threshold for this category)."
+                    },
+                    {
+                        title: "Director's Sitting Fees",
+                        content: "Company pays Rs. 10,000 sitting fees to non-executive director. TDS = 10% of Rs. 10,000 = Rs. 1,000 (no threshold)."
+                    }
+                ],
+                exemptions: [
+                    "Aggregate payments per category <= Rs. 50,000/FY (except director's remuneration).",
+                    "Payments by Individual/HUF for personal purposes.",
+                    "Lower/Nil TDS certificate (Sec 197)."
+                ]
+            },
+            "194K": {
+                title: "Section 194K – TDS on Income from Mutual Fund Units",
+                overview: "TDS on income (primarily dividend) from units of a Mutual Fund, specified undertaking, or specified company, paid to a resident.",
+                applicability: "<strong>Payer:</strong> Person paying income from MF units (AMC/Fund house).<br><strong>Payee:</strong> Resident unitholder.",
+                rateThreshold: "<strong>Rate:</strong> 10% (20% if no PAN).<br><strong>Threshold (from 1 Apr 2025 for dividend):</strong> Rs. 10,000 aggregate income per FY. (Previously Rs. 5,000).",
+                nuances: ["Applies mainly to dividend income from MFs.", "Does NOT apply to capital gains from redemption/sale of MF units."],
+                examples: [
+                    {
+                        title: "MF Dividend",
+                        content: "MF pays Rs. 12,000 dividend to an individual unitholder. TDS = 10% of Rs. 12,000 = Rs. 1,200 (as Rs. 12,000 > Rs. 10,000 threshold)."
+                    }
+                ],
+                exemptions: [
+                    "Aggregate dividend income up to Rs. 10,000/FY.",
+                    "Capital gains from MF units.",
+                    "Form 15G/15H applicable.",
+                    "Lower/Nil TDS certificate (Sec 197)."
+                ]
+            },
+            "194M": {
+                title: "Section 194M – TDS on Certain Payments by Individuals/HUFs",
+                overview: "TDS on high-value payments by Individuals/HUFs (not covered by 194C, 194H, 194J due to audit status or personal purpose) to resident contractors, commission agents, professionals.",
+                applicability: "<strong>Payer:</strong> Individual/HUF not required to deduct TDS under 194C/194H/194J.<br><strong>Payee:</strong> Resident contractor, commission agent, or professional.",
+                rateThreshold: "<strong>Rate (from 1 Oct 2024):</strong> 2% (20% if no PAN). (Previously 5%)<br><strong>Threshold:</strong> Aggregate payments > Rs. 50 lakhs in a FY for such services.",
+                nuances: ["Covers payments for contractual work, commission (non-insurance), brokerage, professional fees.", "Payer not required to obtain TAN.", "TDS deposited via Form 26QD; Certificate Form 16D issued."],
+                examples: [
+                    {
+                        title: "Large Personal Expenditure",
+                        content: "Individual pays Rs. 60 lakhs to an architect for house design. TDS = 2% of Rs. 60L = Rs. 1,20,000."
+                    }
+                ],
+                exemptions: ["Aggregate payments <= Rs. 50 lakhs/FY."]
+            },
+            "194N": {
+                title: "Section 194N – TDS on Cash Withdrawals",
+                overview: "TDS on cash withdrawals exceeding limits from accounts with banks, co-op banks, or post offices. Aims to discourage large cash transactions.",
+                applicability: "<strong>Payer:</strong> Banking company, Co-op bank, Post office.<br><strong>Payee:</strong> Any person withdrawing cash.",
+                rateThreshold: "<strong>Rates & Thresholds (FY 2025-26):</strong><br><strong>- ITRs Filed (all 3 preceding relevant AYs):</strong> 2% on cash withdrawal > Rs. 1 crore in FY.<br><strong>- ITRs NOT Filed (all 3 preceding relevant AYs):</strong><br>  - 2% on cash withdrawal > Rs. 20 lakhs up to Rs. 1 crore in FY.<br>  - 5% on cash withdrawal > Rs. 1 crore in FY.",
+                nuances: ["Applies to aggregate cash withdrawals from all accounts with that payer.", "Bank/Post office verifies ITR filing status."],
+                examples: [
+                    {
+                        title: "ITR Filer",
+                        content: "Mr. X (ITR filer) withdraws Rs. 1.2 crore cash. TDS = 2% on (1.2 Cr - 1 Cr) = 2% on Rs. 20 lakhs = Rs. 40,000."
+                    },
+                    {
+                        title: "ITR Non-Filer",
+                        content: "ABC Ltd. (ITR non-filer for 1 of 3 yrs) withdraws Rs. 70 lakhs. TDS = 2% on (70L - 20L) = 2% on Rs. 50 lakhs = Rs. 1,00,000."
+                    }
+                ],
+                exemptions: ["Payments to Govt, Banks, Co-op banks, Post offices, Business Correspondents, White Label ATM operators, APMCs (for farmers), certain authorized dealers (FEMA)."]
+            },
+            "194Q": {
+                title: "Section 194Q – TDS on Purchase of Goods",
+                overview: "TDS by a buyer on purchase of goods from a resident seller if purchase value exceeds threshold. Aims to track high-value goods transactions.",
+                applicability: "<strong>Payer (Buyer):</strong> Business with turnover > Rs. 10 crore in preceding FY.<br><strong>Payee (Seller):</strong> A resident.",
+                rateThreshold: "<strong>Rate:</strong> 0.1% of sum exceeding Rs. 50 lakhs (5% if seller's PAN not provided).<br><strong>Threshold:</strong> Aggregate purchase from a seller > Rs. 50 lakhs in FY. TDS on amount > Rs. 50 lakhs.",
+                nuances: ["Applies to revenue and capital goods.", "TDS on value excluding separately indicated GST.", "Sec 194Q prevails over Sec 206C(1H) (TCS by seller) if both apply."],
+                examples: [
+                    {
+                        title: "Goods Purchase",
+                        content: "Buyer Ltd. (turnover > Rs. 10 Cr) buys goods worth Rs. 70 lakhs from Seller Inc. TDS = 0.1% on (70L - 50L) = 0.1% on Rs. 20 lakhs = Rs. 2,000."
+                    }
+                ],
+                exemptions: ["Buyer's turnover <= Rs. 10 Cr in preceding FY.", "Aggregate purchase <= Rs. 50 lakhs/FY from a seller.", "Transactions where TDS deductible under other provisions (except if 206C(1H) also applies)."]
+            },
+            "194R": {
+                title: "Section 194R – TDS on Benefits or Perquisites from Business/Profession",
+                overview: "TDS on any benefit or perquisite (cash or kind) arising from business/profession, provided to a resident. Aims to report such income.",
+                applicability: "<strong>Payer:</strong> Any person providing such benefit/perquisite (except Individual/HUF with turnover below Rs. 1Cr/50L).<br><strong>Payee:</strong> Any resident.",
+                rateThreshold: "<strong>Rate:</strong> 10% of value of benefit/perquisite.<br><strong>Threshold:</strong> Aggregate value of benefit/perquisite > Rs. 20,000 per recipient in FY.",
+                nuances: ["Covers gifts, travel, samples etc.", "Valuation: Purchase price (if bought) or market price (if manufactured). GST excluded if separate.", "If benefit in kind, provider must ensure tax is paid (recover from recipient or pay from own pocket).", "Deductor not to check taxability in recipient's hands."],
+                examples: [
+                    {
+                        title: "Dealer Incentive Trip",
+                        content: "Company provides foreign trip worth Rs. 1,00,000 to top dealer. TDS @10% = Rs. 10,000. Company ensures TDS payment."
+                    }
+                ],
+                exemptions: ["Aggregate value <= Rs. 20,000/FY per recipient.", "Provider is Individual/HUF with turnover below limits.", "Benefits to employees (covered u/s 192) or non-residents (u/s 195).", "Sales discounts, cash discounts, rebates generally not covered."]
+            },
+            "194T": {
+                title: "Section 194T – TDS on Payments by Firm to Partners (NEW)",
+                overview: "<strong>NEW Section (from 1 Apr 2025):</strong> TDS on specified payments (salary, remuneration, commission, bonus, interest) by partnership firms (including LLPs) to their partners.",
+                applicability: "<strong>Payer:</strong> Any partnership firm (including LLP).<br><strong>Payee:</strong> A partner of the firm.",
+                rateThreshold: "<strong>Rate:</strong> 10%.<br><strong>Threshold:</strong> Aggregate payments > Rs. 20,000 per partner in FY. (TDS on entire amount once threshold crossed).",
+                nuances: ["Covers salary, remuneration, commission, bonus, interest.", "Excludes drawings against capital/profit, capital repayment, share of profit (exempt u/s 10(2A)), genuine expense reimbursements.", "Firms need TAN, file Form 26Q, issue Form 16A."],
+                examples: [
+                    {
+                        title: "Interest to Partner",
+                        content: "Firm pays Rs. 25,000 interest to a partner in FY 2025-26. TDS = 10% of Rs. 25,000 = Rs. 2,500 (as Rs. 25,000 > Rs. 20,000 threshold)."
+                    }
+                ],
+                exemptions: ["Aggregate payments <= Rs. 20,000 per partner/FY.", "Payments like drawings, profit share, capital repayment."]
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('header nav a, #mobile-menu a');
+            const contentSections = document.querySelectorAll('.content-section');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            function updateActiveLink(targetId) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active'); // Relies on CSS for active state .nav-link.active
+                    if (link.getAttribute('href') === `#${targetId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            function showSection(targetId) {
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === targetId) {
+                        section.classList.add('active');
+                    }
+                });
+                updateActiveLink(targetId);
+                if (mobileMenu.classList.contains('block')) { // Check if mobile menu is open
+                    mobileMenu.classList.remove('block');
+                    mobileMenu.classList.add('hidden');
+                }
+                 // Adjust offset for sticky header height (approx 64px)
+                 const headerOffset = 64;
+                 const elementPosition = document.getElementById(targetId).offsetTop;
+                 const offsetPosition = elementPosition - headerOffset;
+                 window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    showSection(targetId);
+                     // Update URL hash without jumping, for bookmarkability
+                    if(history.pushState) {
+                        history.pushState(null, null, `#${targetId}`);
+                    } else {
+                        location.hash = `#${targetId}`;
+                    }
+                });
+            });
+            
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection && targetSection.classList.contains('content-section')) {
+                     showSection(targetId);
+                } else {
+                    showSection('essentials'); // Default section
+                }
+            } else {
+                 showSection('essentials'); // Default section
+            }
+
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('block');
+            });
+
+            const tdsSectionGrid = document.getElementById('tdsSectionGrid');
+            const tdsSectionDetail = document.getElementById('tdsSectionDetail');
+            const sec194NToolContainer = document.getElementById('sec194NToolContainer');
+
+            const sectionOrder = ["192", "193", "194", "194A", "194C", "194H", "194I", "194IA", "194IB", "194J", "194K", "194M", "194N", "194Q", "194R", "194T"];
+
+            sectionOrder.forEach(key => {
+                const data = tdsData[key];
+                const card = document.createElement('div');
+                // Tailwind classes for layout, custom CSS for styling
+                card.className = 'tds-section-card bg-white rounded-lg shadow-md hover:shadow-xl cursor-pointer flex flex-col justify-between items-center text-center';
+                card.innerHTML = `<h4 class="text-md font-semibold mb-1">${key}</h4><p class="text-xs">${data.title.split('–')[1].trim()}</p>`;
+                card.addEventListener('click', () => displaySectionDetail(key));
+                tdsSectionGrid.appendChild(card);
+            });
+
+            function displaySectionDetail(key) {
+                const data = tdsData[key];
+                let nuancesHtml = data.nuances.map(n => `<li class="detail-list-item">${n}</li>`).join('');
+                let examplesHtml = data.examples.map((ex, index) => `
+                    <div class="mt-3">
+                        <button class="accordion-button">
+                            ${ex.title}
+                            <svg class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content">
+                            ${ex.content}
+                        </div>
+                    </div>
+                `).join('');
+                let exemptionsHtml = data.exemptions.map(ex => `<li class="detail-list-item">${ex}</li>`).join('');
+
+                tdsSectionDetail.innerHTML = `
+                    <h3 class="text-2xl font-semibold mb-1">${data.title}</h3>
+                    <p class="detail-overview text-sm mb-4">${data.overview}</p>
+                    
+                    <div class="mb-4">
+                        <strong class="detail-strong-block">Applicability:</strong>
+                        <p class="detail-text-content text-sm">${data.applicability}</p>
+                    </div>
+                    <div class="mb-4">
+                        <strong class="detail-strong-block">TDS Rate & Threshold (FY 2025-26):</strong>
+                        <p class="detail-text-content text-sm">${data.rateThreshold}</p>
+                    </div>
+                    
+                    ${data.nuances.length > 0 ? `
+                    <div class="mb-4">
+                        <strong class="detail-strong-block">Specific Conditions & Nuances:</strong>
+                        <ul class="list-disc list-inside pl-4 space-y-1 text-sm">${nuancesHtml}</ul>
+                    </div>` : ''}
+                    
+                    ${data.examples.length > 0 ? `
+                    <div>
+                        <strong class="detail-strong-block mb-1">Common Scenarios & Examples:</strong>
+                        ${examplesHtml}
+                    </div>` : ''}
+
+                    ${data.exemptions.length > 0 ? `
+                    <div class="mt-4">
+                        <strong class="detail-strong-block">Exemptions & Reliefs:</strong>
+                        <ul class="list-disc list-inside pl-4 space-y-1 text-sm">${exemptionsHtml}</ul>
+                    </div>` : ''}
+                `;
+                
+                 // Scroll to the detail section, considering the sticky header
+                const headerOffset = 70; // Approximate height of sticky header + a little buffer
+                const elementPosition = tdsSectionDetail.offsetTop;
+                const offsetPosition = elementPosition - headerOffset;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+
+                if (key === "194N") {
+                    sec194NToolContainer.classList.remove('hidden');
+                } else {
+                    sec194NToolContainer.classList.add('hidden');
+                }
+                
+                attachAccordionListeners();
+            }
+            
+            function attachAccordionListeners() {
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const content = button.nextElementSibling;
+                        const svg = button.querySelector('svg');
+                        button.classList.toggle('open');
+                        if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                            content.style.maxHeight = "0px";
+                            if(svg) svg.style.transform = 'rotate(0deg)';
+                        } else {
+                            content.style.maxHeight = content.scrollHeight + "px";
+                             if(svg) svg.style.transform = 'rotate(180deg)';
+                        }
+                    });
+                });
+            }
+
+            const thresholdChartNote = 'Note: For Sec 194-I (Rent), "Old" is annual (Rs. 2,40,000), "New" is annual equivalent of Rs. 50,000/month (Rs. 6,00,000) for comparison. Sec 194A (Bank Int.) new is for "others", senior citizen is Rs. 1,00,000. Sec 194T is new.';
+            const thresholdChartData = {
+                labels: ['193 Interest', '194 Dividend', '194A Bank Int.', '194A Other Int.', '194H Commission', '194-I Rent (p.a./p.m.)', '194J Prof/Tech', '194K MF Div.', '194T Partner Pay'],
+                datasets: [
+                    {
+                        label: 'Old Threshold (Illustrative, Rs.)',
+                        data: [5000, 5000, 40000, 5000, 15000, 240000, 30000, 5000, 0],
+                        backgroundColor: 'rgba(142, 142, 147, 0.6)', 
+                        borderColor: 'rgba(142, 142, 147, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'New Threshold (FY 2025-26, Rs.)',
+                        data: [10000, 10000, 50000, 10000, 20000, 600000, 50000, 10000, 20000], 
+                        backgroundColor: 'rgba(0, 122, 255, 0.6)',
+                        borderColor: 'rgba(0, 122, 255, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+            
+            const thresholdChangesCtx = document.getElementById('thresholdChangesChart').getContext('2d');
+            new Chart(thresholdChangesCtx, {
+                type: 'bar',
+                data: thresholdChartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) { return 'Rs. ' + value.toLocaleString('en-IN'); },
+                                color: 'var(--text-secondary)' 
+                            },
+                            grid: {
+                                color: 'var(--border-color-light)' 
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    const label = this.getLabelForValue(value);
+                                    if (label.length > 16) {
+                                        return label.match(/.{1,16}/g); 
+                                    }
+                                    return label;
+                                },
+                                color: 'var(--text-secondary)' 
+                            },
+                            grid: {
+                                display: false 
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += 'Rs. ' + context.parsed.y.toLocaleString('en-IN');
+                                    }
+                                    return label;
+                                }
+                            },
+                            backgroundColor: 'rgba(29, 29, 31, 0.85)', 
+                            titleColor: '#f5f5f7',
+                            bodyColor: '#f5f5f7',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1
+                        },
+                        legend: { 
+                            position: 'top',
+                            labels: {
+                                color: 'var(--text-primary)' 
+                            }
+                        },
+                        title: { 
+                            display: true, 
+                            text: 'Comparison of TDS Thresholds (Old vs. New FY 2025-26)',
+                            color: 'var(--text-primary)', 
+                            font: { size: 18, weight: '500' }
+                        },
+                        subtitle: { 
+                            display: true, 
+                            text: thresholdChartNote, 
+                            position: 'bottom', 
+                            color: 'var(--text-secondary)', 
+                            font: {size: 11}, 
+                            padding: { top:10 }
+                        }
+                    }
+                }
+            });
+            
+            document.getElementById('calculate194NTds').addEventListener('click', function() {
+                const itrStatus = document.querySelector('input[name="itrStatus"]:checked').value;
+                const withdrawalAmount = parseFloat(document.getElementById('cashWithdrawalAmount').value) || 0;
+                let tds = 0;
+                let message = "";
+
+                if (withdrawalAmount <= 0) {
+                    message = "Please enter a valid withdrawal amount.";
+                } else {
+                    if (itrStatus === 'filed') {
+                        if (withdrawalAmount > 10000000) { // 1 Crore
+                            tds = (withdrawalAmount - 10000000) * 0.02;
+                            message = `ITRs filed. TDS @2% on amount exceeding Rs. 1 Crore.<br>TDS applicable: Rs. ${tds.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}.`;
+                        } else {
+                            message = "ITRs filed. No TDS applicable as withdrawal is Rs. 1 Crore or less.";
+                        }
+                    } else { // not_filed
+                        if (withdrawalAmount > 10000000) { // 1 Crore
+                            tds = (10000000 - 2000000) * 0.02 + (withdrawalAmount - 10000000) * 0.05;
+                            message = `ITRs not all filed. TDS @2% on (Rs. 1 Cr - Rs. 20L) + 5% on amount exceeding Rs. 1 Crore.<br>TDS applicable: Rs. ${tds.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}.`;
+                        } else if (withdrawalAmount > 2000000) { // 20 Lakhs
+                            tds = (withdrawalAmount - 2000000) * 0.02;
+                            message = `ITRs not all filed. TDS @2% on amount exceeding Rs. 20 Lakhs.<br>TDS applicable: Rs. ${tds.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}.`;
+                        } else {
+                            message = "ITRs not all filed. No TDS applicable as withdrawal is Rs. 20 Lakhs or less.";
+                        }
+                    }
+                }
+                document.getElementById('sec194NResult').innerHTML = message;
+            });
+
+
+        });
+    </script>
+</body>
+</html>
