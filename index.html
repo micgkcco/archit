@@ -57,6 +57,8 @@
             opacity: 1; 
             padding: 40px 20px; 
             max-width: 800px;
+            width: 100%; /* Ensure it takes up available width for padding to work */
+            box-sizing: border-box; /* Include padding in width calculation */
         }
         
         #welcome-screen h2 {
@@ -173,7 +175,9 @@
             transform: translateY(30px) scale(0.98);
             animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards; /* After main CTA animation */
             max-width: 580px; /* Constrain width for focus */
+            width: 90%; /* Make it responsive within its container */
             border: 0.5px solid rgba(var(--border-color-light-rgb), 0.4); /* Very subtle border */
+            box-sizing: border-box;
         }
 
         @keyframes latestUpdateReveal {
@@ -237,6 +241,218 @@
             font-size: 12px; 
             vertical-align: baseline;
         }
+
+        /* --- Disclaimer Modal Styles --- */
+        .disclaimer-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            inset: 0; /* Cover the whole screen (top, right, bottom, left = 0) */
+            background-color: rgba(0, 0, 0, 0.55); /* Semi-transparent overlay */
+            z-index: 2000; /* Ensure it's on top */
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+            font-family: var(--font-family-apple); /* Ensure font consistency */
+            padding: 15px; /* Add padding for modal on small screens */
+            box-sizing: border-box;
+        }
+
+        .disclaimer-modal.visible { /* Class to control visibility and animation */
+            display: flex; /* Use flex for centering */
+            opacity: 1;
+        }
+
+        .disclaimer-modal .modal-content {
+            background-color: var(--background-light);
+            padding: 30px 35px; 
+            border-radius: 14px; 
+            max-width: 460px; 
+            width: 100%; /* Was calc(100% - 40px), now simpler 100% due to parent padding */
+            text-align: center;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12); 
+            transform: scale(0.92); 
+            opacity: 0;
+            transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            transition-delay: 0.05s; 
+            box-sizing: border-box;
+        }
+
+        .disclaimer-modal.visible .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .disclaimer-modal .modal-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 0; 
+            margin-bottom: 12px;
+        }
+
+        .disclaimer-modal .modal-content p {
+            font-size: 14px; 
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin-bottom: 25px;
+        }
+
+        .disclaimer-modal .modal-buttons {
+            display: flex; /* For button layout on small screens */
+            flex-direction: column; /* Stack buttons vertically by default */
+            gap: 10px; /* Space between buttons */
+        }
+
+        .disclaimer-modal .modal-buttons button {
+            padding: 10px 15px; /* Unified padding */
+            border: none;
+            border-radius: 8px; 
+            font-size: 16px;
+            font-weight: 500; 
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            width: 100%; /* Make buttons full width of their container */
+        }
+        .disclaimer-modal .modal-buttons button:active {
+            transform: scale(0.96); 
+        }
+
+        .disclaimer-modal #agreeButton {
+            background-color: var(--link-blue);
+            color: white;
+            /* margin-right: 10px; Removed for stacked layout */
+        }
+        .disclaimer-modal #agreeButton:hover {
+            background-color: var(--link-blue-hover);
+        }
+
+        .disclaimer-modal #cancelButton {
+            background-color: #e8e8ed; 
+            color: var(--link-blue); 
+        }
+        .disclaimer-modal #cancelButton:hover {
+            background-color: #dddce1; 
+        }
+        /* End Disclaimer Modal Styles */
+
+        /* --- Mobile Friendliness --- */
+        @media (max-width: 768px) {
+            #welcome-screen {
+                padding: 30px 15px; /* Adjust padding for smaller screens */
+            }
+            #welcome-screen h2 {
+                font-size: 44px; /* Reduced from 72px */
+                margin-bottom: 15px;
+                letter-spacing: -0.02em;
+            }
+
+            #welcome-screen .welcome-subtitle {
+                font-size: 22px; /* Reduced from 30px */
+                margin-bottom: 25px;
+                letter-spacing: -0.01em;
+            }
+            #welcome-screen .welcome-subtitle .emoji {
+                font-size: 20px; /* Scaled with subtitle */
+            }
+
+            .contact-info p {
+                font-size: 17px; /* Reduced from 19px */
+            }
+            .contact-info .emoji-contact { 
+                font-size: 15px; 
+            }
+
+            .apple-text-cta { /* For both main CTA and update link text */
+                font-size: 19px; /* Reduced from 21px */
+            }
+            
+            .latest-update-section {
+                margin-top: 35px; 
+                padding: 15px; 
+                width: 100%; /* Take full available width within welcome-screen padding */
+                max-width: none; /* Override desktop max-width for this section */
+            }
+
+            .latest-update-section .update-link-text {
+                font-size: 18px; /* Reduced from 20px */
+            }
+
+            .update-description {
+                font-size: 14px; 
+            }
+
+            .disclaimer-modal .modal-content {
+                padding: 25px 20px; 
+            }
+            .disclaimer-modal .modal-content h3 {
+                font-size: 18px;
+            }
+            .disclaimer-modal .modal-content p {
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+             /* For modal buttons on wider small screens, allow side-by-side */
+            .disclaimer-modal .modal-buttons {
+                flex-direction: row; /* Side-by-side for wider small screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            #welcome-screen {
+                padding: 20px 10px;
+            }
+            #welcome-screen h2 {
+                font-size: 32px; /* Further reduce */
+            }
+
+            #welcome-screen .welcome-subtitle {
+                font-size: 18px; /* Further reduce */
+            }
+            #welcome-screen .welcome-subtitle .emoji {
+                font-size: 17px;
+            }
+
+            .contact-info p {
+                font-size: 15px;
+                margin-bottom: 8px;
+            }
+            .apple-text-cta {
+                font-size: 17px;
+            }
+             .latest-update-section {
+                margin-top: 30px;
+             }
+             .latest-update-section .update-link-text {
+                font-size: 17px;
+                margin-bottom: 8px;
+            }
+            .update-badge {
+                font-size: 9px;
+                padding: 3px 8px;
+                margin-bottom: 10px;
+            }
+            .update-description {
+                font-size: 13px;
+            }
+
+            .footer-text {
+                font-size: 10px;
+                bottom: 10px; 
+            }
+            .disclaimer-modal .modal-content {
+                padding: 20px 15px;
+            }
+             .disclaimer-modal .modal-buttons {
+                flex-direction: column; /* Stack buttons on very small screens */
+            }
+            .disclaimer-modal .modal-buttons button {
+                font-size: 15px;
+                padding: 10px;
+            }
+        }
+        /* End Mobile Friendliness */
+
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
@@ -264,7 +480,8 @@
         </div>
 
         <div class="cta-link-container"> 
-            <a href="profile.html" class="apple-text-cta" style="font-size: 21px;"> Know More about Expert <span class="cta-arrow">&rsaquo;</span>
+            <a href="profile.html" class="apple-text-cta" style="font-size: 21px;">
+                Know More about Expert <span class="cta-arrow">&rsaquo;</span>
             </a>
         </div>
 
@@ -281,12 +498,59 @@
         </p>
     </div>
 
+    <div id="disclaimerModal" class="disclaimer-modal">
+        <div class="modal-content">
+            <h3>Disclaimer</h3>
+            <p>
+                © 2025 TDS Navigator. For informational purposes only.<br>
+                Consult a tax professional for specific advice. Content based on provisions as of Finance Act 2025.
+            </p>
+            <div class="modal-buttons">
+                <button id="agreeButton">Agree & Proceed</button>
+                <button id="cancelButton">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const currentYearSpan = document.getElementById('currentYear');
         if (currentYearSpan) {
             currentYearSpan.textContent = new Date().getFullYear();
         }
+
+        // --- Disclaimer Modal Logic ---
+        const tdsUpdateLink = document.querySelector('.latest-update-section a.update-link-text');
+        const disclaimerModal = document.getElementById('disclaimerModal');
+        const agreeButton = document.getElementById('agreeButton');
+        const cancelButton = document.getElementById('cancelButton');
+
+        if (tdsUpdateLink && disclaimerModal && agreeButton && cancelButton) {
+            tdsUpdateLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Stop the link from navigating immediately
+                disclaimerModal.classList.add('visible'); // Show the modal
+            });
+
+            agreeButton.addEventListener('click', function() {
+                disclaimerModal.classList.remove('visible');
+                // Optional: Short delay for animation before redirecting
+                setTimeout(() => {
+                    window.location.href = tdsUpdateLink.href; // Proceed to the link's destination
+                }, 150); 
+            });
+
+            cancelButton.addEventListener('click', function() {
+                disclaimerModal.classList.remove('visible'); // Hide the modal
+            });
+
+            // Optional: Close modal if user clicks on the overlay backdrop
+            disclaimerModal.addEventListener('click', function(event) {
+                if (event.target === disclaimerModal) { 
+                    disclaimerModal.classList.remove('visible');
+                }
+            });
+        }
+        // --- End Disclaimer Modal Logic ---
     });
     </script>
 </body>
