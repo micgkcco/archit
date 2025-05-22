@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archit B. Sheth | Chartered Accountant Profile - Ahmedabad</title>
+
+    <meta name="description" content="Professional profile of Archit B. Sheth, a Qualified Chartered Accountant in Ahmedabad with over 12 years of experience in tax advisory and financial consultancy.">
+    <meta name="keywords" content="Archit B. Sheth Profile, Chartered Accountant Ahmedabad, Tax Expert Ahmedabad, CA Profile Ahmedabad, Financial Advisor Ahmedabad">
+    <meta name="author" content="Archit Sheth">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Profile: Archit B. Sheth - Chartered Accountant, Ahmedabad">
+    <meta property="og:description" content="Learn more about Archit B. Sheth, an experienced Chartered Accountant offering expert financial and tax services in Ahmedabad.">
+    <meta property="og:type" content="profile">
+    
+    <style>
+        :root {
+            --font-family-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --background-light: #ffffff; 
+            --text-primary: #1d1d1f;    
+            --text-secondary: #515154; 
+            --text-tertiary: #86868b;   
+            --link-blue: #007aff;       
+            --link-blue-hover: #0071e3; 
+            --border-color-light: #d2d2d7; 
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        body {
+            font-family: var(--font-family-apple);
+            background-color: var(--background-light); 
+            color: var(--text-primary); 
+            line-height: 1.6; 
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(15px);
+            -webkit-backdrop-filter: saturate(180%) blur(15px);
+            padding: 0 20px;
+            height: 48px; 
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            position: fixed; 
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 0.5px solid var(--border-color-light);
+        }
+        .nav-container { max-width: 980px; width: 100%; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 17px; font-weight: 600; color: var(--text-primary); text-decoration: none; }
+        .nav-link { font-size: 17px; color: var(--link-blue); text-decoration: none; transition: color 0.2s ease-in-out; }
+        .nav-link:hover { color: var(--link-blue-hover); }
+        
+        .profile-container {
+            max-width: 720px; 
+            margin: 0 auto;
+            padding: 100px 20px 60px 20px; 
+            opacity: 0;
+            animation: fadeInContainer 0.5s ease-out 0.1s forwards;
+        }
+        @keyframes fadeInContainer {
+            to { opacity: 1; }
+        }
+
+        .profile-header h1 {
+            font-size: 44px; 
+            font-weight: 700; 
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            transform: translateY(80%) skewY(5deg); 
+            transform-origin: left bottom;
+            animation: titleReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+            text-align: justify; /* User request for justification */
+        }
+        @keyframes titleReveal {
+            0% { opacity: 0; transform: translateY(80%) skewY(5deg); }
+            100% { opacity: 1; transform: translateY(0) skewY(0deg); }
+        }
+
+        .profile-header .subtitle {
+            font-size: 21px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 45px;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: contentFadeInUp 0.9s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+            text-align: justify; /* User request for justification */
+        }
+
+        .profile-section {
+            margin-bottom: 40px; 
+        }
+
+        .profile-section h2 {
+            font-size: 26px; 
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px; 
+            padding-bottom: 10px; 
+            position: relative; 
+            opacity: 0;
+            transform: translateY(20px);
+            animation: contentFadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+        .profile-section h2::after { 
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%; 
+            height: 1px;
+            background-color: var(--border-color-light);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: drawUnderline 0.7s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+            animation-delay: inherit; 
+        }
+        @keyframes drawUnderline {
+            to { transform: scaleX(1); }
+        }
+        
+        #summary h2 { animation-delay: 0.7s; }
+        #summary h2::after { animation-delay: 1.0s; } 
+
+        #expertise h2 { animation-delay: 1.0s; } 
+        #expertise h2::after { animation-delay: 1.3s; }
+
+
+        .profile-section p,
+        .profile-section ul li { 
+            font-size: 17px;
+            line-height: 1.7; 
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            opacity: 0;
+            animation: contentBlockReveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+        
+        #summary p {
+            text-align: justify;
+        }
+        
+        #expertise ul {
+            list-style-type: none; 
+            padding-left: 0;       
+            margin: 0;
+        }
+
+        #expertise ul li {
+            text-align: justify;
+            margin-left: 0; 
+        }
+        
+        @keyframes contentBlockReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(25px);
+                clip-path: inset(0 0 100% 0); 
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                clip-path: inset(0 0 0% 0);
+            }
+        }
+        
+        #summary p:nth-of-type(1) { animation-delay: 0.9s; }
+        #summary p:nth-of-type(2) { animation-delay: 1.05s; }
+
+        #expertise ul li:nth-child(1) { animation-delay: 1.2s; } 
+        #expertise ul li:nth-child(2) { animation-delay: 1.3s; }
+        #expertise ul li:nth-child(3) { animation-delay: 1.4s; }
+        #expertise ul li:nth-child(4) { animation-delay: 1.5s; }
+        #expertise ul li:nth-child(5) { animation-delay: 1.6s; }
+        #expertise ul li:nth-child(6) { animation-delay: 1.7s; }
+        #expertise ul li:nth-child(7) { animation-delay: 1.8s; }
+        
+        @keyframes contentFadeInUp { 
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .app-footer {
+            text-align: center;
+            padding: 40px 20px 30px;
+            font-family: var(--font-family-apple);
+            font-size: 12px; 
+            color: var(--text-tertiary); 
+            letter-spacing: -0.003em;
+            opacity: 0; 
+            transform: translateY(20px);
+            animation: contentFadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) 2.0s forwards; 
+        }
+        .app-footer .india-flag { display: inline-block; margin-left: 4px; font-size: 12px; vertical-align: baseline; }
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Archit B. Sheth</a>
+            <a href="index.html#contact" class="nav-link">Contact Me</a> 
+        </div>
+    </header>
+
+    <main class="profile-container" role="main">
+        <div class="profile-header">
+            <h1>Archit B. Sheth</h1>
+            <p class="subtitle">Qualified Chartered Accountant | 12+ Years of Experience in Financial & Tax Advisory<br>Ahmedabad, Gujarat</p>
+        </div>
+
+        <section class="profile-section" id="summary">
+            <h2>Professional Summary</h2>
+            <p>Archit B. Sheth is a distinguished and results-oriented Chartered Accountant with an extensive track record of over 12 years in providing expert financial counsel and comprehensive taxation services. Based in Ahmedabad, Archit is dedicated to empowering individuals and businesses with astute financial strategies and robust compliance solutions tailored to navigate the complexities of the Indian economic landscape.</p>
+            <p>He combines deep domain knowledge with a proactive, client-centric approach, ensuring that clients receive clear, actionable advice to optimize their financial performance, manage risks effectively, and achieve their strategic objectives. Archit is committed to upholding the highest standards of professional integrity and delivering measurable value through meticulous attention to detail and a thorough understanding of evolving market dynamics and regulatory frameworks.</p>
+        </section>
+
+        <section class="profile-section" id="expertise">
+            <h2>Key Areas of Expertise</h2>
+            <ul>
+                <li><strong>Comprehensive Tax Planning & Advisory:</strong> Strategic advice on Income Tax, GST, and other direct/indirect taxes to ensure optimisation and compliance for various entities.</li>
+                <li><strong>Audit & Assurance Services:</strong> Conducting statutory, internal, and tax audits with a meticulous approach, focusing on providing valuable insights beyond mere regulatory compliance.</li>
+                <li><strong>Financial Reporting & Analysis:</strong> Expertise in the preparation and in-depth analysis of financial statements, MIS reporting, and offering critical insights into overall financial health.</li>
+                <li><strong>Accounting & Bookkeeping Advisory:</strong> Providing comprehensive guidance on best accounting practices, efficient system implementation, and the diligent maintenance of accurate financial records.</li>
+                <li><strong>Business Consultancy & Financial Strategy:</strong> Assisting diverse businesses with robust financial planning, budgeting, forecasting, thorough due diligence, and impactful strategic decision-making.</li>
+                <li><strong>Regulatory Compliance Management:</strong> Ensuring complete adherence to Company Law, FEMA regulations, and various complex taxation statutes for seamless business operations.</li>
+                <li><strong>Startup Advisory:</strong> Specialized guidance for new ventures concerning optimal financial structuring, essential compliance frameworks, and sustainable long-term growth strategies.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>© <span id="currentYear"></span> Archit B. Sheth. All rights reserved. Ahmedabad, Gujarat <span class="india-flag">🇮🇳</span></p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentYearSpan = document.getElementById('currentYear');
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+    });
+    </script>
+</body>
+</html>
