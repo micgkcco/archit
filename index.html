@@ -36,7 +36,7 @@
         }
         body {
             font-family: var(--font-family-apple);
-            overflow-x: hidden;
+            overflow-x: hidden; 
             overflow-y: auto;
             background-color: var(--background-light);
             color: var(--text-primary);
@@ -44,10 +44,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* justify-content: center; */ /* Adjusted for longer content */
             min-height: 100vh;
             margin: 0;
-            padding: 40px 20px; /* Added more top/bottom padding */
+            padding: 40px 20px;
             box-sizing: border-box;
         }
 
@@ -63,7 +62,7 @@
             max-width: 800px;
             width: 100%;
             box-sizing: border-box;
-            margin-bottom: 40px; /* Space before the grid */
+            margin-bottom: 40px; 
         }
 
         #welcome-screen h2 {
@@ -74,8 +73,22 @@
             margin-bottom: 20px;
             line-height: 1.1;
             letter-spacing: -0.025em;
-            opacity: 0;
-            animation: appleHeroTextReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+            opacity: 0; 
+            animation: slamEffect 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
+            /* ADDED: Transition for hover effect */
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        /* ADDED: Hover effect for main heading */
+        #welcome-screen h2:hover {
+            transform: scale(1.02);
+        }
+
+
+        @keyframes slamEffect {
+            0% { opacity: 0; transform: translateY(-70px) scale(0.4); }
+            60% { transform: translateY(15px) scale(1.1); }
+            80% { transform: translateY(-8px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         #welcome-screen .welcome-subtitle {
@@ -87,23 +100,25 @@
             line-height: 1.35;
             letter-spacing: -0.015em;
             opacity: 0;
-            animation: appleHeroTextReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+            animation: appleHeroTextReveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.6s forwards;
+            /* ADDED: Transition for hover effect */
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s ease-out;
         }
+        /* ADDED: Hover effect for subtitle */
+        #welcome-screen .welcome-subtitle:hover {
+            transform: scale(1.03);
+            color: var(--text-primary);
+        }
+
+        @keyframes appleHeroTextReveal {
+            0% { opacity: 0; transform: translateY(40px) scale(0.97); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         #welcome-screen .welcome-subtitle .emoji {
             font-size: 28px;
             vertical-align: baseline;
             margin-left: 6px;
-        }
-
-        @keyframes appleHeroTextReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(40px) scale(0.97);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
         }
 
         .contact-info {
@@ -111,7 +126,7 @@
             margin-top: 24px;
             font-family: var(--font-family-apple);
             transform: translateY(20px);
-            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards;
+            animation: appleStandardFadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 1.0s forwards;
         }
         @keyframes appleStandardFadeInUp {
             0% { opacity: 0; transform: translateY(20px); }
@@ -124,7 +139,12 @@
             line-height: 1.5;
             color: var(--text-primary);
             margin-bottom: 12px;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
         }
+        .contact-info p:hover {
+            transform: scale(1.05); 
+        }
+
         .contact-info .emoji-contact {
             font-size: 17px;
             margin-right: 8px;
@@ -146,7 +166,7 @@
             margin-top: 36px;
             opacity: 0;
             transform: translateY(20px);
-            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.9s forwards;
+            animation: appleStandardFadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 1.3s forwards;
         }
 
         .apple-text-cta {
@@ -173,47 +193,40 @@
         .updates-grid-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 25px; /* Space between cards */
+            gap: 25px;
             justify-content: center;
             width: 100%;
-            max-width: 1100px; /* Adjust as needed for 3 cards in a row */
+            max-width: 1100px;
             margin-left: auto;
             margin-right: auto;
-            padding: 0 15px; /* Padding for the container itself */
+            padding: 0 15px;
             box-sizing: border-box;
         }
 
         .update-section-common {
-            flex: 1 1 300px; /* Grow, shrink, with a base width for responsiveness */
-            min-width: 280px; /* Minimum width before wrapping or shrinking too much */
+            flex: 1 1 300px;
+            min-width: 280px;
             padding: 20px 22px;
             background-color: rgba(var(--text-primary-rgb), 0.025);
-            border-radius: 14px; /* Slightly larger radius for cards */
+            border-radius: 14px;
             text-align: center;
-            opacity: 0;
-            transform: translateY(30px) scale(0.98);
             border: 0.5px solid rgba(var(--border-color-light-rgb), 0.35);
             box-sizing: border-box;
-            display: flex; /* For aligning content within the card */
-            flex-direction: column; /* Stack content vertically */
-            justify-content: space-between; /* Distribute space if needed */
-            /* margin-top is removed, gap in parent handles spacing */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            
+            opacity: 0;
+            transform: translateX(-100px); 
+            transition-property: opacity, transform;
+            transition-duration: 3s; 
+            transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: opacity, transform;
         }
 
-        .tds-update { animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards;}
-        .sft-update { animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.25s forwards;}
-        .fa-summary-update { animation: latestUpdateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) 1.4s forwards;}
-
-
-        @keyframes latestUpdateReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(30px) scale(0.98);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        .update-section-common.is-visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .update-badge {
@@ -227,29 +240,28 @@
             margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            align-self: center; /* Center badge if card is flex container */
+            align-self: center;
         }
 
         .update-section-common .update-link-text {
             font-size: 18px;
             display: block;
-            margin-bottom: 10px; /* Increased margin */
+            margin-bottom: 10px;
         }
 
         .update-description {
             font-size: 14px;
             color: var(--text-secondary);
-            line-height: 1.45; /* Adjusted line height */
-            max-width: 100%; /* Let it fill the card */
+            line-height: 1.45;
+            max-width: 100%;
             margin-left: auto;
             margin-right: auto;
-            flex-grow: 1; /* Allows description to take up available space */
+            flex-grow: 1;
         }
-        /* End Update Section */
 
         .main-footer {
             width: 100%;
-            padding: 40px 20px 20px; /* Increased top padding */
+            padding: 40px 20px 20px;
             text-align: center;
             font-family: var(--font-family-apple);
             font-size: 12px;
@@ -258,8 +270,8 @@
             color: var(--text-secondary);
             letter-spacing: -0.003em;
             transform: translateY(20px);
-            animation: appleStandardFadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.6s forwards; /* Adjusted animation delay */
-            margin-top: 50px; /* Increased margin from content above */
+            animation: appleStandardFadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 1.8s forwards;
+            margin-top: 50px;
             border-top: 0.5px solid var(--border-color-light);
         }
         .main-footer .india-flag {
@@ -269,252 +281,25 @@
             vertical-align: baseline;
         }
 
-        /* --- Disclaimer Modal Styles --- */
-        .disclaimer-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.55);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.25s ease-in-out;
-            font-family: var(--font-family-apple);
-            padding: 15px;
-            box-sizing: border-box;
-        }
-
-        .disclaimer-modal.visible {
-            display: flex;
-            opacity: 1;
-        }
-
-        .disclaimer-modal .modal-content {
-            background-color: var(--background-light);
-            padding: 30px 35px;
-            border-radius: 14px;
-            max-width: 460px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
-            transform: scale(0.92);
-            opacity: 0;
-            transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-            transition-delay: 0.05s;
-            box-sizing: border-box;
-        }
-
-        .disclaimer-modal.visible .modal-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .disclaimer-modal .modal-content h3 {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-top: 0;
-            margin-bottom: 12px;
-        }
-
-        .disclaimer-modal .modal-content p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.55;
-            margin-bottom: 25px;
-        }
-
-        .disclaimer-modal .modal-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .disclaimer-modal .modal-buttons button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            width: 100%;
-        }
-        .disclaimer-modal .modal-buttons button:active {
-            transform: scale(0.96);
-        }
-
-        .disclaimer-modal #agreeButton {
-            background-color: var(--link-blue);
-            color: white;
-        }
-        .disclaimer-modal #agreeButton:hover {
-            background-color: var(--link-blue-hover);
-        }
-
-        .disclaimer-modal #cancelButton {
-            background-color: #e8e8ed;
-            color: var(--link-blue);
-        }
-        .disclaimer-modal #cancelButton:hover {
-            background-color: #dddce1;
-        }
-        /* End Disclaimer Modal Styles */
-
-        /* --- Mobile Friendliness --- */
-        @media (max-width: 992px) { /* Tablet breakpoint */
-             .updates-grid-container {
-                max-width: 700px; /* Allow 2 cards side-by-side or wrap to single column if narrow */
-            }
-            .update-section-common {
-                flex-basis: calc(50% - 12.5px); /* For two cards in a row, accounting for gap */
-                min-width: 280px; /* Ensure they don't get too small */
-            }
-        }
-
-
-        @media (max-width: 768px) { /* Mobile breakpoint */
-            body {
-                 padding: 25px 15px;
-            }
-            #welcome-screen {
-                padding: 15px 0px;
-                margin-bottom: 30px;
-            }
-            #welcome-screen h2 {
-                font-size: 40px;
-                margin-bottom: 15px;
-                letter-spacing: -0.02em;
-            }
-
-            #welcome-screen .welcome-subtitle {
-                font-size: 20px;
-                margin-bottom: 25px;
-                letter-spacing: -0.01em;
-            }
-            #welcome-screen .welcome-subtitle .emoji {
-                font-size: 18px;
-            }
-            .contact-info { margin-top: 20px; }
-            .contact-info p {
-                font-size: 16px;
-            }
-            .contact-info .emoji-contact {
-                font-size: 14px;
-            }
-
-            .apple-text-cta {
-                font-size: 18px;
-            }
-            .cta-link-container { margin-top: 30px;}
-
-            .updates-grid-container {
-                flex-direction: column; /* Stack them vertically on mobile */
-                align-items: center; /* Center cards in the column */
-                gap: 20px; /* Vertical gap when stacked */
-                padding: 0;
-            }
-            .update-section-common {
-                flex-basis: auto; /* Reset flex-basis */
-                width: 100%; /* Full width when stacked */
-                max-width: 450px; /* Max width for readability */
-                min-width: unset;
-                /* margin-top is handled by gap in parent now */
-            }
-
-            .update-section-common .update-link-text {
-                font-size: 17px;
-            }
-             .update-badge {
-                font-size: 9px;
-                padding: 3px 8px;
-                margin-bottom: 10px;
-            }
-            .update-description {
-                font-size: 13px;
-            }
-
-            .disclaimer-modal .modal-content {
-                padding: 25px 20px;
-            }
-            .disclaimer-modal .modal-content h3 {
-                font-size: 18px;
-            }
-            .disclaimer-modal .modal-content p {
-                font-size: 13px;
-                margin-bottom: 20px;
-            }
-            .disclaimer-modal .modal-buttons {
-                flex-direction: row;
-            }
-             .main-footer {
-                position: static;
-                padding: 25px 15px 15px;
-                margin-top: 40px;
-            }
-        }
-
-        @media (max-width: 480px) {
-             body {
-                 padding: 20px 10px;
-             }
-            #welcome-screen {
-                padding: 10px 0px;
-            }
-            #welcome-screen h2 {
-                font-size: 30px;
-            }
-
-            #welcome-screen .welcome-subtitle {
-                font-size: 17px;
-            }
-            #welcome-screen .welcome-subtitle .emoji {
-                font-size: 16px;
-            }
-
-            .contact-info p {
-                font-size: 14px;
-                margin-bottom: 8px;
-            }
-            .apple-text-cta {
-                font-size: 16px;
-            }
-
-             .update-section-common {
-                padding: 15px;
-             }
-             .update-section-common .update-link-text {
-                font-size: 16px;
-                margin-bottom: 6px;
-            }
-            .update-badge {
-                font-size: 8px;
-                padding: 2px 6px;
-                margin-bottom: 8px;
-            }
-            .update-description {
-                font-size: 12px;
-            }
-
-            .main-footer {
-                font-size: 10px;
-                padding-top: 20px;
-                margin-top: 30px;
-            }
-            .disclaimer-modal .modal-content {
-                padding: 20px 15px;
-            }
-             .disclaimer-modal .modal-buttons {
-                flex-direction: column;
-            }
-            .disclaimer-modal .modal-buttons button {
-                font-size: 15px;
-                padding: 10px;
-            }
-        }
-        /* End Mobile Friendliness */
-
+        /* --- Disclaimer Modal Styles (Unchanged) --- */
+        .disclaimer-modal { display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.55); z-index: 2000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s ease-in-out; font-family: var(--font-family-apple); padding: 15px; box-sizing: border-box; }
+        .disclaimer-modal.visible { display: flex; opacity: 1; }
+        .disclaimer-modal .modal-content { background-color: var(--background-light); padding: 30px 35px; border-radius: 14px; max-width: 460px; width: 100%; text-align: center; box-shadow: 0 12px 35px rgba(0,0,0,0.12); transform: scale(0.92); opacity: 0; transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1); transition-delay: 0.05s; box-sizing: border-box; }
+        .disclaimer-modal.visible .modal-content { transform: scale(1); opacity: 1; }
+        .disclaimer-modal .modal-content h3 { font-size: 20px; font-weight: 600; color: var(--text-primary); margin-top: 0; margin-bottom: 12px; }
+        .disclaimer-modal .modal-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 25px; }
+        .disclaimer-modal .modal-buttons { display: flex; flex-direction: column; gap: 10px; }
+        .disclaimer-modal .modal-buttons button { padding: 10px 15px; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background-color 0.2s ease, transform 0.1s ease; width: 100%; }
+        .disclaimer-modal .modal-buttons button:active { transform: scale(0.96); }
+        .disclaimer-modal #agreeButton { background-color: var(--link-blue); color: white; }
+        .disclaimer-modal #agreeButton:hover { background-color: var(--link-blue-hover); }
+        .disclaimer-modal #cancelButton { background-color: #e8e8ed; color: var(--link-blue); }
+        .disclaimer-modal #cancelButton:hover { background-color: #dddce1; }
+        
+        /* --- Mobile Friendliness (Unchanged) --- */
+        @media (max-width: 992px) { .updates-grid-container { max-width: 700px; } .update-section-common { flex-basis: calc(50% - 12.5px); min-width: 280px; } }
+        @media (max-width: 768px) { body { padding: 25px 15px; } #welcome-screen { padding: 15px 0px; margin-bottom: 30px; } #welcome-screen h2 { font-size: 40px; margin-bottom: 15px; letter-spacing: -0.02em; } #welcome-screen .welcome-subtitle { font-size: 20px; margin-bottom: 25px; letter-spacing: -0.01em; } #welcome-screen .welcome-subtitle .emoji { font-size: 18px; } .contact-info { margin-top: 20px; } .contact-info p { font-size: 16px; } .contact-info .emoji-contact { font-size: 14px; } .apple-text-cta { font-size: 18px; } .cta-link-container { margin-top: 30px;} .updates-grid-container { flex-direction: column; align-items: center; gap: 20px; padding: 0; } .update-section-common { flex-basis: auto; width: 100%; max-width: 450px; min-width: unset; } .update-section-common .update-link-text { font-size: 17px; } .update-badge { font-size: 9px; padding: 3px 8px; margin-bottom: 10px; } .update-description { font-size: 13px; } .disclaimer-modal .modal-content { padding: 25px 20px; } .disclaimer-modal .modal-content h3 { font-size: 18px; } .disclaimer-modal .modal-content p { font-size: 13px; margin-bottom: 20px; } .disclaimer-modal .modal-buttons { flex-direction: row; } .main-footer { position: static; padding: 25px 15px 15px; margin-top: 40px; } }
+        @media (max-width: 480px) { body { padding: 20px 10px; } #welcome-screen { padding: 10px 0px; } #welcome-screen h2 { font-size: 30px; } #welcome-screen .welcome-subtitle { font-size: 17px; } #welcome-screen .welcome-subtitle .emoji { font-size: 16px; } .contact-info p { font-size: 14px; margin-bottom: 8px; } .apple-text-cta { font-size: 16px; } .update-section-common { padding: 15px; } .update-section-common .update-link-text { font-size: 16px; margin-bottom: 6px; } .update-badge { font-size: 8px; padding: 2px 6px; margin-bottom: 8px; } .update-description { font-size: 12px; } .main-footer { font-size: 10px; padding-top: 20px; margin-top: 30px; } .disclaimer-modal .modal-content { padding: 20px 15px; } .disclaimer-modal .modal-buttons { flex-direction: column; } .disclaimer-modal .modal-buttons button { font-size: 15px; padding: 10px; } }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
@@ -596,17 +381,15 @@
             currentYearSpan.textContent = new Date().getFullYear();
         }
 
-        // --- Disclaimer Modal Logic ---
+        // --- Disclaimer Modal Logic (Unchanged) ---
         const tdsUpdateLink = document.querySelector('a.tds-navigator-link');
         const sftGuideLink = document.querySelector('a.sft-guide-link');
         const faSummaryLink = document.querySelector('a.fa-summary-link');
-
         const disclaimerModal = document.getElementById('disclaimerModal');
         const disclaimerTitle = document.getElementById('disclaimerTitle');
         const disclaimerText = document.getElementById('disclaimerText');
         const agreeButton = document.getElementById('agreeButton');
         const cancelButton = document.getElementById('cancelButton');
-
         let targetUrl = '';
 
         function showDisclaimer(event, toolName, url) {
@@ -617,43 +400,45 @@
                 Consult a tax professional for specific advice. Content based on relevant provisions.`;
             disclaimerModal.classList.add('visible');
         }
-
-        if (tdsUpdateLink) {
-            tdsUpdateLink.addEventListener('click', function(event) {
-                showDisclaimer(event, 'TDS Navigator', this.href);
-            });
-        }
-
-        if (sftGuideLink) {
-            sftGuideLink.addEventListener('click', function(event) {
-                 showDisclaimer(event, 'SFT Reporting Guide', this.href);
-            });
-        }
-
-        if (faSummaryLink) {
-            faSummaryLink.addEventListener('click', function(event) {
-                 showDisclaimer(event, 'Finance Act 2025 Summary', this.href);
-            });
-        }
-
+        if (tdsUpdateLink) { tdsUpdateLink.addEventListener('click', function(event) { showDisclaimer(event, 'TDS Navigator', this.href); }); }
+        if (sftGuideLink) { sftGuideLink.addEventListener('click', function(event) {  showDisclaimer(event, 'SFT Reporting Guide', this.href); }); }
+        if (faSummaryLink) { faSummaryLink.addEventListener('click', function(event) {  showDisclaimer(event, 'Finance Act 2025 Summary', this.href); }); }
         if (disclaimerModal && agreeButton && cancelButton) {
             agreeButton.addEventListener('click', function() {
                 disclaimerModal.classList.remove('visible');
-                if (targetUrl) {
-                    setTimeout(() => {
-                        window.location.href = targetUrl;
-                    }, 150);
-                }
+                if (targetUrl) { setTimeout(() => { window.location.href = targetUrl; }, 150); }
             });
+            cancelButton.addEventListener('click', function() { disclaimerModal.classList.remove('visible'); });
+            disclaimerModal.addEventListener('click', function(event) { if (event.target === disclaimerModal) { disclaimerModal.classList.remove('visible'); } });
+        }
 
-            cancelButton.addEventListener('click', function() {
-                disclaimerModal.classList.remove('visible');
-            });
+        // --- Scroll-triggered Animation for Update Cards (Unchanged from previous step) ---
+        const animatedCards = document.querySelectorAll('.updates-grid-container .update-section-common');
 
-            disclaimerModal.addEventListener('click', function(event) {
-                if (event.target === disclaimerModal) {
-                    disclaimerModal.classList.remove('visible');
-                }
+        if (animatedCards.length > 0) {
+            const cardObserverOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px', 
+                threshold: 0.1 
+            };
+
+            const observerCallback = (entries, observerInstance) => {
+                entries.forEach((entry) => { 
+                    if (entry.isIntersecting) {
+                        const cardElement = entry.target;
+                        const cardIndex = Array.from(animatedCards).indexOf(cardElement);
+                        
+                        setTimeout(() => {
+                            cardElement.classList.add('is-visible');
+                        }, cardIndex * 500); 
+                        observerInstance.unobserve(cardElement); 
+                    }
+                });
+            };
+            
+            const cardObserver = new IntersectionObserver(observerCallback, cardObserverOptions);
+            animatedCards.forEach(card => {
+                cardObserver.observe(card);
             });
         }
     });
