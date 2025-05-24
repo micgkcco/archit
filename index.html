@@ -65,7 +65,7 @@
             margin-bottom: 40px; 
         }
 
-        #welcome-screen h2 {
+        #welcome-screen h2#main-heading { /* Styles for the H2 container */
             font-family: var(--font-family-apple);
             font-size: 72px;
             font-weight: 600;
@@ -75,12 +75,14 @@
             letter-spacing: -0.025em;
             opacity: 0; 
             animation: slamEffect 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
-            /* ADDED: Transition for hover effect */
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* transition and will-change for transform are moved to #magnetic-text */
+            cursor: default; /* Default cursor for the H2, interaction on inner span */
         }
-        /* ADDED: Hover effect for main heading */
-        #welcome-screen h2:hover {
-            transform: scale(1.02);
+
+        #magnetic-text { /* Styles for the inner SPAN that will have the magnetic effect */
+            display: inline-block; /* Crucial for transform on span */
+            transition: transform 0.1s linear;
+            will-change: transform;
         }
 
 
@@ -101,10 +103,8 @@
             letter-spacing: -0.015em;
             opacity: 0;
             animation: appleHeroTextReveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.6s forwards;
-            /* ADDED: Transition for hover effect */
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s ease-out;
         }
-        /* ADDED: Hover effect for subtitle */
         #welcome-screen .welcome-subtitle:hover {
             transform: scale(1.03);
             color: var(--text-primary);
@@ -141,7 +141,7 @@
             margin-bottom: 12px;
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
         }
-        .contact-info p:hover {
+        .contact-info p:hover { /* This makes the whole P tag pop */
             transform: scale(1.05); 
         }
 
@@ -149,9 +149,8 @@
             font-size: 17px;
             margin-right: 8px;
             vertical-align: middle;
-            color: var(--text-secondary);
         }
-         .contact-info a {
+         .contact-info a { 
             color: var(--link-blue);
             text-decoration: none;
             font-weight: 400;
@@ -169,12 +168,12 @@
             animation: appleStandardFadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 1.3s forwards;
         }
 
-        .apple-text-cta {
+        .apple-text-cta { /* For "Know More" and Update Card links */
             display: inline-block;
             color: var(--link-blue);
             font-weight: 500;
             text-decoration: none;
-            transition: color 0.2s ease-in-out, text-decoration-color 0.2s ease-in-out;
+            transition: color 0.2s ease-in-out, text-decoration-color 0.2s ease-in-out, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Added transform transition */
             cursor: pointer;
             padding: 4px 0;
         }
@@ -182,6 +181,7 @@
             color: var(--link-blue-hover);
             text-decoration: underline;
             text-decoration-color: var(--link-blue-hover);
+            transform: scale(1.05); /* Added pop-out effect */
         }
         .apple-text-cta .cta-arrow {
             margin-left: 5px;
@@ -189,14 +189,13 @@
             display: inline-block;
         }
 
-        /* --- Updates Grid Layout --- */
         .updates-grid-container {
             display: flex;
             flex-wrap: wrap;
             gap: 25px;
             justify-content: center;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1100px; 
             margin-left: auto;
             margin-right: auto;
             padding: 0 15px;
@@ -204,8 +203,9 @@
         }
 
         .update-section-common {
-            flex: 1 1 300px;
-            min-width: 280px;
+            flex: 1 1 250px; 
+            min-width: 270px; 
+            max-width: 320px; 
             padding: 20px 22px;
             background-color: rgba(var(--text-primary-rgb), 0.025);
             border-radius: 14px;
@@ -281,7 +281,6 @@
             vertical-align: baseline;
         }
 
-        /* --- Disclaimer Modal Styles (Unchanged) --- */
         .disclaimer-modal { display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.55); z-index: 2000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s ease-in-out; font-family: var(--font-family-apple); padding: 15px; box-sizing: border-box; }
         .disclaimer-modal.visible { display: flex; opacity: 1; }
         .disclaimer-modal .modal-content { background-color: var(--background-light); padding: 30px 35px; border-radius: 14px; max-width: 460px; width: 100%; text-align: center; box-shadow: 0 12px 35px rgba(0,0,0,0.12); transform: scale(0.92); opacity: 0; transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1); transition-delay: 0.05s; box-sizing: border-box; }
@@ -296,22 +295,63 @@
         .disclaimer-modal #cancelButton { background-color: #e8e8ed; color: var(--link-blue); }
         .disclaimer-modal #cancelButton:hover { background-color: #dddce1; }
         
-        /* --- Mobile Friendliness (Unchanged) --- */
-        @media (max-width: 992px) { .updates-grid-container { max-width: 700px; } .update-section-common { flex-basis: calc(50% - 12.5px); min-width: 280px; } }
-        @media (max-width: 768px) { body { padding: 25px 15px; } #welcome-screen { padding: 15px 0px; margin-bottom: 30px; } #welcome-screen h2 { font-size: 40px; margin-bottom: 15px; letter-spacing: -0.02em; } #welcome-screen .welcome-subtitle { font-size: 20px; margin-bottom: 25px; letter-spacing: -0.01em; } #welcome-screen .welcome-subtitle .emoji { font-size: 18px; } .contact-info { margin-top: 20px; } .contact-info p { font-size: 16px; } .contact-info .emoji-contact { font-size: 14px; } .apple-text-cta { font-size: 18px; } .cta-link-container { margin-top: 30px;} .updates-grid-container { flex-direction: column; align-items: center; gap: 20px; padding: 0; } .update-section-common { flex-basis: auto; width: 100%; max-width: 450px; min-width: unset; } .update-section-common .update-link-text { font-size: 17px; } .update-badge { font-size: 9px; padding: 3px 8px; margin-bottom: 10px; } .update-description { font-size: 13px; } .disclaimer-modal .modal-content { padding: 25px 20px; } .disclaimer-modal .modal-content h3 { font-size: 18px; } .disclaimer-modal .modal-content p { font-size: 13px; margin-bottom: 20px; } .disclaimer-modal .modal-buttons { flex-direction: row; } .main-footer { position: static; padding: 25px 15px 15px; margin-top: 40px; } }
-        @media (max-width: 480px) { body { padding: 20px 10px; } #welcome-screen { padding: 10px 0px; } #welcome-screen h2 { font-size: 30px; } #welcome-screen .welcome-subtitle { font-size: 17px; } #welcome-screen .welcome-subtitle .emoji { font-size: 16px; } .contact-info p { font-size: 14px; margin-bottom: 8px; } .apple-text-cta { font-size: 16px; } .update-section-common { padding: 15px; } .update-section-common .update-link-text { font-size: 16px; margin-bottom: 6px; } .update-badge { font-size: 8px; padding: 2px 6px; margin-bottom: 8px; } .update-description { font-size: 12px; } .main-footer { font-size: 10px; padding-top: 20px; margin-top: 30px; } .disclaimer-modal .modal-content { padding: 20px 15px; } .disclaimer-modal .modal-buttons { flex-direction: column; } .disclaimer-modal .modal-buttons button { font-size: 15px; padding: 10px; } }
+        @media (max-width: 1200px) { 
+             .updates-grid-container { max-width: 900px; } 
+             .update-section-common { flex-basis: calc(50% - 12.5px); }
+        }
+        @media (max-width: 992px) { 
+            .updates-grid-container { max-width: 700px; } 
+            .update-section-common { flex-basis: calc(50% - 12.5px); min-width: 280px; } 
+        }
+        @media (max-width: 768px) { 
+            body { padding: 25px 15px; } 
+            #welcome-screen h2#main-heading { font-size: 40px; } /* Adjusted for smaller screens */
+            #welcome-screen { padding: 15px 0px; margin-bottom: 30px; } 
+            #welcome-screen .welcome-subtitle { font-size: 20px; margin-bottom: 25px; letter-spacing: -0.01em; } 
+            #welcome-screen .welcome-subtitle .emoji { font-size: 18px; } 
+            .contact-info { margin-top: 20px; } .contact-info p { font-size: 16px; } 
+            .contact-info .emoji-contact { font-size: 14px; } 
+            .apple-text-cta { font-size: 18px; } 
+            .cta-link-container { margin-top: 30px;} 
+            .updates-grid-container { flex-direction: column; align-items: center; gap: 20px; padding: 0; } 
+            .update-section-common { flex-basis: auto; width: 100%; max-width: 450px; min-width: unset; } 
+            .update-section-common .update-link-text { font-size: 17px; } 
+            .update-badge { font-size: 9px; padding: 3px 8px; margin-bottom: 10px; } 
+            .update-description { font-size: 13px; } 
+            .disclaimer-modal .modal-content { padding: 25px 20px; } 
+            .disclaimer-modal .modal-content h3 { font-size: 18px; } 
+            .disclaimer-modal .modal-content p { font-size: 13px; margin-bottom: 20px; } 
+            .disclaimer-modal .modal-buttons { flex-direction: row; } 
+            .main-footer { position: static; padding: 25px 15px 15px; margin-top: 40px; } 
+        }
+        @media (max-width: 480px) { 
+            body { padding: 20px 10px; } 
+            #welcome-screen h2#main-heading { font-size: 30px; } /* Adjusted for very small screens */
+            #welcome-screen { padding: 10px 0px; } 
+            #welcome-screen .welcome-subtitle { font-size: 17px; } 
+            #welcome-screen .welcome-subtitle .emoji { font-size: 16px; } 
+            .contact-info p { font-size: 14px; margin-bottom: 8px; } 
+            .apple-text-cta { font-size: 16px; } 
+            .update-section-common { padding: 15px; } 
+            .update-section-common .update-link-text { font-size: 16px; margin-bottom: 6px; } 
+            .update-badge { font-size: 8px; padding: 2px 6px; margin-bottom: 8px; } 
+            .update-description { font-size: 12px; } 
+            .main-footer { font-size: 10px; padding-top: 20px; margin-top: 30px; } 
+            .disclaimer-modal .modal-content { padding: 20px 15px; } 
+            .disclaimer-modal .modal-buttons { flex-direction: column; } 
+            .disclaimer-modal .modal-buttons button { font-size: 15px; padding: 10px; } 
+        }
     </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      // gtag('config', 'G-XXXXXXXXXX');
+      // gtag('config', 'G-XXXXXXXXXX'); // Replace G-XXXXXXXXXX with your actual GA ID
     </script>
 </head>
 <body>
     <div id="welcome-screen" role="main">
-        <h2 id="main-heading">Archit B. Sheth</h2>
+        <h2 id="main-heading"><span id="magnetic-text">Archit B. Sheth</span></h2>
         <p class="welcome-subtitle">
             Your Taxation Expert
             <span class="emoji">💼</span>
@@ -357,6 +397,13 @@
             </a>
             <p class="update-description">An interactive summary of key amendments in the Finance Act 2025.</p>
         </div>
+        
+        <div class="update-section-common tax-regime-analyzer-update">
+            <span class="update-badge" style="background-color: #34c759;">Tool</span> <a href="Tax Regime Analyzer FY 2025-26.html" class="apple-text-cta update-link-text tax-regime-link">
+                Tax Regime Analyzer (FY 2025-26) <span class="cta-arrow">&rsaquo;</span>
+            </a>
+            <p class="update-description">Compare Old vs. New tax regimes with our interactive calculator for FY 2025-26.</p>
+        </div>
     </div>
 
     <footer class="main-footer">
@@ -381,10 +428,10 @@
             currentYearSpan.textContent = new Date().getFullYear();
         }
 
-        // --- Disclaimer Modal Logic (Unchanged) ---
         const tdsUpdateLink = document.querySelector('a.tds-navigator-link');
         const sftGuideLink = document.querySelector('a.sft-guide-link');
         const faSummaryLink = document.querySelector('a.fa-summary-link');
+        const taxRegimeLink = document.querySelector('a.tax-regime-link');
         const disclaimerModal = document.getElementById('disclaimerModal');
         const disclaimerTitle = document.getElementById('disclaimerTitle');
         const disclaimerText = document.getElementById('disclaimerText');
@@ -396,13 +443,14 @@
             event.preventDefault();
             targetUrl = url;
             disclaimerTitle.textContent = `${toolName} - Disclaimer`;
-            disclaimerText.innerHTML = `© ${new Date().getFullYear()} ${toolName}. For informational purposes only.<br>
-                Consult a tax professional for specific advice. Content based on relevant provisions.`;
-            disclaimerModal.classList.add('visible');
+            disclaimerText.innerHTML = `The content you are about to access is for informational and illustrative purposes only. It does not constitute legal, tax, or financial advice. Tax laws are subject to change and individual interpretation. <br><br>You should consult a qualified professional for advice specific to your situation before making any financial decisions. <br><br> By clicking "Agree & Proceed", you acknowledge that you have read and understood this disclaimer.`;
+            if(disclaimerModal) disclaimerModal.classList.add('visible');
         }
         if (tdsUpdateLink) { tdsUpdateLink.addEventListener('click', function(event) { showDisclaimer(event, 'TDS Navigator', this.href); }); }
         if (sftGuideLink) { sftGuideLink.addEventListener('click', function(event) {  showDisclaimer(event, 'SFT Reporting Guide', this.href); }); }
         if (faSummaryLink) { faSummaryLink.addEventListener('click', function(event) {  showDisclaimer(event, 'Finance Act 2025 Summary', this.href); }); }
+        if (taxRegimeLink) { taxRegimeLink.addEventListener('click', function(event) { showDisclaimer(event, 'Tax Regime Analyzer', this.href); }); } 
+
         if (disclaimerModal && agreeButton && cancelButton) {
             agreeButton.addEventListener('click', function() {
                 disclaimerModal.classList.remove('visible');
@@ -412,33 +460,50 @@
             disclaimerModal.addEventListener('click', function(event) { if (event.target === disclaimerModal) { disclaimerModal.classList.remove('visible'); } });
         }
 
-        // --- Scroll-triggered Animation for Update Cards (Unchanged from previous step) ---
         const animatedCards = document.querySelectorAll('.updates-grid-container .update-section-common');
-
         if (animatedCards.length > 0) {
-            const cardObserverOptions = {
-                root: null,
-                rootMargin: '0px 0px -10% 0px', 
-                threshold: 0.1 
-            };
-
+            const cardObserverOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 };
             const observerCallback = (entries, observerInstance) => {
-                entries.forEach((entry) => { 
+                entries.forEach((entry, index) => { 
                     if (entry.isIntersecting) {
                         const cardElement = entry.target;
-                        const cardIndex = Array.from(animatedCards).indexOf(cardElement);
-                        
-                        setTimeout(() => {
-                            cardElement.classList.add('is-visible');
-                        }, cardIndex * 500); 
+                        setTimeout(() => { cardElement.classList.add('is-visible'); }, index * 250); 
                         observerInstance.unobserve(cardElement); 
                     }
                 });
             };
-            
             const cardObserver = new IntersectionObserver(observerCallback, cardObserverOptions);
-            animatedCards.forEach(card => {
-                cardObserver.observe(card);
+            animatedCards.forEach(card => { cardObserver.observe(card); });
+        }
+
+        // --- Magnetic Hover Effect for Main Heading (Wrapper Strategy) ---
+        const mainHeadingContainer = document.getElementById('main-heading'); // This is the H2
+        const magneticText = document.getElementById('magnetic-text'); // This is the inner SPAN
+
+        if (mainHeadingContainer && magneticText) {
+            const moveIntensity = 0.2; 
+            const scaleIntensity = 1.03; 
+
+            mainHeadingContainer.addEventListener('mousemove', (e) => {
+                const rect = magneticText.getBoundingClientRect(); // Use rect of the span for calculations
+                
+                const mouseX_viewport = e.clientX;
+                const mouseY_viewport = e.clientY;
+
+                const centerX_viewport = rect.left + rect.width / 2;
+                const centerY_viewport = rect.top + rect.height / 2;
+
+                const deltaX = mouseX_viewport - centerX_viewport;
+                const deltaY = mouseY_viewport - centerY_viewport;
+                
+                const translateX = deltaX * moveIntensity;
+                const translateY = deltaY * moveIntensity;
+                
+                magneticText.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleIntensity})`;
+            });
+
+            mainHeadingContainer.addEventListener('mouseleave', () => {
+                magneticText.style.transform = 'translate(0px, 0px) scale(1)'; 
             });
         }
     });
