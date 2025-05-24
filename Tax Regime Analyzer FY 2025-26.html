@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Income Tax Regime Comparison FY 2025-26 (AY 2026-27)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    :root {
+        --font-family-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        --background-body: #f5f5f7; /* Light grey for overall page background */
+        --background-light: #ffffff; /* White for content cards, header */
+        --text-primary: #1d1d1f;
+        --text-secondary: #515154;
+        --text-tertiary: #86868b;
+        --link-blue: #007aff;
+        --link-blue-hover: #0071e3;
+        --border-color-light: #d2d2d7;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        font-family: var(--font-family-apple);
+        background-color: var(--background-body);
+        color: var(--text-secondary); /* Default text color */
+        line-height: 1.6;
+    }
+
+    /* Header */
+    header.sticky {
+        background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+        backdrop-filter: saturate(180%) blur(15px);
+        -webkit-backdrop-filter: saturate(180%) blur(15px);
+        border-bottom: 0.5px solid var(--border-color-light);
+        box-shadow: none; /* Remove Tailwind shadow if any, rely on border */
+    }
+    .header-logo-link {
+        text-decoration: none;
+        color: inherit; /* Inherits color from h1, which is var(--text-primary) */
+        display: inline-block;
+    }
+    .header-logo-link:hover h1 {
+        color: var(--link-blue);
+    }
+
+    header h1.text-2xl {
+        color: var(--text-primary);
+        font-weight: 600;
+        transition: color 0.2s ease-in-out;
+    }
+    header p.text-xs { /* For subtitle, if any */
+        color: var(--text-secondary);
+    }
+    .nav-link {
+        color: var(--text-secondary);
+        border-bottom-width: 2px;
+        border-bottom-color: transparent;
+        transition: color 0.3s ease, border-bottom-color 0.3s ease;
+        font-size: 15px;
+        font-weight: 400;
+        padding: 0.5rem 0.75rem; /* Adjusted padding from TDS nav */
+        border-radius: 0.375rem; /* From Tax Regime nav */
+    }
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--link-blue);
+        border-bottom-color: var(--link-blue);
+        /* background-color: #2563eb; /* From Tax Regime (Optional, if border is not enough) */
+        /* color: white; /* From Tax Regime (Optional) */
+    }
+    #mobile-menu-button svg {
+        color: var(--text-primary);
+    }
+     #mobile-menu {
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: saturate(180%) blur(10px);
+        -webkit-backdrop-filter: saturate(180%) blur(10px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+     }
+    #mobile-menu a.nav-link {
+        color: var(--text-secondary);
+        display: block; /* Ensure mobile links are block */
+        padding: 0.75rem 1rem; /* Consistent padding for mobile */
+    }
+    #mobile-menu a.nav-link:hover,
+    #mobile-menu a.nav-link.active {
+        color: var(--link-blue);
+        background-color: rgba(0, 122, 255, 0.05);
+    }
+
+
+    /* Main Content */
+    main.container {
+        padding-top: 1rem;
+    }
+
+    /* Section Headings */
+    .content-section > h2.section-title-custom { /* Renamed to avoid conflict if section-title was used elsewhere */
+        font-size: 32px; /* from .content-section > h2 */
+        font-weight: 600; /* from .content-section > h2 */
+        color: var(--text-primary); /* from .content-section > h2 */
+        border-bottom: 1px solid var(--border-color-light); /* from .content-section > h2 */
+        margin-bottom: 2rem; /* from .content-section > h2 */
+        padding-bottom: 0.75rem; /* from .content-section > h2 */
+    }
+
+
+    /* Paragraphs and general text */
+    p.leading-relaxed, .text-gray-700, .executive-summary p, ul.custom-list li { /* Combine general text styles */
+        color: var(--text-secondary);
+        line-height: 1.65;
+        font-size: 17px; /* From p.leading-relaxed */
+        margin-bottom: 0.75rem; /* Common margin */
+    }
+    .text-slate-600-override, .text-slate-700-override { /* Keep for specific overrides if any */
+        color: var(--text-secondary) !important;
+        font-size: 17px;
+        line-height: 1.65;
+    }
+
+    ul li, .text-sm-override, ul.custom-list {
+         color: var(--text-secondary);
+         font-size: 16px;
+         padding-left: 0; /* Reset padding for ul if list-disc is added by Tailwind */
+    }
+     ul.list-disc.custom-list { /* Ensure custom list gets disc and padding */
+        padding-left: 1.5rem;
+        list-style-type: disc;
+    }
+    ul.custom-list li {
+        margin-bottom: 0.5rem; /* Retain from original */
+    }
+
+
+    /* Content Cards / Backgrounds */
+    .bg-white-card { /* Replaces .content-box */
+        background-color: var(--background-light);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05);
+        padding: 24px;
+        border-radius: 12px;
+        margin-bottom: 2rem; /* Common margin */
+    }
+
+
+    /* Sub-headings within cards */
+    h3.subsection-title-custom { /* Replaces .subsection-title */
+        color: var(--text-primary);
+        font-weight: 600; /* from h3.font-semibold */
+        margin-bottom: 1rem; /* from h3.font-semibold */
+        font-size: 1.35rem; /* from original .subsection-title */
+        /* border-bottom: 1px solid var(--border-color-light); /* Optional: if sub-sections also need a border */
+        /* padding-bottom: 0.5rem; */
+    }
+     h4.font-semibold-custom { /* For other h4s */
+        color: var(--text-primary);
+        font-weight: 500;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem; /* from original .result-card h4 */
+    }
+
+
+    /* Tables */
+    .table-container { /* Keep for overflow */
+        overflow-x: auto;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color-light);
+        border-radius: 8px;
+        /* overflow: hidden; /* from .table-responsive */
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table thead {
+        background-color: #f9f9f9;
+    }
+    table th {
+        color: var(--text-primary);
+        font-weight: 500;
+        font-size: 13px;
+        text-transform: none;
+        letter-spacing: normal;
+        padding: 12px 16px;
+        text-align: left;
+        border: 1px solid var(--border-color-light); /* Add border like original for consistency */
+    }
+    table td {
+        color: var(--text-secondary);
+        font-size: 15px;
+        padding: 12px 16px;
+        vertical-align: top;
+        border: 1px solid var(--border-color-light); /* Add border like original for consistency */
+    }
+    table td:first-child { font-weight: 500; } /* From original */
+    table tbody {
+        border-color: var(--border-color-light);
+    }
+    .table-text-override { /* If specific text needs override */
+        color: var(--text-secondary) !important;
+        font-size: 15px !important;
+    }
+
+
+    /* Chart Container */
+    .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 700px; /* Increased max-width */
+        margin-left: auto;
+        margin-right: auto;
+        height: 350px; /* Base height */
+        max-height: 420px; /* Max height */
+        padding: 1rem;
+        border-radius: 12px;
+        background-color: var(--background-light);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.05);
+    }
+    @media (min-width: 768px) { .chart-container { height: 400px; } }
+
+
+    /* Tooltip Icon from Tax Regime */
+    .tooltip-icon { cursor: help; margin-left: 5px; color: var(--link-blue); display: inline-block; font-weight: bold; position: relative; }
+    .tooltip-text { visibility: hidden; width: 300px; background-color: var(--text-primary); color: var(--background-light); text-align: left; border-radius: 0.375rem; padding: 0.75rem; position: absolute; z-index: 100; bottom: 130%; left: 50%; margin-left: -150px; opacity: 0; transition: opacity 0.3s; font-size: 0.8rem; line-height: 1.3rem; box-shadow: 0 4px 6px rgb(0 0 0 / 0.2); }
+    .tooltip-icon:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+    /* Forms & Interactive Tool */
+    .input-group { margin-bottom: 1.25rem; } /* Keep from original */
+
+    label, .form-radio-label { /* Style for labels */
+        color: var(--text-primary);
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 0.35rem; /* From original .input-group label */
+    }
+    input[type="number"], input[type="text"], select { /* Style for inputs & select */
+        border: 1px solid var(--border-color-light);
+        background-color: var(--background-light);
+        color: var(--text-primary);
+        border-radius: 6px;
+        padding: 10px 12px;
+        font-size: 0.875rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        margin-top: 0.25rem;
+        width: 100%;
+        box-shadow: none;
+    }
+    input[type="number"]:focus, input[type="text"]:focus, select:focus {
+        border-color: var(--link-blue);
+        box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+        outline: none;
+    }
+
+    /* Button Styling */
+    button.btn-primary-custom { /* Replaces .btn-primary */
+        background-color: var(--link-blue);
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem; /* from .btn-primary */
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
+        width: 100%;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        border: none; /* Ensure no default border */
+        cursor: pointer;
+    }
+    button.btn-primary-custom:hover {
+        background-color: var(--link-blue-hover);
+    }
+
+    /* Result Card Styling */
+    .result-card-custom { /* Replaces .result-card */
+        background-color: rgba(0, 122, 255, 0.08); /* Light blue tint */
+        border-left: 5px solid var(--link-blue);
+        color: var(--text-primary);
+        border-radius: 8px;
+        padding: 1.25rem; /* from original .result-card */
+        margin-top: 1.25rem; /* from original .result-card */
+    }
+    .result-card-custom.best-option-custom { /* Replaces .best-option */
+        background-color: rgba(22, 163, 74, 0.08); /* Light green tint for best */
+        border-left-color: #16a34a; /* Green border for best */
+    }
+    .result-card-custom h4 { /* from original .result-card h4 */
+        font-weight: 600;
+        color: var(--text-primary); /* Default color */
+        margin-bottom: 0.6rem;
+        font-size: 1.1rem;
+    }
+    .result-card-custom.best-option-custom h4 {
+        color: #15803d; /* Green text for best h4 */
+    }
+    .result-card-custom p {
+        margin-bottom: 0.35rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+     .result-card-custom p.font-bold {
+        color: var(--text-primary);
+     }
+
+
+    /* Note & Disclaimer Box Styling */
+    .note-custom { /* Replaces .note */
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        background-color: #fffbeb; /* yellow tint */
+        border-left: 4px solid #facc15; /* yellow border */
+        border-radius: 0.25rem;
+    }
+    .disclaimer-box-custom { /* Replaces .disclaimer-box */
+        background-color: #fffbeb;
+        border: 1px solid #fde68a;
+        color: #713f12;
+        padding: 1rem;
+        border-radius: 8px; /* Matched other cards */
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+    }
+     .conclusion-box-custom {
+        margin-top: 1.25rem;
+        padding: 1rem;
+        border-radius: 8px;
+        font-weight: 500;
+     }
+     .conclusion-box-custom.beneficial {
+        background-color: rgba(22, 163, 74, 0.08);
+        border-left: 4px solid #16a34a;
+        color: #15803d;
+     }
+    .conclusion-box-custom.neutral {
+        background-color: rgba(0, 122, 255, 0.08);
+        border-left: 4px solid var(--link-blue);
+        color: var(--text-primary); /* Link blue might be too bright for text */
+    }
+
+
+    /* Footer */
+    footer {
+        background-color: var(--background-body);
+        color: var(--text-tertiary);
+        padding: 30px 20px;
+        text-align: center;
+        border-top: 0.5px solid var(--border-color-light);
+        margin-top: 3rem;
+    }
+    footer p {
+        color: var(--text-tertiary);
+        font-size: 13px;
+    }
+    footer p.text-xs { /* For smaller text in footer if needed */
+        margin-top: 0.25rem;
+    }
+
+    /* Utility for consistent table cell structure */
+    .table-responsive-wrapper { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; } /* if .table-container is not enough */
+    /* table { width: 100%; border-collapse: collapse; }  already defined */
+    th, td { white-space: normal; word-wrap: break-word; }
+
+    .content-section { display: none; } /* For tabbed navigation */
+    .content-section.active { display: block; }
+
+    /* Specific overrides if Tailwind's defaults clash too much */
+    .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+</style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="header-logo-link">
+                        <h1 class="text-2xl font-bold">Tax Regime Analyzer</h1>
+                    </a>
+                    <p class="text-xs">FY 2025-26 (AY 2026-27)</p>
+                </div>
+                <nav class="hidden md:flex space-x-1"> <a href="#introduction" class="nav-link">Intro</a>
+                    <a href="#regime-glance" class="nav-link">Overview</a>
+                    <a href="#calculator" class="nav-link">Calculator</a>
+                    <a href="#new-regime-details" class="nav-link">New Regime</a>
+                    <a href="#old-regime-details" class="nav-link">Old Regime</a>
+                    <a href="#advanced-concepts" class="nav-link">Advanced</a>
+                    <a href="#making-choice" class="nav-link">Choice</a>
+                    <a href="#legislative-context" class="nav-link">Context</a>
+                    <a href="#recommendations" class="nav-link">Recommend</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden shadow-lg">
+            <a href="#introduction" class="nav-link">Introduction</a>
+            <a href="#regime-glance" class="nav-link">Regime Overview</a>
+            <a href="#calculator" class="nav-link">Tax Calculator</a>
+            <a href="#new-regime-details" class="nav-link">New Regime Details</a>
+            <a href="#old-regime-details" class="nav-link">Old Regime Details</a>
+            <a href="#advanced-concepts" class="nav-link">Advanced Tax Concepts</a>
+            <a href="#making-choice" class="nav-link">Making Your Choice</a>
+            <a href="#legislative-context" class="nav-link">Legislative Context</a>
+            <a href="#recommendations" class="nav-link">Recommendations</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <section id="introduction" class="content-section pt-16 -mt-16">
+            <div class="bg-white-card">
+                <h2 class="section-title-custom">Understanding Your Income Tax: FY 2025-26</h2>
+                <div class="disclaimer-box-custom">
+                    <p class="font-semibold">Disclaimer:</p>
+                    <p>This application is for informational and illustrative purposes only. It does not constitute legal, tax, or financial advice. Tax laws are subject to change and individual interpretation. Taxpayers should consult a qualified professional or chartered accountant for advice specific to their situation before making any financial decisions. The information herein is based on interpretations of publicly available information and assumed provisions of the Finance Act 2025 and should be cross-verified with official government notifications and primary legal texts.</p>
+                </div>
+                <div class="executive-summary">
+                    <p>For the Financial Year (FY) 2025-26 (Assessment Year AY 2026-27), salaried individuals in India can choose between the Old Tax Regime and the New Tax Regime (default option under Sec 115BAC). The Finance Act 2025 has introduced significant amendments, particularly making the New Regime more attractive with revised slabs, a Rs. 4,00,000 basic exemption, an enhanced Rs. 60,000 rebate (for taxable income up to Rs. 12,00,000), and a Rs. 75,000 standard deduction.</p>
+                    <p>Notably, under the New Regime, individuals with *only salary income* up to Rs. 12,75,000 may have nil tax liability. However, this is an oversimplification if other income sources exist. The New Regime suits those with limited deductions, while the Old Regime might benefit those with substantial claims (HRA, home loan interest, Chapter VI-A). This SPA helps you compare your tax liability under both regimes based on these updated rules.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="regime-glance" class="content-section pt-16 -mt-16">
+            <div class="bg-white-card">
+                <h2 class="section-title-custom">Regimes At-a-Glance: Key Features (FY 2025-26)</h2>
+                <p class="mb-6 leading-relaxed">This table provides a quick comparison of the primary features differentiating the Old and New Tax Regimes for salaried individuals for the Financial Year 2025-26.</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>New Tax Regime (Default)</th>
+                                <th>Old Tax Regime (Optional)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Basic Exemption Limit (Individual <60 yrs)</td><td>₹4,00,000</td><td>₹2,50,000</td></tr>
+                            <tr><td>Standard Deduction (Salaried)</td><td>₹75,000 (See note in New Regime section)</td><td>₹50,000</td></tr>
+                            <tr><td>Max Rebate (Sec 87A) & Income for Nil Tax</td><td>₹60,000 rebate for taxable income up to ₹12,00,000. Effective nil tax up to ₹12,75,000 gross salary (for salary-only income).</td><td>₹12,500 rebate for taxable income up to ₹5,00,000.</td></tr>
+                            <tr><td>Chapter VI-A Deductions (80C, 80D etc.)</td><td>Generally No (except Sec 80CCD(2), 80CCH(2), 57(iia))</td><td>Yes</td></tr>
+                            <tr><td>HRA Exemption (Sec 10(13A))</td><td>No</td><td>Yes</td></tr>
+                            <tr><td>LTA Exemption (Sec 10(5))</td><td>No</td><td>Yes</td></tr>
+                            <tr><td>Home Loan Interest (Self-Occupied) (Sec 24(b))</td><td>No</td><td>Yes (up to ₹2,00,000)</td></tr>
+                            <tr><td>Home Loan Interest (Let-Out) (Sec 24(b))</td><td>Yes</td><td>Yes</td></tr>
+                            <tr><td>Professional Tax (Sec 16(iii))</td><td>No</td><td>Yes (up to ₹2,500)</td></tr>
+                            <tr><td>Default Status</td><td>Yes</td><td>No (must be opted for)</td></tr>
+                            <tr><td>Highest Surcharge Rate</td><td>25% (on income > ₹2 Cr)</td><td>37% (on income > ₹5 Cr)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator" class="content-section pt-16 -mt-16">
+            <div class="bg-white-card">
+                <h2 class="section-title-custom">Interactive Tax Calculator (FY 2025-26)</h2>
+                <p class="mb-6 leading-relaxed">Enter your financial details to compare your estimated tax liability. This calculator considers amendments from Finance Act 2025. Health & Education Cess (4%) and applicable Surcharge are included. Results are illustrative.</p>
+
+                <div class="grid lg:grid-cols-2 gap-x-8 gap-y-6">
+                    <div>
+                        <h3 class="subsection-title-custom border-b pb-2 mb-4">Your Financial Details:</h3>
+                        <div class="input-group">
+                            <label for="grossSalary">Gross Annual Salary (₹):</label>
+                            <input type="number" id="grossSalary" placeholder="e.g., 1200000" value="1275000">
+                        </div>
+                        <div class="input-group">
+                            <label for="age">Your Age Group:</label>
+                            <select id="age">
+                                <option value="below60">Below 60 years</option>
+                                <option value="60to80">60 to less than 80 years (Senior Citizen)</option>
+                                <option value="above80">80 years and above (Super Senior Citizen)</option>
+                            </select>
+                        </div>
+
+                        <h4 class="font-semibold-custom mt-6 mb-3 text-blue-700">Deductions (Primarily for Old Regime Calculation):</h4>
+                        <div class="input-group">
+                            <label for="deduction80C">Sec 80C (PPF, EPF, LIC, ELSS, etc.) (Max ₹1,50,000):
+                                <span class="tooltip-icon">ⓘ<span class="tooltip-text">Includes investments like PPF, EPF, LIC premium, ELSS, NSC, principal repayment of housing loan, children's tuition fees, 5-year tax-saving FDs.</span></span>
+                            </label>
+                            <input type="number" id="deduction80C" placeholder="e.g., 150000" value="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="deduction80CCD1B">Sec 80CCD(1B) (NPS Employee Contribution) (Max ₹50,000):
+                                <span class="tooltip-icon">ⓘ<span class="tooltip-text">Additional deduction for contribution to National Pension System by employee.</span></span>
+                            </label>
+                            <input type="number" id="deduction80CCD1B" placeholder="e.g., 50000" value="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="deduction80D">Sec 80D (Medical Insurance Premium - Total Eligible):
+                                <span class="tooltip-icon">ⓘ<span class="tooltip-text">Enter total eligible amount. E.g., Self (<60) + Parents (<60) = Max 25k+25k = 50k. Self (Sr) + Parents (Sr) = Max 50k+50k = 1L.</span></span>
+                            </label>
+                            <input type="number" id="deduction80D" placeholder="e.g., 25000" value="0">
+                        </div>
+                         <div class="input-group">
+                            <label for="hraExemption">HRA Exemption Claimed (as per Rule 2A):
+                                <span class="tooltip-icon">ⓘ<span class="tooltip-text">Enter the HRA exemption amount you are eligible for. This is the least of: 1. Actual HRA received, 2. Rent paid minus 10% of salary, 3. 40%/50% of salary.</span></span>
+                            </label>
+                            <input type="number" id="hraExemption" placeholder="e.g., 0" value="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="homeLoanInterestSOP">Interest on Housing Loan (Self-Occupied Property) (Max ₹2,00,000):
+                                <span class="tooltip-icon">ⓘ<span class="tooltip-text">Deduction for interest on loan for a self-occupied house under Old Regime.</span></span>
+                            </label>
+                            <input type="number" id="homeLoanInterestSOP" placeholder="e.g., 0" value="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="professionalTax">Professional Tax Paid (Max ₹2,500):</label>
+                            <input type="number" id="professionalTax" placeholder="e.g., 2500" value="2500">
+                        </div>
+                         <div class="input-group">
+                            <label for="otherDeductionsOld">Other Chapter VI-A Deductions (Old Regime - e.g., 80E, 80G, 80TTA):
+                                <span class="tooltip-icon">ⓘ<span class="tooltip-text">Sum of other eligible deductions like education loan interest (80E), donations (80G), savings interest (80TTA/TTB), etc.</span></span>
+                            </label>
+                            <input type="number" id="otherDeductionsOld" placeholder="e.g., 0" value="0">
+                        </div>
+
+                        <h4 class="font-semibold-custom mt-6 mb-3 text-blue-700">Deductions (Applicable in New Regime / Both):</h4>
+                         <div class="input-group">
+                            <label for="employerNPS">Employer's NPS Contribution (Sec 80CCD(2) - Deductible Amount):
+                                <span class="tooltip-icon">ⓘ<span class="tooltip-text">Eligible amount. 10% of salary (Basic+DA) for non-govt, 14% for govt employees. Available in both regimes. This amount is typically part of CTC, added to gross salary for tax purposes, then deducted.</span></span>
+                            </label>
+                            <input type="number" id="employerNPS" placeholder="e.g., 0" value="0">
+                        </div>
+                        <button id="calculateTaxBtn" class="btn-primary-custom mt-4">Calculate Tax Liability</button>
+                    </div>
+
+                    <div class="mt-6 lg:mt-0">
+                        <h3 class="subsection-title-custom border-b pb-2 mb-4">Comparison Results:</h3>
+                        <div id="resultsArea" class="space-y-5">
+                           <p class="text-center text-slate-500 py-8">Enter your details and click "Calculate Tax Liability" to see the comparison.</p>
+                        </div>
+                        <div class="mt-8">
+                            <h3 class="subsection-title-custom text-center mb-3">Net Tax Payable Comparison Chart:</h3>
+                            <div class="chart-container p-3">
+                                <canvas id="taxComparisonChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="new-regime-details" class="content-section pt-16 -mt-16">
+            <div class="bg-white-card">
+                <h2 class="section-title-custom">New Tax Regime In-Depth (FY 2025-26)</h2>
+                <p class="mb-4 leading-relaxed">The New Tax Regime (Sec 115BAC) is the default. It offers lower tax rates but fewer deductions.</p>
+                <h3 class="subsection-title-custom">A. Income Tax Slabs & Rates (New Regime)</h3>
+                <div class="table-container">
+                     <table>
+                        <thead><tr><th>Income Slab (₹)</th><th>Tax Rate (%)</th></tr></thead>
+                        <tbody>
+                            <tr><td>Up to 4,00,000</td><td>Nil</td></tr>
+                            <tr><td>4,00,001 to 8,00,000</td><td>5%</td></tr>
+                            <tr><td>8,00,001 to 12,00,000</td><td>10%</td></tr>
+                            <tr><td>12,00,001 to 16,00,000</td><td>15%</td></tr>
+                            <tr><td>16,00,001 to 20,00,000</td><td>20%</td></tr>
+                            <tr><td>20,00,001 to 24,00,000</td><td>25%</td></tr>
+                            <tr><td>Above 24,00,000</td><td>30%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="note-custom">Basic Exemption Limit: ₹4,00,000. Applicable to all individuals irrespective of age.</p>
+
+                <h3 class="subsection-title-custom mt-6">B. Standard Deduction (Sec 16(ia))</h3>
+                <p class="leading-relaxed">A standard deduction of **₹75,000** is available from salary income.</p>
+                <p class="note-custom"><strong>Important Note on AY 2026-27 Applicability:</strong> There's a potential legislative drafting ambiguity regarding the Rs. 75,000 standard deduction's explicit extension to AY 2026-27. This tool assumes its availability based on legislative intent. Pending CBDT/Finance Ministry notification, taxpayers must monitor clarifications; current assumptions are not legally guaranteed for AY 2026-27.</p>
+
+                <h3 class="subsection-title-custom mt-6">C. Tax Rebate (Sec 87A)</h3>
+                <p class="leading-relaxed">A rebate of up to **₹60,000** is available if taxable income (after standard deduction) is up to ₹12,00,000. This makes gross salary up to **₹12,75,000 effectively tax-free if it's salary-only income**.</p>
+                <p class="note-custom"><strong>Caveats:</strong> This ₹12.75 lakh threshold assumes salary-only income. Other income (interest, capital gains) can alter taxable income and rebate eligibility. Rebate is not available against tax on certain special rate incomes (e.g., LTCG u/s 112A). Marginal relief applies if income slightly exceeds ₹12,00,000.</p>
+
+                <h3 class="subsection-title-custom mt-6">D. Permitted Deductions (New Regime)</h3>
+                <ul class="custom-list list-disc">
+                    <li>Employer's contribution to NPS (Sec 80CCD(2)) - 10% of salary (Basic+DA) for private sector, 14% for Central Govt. employees.</li>
+                    <li>Deduction for family pension (Sec 57(iia)) - ₹15,000 or 1/3rd, whichever is lower.</li>
+                    <li>Interest on home loan for let-out property (Sec 24(b)).</li>
+                    <li>Deduction for Agniveer Corpus Fund (Sec 80CCH(2)).</li>
+                    <li>Certain transport/conveyance/daily allowances for official duties.</li>
+                    <li>Exemptions for gratuity, leave encashment (Sec 10(10), 10(10AA)).</li>
+                </ul>
+
+                <h3 class="subsection-title-custom mt-6">E. Major Deductions Forgone (New Regime)</h3>
+                 <ul class="custom-list list-disc">
+                    <li>Most Chapter VI-A deductions: Sec 80C (LIC, PPF, ELSS), 80D (Mediclaim), 80E (Education Loan Interest), 80G (Donations), 80TTA/TTB (Savings Interest), employee's NPS (80CCD(1), 80CCD(1B)).</li>
+                    <li>House Rent Allowance (HRA) exemption (Sec 10(13A)).</li>
+                    <li>Leave Travel Allowance (LTA) exemption (Sec 10(5)).</li>
+                    <li>Interest on housing loan for self-occupied property (Sec 24(b) - up to ₹2L).</li>
+                    <li>Professional Tax deduction (Sec 16(iii)).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="old-regime-details" class="content-section pt-16 -mt-16">
+            <div class="bg-white-card">
+                <h2 class="section-title-custom">Old Tax Regime In-Depth (FY 2025-26)</h2>
+                <p class="mb-4 leading-relaxed">The Old Tax Regime can be opted for. It has different slabs and allows various deductions.</p>
+                <h3 class="subsection-title-custom">A. Income Tax Slabs & Rates (Old Regime)</h3>
+                <p class="mb-2 leading-relaxed"><strong>Individuals below 60 years:</strong></p>
+                <div class="table-container">
+                    <table><thead><tr><th>Income Slab (₹)</th><th>Tax Rate (%)</th></tr></thead><tbody><tr><td>Up to 2,50,000</td><td>Nil</td></tr><tr><td>2,50,001 to 5,00,000</td><td>5%</td></tr><tr><td>5,00,001 to 10,00,000</td><td>20%</td></tr><tr><td>Above 10,00,000</td><td>30%</td></tr></tbody></table>
+                </div>
+                <p class="mb-2 mt-4 leading-relaxed"><strong>Senior Citizens (60 to <80 years):</strong></p>
+                <div class="table-container">
+                    <table><thead><tr><th>Income Slab (₹)</th><th>Tax Rate (%)</th></tr></thead><tbody><tr><td>Up to 3,00,000</td><td>Nil</td></tr><tr><td>3,00,001 to 5,00,000</td><td>5%</td></tr><tr><td>5,00,001 to 10,00,000</td><td>20%</td></tr><tr><td>Above 10,00,000</td><td>30%</td></tr></tbody></table>
+                </div>
+                <p class="mb-2 mt-4 leading-relaxed"><strong>Super Senior Citizens (≥80 years):</strong></p>
+                <div class="table-container">
+                     <table><thead><tr><th>Income Slab (₹)</th><th>Tax Rate (%)</th></tr></thead><tbody><tr><td>Up to 5,00,000</td><td>Nil</td></tr><tr><td>5,00,001 to 10,00,000</td><td>20%</td></tr><tr><td>Above 10,00,000</td><td>30%</td></tr></tbody></table>
+                </div>
+
+                <h3 class="subsection-title-custom mt-6">B. Standard Deduction (Sec 16(ia))</h3>
+                <p class="leading-relaxed">A standard deduction of **₹50,000** is available from salary income.</p>
+
+                <h3 class="subsection-title-custom mt-6">C. Tax Rebate (Sec 87A)</h3>
+                <p class="leading-relaxed">A rebate of up to **₹12,500** is available if taxable income (after all deductions) is up to ₹5,00,000.</p>
+
+                <h3 class="subsection-title-custom mt-6">D. Key Deductions Available (Old Regime)</h3>
+                <ul class="custom-list list-disc">
+                    <li><strong>Chapter VI-A:</strong> Sec 80C, 80CCC, 80CCD(1) (Total ₹1.5L), Sec 80CCD(1B) (NPS employee - additional ₹50k), Sec 80D (Mediclaim), Sec 80E (Education Loan Interest), Sec 80G (Donations), Sec 80TTA/TTB (Savings Interest), Employer's NPS (80CCD(2)).</li>
+                    <li><strong>HRA Exemption (Sec 10(13A)):</strong> Based on rent paid, salary, and city.</li>
+                    <li><strong>LTA Exemption (Sec 10(5)):</strong> For travel within India.</li>
+                    <li><strong>Interest on Housing Loan (Sec 24(b)):</strong> Up to ₹2L for self-occupied property; full interest for let-out.</li>
+                    <li><strong>Professional Tax (Sec 16(iii)):</strong> Up to ₹2,500.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="advanced-concepts" class="content-section pt-16 -mt-16">
+            <div class="bg-white-card">
+                <h2 class="section-title-custom">Advanced Tax Concepts</h2>
+                <h3 class="subsection-title-custom">A. Surcharge</h3>
+                <p class="mb-2 leading-relaxed">An additional tax on higher incomes. Max surcharge under New Regime is 25% (for income > ₹2 Cr), while it's 37% under Old Regime (for income > ₹5 Cr). This cap is per Finance Act 2023, amending Sec 115BAC.</p>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Total Income Threshold (₹)</th><th>Surcharge (Old Regime)</th><th>Surcharge (New Regime)</th></tr></thead>
+                        <tbody>
+                            <tr><td>> 50 Lakh to 1 Crore</td><td>10%</td><td>10%</td></tr>
+                            <tr><td>> 1 Crore to 2 Crore</td><td>15%</td><td>15%</td></tr>
+                            <tr><td>> 2 Crore to 5 Crore</td><td>25%</td><td>25%</td></tr>
+                            <tr><td>> 5 Crore</td><td>37%</td><td>25%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 class="subsection-title-custom mt-6">B. Health & Education Cess</h3>
+                <p class="leading-relaxed">A cess of **4%** is levied on income tax plus surcharge (if any) under both regimes.</p>
+                <h3 class="subsection-title-custom mt-6">C. Marginal Relief</h3>
+                <p class="leading-relaxed">Ensures that an increase in tax (due to crossing a surcharge threshold or rebate eligibility limit) does not exceed the income increase that caused it. For instance, if taxable income under New Regime slightly exceeds ₹12 lakh, losing the full ₹60,000 rebate, marginal relief would limit the additional tax payable to be not more than the income exceeding ₹12 lakh.</p>
+                <h3 class="subsection-title-custom mt-6">D. Alternative Minimum Tax (AMT)</h3>
+                <p class="leading-relaxed">AMT (Sec 115JC) generally doesn't apply under the New Regime. Under the Old Regime, it can apply at 18.5% (plus surcharge/cess) if certain deductions (e.g., Sec 10AA, 35AD, some Chapter VI-A like 80QQB/RRB) are claimed and adjusted total income exceeds ₹20 lakh. Less common for purely salaried individuals.</p>
+            </div>
+        </section>
+
+        <section id="making-choice" class="content-section pt-16 -mt-16">
+            <div class="bg-white-card">
+                <h2 class="section-title-custom">Making Your Choice: Old vs. New Regime</h2>
+                <p class="mb-4 leading-relaxed">The New Tax Regime is default for FY 2025-26. Here’s how to decide:</p>
+
+                <h3 class="subsection-title-custom">A. For Salaried Individuals (Without Business/Professional Income)</h3>
+                <ul class="custom-list list-disc">
+                    <li><strong>Annual Choice:</strong> Can choose between regimes each year when filing ITR.</li>
+                    <li><strong>No Prior Form:</strong> No need to file Form 10-IEA beforehand.</li>
+                    <li><strong>Calculation is Key:</strong> Use the calculator on this page for a personalized estimate.</li>
+                </ul>
+
+                <h3 class="subsection-title-custom mt-6">B. For Individuals With Business/Professional Income</h3>
+                <ul class="custom-list list-disc">
+                    <li><strong>Stricter Rules:</strong> To opt for Old Regime, must file Form 10-IEA by ITR due date (Sec 139(1)).</li>
+                    <li><strong>One-Time Switchback (Sec 115BAC(6)):</strong> Once opted out of New Regime (to Old), can opt back into New Regime only once. If opted back, generally cannot revert to Old Regime again with business income.</li>
+                </ul>
+
+                <h3 class="subsection-title-custom mt-6">C. When Might Each Regime Be Better?</h3>
+                <ul class="custom-list list-disc">
+                    <li><strong>Old Regime:</strong> Potentially better with substantial deductions (HRA, home loan interest for SOP, high 80C/80D investments).</li>
+                    <li><strong>New Regime:</strong> Often better with limited deductions, due to lower rates, higher basic exemption, enhanced rebate, and higher standard deduction. Gross salary up to ₹12.75 lakh can be tax-free (salary-only income).</li>
+                </ul>
+
+                <h3 class="subsection-title-custom mt-6">D. Illustrative Break-Even Deductions (Old Regime) for FY 2025-26</h3>
+                <p class="mb-2 leading-relaxed">This table gives a *very rough estimate* of total "other deductions" (beyond standard deduction difference, e.g., 80C, HRA, Home Loan Interest for SOP) needed under Old Regime to match New Regime. <strong>Actuals depend on specific mix of deductions. Use the calculator.</strong></p>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Gross Annual Salary (₹)</th><th>Approx. Other Deductions Needed in Old Regime (₹) to Break-Even*</th></tr></thead>
+                        <tbody>
+                            <tr><td>10,00,000</td><td>~ ₹2,75,000 - ₹3,25,000</td></tr>
+                            <tr><td>15,00,000</td><td>~ ₹5,00,000 - ₹5,75,000</td></tr>
+                            <tr><td>20,00,000</td><td>~ ₹5,75,000 - ₹6,50,000</td></tr>
+                            <tr><td>25,00,000</td><td>~ ₹6,25,000 - ₹7,00,000</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="note-custom">*Illustrative for individual <60 yrs. New Regime's enhanced benefits mean significant deductions are needed in Old Regime to match it.</p>
+            </div>
+        </section>
+
+        <section id="legislative-context" class="content-section pt-16 -mt-16">
+            <div class="bg-white-card">
+                <h2 class="section-title-custom">Legislative Context & Future Outlook</h2>
+                <h3 class="subsection-title-custom">A. Finance Act 2025 Amendments (FY 2025-26)</h3>
+                <p class="mb-4 leading-relaxed">Key changes effective April 1, 2025, making the New Regime more appealing:</p>
+                <ul class="custom-list list-disc">
+                    <li>Revised tax slabs (New Regime).</li>
+                    <li>Increased basic exemption limit to ₹4,00,000 (New Regime).</li>
+                    <li>Enhanced rebate u/s 87A to ₹60,000 for taxable income up to ₹12,00,000 (New Regime).</li>
+                    <li>Standard Deduction: ₹75,000 (New Regime - subject to note), ₹50,000 (Old Regime).</li>
+                </ul>
+                <h3 class="subsection-title-custom mt-6">B. The Income Tax Bill 2025: A Look Ahead</h3>
+                <p class="mb-4 leading-relaxed">Introduced Feb 13, 2025, to replace Income Tax Act, 1961, aiming for simplification, transparency, and reduced litigation. Proposed effective date: April 1, 2026.</p>
+                <ul class="custom-list list-disc">
+                    <li>Key features: Simplified language, consolidated TDS, VDA definitions, unified 'Tax Year' concept.</li>
+                    <li>**For FY 2025-26 (AY 2026-27):** Tax calculation is governed by Income Tax Act, 1961, as amended by Finance Act 2025. The Bill's structural changes are not yet applicable. The Bill retains the FY 2025-26 New Regime slabs.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="recommendations" class="content-section pt-16 -mt-16">
+            <div class="bg-white-card">
+                <h2 class="section-title-custom">Key Strategic Recommendations</h2>
+                <p class="mb-4 leading-relaxed">Effective tax planning requires annual review. Consider these points:</p>
+                <ul class="custom-list list-disc">
+                    <li><strong>Personalized Calculation is Paramount:</strong> Use the calculator on this page with your actual income and potential deductions.</li>
+                    <li><strong>Evaluate Deduction Profile:</strong> High deductions might favor Old Regime; low/moderate deductions often favor the New Regime.</li>
+                    <li><strong>Consider Income Level & Surcharge:</strong> The New Regime’s 25% max surcharge benefits very high earners.</li>
+                    <li><strong>Stay Updated on Clarifications:</strong> Especially regarding the Rs. 75,000 standard deduction (New Regime) for AY 2026-27.</li>
+                    <li><strong>Factor in Future Financial Plans:</strong> Anticipate changes that might alter your deduction profile.</li>
+                    <li><strong>Maintain Records:</strong> Useful for annual comparisons and informed financial decisions.</li>
+                    <li><strong>Leverage Flexibility:</strong> Salaried individuals (no business income) can choose the most beneficial regime annually.</li>
+                </ul>
+                <p class="mt-4 leading-relaxed">Consultation with a tax professional is advised for complex situations or personalized advice.</p>
+            </div>
+        </section>
+
+        <footer class="py-8 mt-12">
+            <div class="container mx-auto px-4 text-center">
+                <p class="font-semibold">Disclaimer:</p>
+                <p>This application and the information provided are for general guidance and illustrative purposes only. It does not constitute legal, tax, or financial advice. Tax laws are subject to change and individual interpretation. Taxpayers should consult a qualified tax professional or chartered accountant for advice specific to their individual situation before making any financial decisions.</p>
+                <p class="mt-2">&copy; 2025 Interactive Tax Regime Analyzer. Based on provisions of Income Tax Act, 1961 as amended by Finance Act 2025 (for FY 2025-26 / AY 2026-27), based on assumed changes and publicly available interpretations.</p>
+            </div>
+        </footer>
+    </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // --- Navigation and Mobile Menu Logic (Adapted from TDS Navigator) ---
+    const navLinks = document.querySelectorAll('header nav a, #mobile-menu a');
+    const contentSections = document.querySelectorAll('main > section.content-section[id]');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function updateActiveLink(targetId) {
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${targetId}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    function showSection(targetId, pushState = true) {
+        let sectionFound = false;
+        contentSections.forEach(section => {
+            if (section.id === targetId) {
+                section.classList.add('active');
+                sectionFound = true;
+            } else {
+                section.classList.remove('active');
+            }
+        });
+
+        if (!sectionFound && contentSections.length > 0) { // Fallback to first section if target not found
+            contentSections[0].classList.add('active');
+            targetId = contentSections[0].id;
+        }
+        
+        updateActiveLink(targetId);
+
+        if (mobileMenu.classList.contains('block')) {
+            mobileMenu.classList.remove('block');
+            mobileMenu.classList.add('hidden');
+            // Assuming SVG toggle is handled by Tailwind or simple class, not explicitly here.
+        }
+        
+        if (pushState) {
+            const headerOffset = document.querySelector('header.sticky')?.offsetHeight || 64;
+            const element = document.getElementById(targetId);
+            if (element) {
+                const elementPosition = element.offsetTop;
+                const offsetPosition = elementPosition - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                if (history.pushState) {
+                    history.pushState(null, null, `#${targetId}`);
+                } else {
+                    location.hash = `#${targetId}`;
+                }
+            }
+        }
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                showSection(targetId);
+            }
+            // For mobile menu links specifically, ensure menu closes
+            if (mobileMenu.contains(link) && mobileMenu.classList.contains('block')) {
+                 mobileMenu.classList.remove('block');
+                 mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection && targetSection.classList.contains('content-section')) {
+            showSection(targetId, false); // Don't push state on initial load from hash
+        } else if (contentSections.length > 0) {
+            showSection(contentSections[0].id, false); // Show first section if hash is invalid
+        }
+    } else if (contentSections.length > 0) {
+        showSection(contentSections[0].id, false); // Show first section by default
+    }
+
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('block');
+        // Add SVG icon toggle if needed, e.g., by toggling classes on SVGs if you have two (open/close)
+    });
+    
+    // Scroll-based active link highlighting
+    const stickyNav = document.querySelector('header.sticky');
+    let navHeight = stickyNav ? stickyNav.offsetHeight : 64;
+    window.addEventListener('resize', () => { navHeight = stickyNav ? stickyNav.offsetHeight : 64; });
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        contentSections.forEach(section => {
+            if (section.classList.contains('active')) { // Only consider active sections for scrollspy
+                 const sectionTop = section.offsetTop - navHeight - 20; // Adjust offset as needed
+                 if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                 }
+            }
+        });
+         // If scrolled to top, or no section is "current" but one is active due to click/hash
+        if (!current && window.pageYOffset < (contentSections[0]?.offsetTop - navHeight - 20)) {
+             if(contentSections[0]) current = contentSections[0].id;
+        } else {
+            // Find the first active section if current is empty (e.g. on initial load with no scroll)
+            if (!current) {
+                for(let sec of contentSections) {
+                    if (sec.classList.contains('active')) {
+                        current = sec.id;
+                        break;
+                    }
+                }
+            }
+        }
+        updateActiveLink(current);
+    });
+
+
+    // --- Tax Calculator Logic (Original from Tax Regime Analyzer) ---
+    const grossSalaryEl = document.getElementById('grossSalary');
+    const ageEl = document.getElementById('age');
+    const deduction80CEl = document.getElementById('deduction80C');
+    const deduction80CCD1BEl = document.getElementById('deduction80CCD1B');
+    const deduction80DEl = document.getElementById('deduction80D');
+    const hraExemptionEl = document.getElementById('hraExemption');
+    const homeLoanInterestSOPEl = document.getElementById('homeLoanInterestSOP');
+    const professionalTaxEl = document.getElementById('professionalTax');
+    const otherDeductionsOldEl = document.getElementById('otherDeductionsOld');
+    const employerNPSEl = document.getElementById('employerNPS');
+
+    const calculateTaxBtn = document.getElementById('calculateTaxBtn');
+    const resultsArea = document.getElementById('resultsArea');
+    let taxComparisonChart = null;
+
+    const HEALTH_EDU_CESS_RATE = 0.04;
+
+    function getSurcharge(taxableIncome, taxAfterRebate, regime) {
+        let surchargeRate = 0;
+        if (taxableIncome > 50000000) { // Above 5 Cr
+            surchargeRate = regime === 'new' ? 0.25 : 0.37;
+        } else if (taxableIncome > 20000000) { // Above 2 Cr up to 5 Cr
+             surchargeRate = 0.25;
+        } else if (taxableIncome > 10000000) { // Above 1 Cr up to 2 Cr
+            surchargeRate = 0.15;
+        } else if (taxableIncome > 5000000) { // Above 50 Lakh up to 1 Cr
+            surchargeRate = 0.10;
+        }
+
+        let surchargeAmount = taxAfterRebate * surchargeRate;
+
+        if (surchargeRate > 0) {
+            let thresholdIncome;
+            if (taxableIncome > 50000000) thresholdIncome = 50000000;
+            else if (taxableIncome > 20000000) thresholdIncome = 20000000;
+            else if (taxableIncome > 10000000) thresholdIncome = 10000000;
+            else if (taxableIncome > 5000000) thresholdIncome = 5000000;
+
+            if (thresholdIncome) {
+                let taxOnThreshold;
+                // A simplified tax on threshold for marginal relief check (not a full re-calculation)
+                // This part needs careful implementation for accuracy in real marginal relief
+                // For simplicity, we're assuming tax grows somewhat linearly after the threshold for this check
+                let tempDeductionsOld = {d80C:0, d80CCD1B:0, d80D:0, hra:0, homeLoanSOP:0, professionalTax:0, otherOldDeductions:0, employerNPS:0};
+                let tempDeductionsNew = {employerNPS:0};
+
+                if (regime === 'old') {
+                     taxOnThreshold = calculateTaxOldRegime(thresholdIncome, ageEl.value, tempDeductionsOld, true).taxAfterRebate;
+                } else {
+                     taxOnThreshold = calculateTaxNewRegime(thresholdIncome, tempDeductionsNew, true).taxAfterRebate;
+                }
+                let incomeExceedingThreshold = taxableIncome - thresholdIncome;
+                if ((taxAfterRebate + surchargeAmount) > (taxOnThreshold + incomeExceedingThreshold)) {
+                    surchargeAmount = (taxOnThreshold + incomeExceedingThreshold) - taxAfterRebate;
+                    surchargeAmount = Math.max(0, surchargeAmount);
+                }
+            }
+        }
+        return surchargeAmount;
+    }
+
+    function calculateTaxOldRegime(grossSalaryInput, age, deductions, isForReliefCalc = false) {
+        let currentGrossSalary = grossSalaryInput;
+        currentGrossSalary += deductions.employerNPS;
+
+        const standardDeductionOld = 50000;
+        let taxableIncome = currentGrossSalary - standardDeductionOld;
+
+        let totalChapterVIA = deductions.d80C + deductions.d80CCD1B + deductions.d80D + deductions.otherOldDeductions + deductions.employerNPS;
+        taxableIncome -= (deductions.hra + deductions.homeLoanSOP + deductions.professionalTax);
+        taxableIncome -= totalChapterVIA;
+
+        taxableIncome = Math.max(0, taxableIncome);
+
+        let tax = 0;
+        let basicExemptionLimit = 250000;
+
+        if (age === '60to80') basicExemptionLimit = 300000;
+        else if (age === 'above80') basicExemptionLimit = 500000;
+
+        if (taxableIncome <= basicExemptionLimit) tax = 0;
+        else if (taxableIncome <= 500000) tax = (taxableIncome - basicExemptionLimit) * 0.05;
+        else if (taxableIncome <= 1000000) {
+            let taxOnFirstSlab = (age === 'above80' && basicExemptionLimit === 500000) ? 0 : (500000 - basicExemptionLimit) * 0.05;
+            tax = taxOnFirstSlab + (taxableIncome - 500000) * 0.20;
+        } else {
+            let taxOnFirstSlab = (age === 'above80' && basicExemptionLimit === 500000) ? 0 : (500000 - basicExemptionLimit) * 0.05;
+            tax = taxOnFirstSlab + (1000000 - 500000) * 0.20 + (taxableIncome - 1000000) * 0.30;
+        }
+        tax = Math.max(0,tax);
+
+        let rebate87A = 0;
+        if (taxableIncome <= 500000) rebate87A = Math.min(tax, 12500);
+
+        let taxAfterRebate = Math.max(0, tax - rebate87A);
+        if (isForReliefCalc) return { taxAfterRebate: taxAfterRebate, taxableIncome: taxableIncome };
+
+
+        const surcharge = getSurcharge(taxableIncome, taxAfterRebate, 'old');
+        const taxPlusSurcharge = taxAfterRebate + surcharge;
+        const cess = taxPlusSurcharge * HEALTH_EDU_CESS_RATE;
+        const totalTax = taxPlusSurcharge + cess;
+
+        return { taxableIncome, taxBeforeRebate: tax, rebate87A, taxAfterRebate, surcharge, cess, totalTax };
+    }
+
+    function calculateTaxNewRegime(grossSalaryInput, deductionsNew, isForReliefCalc = false) {
+        let currentGrossSalary = grossSalaryInput;
+        currentGrossSalary += deductionsNew.employerNPS;
+
+        const standardDeductionNew = 75000;
+        let taxableIncome = currentGrossSalary - standardDeductionNew - deductionsNew.employerNPS;
+        taxableIncome = Math.max(0, taxableIncome);
+
+        let tax = 0;
+        const basicExemptionNew = 400000;
+
+        if (taxableIncome <= basicExemptionNew) tax = 0;
+        else if (taxableIncome <= 800000) tax = (taxableIncome - basicExemptionNew) * 0.05;
+        else if (taxableIncome <= 1200000) tax = (800000 - basicExemptionNew) * 0.05 + (taxableIncome - 800000) * 0.10;
+        else if (taxableIncome <= 1600000) tax = (800000 - basicExemptionNew) * 0.05 + (1200000 - 800000) * 0.10 + (taxableIncome - 1200000) * 0.15;
+        else if (taxableIncome <= 2000000) tax = (800000 - basicExemptionNew) * 0.05 + (1200000 - 800000) * 0.10 + (1600000 - 1200000) * 0.15 + (taxableIncome - 1600000) * 0.20;
+        else if (taxableIncome <= 2400000) tax = (800000 - basicExemptionNew) * 0.05 + (1200000 - 800000) * 0.10 + (1600000 - 1200000) * 0.15 + (2000000 - 1600000) * 0.20 + (taxableIncome - 2000000) * 0.25;
+        else tax = (800000 - basicExemptionNew) * 0.05 + (1200000 - 800000) * 0.10 + (1600000 - 1200000) * 0.15 + (2000000 - 1600000) * 0.20 + (2400000 - 2000000) * 0.25 + (taxableIncome - 2400000) * 0.30;
+        tax = Math.max(0,tax);
+
+        let rebate87A = 0;
+        let taxAfterRebate = tax;
+
+        if (taxableIncome <= 1200000) {
+            rebate87A = Math.min(tax, 60000);
+            taxAfterRebate = Math.max(0, tax - rebate87A);
+        } else {
+            const taxOn12L = (800000 - basicExemptionNew) * 0.05 + (1200000 - 800000) * 0.10;
+            const rebateOn12L = Math.min(taxOn12L, 60000);
+            const taxAfterRebateOn12L = Math.max(0, taxOn12L - rebateOn12L); // Should be 0
+
+            const incomeExceeding12L = taxableIncome - 1200000;
+            // If tax (calculated without rebate) is greater than (tax after rebate on 12L + income exceeding 12L),
+            // then marginal relief applies.
+            if (tax > (taxAfterRebateOn12L + incomeExceeding12L) && incomeExceeding12L > 0) {
+                taxAfterRebate = taxAfterRebateOn12L + incomeExceeding12L;
+                rebate87A = tax - taxAfterRebate; // Implied rebate due to marginal relief
+            } else {
+                 taxAfterRebate = tax;
+                 rebate87A = 0;
+            }
+        }
+         taxAfterRebate = Math.max(0, taxAfterRebate);
+
+        if (isForReliefCalc) return { taxAfterRebate: taxAfterRebate, taxableIncome: taxableIncome };
+
+        const surcharge = getSurcharge(taxableIncome, taxAfterRebate, 'new');
+        const taxPlusSurcharge = taxAfterRebate + surcharge;
+        const cess = taxPlusSurcharge * HEALTH_EDU_CESS_RATE;
+        const totalTax = taxPlusSurcharge + cess;
+
+        return { taxableIncome, taxBeforeRebate: tax, rebate87A, taxAfterRebate, surcharge, cess, totalTax };
+    }
+
+
+    function updateChart(oldTax, newTax) {
+        const chartCanvas = document.getElementById('taxComparisonChart');
+        if (!chartCanvas) return;
+        const ctx = chartCanvas.getContext('2d');
+        if (taxComparisonChart) taxComparisonChart.destroy();
+        
+        taxComparisonChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Old Regime', 'New Regime (Default)'],
+                datasets: [{
+                    label: 'Net Tax Payable (₹)',
+                    data: [oldTax, newTax],
+                    backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => '₹' + value.toLocaleString('en-IN'),
+                            color: 'var(--text-secondary)'
+                        },
+                        grid: { color: 'var(--border-color-light)' }
+                    },
+                    x: {
+                        ticks: { color: 'var(--text-secondary)' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: { label: context => context.dataset.label + ': ₹' + context.parsed.y.toLocaleString('en-IN') },
+                        backgroundColor: 'rgba(29, 29, 31, 0.85)',
+                        titleColor: '#f5f5f7', bodyColor: '#f5f5f7'
+                    },
+                    legend: { display: false },
+                     title: {
+                        display: true,
+                        text: 'Net Tax Payable Comparison',
+                        color: 'var(--text-primary)',
+                        font: { size: 16, weight: '500'}
+                    }
+                }
+            }
+        });
+    }
+
+    function formatCurrency(value) {
+        return '₹' + Math.round(value).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    if (calculateTaxBtn) {
+        calculateTaxBtn.addEventListener('click', function() {
+            const grossSalary = parseFloat(grossSalaryEl.value) || 0;
+            const age = ageEl.value;
+            const employerNPSContribution = parseFloat(employerNPSEl.value) || 0;
+
+            const deductionsOld = {
+                d80C: Math.min(parseFloat(deduction80CEl.value) || 0, 150000),
+                d80CCD1B: Math.min(parseFloat(deduction80CCD1BEl.value) || 0, 50000),
+                d80D: parseFloat(deduction80DEl.value) || 0,
+                hra: parseFloat(hraExemptionEl.value) || 0,
+                homeLoanSOP: Math.min(parseFloat(homeLoanInterestSOPEl.value) || 0, 200000),
+                professionalTax: Math.min(parseFloat(professionalTaxEl.value) || 0, 2500),
+                otherOldDeductions: parseFloat(otherDeductionsOldEl.value) || 0,
+                employerNPS: employerNPSContribution
+            };
+
+            const deductionsNew = { employerNPS: employerNPSContribution };
+
+            const oldRegimeResult = calculateTaxOldRegime(grossSalary, age, deductionsOld);
+            const newRegimeResult = calculateTaxNewRegime(grossSalary, deductionsNew);
+
+            resultsArea.innerHTML = `
+                <div class="result-card-custom ${newRegimeResult.totalTax < oldRegimeResult.totalTax && newRegimeResult.totalTax !== oldRegimeResult.totalTax ? 'best-option-custom' : ''}">
+                    <h4>New Tax Regime (Default)</h4>
+                    <p>Taxable Income (after std ded & 80CCD(2)): ${formatCurrency(newRegimeResult.taxableIncome)}</p>
+                    <p>Tax Before Rebate: ${formatCurrency(newRegimeResult.taxBeforeRebate)}</p>
+                    <p>Rebate u/s 87A: ${formatCurrency(newRegimeResult.rebate87A)}</p>
+                    <p>Tax After Rebate: ${formatCurrency(newRegimeResult.taxAfterRebate)}</p>
+                    <p>Surcharge: ${formatCurrency(newRegimeResult.surcharge)}</p>
+                    <p>Health & Edu Cess (4%): ${formatCurrency(newRegimeResult.cess)}</p>
+                    <p class="font-bold text-lg mt-2">Net Tax Payable: ${formatCurrency(newRegimeResult.totalTax)}</p>
+                </div>
+                <div class="result-card-custom ${oldRegimeResult.totalTax < newRegimeResult.totalTax || oldRegimeResult.totalTax === newRegimeResult.totalTax ? 'best-option-custom' : ''}">
+                    <h4>Old Tax Regime (Optional)</h4>
+                    <p>Taxable Income (after all deductions): ${formatCurrency(oldRegimeResult.taxableIncome)}</p>
+                    <p>Tax Before Rebate: ${formatCurrency(oldRegimeResult.taxBeforeRebate)}</p>
+                    <p>Rebate u/s 87A: ${formatCurrency(oldRegimeResult.rebate87A)}</p>
+                    <p>Tax After Rebate: ${formatCurrency(oldRegimeResult.taxAfterRebate)}</p>
+                    <p>Surcharge: ${formatCurrency(oldRegimeResult.surcharge)}</p>
+                    <p>Health & Edu Cess (4%): ${formatCurrency(oldRegimeResult.cess)}</p>
+                    <p class="font-bold text-lg mt-2">Net Tax Payable: ${formatCurrency(oldRegimeResult.totalTax)}</p>
+                </div>
+            `;
+
+            let conclusion = '';
+            const taxDiff = Math.abs(oldRegimeResult.totalTax - newRegimeResult.totalTax);
+            if (newRegimeResult.totalTax < oldRegimeResult.totalTax) {
+                conclusion = `<div class="conclusion-box-custom beneficial">
+                                <p>Conclusion: The New Tax Regime seems more beneficial, saving approximately ${formatCurrency(taxDiff)}.</p>
+                             </div>`;
+            } else if (oldRegimeResult.totalTax < newRegimeResult.totalTax) {
+                conclusion = `<div class="conclusion-box-custom beneficial">
+                                <p>Conclusion: The Old Tax Regime seems more beneficial, saving approximately ${formatCurrency(taxDiff)}.</p>
+                             </div>`;
+            } else {
+                conclusion = `<div class="conclusion-box-custom neutral">
+                                <p>Conclusion: Both regimes result in similar tax liability (or difference is negligible).</p>
+                             </div>`;
+            }
+            resultsArea.innerHTML += conclusion;
+            updateChart(oldRegimeResult.totalTax, newRegimeResult.totalTax);
+        });
+        updateChart(0, 0); // Initial empty chart
+        calculateTaxBtn.click(); // Perform initial calculation
+    }
+
+});
+</script>
+</body>
+</html>
