@@ -22,7 +22,7 @@
     html {
         scroll-behavior: smooth;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        -moz-osx-smoothing: grayscale;
     }
 
     body {
@@ -371,9 +371,15 @@
     .content-section.active { display: block; }
 
     /* Specific overrides if Tailwind's defaults clash too much */
-    .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-smoothing: grayscale; }
 </style>
-</head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/CA%20India%20Logo.png" type="image/png">
+    </head>
 <body class="antialiased">
 
     <header class="bg-white shadow-md sticky top-0 z-50">
@@ -418,6 +424,9 @@
     </header>
 
     <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="text-right mb-4">
+            <a href="index.html" class="text-sm text-blue-700 hover:underline">&larr; Back to Home</a>
+        </div>
 
         <section id="introduction" class="content-section pt-16 -mt-16">
             <div class="bg-white-card">
@@ -629,7 +638,7 @@
 
                 <h3 class="subsection-title-custom mt-6">D. Key Deductions Available (Old Regime)</h3>
                 <ul class="custom-list list-disc">
-                    <li><strong>Chapter VI-A:</strong> Sec 80C, 80CCC, 80CCD(1) (Total ₹1.5L), Sec 80CCD(1B) (NPS employee - additional ₹50k), Sec 80D (Mediclaim), Sec 80E (Education Loan Interest), Sec 80G (Donations), Sec 80TTA/TTB (Savings Interest), Employer's NPS (80CCD(2)).</li>
+                    <li><strong>Chapter VI-A:</strong> Sec 80C, 80CCC, 80CCD(1) (Total ₹1.5L), Sec 80CCD(1B) (NPS employee - additional ₹50k), Sec 80D (Mediclaim), Sec 80E (Education Loan Interest), Sec 80G (Donations), 80TTA/TTB (Savings Interest), Employer's NPS (80CCD(2)).</li>
                     <li><strong>HRA Exemption (Sec 10(13A)):</strong> Based on rent paid, salary, and city.</li>
                     <li><strong>LTA Exemption (Sec 10(5)):</strong> For travel within India.</li>
                     <li><strong>Interest on Housing Loan (Sec 24(b)):</strong> Up to ₹2L for self-occupied property; full interest for let-out.</li>
