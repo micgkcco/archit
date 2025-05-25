@@ -13,6 +13,13 @@
     <meta property="og:title" content="Archit B. Sheth - Tax Experts in Ahmedabad">
     <meta property="og:description" content="Professional tax advisory and chartered accountant services in Ahmedabad, Gujarat.">
     <meta property="og:type" content="website">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/CA%20India%20Logo.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -32,11 +39,11 @@
         html {
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            -moz-osx-smoothing: grayscale;
         }
         body {
             font-family: var(--font-family-apple);
-            overflow-x: hidden; 
+            overflow-x: hidden;
             overflow-y: auto;
             background-color: var(--background-light);
             color: var(--text-primary);
@@ -62,7 +69,7 @@
             max-width: 800px;
             width: 100%;
             box-sizing: border-box;
-            margin-bottom: 40px; 
+            margin-bottom: 40px;
         }
 
         #welcome-screen h2#main-heading { /* Styles for the H2 container */
@@ -73,7 +80,7 @@
             margin-bottom: 20px;
             line-height: 1.1;
             letter-spacing: -0.025em;
-            opacity: 0; 
+            opacity: 0;
             animation: slamEffect 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
             /* transition and will-change for transform are moved to #magnetic-text */
             cursor: default; /* Default cursor for the H2, interaction on inner span */
@@ -139,10 +146,10 @@
             line-height: 1.5;
             color: var(--text-primary);
             margin-bottom: 12px;
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .contact-info p:hover { /* This makes the whole P tag pop */
-            transform: scale(1.05); 
+            transform: scale(1.05);
         }
 
         .contact-info .emoji-contact {
@@ -150,7 +157,7 @@
             margin-right: 8px;
             vertical-align: middle;
         }
-         .contact-info a { 
+         .contact-info a {
             color: var(--link-blue);
             text-decoration: none;
             font-weight: 400;
@@ -195,7 +202,7 @@
             gap: 25px;
             justify-content: center;
             width: 100%;
-            max-width: 1100px; 
+            max-width: 1100px;
             margin-left: auto;
             margin-right: auto;
             padding: 0 15px;
@@ -203,9 +210,9 @@
         }
 
         .update-section-common {
-            flex: 1 1 250px; 
-            min-width: 270px; 
-            max-width: 320px; 
+            flex: 1 1 250px;
+            min-width: 270px;
+            max-width: 320px;
             padding: 20px 22px;
             background-color: rgba(var(--text-primary-rgb), 0.025);
             border-radius: 14px;
@@ -215,11 +222,11 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            
+
             opacity: 0;
-            transform: translateX(-100px); 
+            transform: translateX(-100px);
             transition-property: opacity, transform;
-            transition-duration: 3s; 
+            transition-duration: 3s;
             transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             will-change: opacity, transform;
         }
@@ -294,52 +301,52 @@
         .disclaimer-modal #agreeButton:hover { background-color: var(--link-blue-hover); }
         .disclaimer-modal #cancelButton { background-color: #e8e8ed; color: var(--link-blue); }
         .disclaimer-modal #cancelButton:hover { background-color: #dddce1; }
-        
-        @media (max-width: 1200px) { 
-             .updates-grid-container { max-width: 900px; } 
+
+        @media (max-width: 1200px) {
+             .updates-grid-container { max-width: 900px; }
              .update-section-common { flex-basis: calc(50% - 12.5px); }
         }
-        @media (max-width: 992px) { 
-            .updates-grid-container { max-width: 700px; } 
-            .update-section-common { flex-basis: calc(50% - 12.5px); min-width: 280px; } 
+        @media (max-width: 992px) {
+            .updates-grid-container { max-width: 700px; }
+            .update-section-common { flex-basis: calc(50% - 12.5px); min-width: 280px; }
         }
-        @media (max-width: 768px) { 
-            body { padding: 25px 15px; } 
+        @media (max-width: 768px) {
+            body { padding: 25px 15px; }
             #welcome-screen h2#main-heading { font-size: 40px; } /* Adjusted for smaller screens */
-            #welcome-screen { padding: 15px 0px; margin-bottom: 30px; } 
-            #welcome-screen .welcome-subtitle { font-size: 20px; margin-bottom: 25px; letter-spacing: -0.01em; } 
-            #welcome-screen .welcome-subtitle .emoji { font-size: 18px; } 
-            .contact-info { margin-top: 20px; } .contact-info p { font-size: 16px; } 
-            .contact-info .emoji-contact { font-size: 14px; } 
-            .apple-text-cta { font-size: 18px; } 
-            .cta-link-container { margin-top: 30px;} 
-            .updates-grid-container { flex-direction: column; align-items: center; gap: 20px; padding: 0; } 
-            .update-section-common { flex-basis: auto; width: 100%; max-width: 450px; min-width: unset; } 
-            .update-section-common .update-link-text { font-size: 17px; } 
-            .update-badge { font-size: 9px; padding: 3px 8px; margin-bottom: 10px; } 
-            .update-description { font-size: 13px; } 
-            .disclaimer-modal .modal-content { padding: 25px 20px; } 
-            .disclaimer-modal .modal-content h3 { font-size: 18px; } 
-            .disclaimer-modal .modal-content p { font-size: 13px; margin-bottom: 20px; } 
-            .disclaimer-modal .modal-buttons { flex-direction: row; } 
-            .main-footer { position: static; padding: 25px 15px 15px; margin-top: 40px; } 
+            #welcome-screen { padding: 15px 0px; margin-bottom: 30px; }
+            #welcome-screen .welcome-subtitle { font-size: 20px; margin-bottom: 25px; letter-spacing: -0.01em; }
+            #welcome-screen .welcome-subtitle .emoji { font-size: 18px; }
+            .contact-info { margin-top: 20px; } .contact-info p { font-size: 16px; }
+            .contact-info .emoji-contact { font-size: 14px; }
+            .apple-text-cta { font-size: 18px; }
+            .cta-link-container { margin-top: 30px;}
+            .updates-grid-container { flex-direction: column; align-items: center; gap: 20px; padding: 0; }
+            .update-section-common { flex-basis: auto; width: 100%; max-width: 450px; min-width: unset; }
+            .update-section-common .update-link-text { font-size: 17px; }
+            .update-badge { font-size: 9px; padding: 3px 8px; margin-bottom: 10px; }
+            .update-description { font-size: 13px; }
+            .disclaimer-modal .modal-content { padding: 25px 20px; }
+            .disclaimer-modal .modal-content h3 { font-size: 18px; }
+            .disclaimer-modal .modal-content p { font-size: 13px; margin-bottom: 20px; }
+            .disclaimer-modal .modal-buttons { flex-direction: row; }
+            .main-footer { position: static; padding: 25px 15px 15px; margin-top: 40px; }
         }
-        @media (max-width: 480px) { 
-            body { padding: 20px 10px; } 
+        @media (max-width: 480px) {
+            body { padding: 20px 10px; }
             #welcome-screen h2#main-heading { font-size: 30px; } /* Adjusted for very small screens */
-            #welcome-screen { padding: 10px 0px; } 
-            #welcome-screen .welcome-subtitle { font-size: 17px; } 
-            #welcome-screen .welcome-subtitle .emoji { font-size: 16px; } 
-            .contact-info p { font-size: 14px; margin-bottom: 8px; } 
-            .apple-text-cta { font-size: 16px; } 
-            .update-section-common { padding: 15px; } 
-            .update-section-common .update-link-text { font-size: 16px; margin-bottom: 6px; } 
-            .update-badge { font-size: 8px; padding: 2px 6px; margin-bottom: 8px; } 
-            .update-description { font-size: 12px; } 
-            .main-footer { font-size: 10px; padding-top: 20px; margin-top: 30px; } 
-            .disclaimer-modal .modal-content { padding: 20px 15px; } 
-            .disclaimer-modal .modal-buttons { flex-direction: column; } 
-            .disclaimer-modal .modal-buttons button { font-size: 15px; padding: 10px; } 
+            #welcome-screen { padding: 10px 0px; }
+            #welcome-screen .welcome-subtitle { font-size: 17px; }
+            #welcome-screen .welcome-subtitle .emoji { font-size: 16px; }
+            .contact-info p { font-size: 14px; margin-bottom: 8px; }
+            .apple-text-cta { font-size: 16px; }
+            .update-section-common { padding: 15px; }
+            .update-section-common .update-link-text { font-size: 16px; margin-bottom: 6px; }
+            .update-badge { font-size: 8px; padding: 2px 6px; margin-bottom: 8px; }
+            .update-description { font-size: 12px; }
+            .main-footer { font-size: 10px; padding-top: 20px; margin-top: 30px; }
+            .disclaimer-modal .modal-content { padding: 20px 15px; }
+            .disclaimer-modal .modal-buttons { flex-direction: column; }
+            .disclaimer-modal .modal-buttons button { font-size: 15px; padding: 10px; }
         }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> <script>
@@ -354,7 +361,7 @@
         <h2 id="main-heading"><span id="magnetic-text">Archit B. Sheth</span></h2>
         <p class="welcome-subtitle">
             Your Taxation Expert
-            <span class="emoji">💼</span>
+            <span class="emoji">📈</span>
         </p>
 
         <div class="contact-info">
@@ -397,7 +404,7 @@
             </a>
             <p class="update-description">An interactive summary of key amendments in the Finance Act 2025.</p>
         </div>
-        
+
         <div class="update-section-common tax-regime-analyzer-update">
             <span class="update-badge" style="background-color: #34c759;">Tool</span> <a href="Tax Regime Analyzer FY 2025-26.html" class="apple-text-cta update-link-text tax-regime-link">
                 Tax Regime Analyzer (FY 2025-26) <span class="cta-arrow">&rsaquo;</span>
@@ -449,7 +456,7 @@
         if (tdsUpdateLink) { tdsUpdateLink.addEventListener('click', function(event) { showDisclaimer(event, 'TDS Navigator', this.href); }); }
         if (sftGuideLink) { sftGuideLink.addEventListener('click', function(event) {  showDisclaimer(event, 'SFT Reporting Guide', this.href); }); }
         if (faSummaryLink) { faSummaryLink.addEventListener('click', function(event) {  showDisclaimer(event, 'Finance Act 2025 Summary', this.href); }); }
-        if (taxRegimeLink) { taxRegimeLink.addEventListener('click', function(event) { showDisclaimer(event, 'Tax Regime Analyzer', this.href); }); } 
+        if (taxRegimeLink) { taxRegimeLink.addEventListener('click', function(event) { showDisclaimer(event, 'Tax Regime Analyzer', this.href); }); }
 
         if (disclaimerModal && agreeButton && cancelButton) {
             agreeButton.addEventListener('click', function() {
@@ -464,11 +471,11 @@
         if (animatedCards.length > 0) {
             const cardObserverOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 };
             const observerCallback = (entries, observerInstance) => {
-                entries.forEach((entry, index) => { 
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
                         const cardElement = entry.target;
-                        setTimeout(() => { cardElement.classList.add('is-visible'); }, index * 250); 
-                        observerInstance.unobserve(cardElement); 
+                        setTimeout(() => { cardElement.classList.add('is-visible'); }, index * 250);
+                        observerInstance.unobserve(cardElement);
                     }
                 });
             };
@@ -481,12 +488,12 @@
         const magneticText = document.getElementById('magnetic-text'); // This is the inner SPAN
 
         if (mainHeadingContainer && magneticText) {
-            const moveIntensity = 0.2; 
-            const scaleIntensity = 1.03; 
+            const moveIntensity = 0.2;
+            const scaleIntensity = 1.03;
 
             mainHeadingContainer.addEventListener('mousemove', (e) => {
                 const rect = magneticText.getBoundingClientRect(); // Use rect of the span for calculations
-                
+
                 const mouseX_viewport = e.clientX;
                 const mouseY_viewport = e.clientY;
 
@@ -495,15 +502,15 @@
 
                 const deltaX = mouseX_viewport - centerX_viewport;
                 const deltaY = mouseY_viewport - centerY_viewport;
-                
+
                 const translateX = deltaX * moveIntensity;
                 const translateY = deltaY * moveIntensity;
-                
+
                 magneticText.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleIntensity})`;
             });
 
             mainHeadingContainer.addEventListener('mouseleave', () => {
-                magneticText.style.transform = 'translate(0px, 0px) scale(1)'; 
+                magneticText.style.transform = 'translate(0px, 0px) scale(1)';
             });
         }
     });
