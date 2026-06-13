@@ -623,6 +623,14 @@
             .hero .anim { opacity: 1; animation: none; }
         }
     
+        /* ---------- Secret menu (floating) ---------- */
+        .secret-menu{position:fixed;z-index:9999;display:flex;flex-direction:column;gap:4px;background:#fff;border:2.5px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--pink);padding:10px 12px;}
+        .secret-menu[hidden]{display:none;}
+        .secret-menu button{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-size:15px;font-weight:600;letter-spacing:-0.01em;color:var(--ink);background:none;border:none;padding:7px 10px;border-radius:9px;cursor:pointer;text-align:left;white-space:nowrap;}
+        .secret-menu button::before{content:"\2726";color:var(--pink);font-size:12px;}
+        .secret-menu button:hover{color:var(--pink);background:var(--bg);}
+        .secret-menu button:focus-visible{outline:none;color:var(--pink);background:var(--bg);}
+
         /* ---------- Prayer reading panel ---------- */
         .prayer-overlay{position:fixed;inset:0;z-index:3000;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;}
         .prayer-overlay[hidden]{display:none;}
@@ -675,7 +683,7 @@
     </nav>
 
     <header class="hero" role="banner">
-        <h1 class="anim">Tax, <span class="hl">sorted<span class="secret-dot"><span class="secret-trigger" id="secretDot" role="button" tabindex="0" aria-expanded="false" aria-label="Prayers">.</span><span class="secret-pop" id="secretPop"><a href="hanuman-chalisa.html" data-prayer="hanuman">Hanuman Chalisa</a><a href="bajrang-baan.html" data-prayer="bajrang">Bajrang Baan</a></span></span></span></h1>
+        <h1 class="anim">Tax, <span class="hl">sorted<span class="secret-trigger" id="secretDot" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="secretMenu" aria-label="Prayers">.</span></span></h1>
         <div class="cta-row anim">
             <a href="mailto:archit@absheth.com" class="btn">Get in touch &#10024;</a>
         </div>
@@ -767,29 +775,10 @@
             document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.classList.remove('visible'); });
         }
 
-        const sdot = document.getElementById('secretDot');
-        const spop = document.getElementById('secretPop');
-        if (sdot && spop) {
-            const toggleSecret = (e) => {
-                e.preventDefault(); e.stopPropagation();
-                const open = spop.classList.toggle('open');
-                sdot.setAttribute('aria-expanded', open ? 'true' : 'false');
-            };
-            sdot.addEventListener('click', toggleSecret);
-            sdot.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') toggleSecret(e); });
-            document.addEventListener('click', (e) => {
-                if (!spop.contains(e.target) && e.target !== sdot) {
-                    spop.classList.remove('open');
-                    sdot.setAttribute('aria-expanded', 'false');
-                }
-            });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') { spop.classList.remove('open'); sdot.setAttribute('aria-expanded', 'false'); }
-            });
-        }
     });
     </script>
 
+    <div class="secret-menu" id="secretMenu" role="menu" aria-label="Prayers" hidden><button type="button" role="menuitem" data-prayer="hanuman">Hanuman Chalisa</button><button type="button" role="menuitem" data-prayer="bajrang">Bajrang Baan</button></div>
     <div class="prayer-overlay" id="prayer-hanuman" role="dialog" aria-modal="true" aria-label="Hanuman Chalisa" hidden><header class="prayer-bar"><button class="prayer-close" type="button" aria-label="Close">&larr; Close</button><span class="prayer-brand"><span class="star">&#10022;</span>Archit B. Sheth</span></header><article><p class="eyebrow">Goswami Tulsidas</p>
   <h1>Hanuman <span class="hl">Chalisa</span></h1>
   <p class="sub">Forty verses in praise of Shri Hanuman, with their meaning.</p>
@@ -883,29 +872,55 @@
 
     <script>
     (function(){
-        function openPrayer(id){
+        var dot  = document.getElementById('secretDot');
+        var menu = document.getElementById('secretMenu');
+
+        function hideMenu(){ if(menu) menu.hidden = true; if(dot) dot.setAttribute('aria-expanded','false'); }
+        function showMenu(){
+            if(!menu || !dot) return;
+            menu.hidden = false;
+            var r = dot.getBoundingClientRect();
+            menu.style.top = (r.bottom + 8) + 'px';
+            var mw = menu.offsetWidth;
+            var left = r.right - mw;
+            if(left < 8) left = 8;
+            if(left + mw > window.innerWidth - 8) left = window.innerWidth - 8 - mw;
+            menu.style.left = left + 'px';
+            dot.setAttribute('aria-expanded','true');
+        }
+        function toggleMenu(){ if(menu && menu.hidden) showMenu(); else hideMenu(); }
+
+        function openPanel(id){
             document.querySelectorAll('.prayer-overlay').forEach(function(o){ o.hidden = true; });
             var ov = document.getElementById(id);
             if(!ov) return;
             ov.hidden = false;
             ov.scrollTop = 0;
             document.body.style.overflow = 'hidden';
-            var sp = document.getElementById('secretPop'); if(sp) sp.classList.remove('open');
-            var sd = document.getElementById('secretDot'); if(sd) sd.setAttribute('aria-expanded','false');
+            hideMenu();
             var btn = ov.querySelector('.prayer-close'); if(btn) btn.focus();
         }
         function closeAll(){
             document.querySelectorAll('.prayer-overlay').forEach(function(o){ o.hidden = true; });
             document.body.style.overflow = '';
         }
-        document.querySelectorAll('[data-prayer]').forEach(function(a){
-            a.addEventListener('click', function(e){ e.preventDefault(); openPrayer('prayer-' + a.getAttribute('data-prayer')); });
+
+        if(dot){
+            dot.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); toggleMenu(); });
+            dot.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleMenu(); } });
+        }
+        document.querySelectorAll('[data-prayer]').forEach(function(b){
+            b.addEventListener('click', function(e){ e.preventDefault(); openPanel('prayer-' + b.getAttribute('data-prayer')); });
         });
-        document.querySelectorAll('.prayer-close').forEach(function(b){
-            b.addEventListener('click', closeAll);
+        document.querySelectorAll('.prayer-close').forEach(function(b){ b.addEventListener('click', closeAll); });
+
+        document.addEventListener('click', function(e){
+            if(menu && !menu.hidden && !menu.contains(e.target) && e.target !== dot) hideMenu();
         });
+        window.addEventListener('scroll', hideMenu, true);
+        window.addEventListener('resize', hideMenu);
         document.addEventListener('keydown', function(e){
-            if(e.key === 'Escape' && document.querySelector('.prayer-overlay:not([hidden])')) closeAll();
+            if(e.key === 'Escape'){ hideMenu(); if(document.querySelector('.prayer-overlay:not([hidden])')) closeAll(); }
         });
     })();
     </script>
