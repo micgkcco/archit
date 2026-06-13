@@ -168,6 +168,9 @@
             border-radius: 4px;
         }
 
+        html { -webkit-text-size-adjust: 100%; }
+        body { -webkit-tap-highlight-color: transparent; }
+
         .wrap {
             width: 100%;
             max-width: var(--maxw);
@@ -560,7 +563,8 @@
 
         /* ---------- Secret prayer link ---------- */
         .secret-dot { position: relative; display: inline-block; vertical-align: baseline; }
-        .secret-trigger { cursor: pointer; }
+        .secret-trigger { cursor: pointer; position: relative; }
+        .secret-trigger::after { content: ""; position: absolute; top: -0.3em; bottom: -0.35em; left: -0.2em; right: -0.7em; }
         .secret-trigger:focus { outline: none; }
         .secret-trigger:focus-visible { outline: none; color: var(--pink); }
         .secret-pop {
@@ -632,7 +636,7 @@
         .secret-menu button:focus-visible{outline:none;color:var(--pink);background:var(--bg);}
 
         /* ---------- Prayer reading panel ---------- */
-        .prayer-overlay{position:fixed;inset:0;z-index:3000;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;}
+        .prayer-overlay{position:fixed;inset:0;z-index:3000;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
         .prayer-overlay[hidden]{display:none;}
         .prayer-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:760px;margin:0 auto;padding:18px 24px;background:var(--bg);}
         .prayer-brand{font-family:var(--display);font-weight:800;font-size:16px;color:var(--ink);}
@@ -659,6 +663,22 @@
         .prayer-foot .prayer-close--text{font-family:var(--body);font-size:15px;font-weight:600;background:none;border:none;box-shadow:none;padding:0;color:var(--indigo);}
         .prayer-foot .prayer-close--text:hover{transform:none;box-shadow:none;color:var(--pink);}
 
+
+        @media (max-width: 600px) {
+            .secret-menu { padding: 12px 12px; }
+            .secret-menu button { padding: 12px 12px; font-size: 16px; border-radius: 11px; }
+            .prayer-bar { padding: 14px 18px; }
+            .prayer-close { padding: 12px 18px; font-size: 15px; }
+            .prayer-overlay article { padding: 4px 20px 96px; }
+            .prayer-overlay .eyebrow { margin-top: 8px; }
+            .prayer-overlay h1 { font-size: 40px; }
+            .prayer-overlay .sub { font-size: 16px; margin-bottom: 26px; }
+            .prayer-overlay h2 { font-size: 21px; margin: 40px 0 20px; }
+            .prayer-overlay .translit { font-size: 18px; line-height: 1.55; }
+            .prayer-overlay .meaning { font-size: 16px; line-height: 1.66; }
+            .prayer-overlay .verse { margin-bottom: 24px; }
+            .prayer-foot { gap: 16px; }
+        }
     </style>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
