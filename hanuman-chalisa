@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hanuman Chalisa | Archit B. Sheth</title>
+<meta name="description" content="Hanuman Chalisa by Goswami Tulsidas, transliteration with English meaning.">
+<meta name="theme-color" content="#FFB703">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Space Grotesk",system-ui,-apple-system,sans-serif;
+  --bg:#FFFBF4;--ink:#1B1340;--ink-2:#5A5478;
+  --marigold:#FFB703;--pink:#FF2E93;--indigo:#3D34E0;--teal:#06C996;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+body{margin:0;font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.5;}
+a{color:var(--indigo);}
+:focus-visible{outline:3px solid var(--indigo);outline-offset:3px;border-radius:4px;}
+.topbar{display:flex;align-items:center;justify-content:space-between;max-width:760px;margin:0 auto;padding:20px 24px;}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;text-decoration:none;color:var(--ink);}
+.back:hover{color:var(--pink);}
+.brand{font-family:var(--display);font-weight:800;font-size:16px;color:var(--ink);text-decoration:none;}
+.brand .star{color:var(--pink);margin-right:5px;}
+article{max-width:720px;margin:0 auto;padding:12px 24px 70px;}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-2);margin:20px 0 12px;}
+h1{font-family:var(--display);font-size:clamp(40px,8vw,76px);font-weight:800;letter-spacing:-0.02em;line-height:1;margin:0 0 10px;}
+h1 .hl{background:var(--marigold);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .08em;border-radius:5px;}
+.sub{font-size:17px;color:var(--ink-2);margin:0 0 30px;}
+.rule{height:3px;width:64px;background:var(--ink);border:none;margin:0 0 36px;border-radius:2px;}
+h2{font-family:var(--display);font-size:clamp(19px,3vw,24px);font-weight:700;letter-spacing:-0.01em;color:var(--ink);margin:46px 0 22px;}
+h2 .star{color:var(--marigold);margin-right:8px;font-size:0.72em;}
+.verse{margin:0 0 26px;}
+.translit{font-size:clamp(17px,2vw,19px);font-weight:600;color:var(--ink);line-height:1.5;margin:0 0 6px;}
+.translit .num{color:var(--pink);margin-right:10px;}
+.meaning{font-size:16px;font-style:italic;color:var(--ink-2);line-height:1.6;margin:0;}
+.closing{margin-top:10px;padding-top:8px;}
+footer{max-width:720px;margin:0 auto;padding:30px 24px 56px;border-top:3px solid var(--ink);}
+.foot-links{display:flex;flex-wrap:wrap;gap:18px;align-items:center;font-size:15px;font-weight:600;}
+.foot-links a{text-decoration:none;color:var(--indigo);}
+.foot-links a:hover{color:var(--pink);}
+@media(max-width:480px){.topbar,article,footer{padding-left:18px;padding-right:18px;}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="back" href="index.html">&larr; Home</a>
+  <a class="brand" href="index.html"><span class="star">&#10022;</span>Archit B. Sheth</a>
+</header>
+
+<article>
+  <p class="eyebrow">Goswami Tulsidas</p>
+  <h1>Hanuman <span class="hl">Chalisa</span></h1>
+  <p class="sub">Forty verses in praise of Shri Hanuman, with their meaning.</p>
+  <hr class="rule">
+
+  <h2><span class="star">&#10022;</span>Invocation</h2>
+  <div class="verse"><p class="translit">Mangala moorati maaruta nandana<br>Sakala amangala moola nikandana</p><p class="meaning">You are the embodiment of blessings, Son of the Wind. You destroy the root of all that is inauspicious and harmful.</p></div>
+  <div class="verse"><p class="translit">Shree Guru charana saroja raja nija manu mukuru sudhaari<br>Baranaun Raghubara bimala jasu jo daayaku phala chaari</p><p class="meaning">Taking the dust of my Guru's lotus feet to polish the mirror of my heart, I sing the pure fame of the best of the Raghus, which bestows the four fruits of life.</p></div>
+  <div class="verse"><p class="translit">Buddhi heena tanu jaanike sumiraun pawana kumaara<br>Bala budhi vidyaa dehu mohin harahu kalesa bikaara</p><p class="meaning">Knowing myself to be without wit, I remember you, Son of the Wind. Grant me strength, intelligence and wisdom, and take away my sorrows and faults.</p></div>
+  <div class="verse"><p class="translit">Seeyavara Ramchandra pada jai sharanam</p><p class="meaning">Refuge at the feet of Sita's lord, Ram.</p></div>
+
+  <h2><span class="star">&#10022;</span>The forty verses</h2>
+  <div class="verse"><p class="translit"><span class="num">1</span>Jaya Hanumaan gyaana guna saagara,<br>Jaya Kapeesa tihun loka ujaagara</p><p class="meaning">Hail Hanuman, ocean of wisdom. Hail Monkey Lord, you light up the three worlds.</p></div>
+  <div class="verse"><p class="translit"><span class="num">2</span>Raama doota atulita bala dhaamaa,<br>Anjani putra Pawanasuta naamaa</p><p class="meaning">You are Ram's messenger, the abode of matchless power, Anjani's son, known as the Son of the Wind.</p></div>
+  <div class="verse"><p class="translit"><span class="num">3</span>Mahaabeera bikrama bajarangee,<br>Kumati niwaara sumati ke sangee</p><p class="meaning">Great hero, mighty as a thunderbolt, remover of evil thoughts and companion of the good.</p></div>
+  <div class="verse"><p class="translit"><span class="num">4</span>Kanchana barana biraaja subesaa,<br>Kaanana kundala kunchita kesaa</p><p class="meaning">Golden hued and splendidly adorned, with heavy earrings and curly locks.</p></div>
+  <div class="verse"><p class="translit"><span class="num">5</span>Haata bajra au dwajaa biraajai,<br>Kaandhe moonja janeu saajai</p><p class="meaning">In your hands shine a mace and a banner, and a sacred thread adorns your shoulder.</p></div>
+  <div class="verse"><p class="translit"><span class="num">6</span>Shankara suwana Kesaree nandana,<br>Teja prataapa mahaa jaga bandana</p><p class="meaning">You are an incarnation of Shiva and Kesari's son; your glory is revered throughout the world.</p></div>
+  <div class="verse"><p class="translit"><span class="num">7</span>Vidyaawaana gunee ati chaatura,<br>Raama kaaja karibe ko aatur</p><p class="meaning">Wisest of the wise, virtuous and very clever, ever eager to do Ram's work.</p></div>
+  <div class="verse"><p class="translit"><span class="num">8</span>Prabhu charitra sunibe ko rasiyaa,<br>Raama Lakhana Seetaa mana basiyaa</p><p class="meaning">You delight in hearing of the Lord's deeds; Ram, Lakshman and Sita dwell in your heart.</p></div>
+  <div class="verse"><p class="translit"><span class="num">9</span>Sookshma roopa dhari Siyahin dikhaawaa,<br>Bikata roopa dhari Lankaa jaraawaa</p><p class="meaning">Assuming a tiny form you appeared to Sita; in an awesome form you burned Lanka.</p></div>
+  <div class="verse"><p class="translit"><span class="num">10</span>Bheema roopa dhari asura sanghaare,<br>Raamachandra ke kaaja sanvaare</p><p class="meaning">Taking a dreadful form you slaughtered the demons, completing Lord Ram's work.</p></div>
+  <div class="verse"><p class="translit"><span class="num">11</span>Laaya sajeevana Lakhana jiyaaye,<br>Shree Raghubeera harashi ura laaye</p><p class="meaning">Bringing the magic herb you revived Lakshman; Shri Ram embraced you with delight.</p></div>
+  <div class="verse"><p class="translit"><span class="num">12</span>Raghupati keenhee bahuta baraaee,<br>tuma mama priya Bharatahi sama bhaaee</p><p class="meaning">The Lord of the Raghus praised you greatly: "You are as dear to me as my brother Bharat."</p></div>
+  <div class="verse"><p class="translit"><span class="num">13</span>Sahasa badana tumharo jasa gaawain,<br>asa kahi Shreepati kanta lagaawain</p><p class="meaning">"Thousands of mouths will sing your fame." So saying, Lakshmi's Lord drew you to himself.</p></div>
+  <div class="verse"><p class="translit"><span class="num">14</span>Sanakaadika Brahmaadi muneesaa,<br>Naarada Saarada sahita Aheesaa</p><p class="meaning">Sanak and the sages, Brahma and the great munis, Narada, Saraswati and the King of serpents,</p></div>
+  <div class="verse"><p class="translit"><span class="num">15</span>Yama Kubera digapaala jahaante,<br>kabi kobida kahi sake kahaante</p><p class="meaning">Yama, Kubera and the guardians of the four quarters, poets and scholars: none can express your glory.</p></div>
+  <div class="verse"><p class="translit"><span class="num">16</span>Tuma upakaara Sugreevahin keenhaa,<br>Raama milaaya raaja pada deenhaa</p><p class="meaning">You did great service for Sugriva; bringing him to Ram, you gave him kingship.</p></div>
+  <div class="verse"><p class="translit"><span class="num">17</span>Tumharo mantra Vibheeshana maanaa,<br>Lankeshwara bhaye saba jaga jaanaa</p><p class="meaning">Vibhishana heeded your counsel; he became the Lord of Lanka, as the whole world knows.</p></div>
+  <div class="verse"><p class="translit"><span class="num">18</span>Yuga sahasra yojana para bhaanu,<br>leelyo taahi madhura phala jaanu</p><p class="meaning">Though the sun is millions of miles away, you swallowed it, thinking it a sweet fruit.</p></div>
+  <div class="verse"><p class="translit"><span class="num">19</span>Prabhu mudrikaa meli mukha maaheen,<br>jaladhi laanghi gaye acharaja naaheen</p><p class="meaning">Holding the Lord's ring in your mouth, it is no wonder that you leapt across the ocean.</p></div>
+  <div class="verse"><p class="translit"><span class="num">20</span>Durgama kaaja jagata ke jete,<br>sugama anugraha tumhare tete</p><p class="meaning">Every difficult task in this world becomes easy by your grace.</p></div>
+  <div class="verse"><p class="translit"><span class="num">21</span>Raama duaare tuma rakhawaare,<br>hota na aagyaa binu paisaare</p><p class="meaning">You are the guardian at Ram's door; no one enters without your permission.</p></div>
+  <div class="verse"><p class="translit"><span class="num">22</span>Saba sukha lahai tumhaaree sharanaa,<br>tuma rakshaka kaahu ko dara naa</p><p class="meaning">All who take refuge in you find happiness; those you protect know no fear.</p></div>
+  <div class="verse"><p class="translit"><span class="num">23</span>Aapana teja samhaaro aapai,<br>teenon loka haanka ten kaanpai</p><p class="meaning">You alone can withstand your own splendour; the three worlds tremble at your roar.</p></div>
+  <div class="verse"><p class="translit"><span class="num">24</span>Bhoota pisaacha nikata nahin aawai,<br>Mahaabeera jaba naama sunaawai</p><p class="meaning">Ghosts and goblins cannot come near, Great Hero, when your name is uttered.</p></div>
+  <div class="verse"><p class="translit"><span class="num">25</span>Naasai roga hare saba peeraa,<br>japata nirantara Hanumata beeraa</p><p class="meaning">All disease and pain is destroyed by constant repetition of your name, brave Hanuman.</p></div>
+  <div class="verse"><p class="translit"><span class="num">26</span>Sankata ten Hanumaana churaawai,<br>mana krama bachana dhyaana jo laawai</p><p class="meaning">You release from affliction all those who remember you in thought, word and deed.</p></div>
+  <div class="verse"><p class="translit"><span class="num">27</span>Saba para Raama tapaswee raajaa,<br>tina ke kaaja sakala tuma saajaa</p><p class="meaning">Ram, the ascetic king, reigns over all, but you carry out all his work.</p></div>
+  <div class="verse"><p class="translit"><span class="num">28</span>Aura manorata jo koee laawai,<br>soee amita jeewana phala paawai</p><p class="meaning">Whoever comes to you with any longing obtains the abundance of the four fruits of life.</p></div>
+  <div class="verse"><p class="translit"><span class="num">29</span>Chaaron juga parataapa tumhaaraa,<br>hai parasidha jagata ujiyaaraa</p><p class="meaning">Your splendour fills the four ages; your glory is renowned throughout the world.</p></div>
+  <div class="verse"><p class="translit"><span class="num">30</span>Saadhu santa ke tuma rakhawaare,<br>asura nikandana Raama dulaare</p><p class="meaning">You are the guardian of saints and sages, the destroyer of demons and the darling of Ram.</p></div>
+  <div class="verse"><p class="translit"><span class="num">31</span>Ashta siddhi nau nidhi ke daataa,<br>asa bara deena Jaanakee Maataa</p><p class="meaning">You grant the eight powers and nine treasures, by the boon you received from Mother Janaki.</p></div>
+  <div class="verse"><p class="translit"><span class="num">32</span>Raama rasaayana tumhare paasaa,<br>sadaa raho Raghupati ke daasaa</p><p class="meaning">You hold the elixir of Ram's name and remain forever his servant.</p></div>
+  <div class="verse"><p class="translit"><span class="num">33</span>Tumhare bhajana Raama ko paawai,<br>janama janama ke dukha bisaraawai</p><p class="meaning">Singing your praise, one finds Ram and forgets the sorrows of countless lives.</p></div>
+  <div class="verse"><p class="translit"><span class="num">34</span>Anta kaala Raghubara pura jaaee,<br>jahaan janama Hari bhakta kahaaee</p><p class="meaning">At the final hour one goes to Ram's own abode, born there as a devotee of Hari.</p></div>
+  <div class="verse"><p class="translit"><span class="num">35</span>Aura devataa chitta na dharaee,<br>Hanumata se-ee sarva sukha karaee</p><p class="meaning">Hold no other deity in your heart; from Hanuman you receive every happiness.</p></div>
+  <div class="verse"><p class="translit"><span class="num">36</span>Sankata katai mite saba peeraa,<br>jo sumire Hanumata bala beeraa</p><p class="meaning">All trouble ends and all pain is removed for those who remember the mighty hero, Hanuman.</p></div>
+  <div class="verse"><p class="translit"><span class="num">37</span>Jai jai jai Hanumaana Gosaaee,<br>kripaa karahu gurudeva kee naaee</p><p class="meaning">Victory, victory, victory to Lord Hanuman. Bestow your grace on me, as my Guru.</p></div>
+  <div class="verse"><p class="translit"><span class="num">38</span>Jo sata baara paata kara koee,<br>chootahi bandi mahaa sukha hoee</p><p class="meaning">Whoever recites this a hundred times is released from bondage and gains great bliss.</p></div>
+  <div class="verse"><p class="translit"><span class="num">39</span>Jo yaha parai Hanumaana chaaleesaa,<br>hoya siddhi saakhee Gaureesaa</p><p class="meaning">One who reads this Hanuman Chalisa attains perfection, as Shiva, the Lord of Gauri, is witness.</p></div>
+  <div class="verse"><p class="translit"><span class="num">40</span>Tulasee Daasa sadaa Hari cheraa,<br>keejai naata hridaya mahaan deraa</p><p class="meaning">Says Tulsidas, who ever remains Hari's servant: "Lord, make your home in my heart."</p></div>
+
+  <div class="closing">
+    <h2><span class="star">&#10022;</span>Closing</h2>
+    <div class="verse"><p class="translit">Pawanatanaya sankata harana mangala moorati roopa<br>Raama Lakhana Seetaa sahita hridaya basahu sura bhoopa</p><p class="meaning">Son of the Wind, remover of sorrow, embodiment of blessings: with Ram, Lakshman and Sita, dwell in my heart, O King of Gods.</p></div>
+    <div class="verse"><p class="translit">Seeyavara Ramchandra pada jai sharanam</p><p class="meaning">Refuge at the feet of Sita's lord, Ram.</p></div>
+  </div>
+</article>
+
+<footer>
+  <div class="foot-links">
+    <a href="bajrang-baan.html">Bajrang Baan &rarr;</a>
+    <a href="index.html">Home</a>
+  </div>
+</footer>
+</body>
+</html>
